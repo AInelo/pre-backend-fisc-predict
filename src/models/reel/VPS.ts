@@ -161,64 +161,107 @@ export class CalculateurVPS {
     };
   }
 
-  /**
-   * Méthode utilitaire pour afficher un résumé du calcul
-   */
-  public afficherResume(resultat: CalculVPSResult): string {
-    let resume = `=== CALCUL VPS ===\n`;
-    resume += `Masse salariale totale: ${resultat.masse_salariale_totale.toLocaleString()} FCFA\n`;
-    resume += `Taux applicable: ${(resultat.taux_applicable * 100)}%\n`;
-    resume += `Statut d'exemption: ${resultat.est_exempte ? 'EXEMPTÉ' : 'NON EXEMPTÉ'}\n`;
-    
-    if (resultat.est_exempte) {
-      resume += `Raisons d'exemption:\n`;
-      Object.entries(resultat.details_exemption).forEach(([cle, valeur]) => {
-        if (valeur) {
-          resume += `  - ${cle.replace(/_/g, ' ')}\n`;
-        }
-      });
-    }
-    
-    resume += `MONTANT VPS: ${resultat.montant_vps.toLocaleString()} FCFA`;
-    
-    return resume;
-  }
+ 
 }
 
-// Exemple d'utilisation
-export function exempleUtilisation(): void {
-  const calculateur = new CalculateurVPS();
 
-  // Exemple d'entreprise
-  const entreprise: Entreprise = {
-    date_creation: new Date('2023-01-01'),
-    est_representation_diplomatique: false,
-    est_organisation_internationale: false,
-    est_assujetti_tps: false,
-    est_etablissement_enseignement_prive: false
-  };
 
-  // Exemple de salariés
-  const salaries: Salarie[] = [
-    {
-      salaire: 200000,
-      emoluments: 50000,
-      retributions_accessoires: 25000,
-      est_beninois: true,
-      date_embauche: new Date('2024-01-15'),
-      est_premier_emploi_beninois: true,
-      est_declare_cnss: true,
-      est_stagiaire_art120: false
-    },
-    {
-      salaire: 150000,
-      emoluments: 30000,
-      retributions_accessoires: 15000,
-      est_beninois: false,
-      est_stagiaire_art120: false
-    }
-  ];
 
-  const resultat = calculateur.calculerVPS(entreprise, salaries);
-  console.log(calculateur.afficherResume(resultat));
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ // /**
+  //  * Méthode utilitaire pour afficher un résumé du calcul
+  //  */
+  // public afficherResume(resultat: CalculVPSResult): string {
+  //   let resume = `=== CALCUL VPS ===\n`;
+  //   resume += `Masse salariale totale: ${resultat.masse_salariale_totale.toLocaleString()} FCFA\n`;
+  //   resume += `Taux applicable: ${(resultat.taux_applicable * 100)}%\n`;
+  //   resume += `Statut d'exemption: ${resultat.est_exempte ? 'EXEMPTÉ' : 'NON EXEMPTÉ'}\n`;
+    
+  //   if (resultat.est_exempte) {
+  //     resume += `Raisons d'exemption:\n`;
+  //     Object.entries(resultat.details_exemption).forEach(([cle, valeur]) => {
+  //       if (valeur) {
+  //         resume += `  - ${cle.replace(/_/g, ' ')}\n`;
+  //       }
+  //     });
+  //   }
+    
+  //   resume += `MONTANT VPS: ${resultat.montant_vps.toLocaleString()} FCFA`;
+    
+  //   return resume;
+  // }
+
+
+
+
+
+
+
+
+// // Exemple d'utilisation
+// export function exempleUtilisation(): void {
+//   const calculateur = new CalculateurVPS();
+
+//   // Exemple d'entreprise
+//   const entreprise: Entreprise = {
+//     date_creation: new Date('2023-01-01'),
+//     est_representation_diplomatique: false,
+//     est_organisation_internationale: false,
+//     est_assujetti_tps: false,
+//     est_etablissement_enseignement_prive: false
+//   };
+
+//   // Exemple de salariés
+//   const salaries: Salarie[] = [
+//     {
+//       salaire: 200000,
+//       emoluments: 50000,
+//       retributions_accessoires: 25000,
+//       est_beninois: true,
+//       date_embauche: new Date('2024-01-15'),
+//       est_premier_emploi_beninois: true,
+//       est_declare_cnss: true,
+//       est_stagiaire_art120: false
+//     },
+//     {
+//       salaire: 150000,
+//       emoluments: 30000,
+//       retributions_accessoires: 15000,
+//       est_beninois: false,
+//       est_stagiaire_art120: false
+//     }
+//   ];
+
+//   const resultat = calculateur.calculerVPS(entreprise, salaries);
+//   console.log(calculateur.afficherResume(resultat));
+// }

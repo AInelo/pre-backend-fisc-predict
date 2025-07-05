@@ -4,7 +4,7 @@ import {
   CalculateurAIB,
   ParametresAIB,
   ResultatAIB
-} from '../models/AIB';
+} from '../models/reel/AIB';
 
 export class AIBService {
   /**
@@ -14,24 +14,6 @@ export class AIBService {
    */
   static simulerAIB(params: ParametresAIB): ResultatAIB {
     return CalculateurAIB.calculerAIB(params);
-  }
-
-  /**
-   * Retourne un résumé texte du calcul AIB
-   * @param resultat Résultat du calcul
-   * @returns Chaîne formatée
-   */
-  static resumeCalcul(resultat: ResultatAIB): string {
-    return CalculateurAIB.afficherResume(resultat);
-  }
-
-  /**
-   * Retourne le montant total formaté en FCFA
-   * @param resultat Résultat du calcul
-   * @returns Montant total formaté
-   */
-  static formaterMontantTotal(resultat: ResultatAIB): string {
-    return CalculateurAIB.formaterMontant(resultat.montantTotal);
   }
 
   /**
@@ -45,5 +27,40 @@ export class AIBService {
   ): boolean {
     // Copie logique identique à celle de CalculateurAIB
     return estNouvelleEntreprise && releveTPS && ancienneteEnMois <= 12;
+  }
+
+  /**
+   * Estimation avant transaction commerciale
+   */
+  static estimerAvantTransaction(params: ParametresAIB) {
+    return CalculateurAIB.estimerAvantTransaction(params);
+  }
+
+  /**
+   * Vérification lors de la déclaration fiscale (multi-opérations)
+   */
+  static verifierPourDeclaration(operations: ParametresAIB[]) {
+    return CalculateurAIB.verifierPourDeclaration(operations);
+  }
+
+  /**
+   * Simulation en phase de négociation avec un client/public
+   */
+  static simulerRetenuePourNegociation(params: ParametresAIB) {
+    return CalculateurAIB.simulerRetenuePourNegociation(params);
+  }
+
+  /**
+   * Estimation pour planification financière (multi-mois / prévisions)
+   */
+  static planifierChargesFiscales(previsions: ParametresAIB[]) {
+    return CalculateurAIB.planifierChargesFiscales(previsions);
+  }
+
+  /**
+   * Reconstitution pour contrôle fiscal ou audit
+   */
+  static reconstituerPourControle(operations: ParametresAIB[]) {
+    return CalculateurAIB.reconstituerPourControle(operations);
   }
 }

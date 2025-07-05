@@ -64,6 +64,7 @@ const TAUX = {
 
 const REDEVANCE_ORTB = 4000; // FCFA
 
+
 /**
  * Classe principale pour le calcul de l'AIB
  */
@@ -190,6 +191,98 @@ export class CalculateurAIB {
         };
     }
 
+
+
+        /**
+     * 1. Estimation avant transaction commerciale
+     */
+        public static estimerAvantTransaction(parametres: ParametresAIB): ResultatAIB {
+            return this.calculerAIB(parametres);
+        }
+    
+        /**
+         * 2. Vérification lors de la déclaration fiscale (multi-opérations)
+         */
+        public static verifierPourDeclaration(operations: ParametresAIB[]): ResultatAIB[] {
+            return operations.map(op => this.calculerAIB(op));
+        }
+    
+        /**
+         * 3. Simulation en phase de négociation avec un client/public
+         * Fournit le net attendu après AIB + ORTB
+         */
+        public static simulerRetenuePourNegociation(parametres: ParametresAIB): {
+            resultat: ResultatAIB;
+            montantNetPerçu: number;
+        } {
+            const resultat = this.calculerAIB(parametres);
+            const montantNetPerçu = parametres.montant - resultat.acompteAIB - resultat.redevanceORTB;
+            return { resultat, montantNetPerçu };
+        }
+    
+        /**
+         * 4. Estimation pour planification financière (multi-mois / prévisions)
+         */
+        public static planifierChargesFiscales(previsions: ParametresAIB[]): {
+            totalAIB: number;
+            totalORTB: number;
+            totalGlobal: number;
+            resultats: ResultatAIB[];
+        } {
+            const resultats = previsions.map(p => this.calculerAIB(p));
+            const totalAIB = resultats.reduce((sum, r) => sum + r.acompteAIB, 0);
+            const totalORTB = resultats.reduce((sum, r) => sum + r.redevanceORTB, 0);
+            const totalGlobal = totalAIB + totalORTB;
+    
+            return { totalAIB, totalORTB, totalGlobal, resultats };
+        }
+    
+        /**
+         * 5. Reconstitution pour contrôle fiscal ou audit
+         * Retourne la liste détaillée des calculs avec explication de l'exonération
+         */
+        public static reconstituerPourControle(operations: ParametresAIB[]): {
+            resultats: ResultatAIB[];
+            totalAIB: number;
+            totalORTB: number;
+            montantTotal: number;
+            recapitulatif: {
+                exonerations: number;
+                nonExonerations: number;
+            };
+        } {
+            const resultats = operations.map(op => this.calculerAIB(op));
+            const totalAIB = resultats.reduce((acc, r) => acc + r.acompteAIB, 0);
+            const totalORTB = resultats.reduce((acc, r) => acc + r.redevanceORTB, 0);
+            const montantTotal = totalAIB + totalORTB;
+            const exonerations = resultats.filter(r => r.exonerationAppliquee).length;
+            const nonExonerations = resultats.length - exonerations;
+    
+            return {
+                resultats,
+                totalAIB,
+                totalORTB,
+                montantTotal,
+                recapitulatif: {
+                    exonerations,
+                    nonExonerations
+                }
+            };
+        }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Méthode utilitaire pour formater le résultat en FCFA
      */
@@ -201,25 +294,7 @@ export class CalculateurAIB {
         }).format(montant).replace('XOF', 'FCFA');
     }
 
-    /**
-     * Affiche un résumé détaillé du calcul
-     */
-    public static afficherResume(resultat: ResultatAIB): string {
-        const resume = `
-            === RÉSUMÉ DU CALCUL AIB ===
-            Montant de la transaction: ${this.formaterMontant(resultat.montantTransaction)}
-            Taux applicable: ${(resultat.taux * 100).toFixed(1)}%
-            Acompte AIB: ${this.formaterMontant(resultat.acompteAIB)}
-            Redevance ORTB: ${this.formaterMontant(resultat.redevanceORTB)}
-            Exonération appliquée: ${resultat.exonerationAppliquee ? 'Oui' : 'Non'}
-            ===============================
-            MONTANT TOTAL À PAYER: ${this.formaterMontant(resultat.montantTotal)}
-            Date d'échéance: ${resultat.dateEcheance}
-            ===============================
-        `;
-
-        return resume.trim();
-    }
+   
 }
 
 
@@ -249,83 +324,84 @@ export class CalculateurAIB {
 
 
 
-// Exemples d'utilisation
-export class ExemplesAIB {
+// // Exemples d'utilisation
+// export class ExemplesAIB {
 
-    /**
-     * Exemple 1: Importation de marchandises
-     */
-    static exemple1(): ResultatAIB {
-        return CalculateurAIB.calculerAIB({
-            montant: 5000000,
-            typeOperation: TypeOperation.IMPORTATION,
-            statutImmatriculation: StatutImmatriculation.IMMATRICULE,
-            typeBeneficiaire: TypeBeneficiaire.PRIVE,
-            mois: "février"
-        });
-    }
+//     /**
+//      * Exemple 1: Importation de marchandises
+//      */
+//     static exemple1(): ResultatAIB {
+//         return CalculateurAIB.calculerAIB({
+//             montant: 5000000,
+//             typeOperation: TypeOperation.IMPORTATION,
+//             statutImmatriculation: StatutImmatriculation.IMMATRICULE,
+//             typeBeneficiaire: TypeBeneficiaire.PRIVE,
+//             mois: "février"
+//         });
+//     }
 
-    /**
-     * Exemple 2: Prestation de service par entreprise non immatriculée
-     */
-    static exemple2(): ResultatAIB {
-        return CalculateurAIB.calculerAIB({
-            montant: 2000000,
-            typeOperation: TypeOperation.PRESTATION_SERVICE,
-            statutImmatriculation: StatutImmatriculation.NON_IMMATRICULE,
-            typeBeneficiaire: TypeBeneficiaire.PRIVE,
-            mois: "mars"
-        });
-    }
+//     /**
+//      * Exemple 2: Prestation de service par entreprise non immatriculée
+//      */
+//     static exemple2(): ResultatAIB {
+//         return CalculateurAIB.calculerAIB({
+//             montant: 2000000,
+//             typeOperation: TypeOperation.PRESTATION_SERVICE,
+//             statutImmatriculation: StatutImmatriculation.NON_IMMATRICULE,
+//             typeBeneficiaire: TypeBeneficiaire.PRIVE,
+//             mois: "mars"
+//         });
+//     }
 
-    /**
-     * Exemple 3: Entreprise nouvelle exonérée
-     */
-    static exemple3(): ResultatAIB {
-        return CalculateurAIB.calculerAIB({
-            montant: 1500000,
-            typeOperation: TypeOperation.ACHAT_COMMERCIAL,
-            statutImmatriculation: StatutImmatriculation.IMMATRICULE,
-            typeBeneficiaire: TypeBeneficiaire.PRIVE,
-            mois: "janvier",
-            estNouvelleEntreprise: true,
-            releveTPS: true,
-            ancienneteEnMois: 8
-        });
-    }
+//     /**
+//      * Exemple 3: Entreprise nouvelle exonérée
+//      */
+//     static exemple3(): ResultatAIB {
+//         return CalculateurAIB.calculerAIB({
+//             montant: 1500000,
+//             typeOperation: TypeOperation.ACHAT_COMMERCIAL,
+//             statutImmatriculation: StatutImmatriculation.IMMATRICULE,
+//             typeBeneficiaire: TypeBeneficiaire.PRIVE,
+//             mois: "janvier",
+//             estNouvelleEntreprise: true,
+//             releveTPS: true,
+//             ancienneteEnMois: 8
+//         });
+//     }
 
-    /**
-     * Exemple 4: Fourniture de travaux à l'État
-     */
-    static exemple4(): ResultatAIB {
-        return CalculateurAIB.calculerAIB({
-            montant: 10000000,
-            typeOperation: TypeOperation.FOURNITURE_TRAVAUX,
-            statutImmatriculation: StatutImmatriculation.IMMATRICULE,
-            typeBeneficiaire: TypeBeneficiaire.PUBLIC,
-            mois: "mars"
-        });
-    }
+//     /**
+//      * Exemple 4: Fourniture de travaux à l'État
+//      */
+//     static exemple4(): ResultatAIB {
+//         return CalculateurAIB.calculerAIB({
+//             montant: 10000000,
+//             typeOperation: TypeOperation.FOURNITURE_TRAVAUX,
+//             statutImmatriculation: StatutImmatriculation.IMMATRICULE,
+//             typeBeneficiaire: TypeBeneficiaire.PUBLIC,
+//             mois: "mars"
+//         });
+//     }
 
-    /**
-     * Exécute tous les exemples
-     */
-    static executerTousLesExemples(): void {
-        console.log("=== EXEMPLES DE CALCUL AIB ===\n");
+//     /**
+//      * Exécute tous les exemples
+//      */
+//     static executerTousLesExemples(): void {
+//         console.log("=== EXEMPLES DE CALCUL AIB ===\n");
 
-        console.log("Exemple 1 - Importation de marchandises:");
-        console.log(CalculateurAIB.afficherResume(this.exemple1()));
-        console.log("\n");
+//         console.log("Exemple 1 - Importation de marchandises:");
+//         console.log(CalculateurAIB.afficherResume(this.exemple1()));
+//         console.log("\n");
 
-        console.log("Exemple 2 - Prestation de service non immatriculée:");
-        console.log(CalculateurAIB.afficherResume(this.exemple2()));
-        console.log("\n");
+//         console.log("Exemple 2 - Prestation de service non immatriculée:");
+//         console.log(CalculateurAIB.afficherResume(this.exemple2()));
+//         console.log("\n");
 
-        console.log("Exemple 3 - Entreprise nouvelle exonérée:");
-        console.log(CalculateurAIB.afficherResume(this.exemple3()));
-        console.log("\n");
+//         console.log("Exemple 3 - Entreprise nouvelle exonérée:");
+//         console.log(CalculateurAIB.afficherResume(this.exemple3()));
+//         console.log("\n");
 
-        console.log("Exemple 4 - Fourniture de travaux à l'État:");
-        console.log(CalculateurAIB.afficherResume(this.exemple4()));
-    }
-}
+//         console.log("Exemple 4 - Fourniture de travaux à l'État:");
+//         console.log(CalculateurAIB.afficherResume(this.exemple4()));
+//     }
+// }
+

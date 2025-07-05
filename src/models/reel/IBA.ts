@@ -230,66 +230,160 @@ export class CalculateurIBA {
         (donnees.volumeProduitsPetroliers === undefined || donnees.volumeProduitsPetroliers < 0)) {
       throw new Error('Volume de produits pétroliers requis et positif pour les stations-services');
     }
-
     // Vérification du seuil de passage au régime réel
     if (donnees.chiffreAffaires > CONSTANTES.SEUIL_REGIME_REEL) {
       console.warn('Attention: CA > 50M FCFA, passage au régime réel recommandé');
     }
   }
 
+
+
+
+
+
+  
+
   /**
-   * Méthode utilitaire pour tester avec les exemples de la documentation
-   */
-  public static testerExemples(): void {
-    console.log('=== Tests des exemples de la documentation ===\n');
-
-    // Cas 1: Entreprise Commerciale Standard
-    const cas1: DonneesIBA = {
-      beneficeImposable: 10_000_000,
-      produitsEncaissables: 8_000_000,
-      chiffreAffaires: 0, // Non spécifié dans l'exemple
-      secteurActivite: SecteurActivite.COMMERCE,
-      typeActivite: TypeActivite.AUTRE,
-      conditionsReduction: ConditionsReduction.NORMALE
-    };
-
-    const resultat1 = this.calculerIBA(cas1);
-    console.log('Cas 1 - Entreprise Commerciale Standard:');
-    console.log(`IBA calculé: ${resultat1.iba.toLocaleString()} FCFA`);
-    console.log(`Attendu: 3,004,000 FCFA\n`);
-
-    // Cas 2: Entreprise BTP
-    const cas2: DonneesIBA = {
-      beneficeImposable: 2_000_000,
-      produitsEncaissables: 15_000_000,
-      chiffreAffaires: 0,
-      secteurActivite: SecteurActivite.BTP,
-      typeActivite: TypeActivite.AUTRE,
-      conditionsReduction: ConditionsReduction.NORMALE
-    };
-
-    const resultat2 = this.calculerIBA(cas2);
-    console.log('Cas 2 - Entreprise BTP:');
-    console.log(`IBA calculé: ${resultat2.iba.toLocaleString()} FCFA`);
-    console.log(`Attendu: 604,000 FCFA\n`);
-
-    // Cas 3: Station-Service
-    const cas3: DonneesIBA = {
-      beneficeImposable: 800_000,
-      produitsEncaissables: 0, // Non applicable pour stations-services
-      chiffreAffaires: 0,
-      volumeProduitsPetroliers: 500_000,
-      secteurActivite: SecteurActivite.STATIONS_SERVICES,
-      typeActivite: TypeActivite.AUTRE,
-      conditionsReduction: ConditionsReduction.NORMALE
-    };
-
-    const resultat3 = this.calculerIBA(cas3);
-    console.log('Cas 3 - Station-Service:');
-    console.log(`IBA calculé: ${resultat3.iba.toLocaleString()} FCFA`);
-    console.log(`Attendu: 304,000 FCFA\n`);
+ * Estime l'IBA pour une période partielle de l'année (en mois)
+ */
+public static estimerIBAProportionnel(donnees: DonneesIBA, dureeEnMois: number): ResultatIBA {
+  if (dureeEnMois <= 0 || dureeEnMois > 12) {
+    throw new Error('La durée doit être comprise entre 1 et 12 mois');
   }
+
+  const resultatAnnuel = this.calculerIBA(donnees);
+  const coefficient = dureeEnMois / 12;
+
+  return {
+    ...resultatAnnuel,
+    iba: Math.round(resultatAnnuel.iba * coefficient),
+    impotNominal: Math.round(resultatAnnuel.impotNominal * coefficient),
+    impotMinimumSectoriel: Math.round(resultatAnnuel.impotMinimumSectoriel * coefficient),
+    impotBase: Math.round(resultatAnnuel.impotBase * coefficient),
+    impotApresReduction: Math.round(resultatAnnuel.impotApresReduction * coefficient),
+  };
+}
+
+/**
+ * Simule l'impact d'une réduction d'impôt (artisanat)
+ */
+public static simulerReduction(donnees: DonneesIBA): { sansReduction: ResultatIBA; avecReduction: ResultatIBA } {
+  const donneesSansReduction = { ...donnees, conditionsReduction: ConditionsReduction.NORMALE };
+  const donneesAvecReduction = { ...donnees, conditionsReduction: ConditionsReduction.ARTISANALE };
+
+  return {
+    sansReduction: this.calculerIBA(donneesSansReduction),
+    avecReduction: this.calculerIBA(donneesAvecReduction),
+  };
+}
+
+/**
+ * Vérifie si le passage au régime réel est obligatoire ou conseillé
+ */
+public static verifierEligibiliteRegimeReel(donnees: DonneesIBA): { obligatoire: boolean; seuil: number; message: string } {
+  const estObligatoire = donnees.chiffreAffaires > CONSTANTES.SEUIL_REGIME_REEL;
+
+  return {
+    obligatoire: estObligatoire,
+    seuil: CONSTANTES.SEUIL_REGIME_REEL,
+    message: estObligatoire
+      ? 'Le chiffre d’affaires dépasse 50 millions : régime réel obligatoire.'
+      : 'Le contribuable est encore éligible au régime forfaitaire ou simplifié.',
+  };
+}
+
+/**
+ * Prépare une simulation pour business plan ou financement
+ * (multiexercice, simplifié ici à un seul exercice)
+ */
+public static simulerBusinessPlan(donnees: DonneesIBA, dureeEnMois: number): ResultatIBA {
+  return this.estimerIBAProportionnel(donnees, dureeEnMois);
+}
+
+/**
+ * Vérifie la cohérence des montants en contexte d'audit
+ */
+public static verifierCoherenceAudit(donnees: DonneesIBA, ibaDeclare: number): { attendu: ResultatIBA; ecart: number } {
+  const attendu = this.calculerIBA(donnees);
+  const ecart = ibaDeclare - attendu.iba;
+
+  return {
+    attendu,
+    ecart,
+  };
+}
+
+
+
+
+
+
+  
 }
 
 // Export par défaut
 export default CalculateurIBA;
+
+
+
+
+
+
+
+
+
+
+/**
+   * Méthode utilitaire pour tester avec les exemples de la documentation
+   */
+
+
+  // public static testerExemples(): void {
+  //   console.log('=== Tests des exemples de la documentation ===\n');
+
+  //   // Cas 1: Entreprise Commerciale Standard
+  //   const cas1: DonneesIBA = {
+  //     beneficeImposable: 10_000_000,
+  //     produitsEncaissables: 8_000_000,
+  //     chiffreAffaires: 0, // Non spécifié dans l'exemple
+  //     secteurActivite: SecteurActivite.COMMERCE,
+  //     typeActivite: TypeActivite.AUTRE,
+  //     conditionsReduction: ConditionsReduction.NORMALE
+  //   };
+
+  //   const resultat1 = this.calculerIBA(cas1);
+  //   console.log('Cas 1 - Entreprise Commerciale Standard:');
+  //   console.log(`IBA calculé: ${resultat1.iba.toLocaleString()} FCFA`);
+  //   console.log(`Attendu: 3,004,000 FCFA\n`);
+
+  //   // Cas 2: Entreprise BTP
+  //   const cas2: DonneesIBA = {
+  //     beneficeImposable: 2_000_000,
+  //     produitsEncaissables: 15_000_000,
+  //     chiffreAffaires: 0,
+  //     secteurActivite: SecteurActivite.BTP,
+  //     typeActivite: TypeActivite.AUTRE,
+  //     conditionsReduction: ConditionsReduction.NORMALE
+  //   };
+
+  //   const resultat2 = this.calculerIBA(cas2);
+  //   console.log('Cas 2 - Entreprise BTP:');
+  //   console.log(`IBA calculé: ${resultat2.iba.toLocaleString()} FCFA`);
+  //   console.log(`Attendu: 604,000 FCFA\n`);
+
+  //   // Cas 3: Station-Service
+  //   const cas3: DonneesIBA = {
+  //     beneficeImposable: 800_000,
+  //     produitsEncaissables: 0, // Non applicable pour stations-services
+  //     chiffreAffaires: 0,
+  //     volumeProduitsPetroliers: 500_000,
+  //     secteurActivite: SecteurActivite.STATIONS_SERVICES,
+  //     typeActivite: TypeActivite.AUTRE,
+  //     conditionsReduction: ConditionsReduction.NORMALE
+  //   };
+
+  //   const resultat3 = this.calculerIBA(cas3);
+  //   console.log('Cas 3 - Station-Service:');
+  //   console.log(`IBA calculé: ${resultat3.iba.toLocaleString()} FCFA`);
+  //   console.log(`Attendu: 304,000 FCFA\n`);
+  // }

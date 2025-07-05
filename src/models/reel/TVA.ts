@@ -304,4 +304,83 @@ export class CalculateurTVABenin {
       declarationObligatoire
     };
   }
+
+
+
+
+  /**
+   * Contexte 1 : Calcul TVA et Prix TTC pour une vente simple
+   */
+  static calculerTVAVenteSimple(
+    prixHT: number,
+    produit: Produit,
+    entreprise: Entreprise,
+    lieuVente: string
+  ): { tva: number; prixTTC: number } {
+    if (!this.estAssujetti(entreprise)) {
+      return { tva: 0, prixTTC: prixHT };
+    }
+    if (!this.verifierTerritorialite(lieuVente)) {
+      // TVA non applicable hors Bénin
+      return { tva: 0, prixTTC: prixHT };
+    }
+    const taux = this.obtenirTaux(produit);
+    const tva = prixHT * taux;
+    const prixTTC = prixHT * (1 + taux);
+    return { tva, prixTTC };
+  }
+
+  /**
+   * Contexte 2 : Calcul TVA déductible sur achats avec option prorata si mixte
+   */
+  static calculerTVADeductibleAvecProrata(
+    achats: Operation[],
+    chiffreAffairesTaxable: number,
+    chiffreAffairesTotal: number
+  ): number {
+    let tvaDeductible = this.calculerTVADeductible(achats);
+    const prorata = this.calculerProrata(chiffreAffairesTaxable, chiffreAffairesTotal);
+    return this.ajusterTVADeductible(tvaDeductible, prorata);
+  }
+
+  /**
+   * Contexte 3 : Déclaration mensuelle complète (TVA due, pénalités, etc.)
+   */
+  static declarerTVAMensuelle(
+    entreprise: Entreprise,
+    ventes: Operation[],
+    achats: Operation[],
+    jourDeclaration: number,
+    parametresPenalite: { base: number; taux: number }
+  ): {
+    resultatTVA: ResultatTVA;
+    penalites: Penalite;
+    declarationObligatoire: boolean;
+  } {
+    const resultatTVA = this.calculerTVADue(ventes, achats);
+    const penalites = this.calculerPenalites(jourDeclaration, resultatTVA.tvaDue, parametresPenalite.base, parametresPenalite.taux);
+    const declarationObligatoire = this.estDeclarationObligatoire(entreprise, [...ventes, ...achats]);
+
+    return { resultatTVA, penalites, declarationObligatoire };
+  }
+
+  /**
+   * Contexte 4 : Vérification assujettissement à la TVA selon CA annuel
+   */
+  static estAssujettiSelonCA(entreprise: Entreprise): boolean {
+    return this.estAssujetti(entreprise);
+  }
+
+  /**
+   * Contexte 5 : Calcul prix TTC à partir d’un revenu HT souhaité
+   */
+  static calculerPrixTTCAvecRevenuHT(
+    revenuHT: number,
+    tauxTVA: number = CONSTANTES_TVA.TAUX_NORMAL
+  ): number {
+    return revenuHT * (1 + tauxTVA);
+  }
+
+
+
 }

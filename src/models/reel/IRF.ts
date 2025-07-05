@@ -55,7 +55,7 @@ export interface ResultatCalculIRF {
   dateEcheance: Date;
   conforme: boolean;
   retard: number; // en jours
-  details: string;
+  // details: string;
 }
 
 export interface ResultatCalculAnnuel {
@@ -65,8 +65,12 @@ export interface ResultatCalculAnnuel {
   impactFinancier: number;
   nombreTransactions: number;
   loyerBrutTotal: number;
-  details: string;
+  // details: string;
 }
+
+
+
+
 
 export class CalculateurIRF {
 
@@ -154,7 +158,7 @@ export class CalculateurIRF {
       dateEcheance,
       conforme,
       retard,
-      details: this.genererDetailsMensuel(params, taux, retenuesFiscales, loyerNet, dateEcheance, conforme, retard)
+      // details: this.genererDetailsMensuel(params, taux, retenuesFiscales, loyerNet, dateEcheance, conforme, retard)
     };
   }
 
@@ -190,7 +194,7 @@ export class CalculateurIRF {
       impactFinancier: Math.round(impactFinancier * 10000) / 10000,
       nombreTransactions: params.transactions.length,
       loyerBrutTotal: Math.round(loyerBrutTotal),
-      details: this.genererDetailsAnnuel(params, retenuesTotales, obligationTotale, tauxEffectif, loyerBrutTotal)
+      // details: this.genererDetailsAnnuel(params, retenuesTotales, obligationTotale, tauxEffectif, loyerBrutTotal)
     };
   }
 
@@ -202,7 +206,10 @@ export class CalculateurIRF {
     ancienStatut: StatutFiscal,
     nouveauStatut: StatutFiscal,
     moisChangement: number
-  ): { retenuesTotales: number; details: string } {
+  ): { 
+    retenuesTotales: number; 
+    // details: string 
+  } {
     if (moisChangement < 1 || moisChangement > 12) {
       throw new Error('Le mois de changement doit être entre 1 et 12');
     }
@@ -233,7 +240,7 @@ export class CalculateurIRF {
 
     return {
       retenuesTotales: Math.round(retenuesTotales),
-      details
+      // details
     };
   }
 
@@ -242,7 +249,10 @@ export class CalculateurIRF {
    */
   public calculerLoyersVariables(
     loyersEtStatuts: Array<{ loyer: number; statut: StatutFiscal }>
-  ): { retenuesTotales: number; details: string } {
+  ): { 
+    retenuesTotales: number; 
+    // details: string 
+  } {
     let retenuesTotales = 0;
     let details = 'Calcul loyers variables:\n';
 
@@ -258,33 +268,11 @@ export class CalculateurIRF {
 
     return {
       retenuesTotales: Math.round(retenuesTotales),
-      details
+      // details
     };
   }
 
-  /**
-   * Génération des détails pour le calcul mensuel
-   */
-  private genererDetailsMensuel(
-    params: ParametresCalculMensuel,
-    taux: number,
-    retenues: number,
-    loyerNet: number,
-    dateEcheance: Date,
-    conforme: boolean,
-    retard: number
-  ): string {
-    let details = `Calcul IRF mensuel:\n`;
-    details += `- Loyer brut: ${params.loyerBrut.toLocaleString()} FCFA\n`;
-    details += `- Statut fiscal: ${params.statutFiscal}\n`;
-    details += `- Taux appliqué: ${(taux * 100).toFixed(1)}%\n`;
-    details += `- Retenues fiscales: ${Math.round(retenues).toLocaleString()} FCFA\n`;
-    details += `- Loyer net: ${Math.round(loyerNet).toLocaleString()} FCFA\n`;
-    details += `- Date d'échéance: ${dateEcheance.toLocaleDateString('fr-FR')}\n`;
-    details += `- Statut: ${conforme ? 'Conforme' : `En retard de ${retard} jour(s)`}`;
-    
-    return details;
-  }
+ 
 
   /**
    * Génération des détails pour le calcul annuel
@@ -323,24 +311,240 @@ export class CalculateurIRF {
     const taux = this.determinerTaux(statutFiscal);
     return loyerBrut * taux;
   }
+
+
+
+
+
+
+
+
+  /**
+ * Calcul de l'IRF jusqu'à une date de cession (ex: vente du bien)
+ */
+public calculerJusquaCession(
+  transactions: TransactionLoyer[],
+  dateCession: Date
+): {
+  retenuesTotales: number;
+  nombreTransactions: number;
+  loyerBrutTotal: number;
+} {
+  const transactionsFiltrees = transactions.filter(tx => tx.dateVersement <= dateCession);
+
+  let retenuesTotales = 0;
+  let loyerBrutTotal = 0;
+
+  for (const tx of transactionsFiltrees) {
+    const taux = this.determinerTaux(tx.statutFiscal);
+    const retenue = tx.loyerBrut * taux;
+    retenuesTotales += retenue;
+    loyerBrutTotal += tx.loyerBrut;
+  }
+
+  return {
+    retenuesTotales: Math.round(retenuesTotales),
+    nombreTransactions: transactionsFiltrees.length,
+    loyerBrutTotal: Math.round(loyerBrutTotal),
+  };
 }
 
-// Export d'une instance par défaut
-export const calculateurIRF = new CalculateurIRF();
 
-// Fonctions utilitaires pour un accès rapide
-export function calculerIRFMensuel(params: ParametresCalculMensuel, datePaiement?: Date): ResultatCalculIRF {
-  return calculateurIRF.calculerMensuel(params, datePaiement);
+
+
+
+/**
+ * Évalue la rentabilité nette d'un investissement immobilier après IRF
+ */
+public evaluerRentabiliteNet(
+  loyerMensuel: number,
+  statutFiscal: StatutFiscal,
+  montantAchat: number,
+  chargesAnnuelles: number
+): {
+  revenuAnnuelNet: number;
+  rentabiliteNetPourcent: number;
+} {
+  const loyerNetMensuel = this.calculerLoyerNet(loyerMensuel, statutFiscal);
+  const revenuAnnuelNet = (loyerNetMensuel * 12) - chargesAnnuelles;
+  const rentabilite = (revenuAnnuelNet / montantAchat) * 100;
+
+  return {
+    revenuAnnuelNet: Math.round(revenuAnnuelNet),
+    rentabiliteNetPourcent: Math.round(rentabilite * 100) / 100,
+  };
 }
 
-export function calculerIRFAnnuel(params: ParametresCalculAnnuel): ResultatCalculAnnuel {
-  return calculateurIRF.calculerAnnuel(params);
+
+
+
+
+
+
+
+
+/**
+ * Calcule les montants dus et détecte les retards pour chaque transaction
+ */
+public detecterRetards(
+  transactions: TransactionLoyer[]
+): Array<ResultatCalculIRF> {
+  const resultats: ResultatCalculIRF[] = [];
+
+  for (const tx of transactions) {
+    const params: ParametresCalculMensuel = {
+      loyerBrut: tx.loyerBrut,
+      statutFiscal: tx.statutFiscal,
+      dateVersement: tx.dateVersement,
+      typeVersement: TypeVersement.NORMAL
+    };
+
+    const result = this.calculerMensuel(params, tx.dateVersement);
+    resultats.push(result);
+  }
+
+  return resultats;
 }
 
-export function calculerLoyerNet(loyerBrut: number, statutFiscal: StatutFiscal): number {
-  return calculateurIRF.calculerLoyerNet(loyerBrut, statutFiscal);
+
+
+
+
+
+/**
+ * Simule le montant net perçu par le bailleur sur un loyer proposé
+ */
+public simulationContrat(
+  loyerMensuel: number,
+  statutFiscal: StatutFiscal
+): {
+  tauxApplique: number;
+  retenueMensuelle: number;
+  loyerNet: number;
+} {
+  const taux = this.determinerTaux(statutFiscal);
+  const retenue = loyerMensuel * taux;
+  const net = loyerMensuel - retenue;
+
+  return {
+    tauxApplique: taux,
+    retenueMensuelle: Math.round(retenue),
+    loyerNet: Math.round(net)
+  };
 }
 
-export function calculerRetenues(loyerBrut: number, statutFiscal: StatutFiscal): number {
-  return calculateurIRF.calculerRetenues(loyerBrut, statutFiscal);
+
+
+/**
+ * Synthèse d'une période d'imposition (utile pour voir tout en un)
+ */
+public synthesePeriode(
+  transactions: TransactionLoyer[],
+  dateDebut: Date,
+  dateFin: Date
+): {
+  totalIRF: number;
+  totalLoyerBrut: number;
+  moyenneMensuelle: number;
+  tauxEffectif: number;
+} {
+  const periodTransactions = transactions.filter(tx => tx.dateVersement >= dateDebut && tx.dateVersement <= dateFin);
+  let totalIRF = 0;
+  let totalBrut = 0;
+
+  for (const tx of periodTransactions) {
+    const taux = this.determinerTaux(tx.statutFiscal);
+    totalIRF += tx.loyerBrut * taux;
+    totalBrut += tx.loyerBrut;
+  }
+
+  const nombreMois = (dateFin.getFullYear() - dateDebut.getFullYear()) * 12 + (dateFin.getMonth() - dateDebut.getMonth()) + 1;
+
+  return {
+    totalIRF: Math.round(totalIRF),
+    totalLoyerBrut: Math.round(totalBrut),
+    moyenneMensuelle: Math.round(totalBrut / nombreMois),
+    tauxEffectif: totalBrut > 0 ? Math.round((totalIRF / totalBrut) * 10000) / 100 : 0
+  };
 }
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // Export d'une instance par défaut
+// export const calculateurIRF = new CalculateurIRF();
+
+// // Fonctions utilitaires pour un accès rapide
+// export function calculerIRFMensuel(params: ParametresCalculMensuel, datePaiement?: Date): ResultatCalculIRF {
+//   return calculateurIRF.calculerMensuel(params, datePaiement);
+// }
+
+// export function calculerIRFAnnuel(params: ParametresCalculAnnuel): ResultatCalculAnnuel {
+//   return calculateurIRF.calculerAnnuel(params);
+// }
+
+// export function calculerLoyerNet(loyerBrut: number, statutFiscal: StatutFiscal): number {
+//   return calculateurIRF.calculerLoyerNet(loyerBrut, statutFiscal);
+// }
+
+// export function calculerRetenues(loyerBrut: number, statutFiscal: StatutFiscal): number {
+//   return calculateurIRF.calculerRetenues(loyerBrut, statutFiscal);
+// }
+
+
+
+
+
+// /**
+  //  * Génération des détails pour le calcul mensuel
+  //  */
+  // private genererDetailsMensuel(
+  //   params: ParametresCalculMensuel,
+  //   taux: number,
+  //   retenues: number,
+  //   loyerNet: number,
+  //   dateEcheance: Date,
+  //   conforme: boolean,
+  //   retard: number
+  // ): string {
+  //   let details = `Calcul IRF mensuel:\n`;
+  //   details += `- Loyer brut: ${params.loyerBrut.toLocaleString()} FCFA\n`;
+  //   details += `- Statut fiscal: ${params.statutFiscal}\n`;
+  //   details += `- Taux appliqué: ${(taux * 100).toFixed(1)}%\n`;
+  //   details += `- Retenues fiscales: ${Math.round(retenues).toLocaleString()} FCFA\n`;
+  //   details += `- Loyer net: ${Math.round(loyerNet).toLocaleString()} FCFA\n`;
+  //   details += `- Date d'échéance: ${dateEcheance.toLocaleDateString('fr-FR')}\n`;
+  //   details += `- Statut: ${conforme ? 'Conforme' : `En retard de ${retard} jour(s)`}`;
+    
+  //   return details;
+  // }

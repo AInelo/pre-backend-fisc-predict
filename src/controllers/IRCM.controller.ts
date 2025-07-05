@@ -111,4 +111,60 @@ export class IRCMController {
        return
     }
   }
+
+  /**
+   * POST /api/ircm/calculer-revenus-annuels
+   * Body JSON: ParametresIRCM[]
+   */
+  static calculerRevenusAnnuels(req: Request, res: Response) {
+    try {
+      const revenus: ParametresIRCM[] = req.body;
+      const resultat = IRCMService.calculerRevenusAnnuels(revenus);
+      res.json({ success: true, resultat });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || 'Erreur serveur' });
+    }
+  }
+
+  /**
+   * POST /api/ircm/simuler-rendement-net
+   * Body JSON: ParametresIRCM
+   */
+  static simulerRendementNet(req: Request, res: Response) {
+    try {
+      const params: ParametresIRCM = req.body;
+      const resultat = IRCMService.simulerRendementNet(params);
+      res.json({ success: true, resultat });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || 'Erreur serveur' });
+    }
+  }
+
+  /**
+   * POST /api/ircm/verifier-conformite-impot
+   * Body JSON: { params: ParametresIRCM, impotDeclare: number }
+   */
+  static verifierConformiteImpot(req: Request, res: Response) {
+    try {
+      const { params, impotDeclare } = req.body;
+      const resultat = IRCMService.verifierConformiteImpot(params, impotDeclare);
+      res.json({ success: true, resultat });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || 'Erreur serveur' });
+    }
+  }
+
+  /**
+   * POST /api/ircm/estimer-revenu-net
+   * Body JSON: ParametresIRCM
+   */
+  static estimerRevenuNet(req: Request, res: Response) {
+    try {
+      const params: ParametresIRCM = req.body;
+      const resultat = IRCMService.estimerRevenuNet(params);
+      res.json({ success: true, resultat });
+    } catch (error: any) {
+      res.status(500).json({ error: error.message || 'Erreur serveur' });
+    }
+  }
 }

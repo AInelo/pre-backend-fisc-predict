@@ -19,5 +19,9 @@ const router = Router();
 router.post('/simuler', IRCMController.simulerIRCM);
 router.post('/simuler-dividende', IRCMController.simulerDividende);
 router.post('/simuler-obligation-uemoa', IRCMController.simulerObligationUEMOA);
+router.post('/calculer-revenus-annuels', IRCMController.calculerRevenusAnnuels);
+router.post('/simuler-rendement-net', IRCMController.simulerRendementNet);
+router.post('/verifier-conformite-impot', IRCMController.verifierConformiteImpot);
+router.post('/estimer-revenu-net', IRCMController.estimerRevenuNet);
 
 export default router;

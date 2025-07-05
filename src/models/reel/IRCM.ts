@@ -54,7 +54,7 @@ export interface ResultatIRCM {
   tauxApplique: number;
   exonere: boolean;
   facteurConvention: number;
-  details: string;
+
 }
 
 export class CalculateurIRCM {
@@ -219,7 +219,7 @@ export class CalculateurIRCM {
         tauxApplique: 0,
         exonere: true,
         facteurConvention: 1,
-        details: 'Exonéré selon les dispositions du CGI'
+ 
       };
     }
 
@@ -246,29 +246,11 @@ export class CalculateurIRCM {
       tauxApplique: taux,
       exonere: false,
       facteurConvention,
-      details: this.genererDetails(params, taux, facteurConvention)
+ 
     };
   }
 
-  /**
-   * Génération des détails du calcul
-   */
-  private genererDetails(params: ParametresIRCM, taux: number, facteurConvention: number): string {
-    let details = `Calcul IRCM:\n`;
-    details += `- Revenu brut: ${params.revenuBrut} FCFA\n`;
-    details += `- Type de revenu: ${params.typeRevenu}\n`;
-    details += `- Statut: ${params.statut}\n`;
-    details += `- Émetteur: ${params.emetteur}\n`;
-    details += `- Taux appliqué: ${(taux * 100).toFixed(1)}%\n`;
-    
-    if (facteurConvention < 1) {
-      details += `- Facteur convention fiscale: ${facteurConvention.toFixed(3)}\n`;
-    }
-    
-    details += `- Montant IRCM: ${(params.revenuBrut * taux * facteurConvention).toFixed(2)} FCFA`;
-    
-    return details;
-  }
+
 
   /**
    * Calcul pour cas spécifique des dividendes
@@ -297,6 +279,103 @@ export class CalculateurIRCM {
       dureeEmission
     });
   }
+
+
+
+
+
+
+
+
+
+
+    /**
+   * Calcul pour déclaration fiscale annuelle - cumul de plusieurs revenus
+   */
+    public calculerRevenusAnnuels(revenus: ParametresIRCM[]): {
+      totalRevenu: number;
+      totalImpot: number;
+      details: ResultatIRCM[];
+    } {
+      let totalRevenu = 0;
+      let totalImpot = 0;
+      const details: ResultatIRCM[] = [];
+  
+      for (const revenu of revenus) {
+        const result = this.calculer(revenu);
+        totalRevenu += revenu.revenuBrut;
+        totalImpot += result.montantImpot;
+        details.push(result);
+      }
+  
+      return {
+        totalRevenu: Math.round(totalRevenu * 100) / 100,
+        totalImpot: Math.round(totalImpot * 100) / 100,
+        details
+      };
+    }
+  
+    /**
+     * Simulation de rendement net après IRCM pour aider à la planification patrimoniale
+     */
+    public simulerRendementNet(params: ParametresIRCM): {
+      revenuNet: number;
+      impot: number;
+      taux: number;
+    } {
+      const resultat = this.calculer(params);
+      const revenuNet = params.revenuBrut - resultat.montantImpot;
+  
+      return {
+        revenuNet: Math.round(revenuNet * 100) / 100,
+        impot: resultat.montantImpot,
+        taux: resultat.tauxApplique
+      };
+    }
+  
+    /**
+     * Vérification ou contrôle fiscal d’un revenu déjà imposé
+     */
+    public verifierConformiteImpot(
+      params: ParametresIRCM,
+      impotDeclare: number
+    ): {
+      correct: boolean;
+      ecart: number;
+      recalcul: ResultatIRCM;
+    } {
+      const recalcul = this.calculer(params);
+      const ecart = Math.round((recalcul.montantImpot - impotDeclare) * 100) / 100;
+  
+      return {
+        correct: ecart === 0,
+        ecart,
+        recalcul
+      };
+    }
+  
+    /**
+     * Estimation du revenu net à présenter dans un dossier administratif
+     */
+    public estimerRevenuNet(params: ParametresIRCM): {
+      revenuNet: number;
+      revenuBrut: number;
+      impot: number;
+    } {
+      const result = this.calculer(params);
+      const revenuNet = params.revenuBrut - result.montantImpot;
+  
+      return {
+        revenuNet: Math.round(revenuNet * 100) / 100,
+        revenuBrut: params.revenuBrut,
+        impot: result.montantImpot
+      };
+    }
+  
+
+
+
+
 }
 
 
@@ -321,6 +400,9 @@ export const calculateurIRCM = new CalculateurIRCM();
 
 
 // Fonction utilitaire pour un calcul rapide
-export function calculerIRCM(params: ParametresIRCM): ResultatIRCM {
-  return calculateurIRCM.calculer(params);
-}
+// export function calculerIRCM(params: ParametresIRCM): ResultatIRCM {
+//   return calculateurIRCM.calculer(params);
+// }
+
+
+

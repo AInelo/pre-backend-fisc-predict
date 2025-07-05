@@ -1,0 +1,24 @@
+POST /api/aib/simuler-aib
+Content-Type: application/json
+
+{
+  "montant": 1000000,
+  "typeOperation": "Importation",
+  "statutImmatriculation": "Oui",
+  "typeBeneficiaire": "Public",
+  "mois": "mars"
+}
+
+{
+  "success": true,
+  "resultat": {
+    "montantTransaction": 1000000,
+    "taux": 0.01,
+    "acompteAIB": 10000,
+    "redevanceORTB": 4000,
+    "montantTotal": 14000,
+    "exonerationAppliquee": false,
+    "dateEcheance": "10/04/2024"
+  }
+}
+

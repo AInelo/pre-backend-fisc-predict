@@ -215,4 +215,24 @@ export class IRCMService {
   ): ResultatIRCM {
     return this.calculateur.calculerObligationUEMOA(revenuBrut, dureeEmission);
   }
+
+  static calculerRevenusAnnuels(revenus: ParametresIRCM[]): number {
+    // Implementation of calculerRevenusAnnuels method
+    throw new Error('Method not implemented');
+  }
+
+  static simulerRendementNet(params: ParametresIRCM): number {
+    // Implementation of simulerRendementNet method
+    throw new Error('Method not implemented');
+  }
+
+  static verifierConformiteImpot(params: ParametresIRCM, impotDeclare: number): boolean {
+    // Implementation of verifierConformiteImpot method
+    throw new Error('Method not implemented');
+  }
+
+  static estimerRevenuNet(params: ParametresIRCM): number {
+    // Implementation of estimerRevenuNet method
+    throw new Error('Method not implemented');
+  }
 }
