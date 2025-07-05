@@ -5,8 +5,6 @@ import { IBAController } from '../controllers/IBA.controller';
 const router = express.Router();
 const controller = new IBAController();
 
-// TODO: define routes for IBA
-// Example: router.get('/', controller.methodName);
 
 router.post('/calculer', IBAController.calculerIBA);
 router.post('/estimer-proportionnel', IBAController.estimerIBAProportionnel);

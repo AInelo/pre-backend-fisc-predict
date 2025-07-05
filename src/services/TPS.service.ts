@@ -1,5 +1,5 @@
 // Service for TPS
-import { TPS } from '../models/tps/TPS';
+// import { MoteurCalculTPS } from '../models/tps/TPS';
 import { MoteurCalculTPS } from '../models/tps/TPS';
 import type { ConfigurationTPS } from '../models/tps/TPS';
 

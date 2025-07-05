@@ -64,3 +64,6 @@ export class AIBService {
     return CalculateurAIB.reconstituerPourControle(operations);
   }
 }
+
+
+
