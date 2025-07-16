@@ -64,8 +64,15 @@ const CONSTANTES = {
   SEUIL_REGIME_REEL: 50_000_000          // Seuil passage TPS vers Régime Réel
 } as const;
 
+
 /**
+ * 
+ * 
+ * 
  * Classe principale pour le calcul de l'IBA
+ * 
+ * 
+ * 
  */
 export class CalculateurIBA {
   
@@ -313,77 +320,7 @@ public static verifierCoherenceAudit(donnees: DonneesIBA, ibaDeclare: number): {
   };
 }
 
-
-
-
-
-
-  
 }
 
 // Export par défaut
 export default CalculateurIBA;
-
-
-
-
-
-
-
-
-
-
-/**
-   * Méthode utilitaire pour tester avec les exemples de la documentation
-   */
-
-
-  // public static testerExemples(): void {
-  //   console.log('=== Tests des exemples de la documentation ===\n');
-
-  //   // Cas 1: Entreprise Commerciale Standard
-  //   const cas1: DonneesIBA = {
-  //     beneficeImposable: 10_000_000,
-  //     produitsEncaissables: 8_000_000,
-  //     chiffreAffaires: 0, // Non spécifié dans l'exemple
-  //     secteurActivite: SecteurActivite.COMMERCE,
-  //     typeActivite: TypeActivite.AUTRE,
-  //     conditionsReduction: ConditionsReduction.NORMALE
-  //   };
-
-  //   const resultat1 = this.calculerIBA(cas1);
-  //   console.log('Cas 1 - Entreprise Commerciale Standard:');
-  //   console.log(`IBA calculé: ${resultat1.iba.toLocaleString()} FCFA`);
-  //   console.log(`Attendu: 3,004,000 FCFA\n`);
-
-  //   // Cas 2: Entreprise BTP
-  //   const cas2: DonneesIBA = {
-  //     beneficeImposable: 2_000_000,
-  //     produitsEncaissables: 15_000_000,
-  //     chiffreAffaires: 0,
-  //     secteurActivite: SecteurActivite.BTP,
-  //     typeActivite: TypeActivite.AUTRE,
-  //     conditionsReduction: ConditionsReduction.NORMALE
-  //   };
-
-  //   const resultat2 = this.calculerIBA(cas2);
-  //   console.log('Cas 2 - Entreprise BTP:');
-  //   console.log(`IBA calculé: ${resultat2.iba.toLocaleString()} FCFA`);
-  //   console.log(`Attendu: 604,000 FCFA\n`);
-
-  //   // Cas 3: Station-Service
-  //   const cas3: DonneesIBA = {
-  //     beneficeImposable: 800_000,
-  //     produitsEncaissables: 0, // Non applicable pour stations-services
-  //     chiffreAffaires: 0,
-  //     volumeProduitsPetroliers: 500_000,
-  //     secteurActivite: SecteurActivite.STATIONS_SERVICES,
-  //     typeActivite: TypeActivite.AUTRE,
-  //     conditionsReduction: ConditionsReduction.NORMALE
-  //   };
-
-  //   const resultat3 = this.calculerIBA(cas3);
-  //   console.log('Cas 3 - Station-Service:');
-  //   console.log(`IBA calculé: ${resultat3.iba.toLocaleString()} FCFA`);
-  //   console.log(`Attendu: 304,000 FCFA\n`);
-  // }

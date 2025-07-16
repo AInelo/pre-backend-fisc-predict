@@ -1,3 +1,18 @@
+// 🧠 Comment connaît-on ce statut fiscal Sb en pratique ?
+// Le statut fiscal dépend du type d'immatriculation fiscale du bailleur :
+
+// Type de bailleur	Régime fiscal typique	Statut Sb
+// Personne physique exerçant en nom propre et immatriculée	IBA (Impôt sur les Bénéfices d’Affaires)	"IBA"
+// Personne morale (société)	IS (Impôt sur les Sociétés)	"IS"
+// Bailleur non immatriculé (souvent personne physique non enregistrée)	Autres statuts — non IBA/IS	autre (donc τ = 12%)
+
+
+
+
+
+
+
+
 /**
  * IRF - Impôt sur les Revenus Fonciers
  * République du Bénin - Système de Taxation Immobilière

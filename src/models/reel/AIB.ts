@@ -29,6 +29,8 @@ export enum StatutImmatriculation {
 /**
  * Interface pour les paramètres de calcul AIB
  */
+
+
 export interface ParametresAIB {
     montant: number;
     typeOperation: TypeOperation;
@@ -38,6 +40,23 @@ export interface ParametresAIB {
     estNouvelleEntreprise?: boolean;
     releveTPS?: boolean;
     ancienneteEnMois?: number;
+}
+
+
+
+
+
+
+export interface ParametresAIBExemple {
+    montant: number;
+    typeOperation: TypeOperation;
+    statutImmatriculation: StatutImmatriculation;
+    typeBeneficiaire: TypeBeneficiaire;
+    mois: string;
+    dateCreation?: Date; // Date de création de l'entreprise
+    // estNouvelleEntreprise?: boolean;
+    // releveTPS?: boolean;
+    // ancienneteEnMois?: number;
 }
 
 /**
@@ -54,6 +73,9 @@ export interface ResultatAIB {
 }
 
 /**
+ * 
+ * 
+
  * Constantes fiscales
  */
 const TAUX = {
@@ -69,6 +91,21 @@ const REDEVANCE_ORTB = 4000; // FCFA
  * Classe principale pour le calcul de l'AIB
  */
 export class CalculateurAIB {
+
+
+
+    /**
+     * Vérifie si l'entreprise est éligible à l'exonération
+     */
+    private static verifierExoneration(
+        estNouvelleEntreprise: boolean = false,
+        releveTPS: boolean = false,
+        ancienneteEnMois: number = 0
+    ): boolean {
+        return estNouvelleEntreprise && releveTPS && ancienneteEnMois <= 12;
+    }
+
+
 
     /**
      * Détermine le taux d'acompte applicable selon les règles fiscales
@@ -103,17 +140,6 @@ export class CalculateurAIB {
             default:
                 return TAUX.T5; // Taux par défaut
         }
-    }
-
-    /**
-     * Vérifie si l'entreprise est éligible à l'exonération
-     */
-    private static verifierExoneration(
-        estNouvelleEntreprise: boolean = false,
-        releveTPS: boolean = false,
-        ancienneteEnMois: number = 0
-    ): boolean {
-        return estNouvelleEntreprise && releveTPS && ancienneteEnMois <= 12;
     }
 
     /**

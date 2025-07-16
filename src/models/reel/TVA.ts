@@ -11,6 +11,8 @@ export const CONSTANTES_TVA = {
   JOUR_LIMITE_DECLARATION: 10   // 10ème jour du mois
 };
 
+
+
 // Types de base
 export interface Entreprise {
   id: string;
@@ -37,6 +39,17 @@ export interface FactureLigne {
   produit: Produit;
 }
 
+
+
+export interface Penalite {
+  montant: number;
+  retard: number;
+  penaliteBase: number;
+  tauxPenalite: number;
+}
+
+
+
 export interface ResultatTVA {
   tvaCollectee: number;
   tvaDeductible: number;
@@ -45,12 +58,6 @@ export interface ResultatTVA {
   creditTVA?: number;
 }
 
-export interface Penalite {
-  montant: number;
-  retard: number;
-  penaliteBase: number;
-  tauxPenalite: number;
-}
 
 /**
  * Classe principale pour le calcul de la TVA au Bénin

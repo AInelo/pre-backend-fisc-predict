@@ -2,9 +2,9 @@
   "name": "pci-app-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "dist/server.js",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
+    "start": "npm run build && node dist/server.js",
     "dev": "nodemon --watch src --exec ts-node ./src/server.ts",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "tsc",
