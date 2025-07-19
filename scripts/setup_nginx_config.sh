@@ -6,7 +6,7 @@ USER_SERVEUR=${USER_SERVEUR}
 IP_SERVEUR=${IP_SERVEUR}
 
 # Définir ici le domaine à utiliser (sans .conf)
-DOMAIN="victoriendougnon.com"
+DOMAIN="startax-backend.totonlionel.com"
 
 echo "Suppression de l'ancienne config NGINX pour $DOMAIN si elle existe..."
 ssh -i $KEY -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${USER_SERVEUR}@${IP_SERVEUR} "sudo rm -f /etc/nginx/sites-available/${DOMAIN}.conf /etc/nginx/sites-enabled/${DOMAIN}.conf"

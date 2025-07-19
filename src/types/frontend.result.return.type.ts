@@ -9,7 +9,7 @@ export interface GlobalEstimationInfoData {
     impotConfig: ImpotConfig
 }
 
-interface VariableEnter {
+export interface VariableEnter {
     label: string,
     description : string,
     value: number
@@ -37,17 +37,17 @@ export interface EcheancePaiement {
     echeanceDescription : string,
 }
 
-interface InfosSupplementaires {
+export interface InfosSupplementaires {
     infosTitle: string,
     infosDescription: string | string[],
 }
 
 
 export interface ImpotConfig {
+    impotTitle: string;
   label: string;
   description: string;
-  paymentSchedule: PaymentScheduleItem[];
-  obligations: string[];
+
   competentCenter: string;
 }
 

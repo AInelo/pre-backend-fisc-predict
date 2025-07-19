@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build && npm run postbuild
 
 # Expose le port que ton app utilise
-EXPOSE 5000
+EXPOSE 5001
 
 # Commande de démarrage
 CMD ["node", "dist/server.js"]
