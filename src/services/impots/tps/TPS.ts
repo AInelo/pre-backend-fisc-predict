@@ -86,7 +86,7 @@ interface ResultatCalculTPS {
       this.messages = [];
       this.amendes = {};
     }
-  
+
     /**
      * Calcule la TPS de base selon la formule principale
      */

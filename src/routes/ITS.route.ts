@@ -1,6 +1,6 @@
 // Routes for ITS
 import express from 'express';
-import { ITSController } from '../controllers/ITS.controller';
+import { ITSController } from '../controllers/reel/ITS.controller';
 
 const router = express.Router();
 const controller = new ITSController();

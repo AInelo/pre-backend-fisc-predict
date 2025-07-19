@@ -1,6 +1,6 @@
 // Routes for VPS
 import express from 'express';
-import { VPSController } from '../controllers/VPS.controller';
+import { VPSController } from '../controllers/reel/VPS.controller';
 
 const router = express.Router();
 const controller = new VPSController();

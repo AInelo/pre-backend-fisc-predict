@@ -1,6 +1,6 @@
 // Routes for TVA
 import express from 'express';
-import { TVAController } from '../controllers/TVA.controller';
+import { TVAController } from '../controllers/reel/TVA.controller';
 
 const router = express.Router();
 const controller = new TVAController();

@@ -1,6 +1,6 @@
 // Routes for PATENTE
 import express from 'express';
-import { PATENTEController } from '../controllers/PATENTE.controller';
+import { PATENTEController } from '../controllers/reel/PATENTE.controller';
 
 const router = express.Router();
 const controller = new PATENTEController();

@@ -1,6 +1,6 @@
 // Routes for IBA
 import express from 'express';
-import { IBAController } from '../controllers/IBA.controller';
+import { IBAController } from '../controllers/reel/IBA.controller';
 
 const router = express.Router();
 const controller = new IBAController();

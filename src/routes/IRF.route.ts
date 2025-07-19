@@ -1,6 +1,6 @@
 // Routes for IRF
 import express from 'express';
-import { IRFController } from '../controllers/IRF.controller';
+import { IRFController } from '../controllers/reel/IRF.controller';
 
 const router = express.Router();
 const controller = new IRFController();

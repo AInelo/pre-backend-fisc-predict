@@ -1,6 +1,6 @@
 // Routes for IS
 import express from 'express';
-import { ISController } from '../controllers/IS.controller';
+import { ISController } from '../controllers/reel/IS.controller';
 
 const router = express.Router();
 const controller = new ISController();

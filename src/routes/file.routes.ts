@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { FileController } from '../controllers/file.controller';
+import { FileController } from '../controllers/reel/file.controller';
 import { validateSecretKey } from '../middleware/auth.middleware';
 import { uploadSingle, uploadMultiple } from '../middleware/upload.middleware';
 

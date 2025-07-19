@@ -12,7 +12,7 @@
 
 
 import { Router } from 'express';
-import { IRCMController } from '../controllers/IRCM.controller';
+import { IRCMController } from '../controllers/reel/IRCM.controller';
 
 const router = Router();
 

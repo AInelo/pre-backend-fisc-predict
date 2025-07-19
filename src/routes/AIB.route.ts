@@ -1,7 +1,7 @@
 
 // routes/aib.routes.ts
 import { Router } from 'express';
-import { AIBController } from '../controllers/AIB.controller';
+import { AIBController } from '../controllers/reel/AIB.controller';
 
 const router = Router();
 
