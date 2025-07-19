@@ -15,9 +15,9 @@ VPS_SSH_KEY="${SSH_SERVEUR:?VARIABLE SSH_SERVEUR NON DEFINIE}"
 # 📦 Build de l'image avec le Dockerfile
 echo "🔨 Build de l'image Docker depuis Dockerfile..."
 # docker build -t "$IMAGE_NAME:$TAG" .
-# docker compose -f ../bucket-urmapha-compose.yml build
+# docker compose -f ../backend-startax.yml build
 cd "$(dirname "$0")/.."
-docker compose -f bucket-urmapha-compose.yml build
+docker compose -f backend-startax.yml build
 
 
 # 🏷️ Tag avec l’identifiant Docker Hub
