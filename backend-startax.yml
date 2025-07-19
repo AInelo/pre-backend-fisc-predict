@@ -7,7 +7,7 @@ services:
     image: backend-startax:latest
     restart: always
     ports:
-      - "5000:5000"
+      - "5001:5001"
     volumes:
       - /home/admin/startax-bucket:/home/admin/startax-bucket  # <=== volume local:container
     networks:
