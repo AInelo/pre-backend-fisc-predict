@@ -1,4 +1,4 @@
-name: 🚀 Deploy URMAPHA Bucket
+name: 🚀 Deploy Startax BACKEND
 
 on:
   push:
@@ -7,13 +7,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
-      IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
-      SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
 
     steps:
       - name: 📥 Checkout code
@@ -26,26 +19,56 @@ jobs:
           chmod +x scripts/*.sh
 
       - name: 🔨 Build image & push
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+          IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+          SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
         run: |
           chmod +x scripts/build_push_docker_img.sh
           ./scripts/build_push_docker_img.sh
 
       - name: 🚀 Deploy backend
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+          IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+          SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
         run: |
           chmod +x scripts/pull_docker_img_executor.sh
           ./scripts/pull_docker_img_executor.sh key.pem
 
       - name: 🧱 Deploy NGINX config
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+          IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+          SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
         run: |
           chmod +x scripts/setup_nginx_config.sh
           ./scripts/setup_nginx_config.sh key.pem
 
       - name: 🔒 Configure SSL
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+          IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+          SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
         run: |
           chmod +x scripts/configure_ssl.sh
           ./scripts/configure_ssl.sh key.pem
-      
+
       - name: 🔄 Reload NGINX
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+          IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+          SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
         run: |
           chmod +x scripts/reload_nginx.sh
           ./scripts/reload_nginx.sh key.pem
@@ -53,5 +76,96 @@ jobs:
       - name: 🧹 Cleanup
         run: rm -f key.pem
 
-      - name: Clean up SSH key
-        run: rm -f key.pem
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: 🚀 Deploy URMAPHA Bucket
+
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     env:
+#       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+#       USER_SERVEUR: ${{ secrets.USER_SERVEUR }}
+#       IP_SERVEUR: ${{ secrets.IP_SERVEUR }}
+#       SSH_SERVEUR: ${{ secrets.SSH_SERVEUR }}
+
+#     steps:
+#       - name: 📥 Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: 🔐 Write SSH key
+#         run: |
+#           echo "${{ secrets.SSH_SERVEUR }}" > key.pem
+#           chmod 600 key.pem
+#           chmod +x scripts/*.sh
+
+#       - name: 🔨 Build image & push
+#         run: |
+#           chmod +x scripts/build_push_docker_img.sh
+#           ./scripts/build_push_docker_img.sh
+
+#       - name: 🚀 Deploy backend
+#         run: |
+#           chmod +x scripts/pull_docker_img_executor.sh
+#           ./scripts/pull_docker_img_executor.sh key.pem
+
+#       - name: 🧱 Deploy NGINX config
+#         run: |
+#           chmod +x scripts/setup_nginx_config.sh
+#           ./scripts/setup_nginx_config.sh key.pem
+
+#       - name: 🔒 Configure SSL
+#         run: |
+#           chmod +x scripts/configure_ssl.sh
+#           ./scripts/configure_ssl.sh key.pem
+      
+#       - name: 🔄 Reload NGINX
+#         run: |
+#           chmod +x scripts/reload_nginx.sh
+#           ./scripts/reload_nginx.sh key.pem
+
+#       - name: 🧹 Cleanup
+#         run: rm -f key.pem
+
+#       - name: Clean up SSH key
+#         run: rm -f key.pem
