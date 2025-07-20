@@ -1,265 +1,110 @@
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 
 class MoteurTPSimplifie {
-  private static readonly TAUX_TPS = 0.05;
-  private static readonly MONTANT_MINIMUM = 10_000;
-  private static readonly REDEVANCE_RTB = 4_000;
-  private static readonly CONTRIBUTION_CCI = 20_000;
+    private static readonly TAUX_TPS = 0.05;
+    private static readonly MONTANT_MINIMUM = 10_000;
+    private static readonly REDEVANCE_RTB = 4_000;
+    private static readonly CONTRIBUTION_CCI = 20_000;
 
-  public static calculerTPS(chiffreAffaires: number): GlobalEstimationInfoData {
-    const tpsCalculee = chiffreAffaires * this.TAUX_TPS;
-    const tpsBase = Math.max(tpsCalculee, this.MONTANT_MINIMUM);
-    const tpsTotale = tpsBase + this.REDEVANCE_RTB + this.CONTRIBUTION_CCI;
+    public static calculerTPS(chiffreAffaires: number): GlobalEstimationInfoData {
+        const tpsCalculee = chiffreAffaires * this.TAUX_TPS;
+        const tpsBase = Math.max(tpsCalculee, this.MONTANT_MINIMUM);
+        const tpsTotale = tpsBase + this.REDEVANCE_RTB + this.CONTRIBUTION_CCI;
 
-    return {
-      totalEstimation: tpsTotale,
-      totalEstimationCurrency: 'FCFA',
-      contribuableRegime: chiffreAffaires > 50_000_000 ? 'Régime Réel' : 'Régime TPS',
+        return {
+            totalEstimation: tpsTotale,
+            totalEstimationCurrency: 'FCFA',
+            contribuableRegime: chiffreAffaires > 50_000_000 ? 'Régime Réel' : 'Régime TPS',
 
-      VariableEnter: [
-        {
-          label: 'Chiffre d’affaires annuel',
-          description: 'Montant total des ventes ou revenus encaissés durant l’année fiscale.',
-          value: chiffreAffaires,
-          currency: 'FCFA',
-        }
-      ],
+            VariableEnter: [
+                {
+                    label: 'Chiffre d’affaires annuel',
+                    description: 'Montant total des ventes ou revenus encaissés durant l’année fiscale.',
+                    value: chiffreAffaires,
+                    currency: 'FCFA',
+                }
+            ],
 
-      impotDetailCalcule: [
-        {
-          impotTitle: 'TPS (Taxe Professionnelle Synthétique)',
-          impotDescription: 'Calculée à 5% du chiffre d’affaires annuel avec un minimum de 10 000 FCFA.',
-          impotValue: tpsBase,
-          impotValueCurrency: 'FCFA',
-          impotTaux: '5%',
-          importCalculeDescription: `TPS = max(5% du chiffre d’affaires, 10 000 FCFA) → ${tpsBase.toLocaleString('fr-FR')} FCFA`
-        },
-        {
-          impotTitle: 'Redevance RTB',
-          impotDescription: 'Montant fixe de 4 000 FCFA ajouté à la TPS pour la radiodiffusion et télévision nationale.',
-          impotValue: this.REDEVANCE_RTB,
-          impotValueCurrency: 'FCFA',
-          importCalculeDescription: 'Conformément à la loi, une redevance audiovisuelle de 4 000 FCFA est ajoutée.'
-        },
-        {
-          impotTitle: 'Contribution CCI Bénin',
-          impotDescription: 'Montant fixe de 20 000 FCFA représentant la contribution à la Chambre de Commerce et d’Industrie du Bénin.',
-          impotValue: this.CONTRIBUTION_CCI,
-          impotValueCurrency: 'FCFA',
-          importCalculeDescription: 'Montant forfaitaire obligatoire ajouté au calcul de la TPS.'
-        }
-      ],
+            impotDetailCalcule: [
+                {
+                    impotTitle: 'TPS (Taxe Professionnelle Synthétique)',
+                    impotDescription: 'Calculée à 5% du chiffre d’affaires annuel avec un minimum de 10 000 FCFA.',
+                    impotValue: tpsBase,
+                    impotValueCurrency: 'FCFA',
+                    impotTaux: '5%',
+                    importCalculeDescription: `TPS = max(5% du chiffre d’affaires, 10 000 FCFA) → ${tpsBase.toLocaleString('fr-FR')} FCFA`
+                },
+                {
+                    impotTitle: 'Redevance RTB',
+                    impotDescription: 'Montant fixe de 4 000 FCFA ajouté à la TPS pour la radiodiffusion et télévision nationale.',
+                    impotValue: this.REDEVANCE_RTB,
+                    impotValueCurrency: 'FCFA',
+                    importCalculeDescription: 'Conformément à la loi, une redevance audiovisuelle de 4 000 FCFA est ajoutée.'
+                },
+                {
+                    impotTitle: 'Contribution CCI Bénin',
+                    impotDescription: 'Montant fixe de 20 000 FCFA représentant la contribution à la Chambre de Commerce et d’Industrie du Bénin.',
+                    impotValue: this.CONTRIBUTION_CCI,
+                    impotValueCurrency: 'FCFA',
+                    importCalculeDescription: 'Montant forfaitaire obligatoire ajouté au calcul de la TPS.'
+                }
+            ],
 
-      obligationEcheance: [
-        {
-          impotTitle: 'TPS - Solde à payer',
-          echeancePaiement: {
-            echeancePeriodeLimite: '30 avril N+1',
-            echeanceDescription: 'Solde à verser au plus tard le 30 avril de l’année suivante.'
-          },
-          obligationDescription: 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
-        },
-        {
-          impotTitle: 'TPS - Acomptes provisionnels',
-          echeancePaiement: [
-            {
-              echeancePeriodeLimite: '10 février',
-              echeanceDescription: 'Premier acompte égal à 50% de la TPS de l’année précédente.'
-            },
-            {
-              echeancePeriodeLimite: '10 juin',
-              echeanceDescription: 'Deuxième acompte égal à 50% de la TPS de l’année précédente.'
+            obligationEcheance: [
+                {
+                    impotTitle: 'TPS - Solde à payer',
+                    echeancePaiement: {
+                        echeancePeriodeLimite: '30 avril N+1',
+                        echeanceDescription: 'Solde à verser au plus tard le 30 avril de l’année suivante.'
+                    },
+                    obligationDescription: 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
+                },
+                {
+                    impotTitle: 'TPS - Acomptes provisionnels',
+                    echeancePaiement: [
+                        {
+                            echeancePeriodeLimite: '10 février',
+                            echeanceDescription: 'Premier acompte égal à 50% de la TPS de l’année précédente.'
+                        },
+                        {
+                            echeancePeriodeLimite: '10 juin',
+                            echeanceDescription: 'Deuxième acompte égal à 50% de la TPS de l’année précédente.'
+                        }
+                    ],
+                    obligationDescription: 'Applicable sauf pour la première année d’activité.'
+                }
+            ],
+
+            infosSupplementaires: [
+                {
+                    infosTitle: 'Acomptes et Solde',
+                    infosDescription: [
+                        'Deux acomptes provisionnels égaux à 50% de la TPS de l’année précédente sont exigés.',
+                        'Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2).'
+                    ]
+                },
+                {
+                    infosTitle: 'Amendes possibles',
+                    infosDescription: [
+                        'Tout paiement ≥ 100 000 FCFA doit être effectué par voie bancaire. Sinon, amende de 5%.',
+                        'Amende pour non-présentation de comptabilité : 1 000 000 FCFA par exercice.'
+                    ]
+                }
+            ],
+
+            impotConfig: {
+                impotTitle: 'Taxe Professionnelle Synthétique',
+                label: 'TPS',
+                description: `La TPS est égale à 5% du chiffre d’affaires annuel avec un minimum forfaitaire de 10 000 FCFA.
+                        Une redevance audiovisuelle de 4 000 FCFA est ajoutée à la TPS.
+                        Une contribution fixe de 20 000 FCFA à la Chambre de Commerce et d’Industrie du Bénin (CCI Bénin) est également ajoutée.
+                        En cas de chiffre d’affaires > 50 millions FCFA, le contribuable passe au régime réel.`,
+                competentCenter: 'Centre des Impôts territorialement compétent selon l’adresse du contribuable.'
             }
-          ],
-          obligationDescription: 'Applicable sauf pour la première année d’activité.'
-        }
-      ],
-
-      infosSupplementaires: [
-        {
-          infosTitle: 'Règles de calcul',
-          infosDescription: [
-            'La TPS est égale à 5% du chiffre d’affaires annuel avec un minimum forfaitaire de 10 000 FCFA.',
-            'Une redevance audiovisuelle de 4 000 FCFA est ajoutée à la TPS.',
-            'Une contribution fixe de 20 000 FCFA à la Chambre de Commerce et d’Industrie du Bénin (CCI Bénin) est également ajoutée.',
-            'En cas de chiffre d’affaires > 50 millions FCFA, le contribuable passe au régime réel.'
-          ]
-        },
-        {
-          infosTitle: 'Acomptes et Solde',
-          infosDescription: [
-            'Deux acomptes provisionnels égaux à 50% de la TPS de l’année précédente sont exigés.',
-            'Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2).'
-          ]
-        },
-        {
-          infosTitle: 'Amendes possibles',
-          infosDescription: [
-            'Tout paiement ≥ 100 000 FCFA doit être effectué par voie bancaire. Sinon, amende de 5%.',
-            'Amende pour non-présentation de comptabilité : 1 000 000 FCFA par exercice.'
-          ]
-        }
-      ],
-
-      impotConfig: {
-        impotTitle: 'Taxe Professionnelle Synthétique',
-        label: 'TPS',
-        description: 'Forme d’imposition simplifiée applicable aux petites entreprises au Bénin.',
-        competentCenter: 'Centre des Impôts territorialement compétent selon l’adresse du contribuable.'
-      }
-    };
-  }
+        };
+    }
 }
 
 
 
 export default MoteurTPSimplifie
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import {
-//   GlobalEstimationInfoData,
-
-// } from '../../../../types/frontend.result.return.type'; // adapte le chemin à ton projet
-
-// class MoteurTPSimplifie {
-//   private static readonly TAUX_TPS = 0.05;
-//   private static readonly MONTANT_MINIMUM = 10_000;
-//   private static readonly REDEVANCE_RTB = 4_000;
-
-//   public static calculerTPS(chiffreAffaires: number): GlobalEstimationInfoData {
-//     const tpsCalculee = chiffreAffaires * this.TAUX_TPS;
-//     const tpsBase = Math.max(tpsCalculee, this.MONTANT_MINIMUM);
-//     const tpsTotale = tpsBase + this.REDEVANCE_RTB;
-
-//     return {
-//       totalEstimation: tpsTotale,
-//       totalEstimationCurrency: 'FCFA',
-//       contribuableRegime: chiffreAffaires > 50_000_000 ? 'Régime Réel' : 'Régime TPS',
-
-//       VariableEnter: [
-//         {
-//           label: 'Chiffre d’affaires annuel',
-//           description: 'Montant total des ventes ou revenus encaissés durant l’année fiscale.',
-//           value: chiffreAffaires,
-//           currency: 'FCFA',
-//         }
-//       ],
-
-//       impotDetailCalcule: [
-//         {
-//           impotTitle: 'TPS (Taxe Professionnelle Synthétique)',
-//           impotDescription: 'Calculée à 5% du chiffre d’affaires annuel avec un minimum de 10 000 FCFA.',
-//           impotValue: tpsBase,
-//           impotValueCurrency: 'FCFA',
-//           impotTaux: '5%',
-//           importCalculeDescription: `TPS = max(5% du chiffre d’affaires, 10 000 FCFA) → ${tpsBase.toLocaleString('fr-FR')} FCFA`
-//         },
-//         {
-//           impotTitle: 'Redevance RTB',
-//           impotDescription: 'Montant fixe de 4 000 FCFA ajouté à la TPS pour la radiodiffusion et télévision nationale.',
-//           impotValue: this.REDEVANCE_RTB,
-//           impotValueCurrency: 'FCFA',
-//           importCalculeDescription: 'Conformément à la loi, une redevance audiovisuelle de 4 000 FCFA est ajoutée.'
-//         }
-//       ],
-
-//       obligationEcheance: [
-//         {
-//           impotTitle: 'TPS - Solde à payer',
-//           echeancePaiement: {
-//             echeancePeriodeLimite: '30 avril N+1',
-//             echeanceDescription: 'Solde à verser au plus tard le 30 avril de l’année suivante.'
-//           },
-//           obligationDescription: 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
-//         },
-//         {
-//           impotTitle: 'TPS - Acomptes provisionnels',
-//           echeancePaiement: [
-//             {
-//               echeancePeriodeLimite: '10 février',
-//               echeanceDescription: 'Premier acompte égal à 50% de la TPS de l’année précédente.'
-//             },
-//             {
-//               echeancePeriodeLimite: '10 juin',
-//               echeanceDescription: 'Deuxième acompte égal à 50% de la TPS de l’année précédente.'
-//             }
-//           ],
-//           obligationDescription: 'Applicable sauf pour la première année d’activité.'
-//         }
-//       ],
-
-//       infosSupplementaires: [
-//         {
-//           infosTitle: 'Règles de calcul',
-//           infosDescription: [
-//             'La TPS est égale à 5% du chiffre d’affaires annuel avec un minimum forfaitaire de 10 000 FCFA.',
-//             'Une redevance audiovisuelle de 4 000 FCFA est ajoutée à la TPS.',
-//             'En cas de chiffre d’affaires > 50 millions FCFA, le contribuable passe au régime réel.'
-//           ]
-//         },
-//         {
-//           infosTitle: 'Acomptes et Solde',
-//           infosDescription: [
-//             'Deux acomptes provisionnels égaux à 50% de la TPS de l’année précédente sont exigés.',
-//             'Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2).'
-//           ]
-//         },
-//         {
-//           infosTitle: 'Amendes possibles',
-//           infosDescription: [
-//             'Tout paiement ≥ 100 000 FCFA doit être effectué par voie bancaire. Sinon, amende de 5%.',
-//             'Amende pour non-présentation de comptabilité : 1 000 000 FCFA par exercice.'
-//           ]
-//         }
-//       ],
-
-//       impotConfig: {
-//         impotTitle: 'Taxe Professionnelle Synthétique',
-//         label: 'TPS',
-//         description: 'Forme d’imposition simplifiée applicable aux petites entreprises au Bénin.',
-//         competentCenter: 'Centre des Impôts territorialement compétent selon l’adresse du contribuable.'
-//       }
-//     };
-//   }
-// }
-
-
-// export default MoteurTPSimplifie
