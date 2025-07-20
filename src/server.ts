@@ -14,7 +14,7 @@ app.get('/apiAlive', (_req, res) => {
   res.status(200).json({ message: 'API is alive 🚀' });
 });
 
-app.use('/api/general/particulier/', tpsRoutes);
+app.use('/api/general/', tpsRoutes);
 
 const PORT = 5001;
 app.listen(PORT, () => {
