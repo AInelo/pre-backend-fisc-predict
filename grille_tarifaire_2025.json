@@ -1,0 +1,2666 @@
+{
+  "metadata": {
+    "source_file": "grille_revisee_2025_light.xlsx",
+    "description": "Grille tarifaire révisée 2025",
+    "categories": []
+  },
+  "departements": [
+    {
+      "nom": "LITTORAL",
+      "communes": [
+        {
+          "nom": "COTONOU",
+          "arrondissements": [
+            {
+              "nom": "Arrondissement 1",
+              "tarifs": {}
+            },
+            {
+              "nom": "DONATEN FINAGNON TOKPLEGBE",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 2",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 3",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 4",
+              "tarifs": {}
+            },
+            {
+              "nom": "ABOKICODJI LAGUNE FIFADJI HOUTO",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 5",
+              "tarifs": {}
+            },
+            {
+              "nom": "ZONGO EHUZU ZONGO NIMA ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 6",
+              "tarifs": {}
+            },
+            {
+              "nom": "DANTOKPA",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 7",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 8",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 9",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 10",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 11",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 12",
+              "tarifs": {}
+            },
+            {
+              "nom": "CADJEHOUN I COCOTIER",
+              "tarifs": {}
+            },
+            {
+              "nom": "FIDJROSSE CENTRE\n  CADJEHOUN 2\n  CADJEHOUN 3\n  CADJEHOUN 4\n  CADJEHOUN 5\n  CADJEHOUN KPOTA",
+              "tarifs": {}
+            },
+            {
+              "nom": "Arrondissement 13",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "ALIBORI",
+      "communes": [
+        {
+          "nom": "BANIKOARA",
+          "arrondissements": [
+            {
+              "nom": "Banikoara",
+              "tarifs": {}
+            },
+            {
+              "nom": "Founougo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gomparou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Goumori",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kokey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kokiborou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ounet",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sompérékou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Soroko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Toura",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "GOGOUNOU",
+          "arrondissements": [
+            {
+              "nom": "Gogounou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gounarou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bagou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouara",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sori",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoungou-Pantrossi",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KANDI",
+          "arrondissements": [
+            {
+              "nom": "Angaradébou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bensékou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Donwari",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kandi I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kandi II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kandi III",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kassakou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Saah",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sam",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sonsoro",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KARIMAMA",
+          "arrondissements": [
+            {
+              "nom": "Birni-Lafia",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bogo-Bogo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Monsey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kompa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Karimaman",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "MALANVILLE",
+          "arrondissements": [
+            {
+              "nom": "Garou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Guénè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tomboutou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Mandécali",
+              "tarifs": {}
+            },
+            {
+              "nom": "Mallanville",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SEGBANAN",
+          "arrondissements": [
+            {
+              "nom": "Libantè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Liboussou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lougou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sokotindji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ségbana",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "ATACORA",
+      "communes": [
+        {
+          "nom": "BOUNKOUMBE",
+          "arrondissements": [
+            {
+              "nom": "Boukoumbè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dipoli",
+              "tarifs": {}
+            },
+            {
+              "nom": "Korontière",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kossoucoingou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Manta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Natta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tabota",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "COBLY",
+          "arrondissements": [
+            {
+              "nom": "Cobly",
+              "tarifs": {}
+            },
+            {
+              "nom": "Datori",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kountori",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tapoga",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KEROU ",
+          "arrondissements": [
+            {
+              "nom": "Brignamaro ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Firou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kérou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koabagou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KOUANDE",
+          "arrondissements": [
+            {
+              "nom": "Birni",
+              "tarifs": {}
+            },
+            {
+              "nom": "Chabi-Couma",
+              "tarifs": {}
+            },
+            {
+              "nom": "Fô-Tancé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Guilmaro",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kouandé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Oroukayo",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "MATERI ",
+          "arrondissements": [
+            {
+              "nom": "Dassari ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gouandé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Matéri",
+              "tarifs": {}
+            },
+            {
+              "nom": "Nodi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tantéga",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchianhoun-Cossi",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "NATITINGOU",
+          "arrondissements": [
+            {
+              "nom": "Kotapounga",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kouaba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koundata",
+              "tarifs": {}
+            },
+            {
+              "nom": "Natitingou II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Natitingou I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Natitingou III",
+              "tarifs": {}
+            },
+            {
+              "nom": "Natitingou IV",
+              "tarifs": {}
+            },
+            {
+              "nom": "Perma",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchoumi-Tchoumi",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "PEHUNCO",
+          "arrondissements": [
+            {
+              "nom": "Gnémasson",
+              "tarifs": {}
+            },
+            {
+              "nom": "Péhunco",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tobré",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TANGUIETA",
+          "arrondissements": [
+            {
+              "nom": "Cotiakou ",
+              "tarifs": {}
+            },
+            {
+              "nom": "N'Dahonta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Taiakou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tanguiéta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tanongou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TOUCOUNTOUNA",
+          "arrondissements": [
+            {
+              "nom": "Kouarfa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tampégré",
+              "tarifs": {}
+            },
+            {
+              "nom": "Toucountouna",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "ATLANTIQUE",
+      "communes": [
+        {
+          "nom": "ABOMEY-CALAVI",
+          "arrondissements": [
+            {
+              "nom": "Abomey-Calavi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Akassato",
+              "tarifs": {}
+            },
+            {
+              "nom": "Godomey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Glo-Djigbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hévié",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpanroun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouédo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Togba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zinvié",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ALLADA ",
+          "arrondissements": [
+            {
+              "nom": "Agbanou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ahouannonzoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Allada",
+              "tarifs": {}
+            },
+            {
+              "nom": "Attogon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avakpa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ayou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hinvi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lissègazoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lon-Agonmey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sékou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Togoudo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tokpa-Avagoudo",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KPOMASSE",
+          "arrondissements": [
+            {
+              "nom": "Aganmalomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Agbanto",
+              "tarifs": {}
+            },
+            {
+              "nom": "Agonkanmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dedomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dekanmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpomassè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ségbeya",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ségbohoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tokpa-Domè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "OUIDAH",
+          "arrondissements": [
+            {
+              "nom": "Avlékété",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djégbadji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gakpè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouakpé-Daho",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouidah I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouidah II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouidah III",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouidah IV",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pahou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Savi",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SÔ-AVA",
+          "arrondissements": [
+            {
+              "nom": "Ahomey-Lokpo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dékanmey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ganvié I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ganvié II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houédo-Aguékon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sô-Ava",
+              "tarifs": {}
+            },
+            {
+              "nom": "Vekky",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TOFFO ",
+          "arrondissements": [
+            {
+              "nom": "Agué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Colli-Agbamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Coussi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Damè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djanglanmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houégbo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpomé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Séhouè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Toffo-Agué",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TORI-BOSSITO",
+          "arrondissements": [
+            {
+              "nom": "Avamè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Azohouè-Aliho",
+              "tarifs": {}
+            },
+            {
+              "nom": "Azohouè-Cada",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tori-Bossito",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tori-Cada",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tori-Gare",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ZE",
+          "arrondissements": [
+            {
+              "nom": "Adjan",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dawé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djigbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dodji-Bata",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hékanmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koundokpoè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèdjè-Dénou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèdjè-Houégoudo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tangbo-Djevié",
+              "tarifs": {}
+            },
+            {
+              "nom": "Yokpo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zè",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "BORGOU",
+      "communes": [
+        {
+          "nom": "BEMBEREKE",
+          "arrondissements": [
+            {
+              "nom": "Bembèrèkè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Béroubouay",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bouanri",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gomia",
+              "tarifs": {}
+            },
+            {
+              "nom": " Ina",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KALALE",
+          "arrondissements": [
+            {
+              "nom": "Basso",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bouka",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dèrassi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dunkassa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kalalè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Péonga",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "N'DALI",
+          "arrondissements": [
+            {
+              "nom": "Bori",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbégourou",
+              "tarifs": {}
+            },
+            {
+              "nom": "N'Dali",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouénou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sirarou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "NIKKI ",
+          "arrondissements": [
+            {
+              "nom": "Biro",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gnonkourakali",
+              "tarifs": {}
+            },
+            {
+              "nom": "Nikki",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouénou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sérékalé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Suya",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tasso",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "PARAKOU",
+          "arrondissements": [
+            {
+              "nom": "ALBARIKA\nAMAOUIGNON&DOKPAROU\nARAFAT\nBANIKANI\nBAWE\nBOUNDAROU\nDEPOT\nGAH\nGANOU\nGUEMA\nKPEBIE\nLADJI-FARANI\nMADINA\nNIMA\nOKE-DAMA\nTRANZA\nWANSIROU\nZONGO-NORD",
+              "tarifs": {}
+            },
+            {
+              "nom": "AGBAGBA\nALAGA\nBA MORA\nBAKINKOURA\nBAPARAPE\nCAMPADAGBE\nGANON\nGANOU GOUROU\nGANRE\nGOROMOSSO\nKABASSIRA\nKADERA\nKPEROU GUERRA\nLEMANDA\nNABISSOU\nOUEZE\nSINAGOUROU\nTITIROU\nZAZIRA\nZONGO-ZENON",
+              "tarifs": {}
+            },
+            {
+              "nom": "BAKA\nBEYEROU\nSUINROU\nTHIAN\nTIBONA\nWORE",
+              "tarifs": {}
+            },
+            {
+              "nom": "KORO BOROU\nTOUROU\nBAKPEROU\nNIKKIKPEROU\nNISSIKO\nSAWARAROU\nSOKOUNON",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "PERERE ",
+          "arrondissements": [
+            {
+              "nom": "Gninsy ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Guinagourou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpané",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pébié",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pèrèrè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sontou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SINENDE",
+          "arrondissements": [
+            {
+              "nom": "Fô-Bourè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèkèrè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sikki",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sinendé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TCHAOUROU",
+          "arrondissements": [
+            {
+              "nom": "Alafiarou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchatchou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Goro",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bétérou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kika",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sanson ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchaourou",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "COLLINES",
+      "communes": [
+        {
+          "nom": "BANTE ",
+          "arrondissements": [
+            {
+              "nom": "Agoua ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Akpassi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Atokoligbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bantè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bobè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gouka",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lougba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pira",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DASSA-ZOUNME",
+          "arrondissements": [
+            {
+              "nom": "Akofodjoulè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dassa I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dassa II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbaffo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kèrè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpingni",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lèma",
+              "tarifs": {}
+            },
+            {
+              "nom": "Paouingnan",
+              "tarifs": {}
+            },
+            {
+              "nom": "Soclogbo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tré",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "GLAZOUE",
+          "arrondissements": [
+            {
+              "nom": "Aklankpa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Assanté",
+              "tarifs": {}
+            },
+            {
+              "nom": "Glazoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpakpaza",
+              "tarifs": {}
+            },
+            {
+              "nom": "Magoumi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouèdèmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sokponta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Thio",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zaffé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "OUESSE",
+          "arrondissements": [
+            {
+              "nom": "Challa-Ogoi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djègbè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbanlin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kèmon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kilibo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Laminou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouèssè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Odougba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Toui",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SAVALOU",
+          "arrondissements": [
+            {
+              "nom": "Djaloukou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Doumè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gobada",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpataba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lahotan",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lèma",
+              "tarifs": {}
+            },
+            {
+              "nom": "Logozohoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Monkpa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ottola",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouèssè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Savalou-Aga",
+              "tarifs": {}
+            },
+            {
+              "nom": "Savalou-Agbado",
+              "tarifs": {}
+            },
+            {
+              "nom": "Savalou-Attakè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchetti",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SAVE  ",
+          "arrondissements": [
+            {
+              "nom": "ADIDO",
+              "tarifs": {}
+            },
+            {
+              "nom": " Bèssè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Boni",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kaboua",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ofè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Okpara",
+              "tarifs": {}
+            },
+            {
+              "nom": "Plateau",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sakin",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "DONGA",
+      "communes": [
+        {
+          "nom": "BASSILA",
+          "arrondissements": [
+            {
+              "nom": "Alédjo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bassila",
+              "tarifs": {}
+            },
+            {
+              "nom": "Manigri",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pénéssoulou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "COPARGO",
+          "arrondissements": [
+            {
+              "nom": "Anandana ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Copargo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pabégou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Singré",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DJOUGOU",
+          "arrondissements": [
+            {
+              "nom": "Barei ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bariénou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bélléfoungou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bougou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djougou I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djougou III",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djougou II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kolokondé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Onklou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Patargo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pélébina",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sérou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "OUAKE",
+          "arrondissements": [
+            {
+              "nom": "Badjoudè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kondé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouaké",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèmèrè I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèmèrè II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchalinga",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "COUFFO",
+      "communes": [
+        {
+          "nom": "APLAHOUE",
+          "arrondissements": [
+            {
+              "nom": "Aplahoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Atomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Azovè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dekpo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Godohou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kissamey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lonkly",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DJAKOTOMEY",
+          "arrondissements": [
+            {
+              "nom": "Adjintimey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bètoumey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djakotomey I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djakotomey II",
+              "tarifs": {}
+            },
+            {
+              "nom": " Gohomey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houègamey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kinkinhoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kokohoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpoba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sokouhoué",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DOGBO ",
+          "arrondissements": [
+            {
+              "nom": "Ayomi ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dèvè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Honton",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lokogohoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Madjrè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tota",
+              "tarifs": {}
+            },
+            {
+              "nom": "Totchagni",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KLOUEKANME",
+          "arrondissements": [
+            {
+              "nom": "Adjanhonmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ahogbèya",
+              "tarifs": {}
+            },
+            {
+              "nom": "Aya-Hohoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djotto",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hondji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Klouékanmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lanta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchikpé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "LALO",
+          "arrondissements": [
+            {
+              "nom": "Adoukandji ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ahondjinnako",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ahomadégbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Banigbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gnizounmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hlassamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lalo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lokogba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchito",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tohou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zalli",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "TOVIKLIN",
+          "arrondissements": [
+            {
+              "nom": "Adjido ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avédjin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Doko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houédogli",
+              "tarifs": {}
+            },
+            {
+              "nom": "Missinko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tannou-Gola",
+              "tarifs": {}
+            },
+            {
+              "nom": "Toviklin",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "MONO",
+      "communes": [
+        {
+          "nom": "ATHIEME",
+          "arrondissements": [
+            {
+              "nom": "Adohoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Atchannou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Athiémè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dédékpoé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpinnou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "BOPA",
+          "arrondissements": [
+            {
+              "nom": "Agbodji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Badazoui",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bopa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbakpodji",
+              "tarifs": {}
+            },
+            {
+              "nom": " Lobogo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Possotomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Yégodoé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "COME",
+          "arrondissements": [
+            {
+              "nom": "Agatogbo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Akodéha",
+              "tarifs": {}
+            },
+            {
+              "nom": "Comè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouèdèmè-Pédah",
+              "tarifs": {}
+            },
+            {
+              "nom": "Oumako",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "GRAND-POPO",
+          "arrondissements": [
+            {
+              "nom": "Adjaha ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Agoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avloh",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djanglanmey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbéhoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Grand-Popo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sazoué",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "HOUEYOGBE ",
+          "arrondissements": [
+            {
+              "nom": "Dahé ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Doutou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Honhoué",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houéyogbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoungbonou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "LOKOSSA",
+          "arrondissements": [
+            {
+              "nom": "Agamé ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houèdèmè-Adja",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koudo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lokossa",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "OUEME",
+      "communes": [
+        {
+          "nom": "ADJARRA",
+          "arrondissements": [
+            {
+              "nom": "Adjarra I ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Adjarra II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Aglogbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Honvié",
+              "tarifs": {}
+            },
+            {
+              "nom": "Malanhoui",
+              "tarifs": {}
+            },
+            {
+              "nom": "Médédjonou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ADJOHOUN",
+          "arrondissements": [
+            {
+              "nom": "Azowlissè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Akpadanou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kodè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Adjohoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dèmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gangban",
+              "tarifs": {}
+            },
+            {
+              "nom": "Awonou ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Togbota",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "AGUEGUE   ",
+          "arrondissements": [
+            {
+              "nom": "Avagbodji ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houédomè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoungamè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "AKPRO-MISSERETE",
+          "arrondissements": [
+            {
+              "nom": "Akpro-Missérété ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gomè-Sota",
+              "tarifs": {}
+            },
+            {
+              "nom": "Katagon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Vakon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoungbomè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "AVRANKOU",
+          "arrondissements": [
+            {
+              "nom": "Atchoukpa ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avrankou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djomon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbozounmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kouty",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouanho",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sado",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "BONOU  ",
+          "arrondissements": [
+            {
+              "nom": "Affamè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Atchonsa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bonou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Damè-Wogon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houinviguè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DANGBO",
+          "arrondissements": [
+            {
+              "nom": "Dangbo ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dékin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gbéko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houédomey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hozin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Késsounou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zounguè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "PORTO-NOVO",
+          "arrondissements": [
+            {
+              "nom": "AVAKPA GBEGO                  \nAVAKPA KPODJI                 \nAVASSA  BAGORO  AGBOKOME      \nAYETORO                       \nAYIMLONFIDE                   \nKPOTA  SANDODO                \nLOKOSSA                       \nOGANLA  ATAKPAME              \nOGANLA  NORD                  \nOGANLA  POSTE                 \nOGANLA  SOKE                  \nOGANLA  SUD                   \nOGANLA-EST                    \n",
+              "tarifs": {}
+            },
+            {
+              "nom": "ACCRON-GOGANKOME        \n ADJINA SUD                    \nADOME                     \nAGBOKOU 1                     \nAGBOKOU 2                \nAGBOKOU 3            \nATTAKE 2                      \nATTAKE 1                  \nGBEKON                        \nHOUEYOGBE  GBEDJI             \nHOUEZOUME                     \nHOUINME  CHATEAU              \nHOUINME  GANTO                \nHOUINME  GBEDJROMEDE         \n HOUINME DJAGUIDI             \n IDI-ARABA                \nILEFIE                     \nKANDEVIE  MISSOGBE           \nKANDEVIE  OWODE               \nKANDEVIE 3                    \nOUINLINDA 1                   \nAGBOKOU \nEXTENSIONAGBOKOU-SUDOUINLINDA 2                   ",
+              "tarifs": {}
+            },
+            {
+              "nom": "ADJEGOUNLE                    ADJINA NORD                   AHOUANTIKOME                  AKONABOUE                     AKPASSA  ODO  OBA             BASSOU  DODO                  DJASSIN-DAHO                  DEGUE-GARE GANTO              DJASSIN-ZOUME                 DJILADO                       DOTTA                         FILLA  HONNOU  HONDJI         FOUNFOUN DJAGUIDI             FOUNFOUN GBEGO                FOUNFOUN SODJI                FOUNFOUN TOKPA                GBEZOUNKPA                    HASSOE-AGUE                   HLOGOU                        HOUEGBO-HLINKO                HOUSSOUKO                     OUANDO                        SADOGNON  ADJEGOUNLE          KOUTONGBE                     SADOGNON  HOUSSA              SAGBO  KOSSOU                 SODJEKO  TCHINVIE  HINKOUE    SOKOME  TOFFINKOME            TOGO- ADANDEKOME              VEKPA                         OUNDO\nOUADO\nAKONAKOUE\nAKONABOE\nDEGUEKOME",
+              "tarifs": {}
+            },
+            {
+              "nom": "ANAVIE                     \nDJEGAN-DAHO\n DJEGAN-KPEVI\n DODJI                         \nDOWA                          \nGBODJE                        \nGUEVIE- DJEGANTO             \nGUEVIE                        \nGUEVIE-ZINKOME                \nHOUINVIE                      \nHOUNSA                        \nLOUHO                         \nTOKPOTA 1                     \nTOKPOTA 2                     \nZEBOU  AGA                    \nZEBOU  AHOUANGBO              \nZEBOU  MASSE                  \nGUEVIE-DJEGANTODOWA \nEXTENSIONGUEVIE \nDJEGANTO\nAGBOKOU EXTENTION\nDJOGBEZEBOU\nITA-TIGRIGBOJE\nZOUNKPA",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SEME-KPODJI",
+          "arrondissements": [
+            {
+              "nom": "Agblangandan",
+              "tarifs": {}
+            },
+            {
+              "nom": "ZONE CEN SAD",
+              "tarifs": {}
+            },
+            {
+              "nom": "Aholouyèmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djrègbè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèmè-Podji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ekpè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tohouè",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "PLATEAU",
+      "communes": [
+        {
+          "nom": "ADJA-OUERE",
+          "arrondissements": [
+            {
+              "nom": "Adja-Ouèrè ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Oko-Akarè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpoulou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Massè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ikpinlè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Totonnoukon",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "IFANGNI",
+          "arrondissements": [
+            {
+              "nom": "Banigbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Daagbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ifangni",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ko-Koumolou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lagbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tchaada",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "KETOU ",
+          "arrondissements": [
+            {
+              "nom": "Adakplamé",
+              "tarifs": {}
+            },
+            {
+              "nom": " Idigny",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpankou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kétou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Odometa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Okpometa",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "POBE ",
+          "arrondissements": [
+            {
+              "nom": "Ahoyéyé ",
+              "tarifs": {}
+            },
+            {
+              "nom": " Igana",
+              "tarifs": {}
+            },
+            {
+              "nom": "Issaba",
+              "tarifs": {}
+            },
+            {
+              "nom": "Pobè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Towé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "SAKETE  ",
+          "arrondissements": [
+            {
+              "nom": "Aguidi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ita-Djèbou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sakété I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sakété II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Takon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Yoko",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nom": "ZOU",
+      "communes": [
+        {
+          "nom": "ABOMEY",
+          "arrondissements": [
+            {
+              "nom": "Agbokpa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dètohou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Vidolè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Hounli",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sèhoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zounzounmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djègbé",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "AGBANGNIZOUN",
+          "arrondissements": [
+            {
+              "nom": "Adahondjigon ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Adingningon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Agbangnizoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kinta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpota",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lissazounmè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sahé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Siwé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tanvé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoungoudo",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "BOHICON",
+          "arrondissements": [
+            {
+              "nom": "Agongointo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avogbana",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bohicon I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Bohicon II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gnidjazoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lissèzoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Ouassaho",
+              "tarifs": {}
+            },
+            {
+              "nom": "Passagon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Saclo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Sodohomè",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "COVE",
+          "arrondissements": [
+            {
+              "nom": "Adogbé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houèko",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gounli",
+              "tarifs": {}
+            },
+            {
+              "nom": "ZOGBA",
+              "tarifs": {}
+            },
+            {
+              "nom": "Lainta-Cogbè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Naogon",
+              "tarifs": {}
+            },
+            {
+              "nom": "SOLI  ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houin Hounso",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "DJIDJA ",
+          "arrondissements": [
+            {
+              "nom": "Agondji",
+              "tarifs": {}
+            },
+            {
+              "nom": "Agouna",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dan",
+              "tarifs": {}
+            },
+            {
+              "nom": "Djidja",
+              "tarifs": {}
+            },
+            {
+              "nom": " Dohouimè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Gobè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Monsourou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Mougnon",
+              "tarifs": {}
+            },
+            {
+              "nom": "Oungbègamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Outo",
+              "tarifs": {}
+            },
+            {
+              "nom": "Setto",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoukou",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "OUINHI  ",
+          "arrondissements": [
+            {
+              "nom": "Ouinhi",
+              "tarifs": {}
+            },
+            {
+              "nom": "DASSO",
+              "tarifs": {}
+            },
+            {
+              "nom": "SAGON",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tohoué",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ZA-KPOTA",
+          "arrondissements": [
+            {
+              "nom": "Allahé",
+              "tarifs": {}
+            },
+            {
+              "nom": "Assalin",
+              "tarifs": {}
+            },
+            {
+              "nom": "Houngomey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpakpamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpozoun",
+              "tarifs": {}
+            },
+            {
+              "nom": "Za-Kpota",
+              "tarifs": {}
+            },
+            {
+              "nom": "Za-Tanta",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zèko",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ZAGNANADO",
+          "arrondissements": [
+            {
+              "nom": "Agonli-Houégbo ",
+              "tarifs": {}
+            },
+            {
+              "nom": "Banamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Don-Tan",
+              "tarifs": {}
+            },
+            {
+              "nom": "Dovi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zagnanado centre",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpédékpo",
+              "tarifs": {}
+            }
+          ]
+        },
+        {
+          "nom": "ZOGBODOMEY",
+          "arrondissements": [
+            {
+              "nom": "Akiza",
+              "tarifs": {}
+            },
+            {
+              "nom": "Avlamè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Cana I",
+              "tarifs": {}
+            },
+            {
+              "nom": "Cana II",
+              "tarifs": {}
+            },
+            {
+              "nom": "Domè",
+              "tarifs": {}
+            },
+            {
+              "nom": "Koussoukpa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Kpokissa",
+              "tarifs": {}
+            },
+            {
+              "nom": "Massi",
+              "tarifs": {}
+            },
+            {
+              "nom": "Tanwé-Hessou",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zogbodomey",
+              "tarifs": {}
+            },
+            {
+              "nom": "Zoukou",
+              "tarifs": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
