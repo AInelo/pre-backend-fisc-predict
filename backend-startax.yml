@@ -15,4 +15,4 @@ services:
 
 networks:
   startax-network:
-    driver: bridge
+    external: true

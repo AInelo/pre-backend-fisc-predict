@@ -12,12 +12,28 @@ VPS_USER="${USER_SERVEUR:?VARIABLE USER_SERVEUR NON DEFINIE}"
 VPS_HOST="${IP_SERVEUR:?VARIABLE IP_SERVEUR NON DEFINIE}"
 VPS_SSH_KEY="${SSH_SERVEUR:?VARIABLE SSH_SERVEUR NON DEFINIE}"
 
+# 🌐 Nom du réseau Docker externe
+NETWORK_NAME="startax-network"
+
+# 📄 Nom du fichier docker-compose de production
+BUILD_COMPOSE_FILE="backend-startax.yml"
+
+
+# 🔧 Création du réseau externe s’il n’existe pas
+if ! docker network ls | grep -q "$NETWORK_NAME"; then
+  echo "🌐 Création du réseau Docker externe '$NETWORK_NAME'..."
+  docker network create "$NETWORK_NAME"
+else
+  echo "🌐 Réseau '$NETWORK_NAME' déjà existant."
+fi
+
+
 # 📦 Build de l'image avec le Dockerfile
 echo "🔨 Build de l'image Docker depuis Dockerfile..."
 # docker build -t "$IMAGE_NAME:$TAG" .
 # docker compose -f ../backend-startax.yml build
 cd "$(dirname "$0")/.."
-docker compose -f backend-startax.yml build
+docker compose -f "$BUILD_COMPOSE_FILE" build
 
 
 # 🏷️ Tag avec l’identifiant Docker Hub
