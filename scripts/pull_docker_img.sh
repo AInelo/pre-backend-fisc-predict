@@ -9,7 +9,7 @@ DEPLOY_DIR="startax-deploy"
 IMAGE_NAME="backend-startax"
 TAG="latest"
 FULL_IMAGE="$DOCKER_USERNAME/$IMAGE_NAME:$TAG"
-PROD_COMPOSE_FILE="backend-startax.yml"
+PROD_COMPOSE_FILE="backend-startax-docker-compose.prod.yml"
 
 # 🌐 Nom du réseau Docker externe
 NETWORK_NAME="startax-network"

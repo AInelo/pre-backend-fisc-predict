@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  backend-startax:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend-startax:latest

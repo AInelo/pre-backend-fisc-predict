@@ -16,7 +16,7 @@ VPS_SSH_KEY="${SSH_SERVEUR:?VARIABLE SSH_SERVEUR NON DEFINIE}"
 NETWORK_NAME="startax-network"
 
 # 📄 Nom du fichier docker-compose de production
-BUILD_COMPOSE_FILE="backend-startax.yml"
+BUILD_COMPOSE_FILE="backend-startax-docker-compose.build.yml"
 
 
 # 🔧 Création du réseau externe s’il n’existe pas
@@ -31,7 +31,7 @@ fi
 # 📦 Build de l'image avec le Dockerfile
 echo "🔨 Build de l'image Docker depuis Dockerfile..."
 # docker build -t "$IMAGE_NAME:$TAG" .
-# docker compose -f ../backend-startax.yml build
+# docker compose -f ../backend-startax-docker-compose.dev.yml build
 cd "$(dirname "$0")/.."
 docker compose -f "$BUILD_COMPOSE_FILE" build
 

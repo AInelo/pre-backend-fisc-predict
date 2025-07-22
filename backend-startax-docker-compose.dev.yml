@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  backend-startax:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: backend-startax:latest
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      - DB_HOST=mysql_startax
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=secret
+      - DB_NAME=startax_db
+      - MONGO_URL=mongodb://mongo_startax:27017/startax_db
+    volumes:
+      - .:/app
+    depends_on:
+      - mysql_startax
+      - mongo_startax
+    networks:
+      - startax-network
+
+  mysql_startax:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: startax_db
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"  # Attention: 3306 peut déjà être utilisé, donc on mappe sur 3307 ici
+    networks:
+      - startax-network
+
+  mongo_startax:
+    image: mongo:6
+    restart: always
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27018:27017"  # De même, MongoDB sur 27018 si 27017 est déjà pris
+    networks:
+      - startax-network
+
+networks:
+  startax-network:
+    external: true
