@@ -5,7 +5,7 @@ import cors from 'cors';
 import tpsRoutes from './routes/impots/general/tps/TPS.general.route';
 import itsRoutes from './routes/impots/general/reel/ITS.general.route';
 import tfuRoutes from './routes/impots/general/reel/TFU.general.route';
-
+import irfRoutes from './routes/impots/general/reel/IRF.general.route';
 const app = express();
 
 // ✅ Middleware CORS pour autoriser toutes les origines
@@ -25,7 +25,7 @@ app.get('/apiAlive', (_req, res) => {
 app.use('/api/general/', tpsRoutes);
 app.use('/api/general/', itsRoutes);
 app.use('/api/general/', tfuRoutes);
-
+app.use('/api/general/', irfRoutes);
 const PORT = 5001;
 
 

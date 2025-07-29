@@ -26,76 +26,86 @@ interface TFUTarif {
 }
 
 class MoteurTFU {
-    public static calculerTFU(input: TFUInput): TFUCalculationResult {
+    public static calculerTFU(input: TFUInput | TFUInput[]): TFUCalculationResult {
         try {
-            // Extraire l'année de la période fiscale
-            const annee = this.extraireAnnee(input.periodeFiscale);
+            // Convertir en tableau pour un traitement uniforme
+            const inputs = Array.isArray(input) ? input : [input];
+            
+            if (inputs.length === 0) {
+                return this.genererReponseErreurValidation('Aucune donnée TFU fournie');
+            }
+
+            // Extraire l'année de la période fiscale (utiliser la première pour la validation)
+            const annee = this.extraireAnnee(inputs[0].periodeFiscale);
             
             // Vérifier si l'année est 2026 ou ultérieure
             if (annee >= 2026) {
-                return this.genererReponseErreur(input, annee);
+                return this.genererReponseErreur(inputs[0], annee);
             }
 
-            // Validation des entrées
-            if (input.squareMeters < 0) {
-                return this.genererReponseErreurValidation('La surface en mètres carrés ne peut pas être négative');
+            // Calculer la TFU pour chaque propriété
+            let totalTFU = 0;
+            let totalSurface = 0;
+            const detailsCalculs: string[] = [];
+            const variablesEnter: any[] = [];
+
+            for (const singleInput of inputs) {
+                // Validation des entrées
+                if (singleInput.squareMeters < 0) {
+                    return this.genererReponseErreurValidation('La surface en mètres carrés ne peut pas être négative');
+                }
+
+                // Récupérer les données de tarif
+                const rateData = this.findTFURate(singleInput);
+                if (!rateData) {
+                    return this.genererReponseErreurValidation(`Tarif TFU non trouvé pour ${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}`);
+                }
+
+                // Calculer la TFU : nombre de mètres carrés × TFU par m²
+                let tfu = singleInput.squareMeters * rateData.tfu_par_m2;
+
+                // Appliquer le minimum si le résultat est inférieur
+                const tfuFinale = Math.max(tfu, rateData.tfu_minimum);
+
+                // Arrondir à l'entier le plus proche
+                const tfuArrondie = Math.round(tfuFinale);
+
+                totalTFU += tfuArrondie;
+                totalSurface += singleInput.squareMeters;
+
+                // Ajouter les détails du calcul
+                detailsCalculs.push(
+                    `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuArrondie.toLocaleString('fr-FR')} FCFA`
+                );
+
+                // Ajouter les variables d'entrée
+                variablesEnter.push({
+                    label: `Surface - ${singleInput.departement}`,
+                    description: `Surface de la propriété à ${singleInput.commune}`,
+                    value: singleInput.squareMeters,
+                    currency: 'm²',
+                });
             }
-
-            // Récupérer les données de tarif
-            const rateData = this.findTFURate(input);
-            if (!rateData) {
-                return this.genererReponseErreurValidation('Tarif TFU non trouvé pour les paramètres fournis');
-            }
-
-            // Calculer la TFU : nombre de mètres carrés × TFU par m²
-            let tfu = input.squareMeters * rateData.tfu_par_m2;
-
-            // Appliquer le minimum si le résultat est inférieur
-            const tfuFinale = Math.max(tfu, rateData.tfu_minimum);
-
-            // Arrondir à l'entier le plus proche
-            const tfuArrondie = Math.round(tfuFinale);
 
             return {
-                totalEstimation: tfuArrondie,
+                totalEstimation: totalTFU,
                 totalEstimationCurrency: 'FCFA',
                 contribuableRegime: 'TFU',
 
-                VariableEnter: [
-                    {
-                        label: "Surface en mètres carrés",
-                        description: "Surface totale de la propriété foncière.",
-                        value: input.squareMeters,
-                        currency: 'm²',
-                    },
-                    {
-                        label: "Département",
-                        description: "Département où se trouve la propriété.",
-                        value: 0, // Pas de valeur numérique pour le département
-                        currency: '',
-                    },
-                    {
-                        label: "Commune",
-                        description: "Commune où se trouve la propriété.",
-                        value: 0, // Pas de valeur numérique pour la commune
-                        currency: '',
-                    },
-                    {
-                        label: "Arrondissement",
-                        description: "Arrondissement où se trouve la propriété.",
-                        value: 0, // Pas de valeur numérique pour l'arrondissement
-                        currency: '',
-                    }
-                ],
+                VariableEnter: variablesEnter,
 
                 impotDetailCalcule: [
                     {
                         impotTitle: 'TFU (Taxe Foncière Urbaine)',
-                        impotDescription: `Calculée selon le tarif de ${input.departement} - ${input.commune} - ${input.arrondissement}`,
-                        impotValue: tfuArrondie,
+                        impotDescription: inputs.length === 1 
+                            ? `Calculée selon le tarif de ${inputs[0].departement} - ${inputs[0].commune} - ${inputs[0].arrondissement}`
+                            : `Calculée pour ${inputs.length} propriétés avec cumul des montants`,
+                        impotValue: totalTFU,
                         impotValueCurrency: 'FCFA',
-                        impotTaux: `${rateData.tfu_par_m2.toFixed(2)} FCFA/m²`,
-                        importCalculeDescription: `TFU = ${input.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfu.toFixed(2)} FCFA (minimum: ${rateData.tfu_minimum.toFixed(2)} FCFA)`
+                        impotTaux: inputs.length === 1 ? `${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m²` : 'Tarifs variables',
+                        importCalculeDescription: inputs.length === 1 
+                            ? `TFU = ${inputs[0].squareMeters} m² × ${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m² = ${totalTFU.toLocaleString('fr-FR')} FCFA`
+                            : `Cumul TFU pour ${inputs.length} propriétés: ${totalTFU.toLocaleString('fr-FR')} FCFA (Surface totale: ${totalSurface} m²)`
                     }
                 ],
 
