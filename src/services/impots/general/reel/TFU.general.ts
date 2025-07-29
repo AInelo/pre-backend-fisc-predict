@@ -175,28 +175,36 @@ class MoteurTFU {
         }
     }
 
+    // Recherche du tarif TFU en utilisant les slugs pour une précision maximale
     private static findTFURate(input: TFUInput): TFUTarif | null {
         try {
-            const departement = tfuData.departements.find(d => 
-                d.slug.toLowerCase() === input.departement.toLowerCase()
+            // On suppose que les champs d'entrée sont déjà des slugs ou à convertir en slug
+            const departement = tfuData.departements.find(d =>
+                d.slug === input.departement
             );
-            
             if (!departement) return null;
 
-            const commune = departement.communes.find(c => 
-                c.slug.toLowerCase() === input.commune.toLowerCase()
+            const commune = departement.communes.find(c =>
+                c.slug === input.commune
             );
-            
             if (!commune) return null;
 
-            const arrondissement = commune.arrondissements.find(a => 
-                a.slug.toLowerCase() === input.arrondissement.toLowerCase()
+            const arrondissement = commune.arrondissements.find(a =>
+                a.slug === input.arrondissement
             );
-            
             if (!arrondissement) return null;
 
-            const tarif = arrondissement.tarifs[input.categorie as keyof typeof arrondissement.tarifs];
-            
+            // On suppose que input.categorie est le slug de la catégorie (slug_categorie)
+            // Il faut donc trouver la clé du tarif dont le slug_categorie correspond à input.categorie
+            const tarifKey = Object.keys(arrondissement.tarifs).find(key => {
+                const cat = arrondissement.tarifs[key as keyof typeof arrondissement.tarifs];
+                // On vérifie le slug de la catégorie
+                return cat.slug_categorie === input.categorie;
+            });
+
+            if (!tarifKey) return null;
+
+            const tarif = arrondissement.tarifs[tarifKey as keyof typeof arrondissement.tarifs];
             return tarif || null;
         } catch (error) {
             return null;
