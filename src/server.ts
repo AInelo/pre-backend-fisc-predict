@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 
 import tpsRoutes from './routes/impots/general/tps/TPS.general.route';
+import itsRoutes from './routes/impots/general/reel/ITS.general.route';
+import tfuRoutes from './routes/impots/general/reel/TFU.general.route';
 
 const app = express();
 
@@ -21,6 +23,8 @@ app.get('/apiAlive', (_req, res) => {
 });
 
 app.use('/api/general/', tpsRoutes);
+app.use('/api/general/', itsRoutes);
+app.use('/api/general/', tfuRoutes);
 
 const PORT = 5001;
 

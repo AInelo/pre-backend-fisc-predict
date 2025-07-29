@@ -4,7 +4,7 @@ services:
   backend-startax:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     image: backend-startax:latest
     restart: always
     ports:

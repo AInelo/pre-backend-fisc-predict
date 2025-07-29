@@ -1,27 +1,5 @@
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import {BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
-// Interfaces pour la gestion des erreurs
-// export interface BackendEstimationError {
-//   code: string;
-//   message: string;
-//   details?: string;
-//   severity: 'warning' | 'error' | 'info';
-// }
-
-// export interface BackendEstimationContext {
-//   typeContribuable?: string;
-//   regime?: string;
-//   chiffreAffaires?: number;
-//   missingData?: string[];
-// }
-
-// export interface BackendEstimationFailureResponse {
-//   success: false;
-//   errors: BackendEstimationError[];
-//   context?: BackendEstimationContext;
-//   timestamp: string;
-//   requestId?: string;
-// }
 
 // Type union pour le retour de la fonction
 export type TPSCalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;

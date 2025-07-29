@@ -21,3 +21,6 @@ EXPOSE 5001
 
 # Commande de démarrage
 CMD ["node", "dist/server.js"]
+
+
+
