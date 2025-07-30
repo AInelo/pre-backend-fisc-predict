@@ -19047,7 +19047,1057 @@
                             }
                         },
                         {
-                            "nom": "ADJEGOUNLE                    ADJINA NORD                   AHOUANTIKOME                  AKONABOUE                     AKPASSA  ODO  OBA             BASSOU  DODO                  DJASSIN-DAHO                  DEGUE-GARE GANTO              DJASSIN-ZOUME                 DJILADO                       DOTTA                         FILLA  HONNOU  HONDJI         FOUNFOUN DJAGUIDI             FOUNFOUN GBEGO                FOUNFOUN SODJI                FOUNFOUN TOKPA                GBEZOUNKPA                    HASSOE-AGUE                   HLOGOU                        HOUEGBO-HLINKO                HOUSSOUKO                     OUANDO                        SADOGNON  ADJEGOUNLE          KOUTONGBE                     SADOGNON  HOUSSA              SAGBO  KOSSOU                 SODJEKO  TCHINVIE  HINKOUE    SOKOME  TOFFINKOME            TOGO- ADANDEKOME              VEKPA                         OUNDO",
+                            "nom": "ADJEGOUNLE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "ADJINA NORD",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "AHOUANTIKOME",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "AKONABOUE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "AKPASSA-ODO-OBA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "BASSOU-DODO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "DJASSIN-DAHO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "DEGUE-GARE-GANTO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "DJASSIN-ZOUME",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "DJILADO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "DOTTA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "FILLA-HONNOU-HONDJI",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "FOUNFOUN-DJAGUIDI",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "FOUNFOUN-GBEGO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "FOUNFOUN-SODJI",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "FOUNFOUN-TOKPA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "GBEZOUNKPA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "HASSOE-AGUE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "HLOGOU",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "HOUEGBO-HLINKO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "HOUSSOUKO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "OUANDO",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "SADOGNON-ADJEGOUNLE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "KOUTONGBE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "SADOGNON-HOUSSA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "SAGBO-KOSSOU",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "SODJEKO-TCHINVIE-HINKOUE",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "SOKOME-TOFFINKOME",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "TOGO-ADANDEKOME",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "VEKPA",
+                            "tarifs": {
+                                "Categorie_01": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée",
+                                    "tfu_par_m2": 218.7,
+                                    "tfu_minimum": 21870.0
+                                },
+                                "Categorie_02": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 1 ou 2 niveaux",
+                                    "tfu_par_m2": 336.461538461538,
+                                    "tfu_minimum": 47104.6153846154
+                                },
+                                "Categorie_03": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 3 ou 4 niveaux",
+                                    "tfu_par_m2": 504.692307692308,
+                                    "tfu_minimum": 70656.9230769231
+                                },
+                                "Categorie_04": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Rez-de-chaussée et 5 niveaux ou plus",
+                                    "tfu_par_m2": 757.038461538462,
+                                    "tfu_minimum": 105985.384615385
+                                },
+                                "Categorie_05": {
+                                    "nom_categorie": "Bâtiments à toiture tôle et assimilés",
+                                    "description": "Catégorie supplémentaire",
+                                    "tfu_par_m2": 1476.225,
+                                    "tfu_minimum": 221433.75
+                                }
+                            }
+                        },
+                        {
+                            "nom": "OUNDO",
                             "tarifs": {
                                 "Categorie_01": {
                                     "nom_categorie": "Bâtiments à toiture tôle et assimilés",

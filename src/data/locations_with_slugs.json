@@ -1,0 +1,3368 @@
+[
+  {
+    "nom": "LITTORAL",
+    "slug": "littoral",
+    "communes": [
+      {
+        "nom": "COTONOU",
+        "slug": "cotonou",
+        "arrondissements": [
+          {
+            "nom": "Arrondissement 1",
+            "slug": "arrondissement-1"
+          },
+          {
+            "nom": "DONATEN",
+            "slug": "donaten"
+          },
+          {
+            "nom": "FINAGNON",
+            "slug": "finagnon"
+          },
+          {
+            "nom": "TOKPLEGBE",
+            "slug": "tokplegbe"
+          },
+          {
+            "nom": "Arrondissement 2",
+            "slug": "arrondissement-2"
+          },
+          {
+            "nom": "Arrondissement 3",
+            "slug": "arrondissement-3"
+          },
+          {
+            "nom": "Arrondissement 4",
+            "slug": "arrondissement-4"
+          },
+          {
+            "nom": "ABOKICODJI",
+            "slug": "abokicodji"
+          },
+          {
+            "nom": "LAGUNE",
+            "slug": "lagune"
+          },
+          {
+            "nom": "FIFADJI",
+            "slug": "fifadji"
+          },
+          {
+            "nom": "HOUTO",
+            "slug": "houto"
+          },
+          {
+            "nom": "Arrondissement 5",
+            "slug": "arrondissement-5"
+          },
+          {
+            "nom": "ZONGO",
+            "slug": "zongo"
+          },
+          {
+            "nom": "EHUZU",
+            "slug": "ehuzu"
+          },
+          {
+            "nom": "ZONGO",
+            "slug": "zongo"
+          },
+          {
+            "nom": "NIMA",
+            "slug": "nima"
+          },
+          {
+            "nom": "Arrondissement 6",
+            "slug": "arrondissement-6"
+          },
+          {
+            "nom": "DANTOKPA",
+            "slug": "dantokpa"
+          },
+          {
+            "nom": "Arrondissement 7",
+            "slug": "arrondissement-7"
+          },
+          {
+            "nom": "Arrondissement 8",
+            "slug": "arrondissement-8"
+          },
+          {
+            "nom": "Arrondissement 9",
+            "slug": "arrondissement-9"
+          },
+          {
+            "nom": "Arrondissement 10",
+            "slug": "arrondissement-10"
+          },
+          {
+            "nom": "Arrondissement 11",
+            "slug": "arrondissement-11"
+          },
+          {
+            "nom": "Arrondissement 12",
+            "slug": "arrondissement-12"
+          },
+          {
+            "nom": "CADJEHOUN I",
+            "slug": "cadjehoun-i"
+          },
+          {
+            "nom": "COCOTIER",
+            "slug": "cocotier"
+          },
+          {
+            "nom": "FIDJROSSE CENTRE",
+            "slug": "fidjrosse-centre"
+          },
+          {
+            "nom": "CADJEHOUN 2",
+            "slug": "cadjehoun-2"
+          },
+          {
+            "nom": "CADJEHOUN 3",
+            "slug": "cadjehoun-3"
+          },
+          {
+            "nom": "CADJEHOUN 4",
+            "slug": "cadjehoun-4"
+          },
+          {
+            "nom": "CADJEHOUN 5",
+            "slug": "cadjehoun-5"
+          },
+          {
+            "nom": "CADJEHOUN KPOTA",
+            "slug": "cadjehoun-kpota"
+          },
+          {
+            "nom": "Arrondissement 13",
+            "slug": "arrondissement-13"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ALIBORI",
+    "slug": "alibori",
+    "communes": [
+      {
+        "nom": "BANIKOARA",
+        "slug": "banikoara",
+        "arrondissements": [
+          {
+            "nom": "Banikoara",
+            "slug": "banikoara"
+          },
+          {
+            "nom": "Founougo",
+            "slug": "founougo"
+          },
+          {
+            "nom": "Gomparou",
+            "slug": "gomparou"
+          },
+          {
+            "nom": "Goumori",
+            "slug": "goumori"
+          },
+          {
+            "nom": "Kokey",
+            "slug": "kokey"
+          },
+          {
+            "nom": "Kokiborou",
+            "slug": "kokiborou"
+          },
+          {
+            "nom": "Ounet",
+            "slug": "ounet"
+          },
+          {
+            "nom": "Sompérékou",
+            "slug": "somperekou"
+          },
+          {
+            "nom": "Soroko",
+            "slug": "soroko"
+          },
+          {
+            "nom": "Toura",
+            "slug": "toura"
+          }
+        ]
+      },
+      {
+        "nom": "GOGOUNOU",
+        "slug": "gogounou",
+        "arrondissements": [
+          {
+            "nom": "Gogounou",
+            "slug": "gogounou"
+          },
+          {
+            "nom": "Gounarou",
+            "slug": "gounarou"
+          },
+          {
+            "nom": "Bagou",
+            "slug": "bagou"
+          },
+          {
+            "nom": "Ouara",
+            "slug": "ouara"
+          },
+          {
+            "nom": "Sori",
+            "slug": "sori"
+          },
+          {
+            "nom": "Zoungou-Pantrossi",
+            "slug": "zoungou-pantrossi"
+          }
+        ]
+      },
+      {
+        "nom": "KANDI",
+        "slug": "kandi",
+        "arrondissements": [
+          {
+            "nom": "Angaradébou",
+            "slug": "angaradebou"
+          },
+          {
+            "nom": "Bensékou",
+            "slug": "bensekou"
+          },
+          {
+            "nom": "Donwari",
+            "slug": "donwari"
+          },
+          {
+            "nom": "Kandi I",
+            "slug": "kandi-i"
+          },
+          {
+            "nom": "Kandi II",
+            "slug": "kandi-ii"
+          },
+          {
+            "nom": "Kandi III",
+            "slug": "kandi-iii"
+          },
+          {
+            "nom": "Kassakou",
+            "slug": "kassakou"
+          },
+          {
+            "nom": "Saah",
+            "slug": "saah"
+          },
+          {
+            "nom": "Sam",
+            "slug": "sam"
+          },
+          {
+            "nom": "Sonsoro",
+            "slug": "sonsoro"
+          }
+        ]
+      },
+      {
+        "nom": "KARIMAMA",
+        "slug": "karimama",
+        "arrondissements": [
+          {
+            "nom": "Birni-Lafia",
+            "slug": "birni-lafia"
+          },
+          {
+            "nom": "Bogo-Bogo",
+            "slug": "bogo-bogo"
+          },
+          {
+            "nom": "Monsey",
+            "slug": "monsey"
+          },
+          {
+            "nom": "Kompa",
+            "slug": "kompa"
+          },
+          {
+            "nom": "Karimaman",
+            "slug": "karimaman"
+          }
+        ]
+      },
+      {
+        "nom": "MALANVILLE",
+        "slug": "malanville",
+        "arrondissements": [
+          {
+            "nom": "Garou",
+            "slug": "garou"
+          },
+          {
+            "nom": "Guénè",
+            "slug": "guene"
+          },
+          {
+            "nom": "Tomboutou",
+            "slug": "tomboutou"
+          },
+          {
+            "nom": "Mandécali",
+            "slug": "mandecali"
+          },
+          {
+            "nom": "Mallanville",
+            "slug": "mallanville"
+          }
+        ]
+      },
+      {
+        "nom": "SEGBANAN",
+        "slug": "segbanan",
+        "arrondissements": [
+          {
+            "nom": "Libantè",
+            "slug": "libante"
+          },
+          {
+            "nom": "Liboussou",
+            "slug": "liboussou"
+          },
+          {
+            "nom": "Lougou",
+            "slug": "lougou"
+          },
+          {
+            "nom": "Sokotindji",
+            "slug": "sokotindji"
+          },
+          {
+            "nom": "Ségbana",
+            "slug": "segbana"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ATACORA",
+    "slug": "atacora",
+    "communes": [
+      {
+        "nom": "BOUNKOUMBE",
+        "slug": "bounkoumbe",
+        "arrondissements": [
+          {
+            "nom": "Boukoumbè",
+            "slug": "boukoumbe"
+          },
+          {
+            "nom": "Dipoli",
+            "slug": "dipoli"
+          },
+          {
+            "nom": "Korontière",
+            "slug": "korontiere"
+          },
+          {
+            "nom": "Kossoucoingou",
+            "slug": "kossoucoingou"
+          },
+          {
+            "nom": "Manta",
+            "slug": "manta"
+          },
+          {
+            "nom": "Natta",
+            "slug": "natta"
+          },
+          {
+            "nom": "Tabota",
+            "slug": "tabota"
+          }
+        ]
+      },
+      {
+        "nom": "COBLY",
+        "slug": "cobly",
+        "arrondissements": [
+          {
+            "nom": "Cobly",
+            "slug": "cobly"
+          },
+          {
+            "nom": "Datori",
+            "slug": "datori"
+          },
+          {
+            "nom": "Kountori",
+            "slug": "kountori"
+          },
+          {
+            "nom": "Tapoga",
+            "slug": "tapoga"
+          }
+        ]
+      },
+      {
+        "nom": "KEROU ",
+        "slug": "kerou",
+        "arrondissements": [
+          {
+            "nom": "Brignamaro",
+            "slug": "brignamaro"
+          },
+          {
+            "nom": "Firou",
+            "slug": "firou"
+          },
+          {
+            "nom": "Kérou",
+            "slug": "kerou"
+          },
+          {
+            "nom": "Koabagou",
+            "slug": "koabagou"
+          }
+        ]
+      },
+      {
+        "nom": "KOUANDE",
+        "slug": "kouande",
+        "arrondissements": [
+          {
+            "nom": "Birni",
+            "slug": "birni"
+          },
+          {
+            "nom": "Chabi-Couma",
+            "slug": "chabi-couma"
+          },
+          {
+            "nom": "Fô-Tancé",
+            "slug": "fo-tance"
+          },
+          {
+            "nom": "Guilmaro",
+            "slug": "guilmaro"
+          },
+          {
+            "nom": "Kouandé",
+            "slug": "kouande"
+          },
+          {
+            "nom": "Oroukayo",
+            "slug": "oroukayo"
+          }
+        ]
+      },
+      {
+        "nom": "MATERI ",
+        "slug": "materi",
+        "arrondissements": [
+          {
+            "nom": "Dassari",
+            "slug": "dassari"
+          },
+          {
+            "nom": "Gouandé",
+            "slug": "gouande"
+          },
+          {
+            "nom": "Matéri",
+            "slug": "materi"
+          },
+          {
+            "nom": "Nodi",
+            "slug": "nodi"
+          },
+          {
+            "nom": "Tantéga",
+            "slug": "tantega"
+          },
+          {
+            "nom": "Tchianhoun-Cossi",
+            "slug": "tchianhoun-cossi"
+          }
+        ]
+      },
+      {
+        "nom": "NATITINGOU",
+        "slug": "natitingou",
+        "arrondissements": [
+          {
+            "nom": "Kotapounga",
+            "slug": "kotapounga"
+          },
+          {
+            "nom": "Kouaba",
+            "slug": "kouaba"
+          },
+          {
+            "nom": "Koundata",
+            "slug": "koundata"
+          },
+          {
+            "nom": "Natitingou II",
+            "slug": "natitingou-ii"
+          },
+          {
+            "nom": "Natitingou I",
+            "slug": "natitingou-i"
+          },
+          {
+            "nom": "Natitingou III",
+            "slug": "natitingou-iii"
+          },
+          {
+            "nom": "Natitingou IV",
+            "slug": "natitingou-iv"
+          },
+          {
+            "nom": "Perma",
+            "slug": "perma"
+          },
+          {
+            "nom": "Tchoumi-Tchoumi",
+            "slug": "tchoumi-tchoumi"
+          }
+        ]
+      },
+      {
+        "nom": "PEHUNCO",
+        "slug": "pehunco",
+        "arrondissements": [
+          {
+            "nom": "Gnémasson",
+            "slug": "gnemasson"
+          },
+          {
+            "nom": "Péhunco",
+            "slug": "pehunco"
+          },
+          {
+            "nom": "Tobré",
+            "slug": "tobre"
+          }
+        ]
+      },
+      {
+        "nom": "TANGUIETA",
+        "slug": "tanguieta",
+        "arrondissements": [
+          {
+            "nom": "Cotiakou",
+            "slug": "cotiakou"
+          },
+          {
+            "nom": "N'Dahonta",
+            "slug": "ndahonta"
+          },
+          {
+            "nom": "Taiakou",
+            "slug": "taiakou"
+          },
+          {
+            "nom": "Tanguiéta",
+            "slug": "tanguieta"
+          },
+          {
+            "nom": "Tanongou",
+            "slug": "tanongou"
+          }
+        ]
+      },
+      {
+        "nom": "TOUCOUNTOUNA",
+        "slug": "toucountouna",
+        "arrondissements": [
+          {
+            "nom": "Kouarfa",
+            "slug": "kouarfa"
+          },
+          {
+            "nom": "Tampégré",
+            "slug": "tampegre"
+          },
+          {
+            "nom": "Toucountouna",
+            "slug": "toucountouna"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ATLANTIQUE",
+    "slug": "atlantique",
+    "communes": [
+      {
+        "nom": "ABOMEY-CALAVI",
+        "slug": "abomey-calavi",
+        "arrondissements": [
+          {
+            "nom": "Abomey-Calavi",
+            "slug": "abomey-calavi"
+          },
+          {
+            "nom": "Akassato",
+            "slug": "akassato"
+          },
+          {
+            "nom": "Godomey",
+            "slug": "godomey"
+          },
+          {
+            "nom": "Glo-Djigbé",
+            "slug": "glo-djigbe"
+          },
+          {
+            "nom": "Hévié",
+            "slug": "hevie"
+          },
+          {
+            "nom": "Kpanroun",
+            "slug": "kpanroun"
+          },
+          {
+            "nom": "Ouédo",
+            "slug": "ouedo"
+          },
+          {
+            "nom": "Togba",
+            "slug": "togba"
+          },
+          {
+            "nom": "Zinvié",
+            "slug": "zinvie"
+          }
+        ]
+      },
+      {
+        "nom": "ALLADA ",
+        "slug": "allada",
+        "arrondissements": [
+          {
+            "nom": "Agbanou",
+            "slug": "agbanou"
+          },
+          {
+            "nom": "Ahouannonzoun",
+            "slug": "ahouannonzoun"
+          },
+          {
+            "nom": "Allada",
+            "slug": "allada"
+          },
+          {
+            "nom": "Attogon",
+            "slug": "attogon"
+          },
+          {
+            "nom": "Avakpa",
+            "slug": "avakpa"
+          },
+          {
+            "nom": "Ayou",
+            "slug": "ayou"
+          },
+          {
+            "nom": "Hinvi",
+            "slug": "hinvi"
+          },
+          {
+            "nom": "Lissègazoun",
+            "slug": "lissegazoun"
+          },
+          {
+            "nom": "Lon-Agonmey",
+            "slug": "lon-agonmey"
+          },
+          {
+            "nom": "Sékou",
+            "slug": "sekou"
+          },
+          {
+            "nom": "Togoudo",
+            "slug": "togoudo"
+          },
+          {
+            "nom": "Tokpa-Avagoudo",
+            "slug": "tokpa-avagoudo"
+          }
+        ]
+      },
+      {
+        "nom": "KPOMASSE",
+        "slug": "kpomasse",
+        "arrondissements": [
+          {
+            "nom": "Aganmalomè",
+            "slug": "aganmalome"
+          },
+          {
+            "nom": "Agbanto",
+            "slug": "agbanto"
+          },
+          {
+            "nom": "Agonkanmè",
+            "slug": "agonkanme"
+          },
+          {
+            "nom": "Dedomè",
+            "slug": "dedome"
+          },
+          {
+            "nom": "Dekanmè",
+            "slug": "dekanme"
+          },
+          {
+            "nom": "Kpomassè",
+            "slug": "kpomasse"
+          },
+          {
+            "nom": "Ségbeya",
+            "slug": "segbeya"
+          },
+          {
+            "nom": "Ségbohoué",
+            "slug": "segbohoue"
+          },
+          {
+            "nom": "Tokpa-Domè",
+            "slug": "tokpa-dome"
+          }
+        ]
+      },
+      {
+        "nom": "OUIDAH",
+        "slug": "ouidah",
+        "arrondissements": [
+          {
+            "nom": "Avlékété",
+            "slug": "avlekete"
+          },
+          {
+            "nom": "Djégbadji",
+            "slug": "djegbadji"
+          },
+          {
+            "nom": "Gakpè",
+            "slug": "gakpe"
+          },
+          {
+            "nom": "Ouakpé-Daho",
+            "slug": "ouakpe-daho"
+          },
+          {
+            "nom": "Ouidah I",
+            "slug": "ouidah-i"
+          },
+          {
+            "nom": "Ouidah II",
+            "slug": "ouidah-ii"
+          },
+          {
+            "nom": "Ouidah III",
+            "slug": "ouidah-iii"
+          },
+          {
+            "nom": "Ouidah IV",
+            "slug": "ouidah-iv"
+          },
+          {
+            "nom": "Pahou",
+            "slug": "pahou"
+          },
+          {
+            "nom": "Savi",
+            "slug": "savi"
+          }
+        ]
+      },
+      {
+        "nom": "SÔ-AVA",
+        "slug": "so-ava",
+        "arrondissements": [
+          {
+            "nom": "Ahomey-Lokpo",
+            "slug": "ahomey-lokpo"
+          },
+          {
+            "nom": "Dékanmey",
+            "slug": "dekanmey"
+          },
+          {
+            "nom": "Ganvié I",
+            "slug": "ganvie-i"
+          },
+          {
+            "nom": "Ganvié II",
+            "slug": "ganvie-ii"
+          },
+          {
+            "nom": "Houédo-Aguékon",
+            "slug": "houedo-aguekon"
+          },
+          {
+            "nom": "Sô-Ava",
+            "slug": "so-ava"
+          },
+          {
+            "nom": "Vekky",
+            "slug": "vekky"
+          }
+        ]
+      },
+      {
+        "nom": "TOFFO ",
+        "slug": "toffo",
+        "arrondissements": [
+          {
+            "nom": "Agué",
+            "slug": "ague"
+          },
+          {
+            "nom": "Colli-Agbamè",
+            "slug": "colli-agbame"
+          },
+          {
+            "nom": "Coussi",
+            "slug": "coussi"
+          },
+          {
+            "nom": "Damè",
+            "slug": "dame"
+          },
+          {
+            "nom": "Djanglanmè",
+            "slug": "djanglanme"
+          },
+          {
+            "nom": "Houégbo",
+            "slug": "houegbo"
+          },
+          {
+            "nom": "Kpomé",
+            "slug": "kpome"
+          },
+          {
+            "nom": "Sè",
+            "slug": "se"
+          },
+          {
+            "nom": "Séhouè",
+            "slug": "sehoue"
+          },
+          {
+            "nom": "Toffo-Agué",
+            "slug": "toffo-ague"
+          }
+        ]
+      },
+      {
+        "nom": "TORI-BOSSITO",
+        "slug": "tori-bossito",
+        "arrondissements": [
+          {
+            "nom": "Avamè",
+            "slug": "avame"
+          },
+          {
+            "nom": "Azohouè-Aliho",
+            "slug": "azohoue-aliho"
+          },
+          {
+            "nom": "Azohouè-Cada",
+            "slug": "azohoue-cada"
+          },
+          {
+            "nom": "Tori-Bossito",
+            "slug": "tori-bossito"
+          },
+          {
+            "nom": "Tori-Cada",
+            "slug": "tori-cada"
+          },
+          {
+            "nom": "Tori-Gare",
+            "slug": "tori-gare"
+          }
+        ]
+      },
+      {
+        "nom": "ZE",
+        "slug": "ze",
+        "arrondissements": [
+          {
+            "nom": "Adjan",
+            "slug": "adjan"
+          },
+          {
+            "nom": "Dawé",
+            "slug": "dawe"
+          },
+          {
+            "nom": "Djigbé",
+            "slug": "djigbe"
+          },
+          {
+            "nom": "Dodji-Bata",
+            "slug": "dodji-bata"
+          },
+          {
+            "nom": "Hékanmè",
+            "slug": "hekanme"
+          },
+          {
+            "nom": "Koundokpoè",
+            "slug": "koundokpoe"
+          },
+          {
+            "nom": "Sèdjè-Dénou",
+            "slug": "sedje-denou"
+          },
+          {
+            "nom": "Sèdjè-Houégoudo",
+            "slug": "sedje-houegoudo"
+          },
+          {
+            "nom": "Tangbo-Djevié",
+            "slug": "tangbo-djevie"
+          },
+          {
+            "nom": "Yokpo",
+            "slug": "yokpo"
+          },
+          {
+            "nom": "Zè",
+            "slug": "ze"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "BORGOU",
+    "slug": "borgou",
+    "communes": [
+      {
+        "nom": "BEMBEREKE",
+        "slug": "bembereke",
+        "arrondissements": [
+          {
+            "nom": "Bembèrèkè",
+            "slug": "bembereke"
+          },
+          {
+            "nom": "Béroubouay",
+            "slug": "beroubouay"
+          },
+          {
+            "nom": "Bouanri",
+            "slug": "bouanri"
+          },
+          {
+            "nom": "Gomia",
+            "slug": "gomia"
+          },
+          {
+            "nom": "Ina",
+            "slug": "ina"
+          }
+        ]
+      },
+      {
+        "nom": "KALALE",
+        "slug": "kalale",
+        "arrondissements": [
+          {
+            "nom": "Basso",
+            "slug": "basso"
+          },
+          {
+            "nom": "Bouka",
+            "slug": "bouka"
+          },
+          {
+            "nom": "Dèrassi",
+            "slug": "derassi"
+          },
+          {
+            "nom": "Dunkassa",
+            "slug": "dunkassa"
+          },
+          {
+            "nom": "Kalalè",
+            "slug": "kalale"
+          },
+          {
+            "nom": "Péonga",
+            "slug": "peonga"
+          }
+        ]
+      },
+      {
+        "nom": "N'DALI",
+        "slug": "ndali",
+        "arrondissements": [
+          {
+            "nom": "Bori",
+            "slug": "bori"
+          },
+          {
+            "nom": "Gbégourou",
+            "slug": "gbegourou"
+          },
+          {
+            "nom": "N'Dali",
+            "slug": "ndali"
+          },
+          {
+            "nom": "Ouénou",
+            "slug": "ouenou"
+          },
+          {
+            "nom": "Sirarou",
+            "slug": "sirarou"
+          }
+        ]
+      },
+      {
+        "nom": "NIKKI ",
+        "slug": "nikki",
+        "arrondissements": [
+          {
+            "nom": "Biro",
+            "slug": "biro"
+          },
+          {
+            "nom": "Gnonkourakali",
+            "slug": "gnonkourakali"
+          },
+          {
+            "nom": "Nikki",
+            "slug": "nikki"
+          },
+          {
+            "nom": "Ouénou",
+            "slug": "ouenou"
+          },
+          {
+            "nom": "Sérékalé",
+            "slug": "serekale"
+          },
+          {
+            "nom": "Suya",
+            "slug": "suya"
+          },
+          {
+            "nom": "Tasso",
+            "slug": "tasso"
+          }
+        ]
+      },
+      {
+        "nom": "PARAKOU",
+        "slug": "parakou",
+        "arrondissements": [
+          {
+            "nom": "ALBARIKA",
+            "slug": "albarika"
+          },
+          {
+            "nom": "AMAOUIGNON&DOKPAROU",
+            "slug": "amaouignondokparou"
+          },
+          {
+            "nom": "ARAFAT",
+            "slug": "arafat"
+          },
+          {
+            "nom": "BANIKANI",
+            "slug": "banikani"
+          },
+          {
+            "nom": "BAWE",
+            "slug": "bawe"
+          },
+          {
+            "nom": "BOUNDAROU",
+            "slug": "boundarou"
+          },
+          {
+            "nom": "DEPOT",
+            "slug": "depot"
+          },
+          {
+            "nom": "GAH",
+            "slug": "gah"
+          },
+          {
+            "nom": "GANOU",
+            "slug": "ganou"
+          },
+          {
+            "nom": "GUEMA",
+            "slug": "guema"
+          },
+          {
+            "nom": "KPEBIE",
+            "slug": "kpebie"
+          },
+          {
+            "nom": "LADJI-FARANI",
+            "slug": "ladji-farani"
+          },
+          {
+            "nom": "MADINA",
+            "slug": "madina"
+          },
+          {
+            "nom": "NIMA",
+            "slug": "nima"
+          },
+          {
+            "nom": "OKE-DAMA",
+            "slug": "oke-dama"
+          },
+          {
+            "nom": "TRANZA",
+            "slug": "tranza"
+          },
+          {
+            "nom": "WANSIROU",
+            "slug": "wansirou"
+          },
+          {
+            "nom": "ZONGO-NORD",
+            "slug": "zongo-nord"
+          },
+          {
+            "nom": "AGBAGBA",
+            "slug": "agbagba"
+          },
+          {
+            "nom": "ALAGA",
+            "slug": "alaga"
+          },
+          {
+            "nom": "BA MORA",
+            "slug": "ba-mora"
+          },
+          {
+            "nom": "BAKINKOURA",
+            "slug": "bakinkoura"
+          },
+          {
+            "nom": "BAPARAPE",
+            "slug": "baparape"
+          },
+          {
+            "nom": "CAMPADAGBE",
+            "slug": "campadagbe"
+          },
+          {
+            "nom": "GANON",
+            "slug": "ganon"
+          },
+          {
+            "nom": "GANOU GOUROU",
+            "slug": "ganou-gourou"
+          },
+          {
+            "nom": "GANRE",
+            "slug": "ganre"
+          },
+          {
+            "nom": "GOROMOSSO",
+            "slug": "goromosso"
+          },
+          {
+            "nom": "KABASSIRA",
+            "slug": "kabassira"
+          },
+          {
+            "nom": "KADERA",
+            "slug": "kadera"
+          },
+          {
+            "nom": "KPEROU GUERRA",
+            "slug": "kperou-guerra"
+          },
+          {
+            "nom": "LEMANDA",
+            "slug": "lemanda"
+          },
+          {
+            "nom": "NABISSOU",
+            "slug": "nabissou"
+          },
+          {
+            "nom": "OUEZE",
+            "slug": "oueze"
+          },
+          {
+            "nom": "SINAGOUROU",
+            "slug": "sinagourou"
+          },
+          {
+            "nom": "TITIROU",
+            "slug": "titirou"
+          },
+          {
+            "nom": "ZAZIRA",
+            "slug": "zazira"
+          },
+          {
+            "nom": "ZONGO-ZENON",
+            "slug": "zongo-zenon"
+          },
+          {
+            "nom": "BAKA",
+            "slug": "baka"
+          },
+          {
+            "nom": "BEYEROU",
+            "slug": "beyerou"
+          },
+          {
+            "nom": "SUINROU",
+            "slug": "suinrou"
+          },
+          {
+            "nom": "THIAN",
+            "slug": "thian"
+          },
+          {
+            "nom": "TIBONA",
+            "slug": "tibona"
+          },
+          {
+            "nom": "WORE",
+            "slug": "wore"
+          },
+          {
+            "nom": "KORO BOROU",
+            "slug": "koro-borou"
+          },
+          {
+            "nom": "TOUROU",
+            "slug": "tourou"
+          },
+          {
+            "nom": "BAKPEROU",
+            "slug": "bakperou"
+          },
+          {
+            "nom": "NIKKIKPEROU",
+            "slug": "nikkikperou"
+          },
+          {
+            "nom": "NISSIKO",
+            "slug": "nissiko"
+          },
+          {
+            "nom": "SAWARAROU",
+            "slug": "sawararou"
+          },
+          {
+            "nom": "SOKOUNON",
+            "slug": "sokounon"
+          }
+        ]
+      },
+      {
+        "nom": "PERERE ",
+        "slug": "perere",
+        "arrondissements": [
+          {
+            "nom": "Gninsy",
+            "slug": "gninsy"
+          },
+          {
+            "nom": "Guinagourou",
+            "slug": "guinagourou"
+          },
+          {
+            "nom": "Kpané",
+            "slug": "kpane"
+          },
+          {
+            "nom": "Pébié",
+            "slug": "pebie"
+          },
+          {
+            "nom": "Pèrèrè",
+            "slug": "perere"
+          },
+          {
+            "nom": "Sontou",
+            "slug": "sontou"
+          }
+        ]
+      },
+      {
+        "nom": "SINENDE",
+        "slug": "sinende",
+        "arrondissements": [
+          {
+            "nom": "Fô-Bourè",
+            "slug": "fo-boure"
+          },
+          {
+            "nom": "Sèkèrè",
+            "slug": "sekere"
+          },
+          {
+            "nom": "Sikki",
+            "slug": "sikki"
+          },
+          {
+            "nom": "Sinendé",
+            "slug": "sinende"
+          }
+        ]
+      },
+      {
+        "nom": "TCHAOUROU",
+        "slug": "tchaourou",
+        "arrondissements": [
+          {
+            "nom": "Alafiarou",
+            "slug": "alafiarou"
+          },
+          {
+            "nom": "Tchatchou",
+            "slug": "tchatchou"
+          },
+          {
+            "nom": "Goro",
+            "slug": "goro"
+          },
+          {
+            "nom": "Bétérou",
+            "slug": "beterou"
+          },
+          {
+            "nom": "Kika",
+            "slug": "kika"
+          },
+          {
+            "nom": "Sanson",
+            "slug": "sanson"
+          },
+          {
+            "nom": "Tchaourou",
+            "slug": "tchaourou"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COLLINES",
+    "slug": "collines",
+    "communes": [
+      {
+        "nom": "BANTE ",
+        "slug": "bante",
+        "arrondissements": [
+          {
+            "nom": "Agoua",
+            "slug": "agoua"
+          },
+          {
+            "nom": "Akpassi",
+            "slug": "akpassi"
+          },
+          {
+            "nom": "Atokoligbé",
+            "slug": "atokoligbe"
+          },
+          {
+            "nom": "Bantè",
+            "slug": "bante"
+          },
+          {
+            "nom": "Bobè",
+            "slug": "bobe"
+          },
+          {
+            "nom": "Gouka",
+            "slug": "gouka"
+          },
+          {
+            "nom": "Koko",
+            "slug": "koko"
+          },
+          {
+            "nom": "Lougba",
+            "slug": "lougba"
+          },
+          {
+            "nom": "Pira",
+            "slug": "pira"
+          }
+        ]
+      },
+      {
+        "nom": "DASSA-ZOUNME",
+        "slug": "dassa-zounme",
+        "arrondissements": [
+          {
+            "nom": "Akofodjoulè",
+            "slug": "akofodjoule"
+          },
+          {
+            "nom": "Dassa I",
+            "slug": "dassa-i"
+          },
+          {
+            "nom": "Dassa II",
+            "slug": "dassa-ii"
+          },
+          {
+            "nom": "Gbaffo",
+            "slug": "gbaffo"
+          },
+          {
+            "nom": "Kèrè",
+            "slug": "kere"
+          },
+          {
+            "nom": "Kpingni",
+            "slug": "kpingni"
+          },
+          {
+            "nom": "Lèma",
+            "slug": "lema"
+          },
+          {
+            "nom": "Paouingnan",
+            "slug": "paouingnan"
+          },
+          {
+            "nom": "Soclogbo",
+            "slug": "soclogbo"
+          },
+          {
+            "nom": "Tré",
+            "slug": "tre"
+          }
+        ]
+      },
+      {
+        "nom": "GLAZOUE",
+        "slug": "glazoue",
+        "arrondissements": [
+          {
+            "nom": "Aklankpa",
+            "slug": "aklankpa"
+          },
+          {
+            "nom": "Assanté",
+            "slug": "assante"
+          },
+          {
+            "nom": "Glazoué",
+            "slug": "glazoue"
+          },
+          {
+            "nom": "Gomè",
+            "slug": "gome"
+          },
+          {
+            "nom": "Kpakpaza",
+            "slug": "kpakpaza"
+          },
+          {
+            "nom": "Magoumi",
+            "slug": "magoumi"
+          },
+          {
+            "nom": "Ouèdèmè",
+            "slug": "ouedeme"
+          },
+          {
+            "nom": "Sokponta",
+            "slug": "sokponta"
+          },
+          {
+            "nom": "Thio",
+            "slug": "thio"
+          },
+          {
+            "nom": "Zaffé",
+            "slug": "zaffe"
+          }
+        ]
+      },
+      {
+        "nom": "OUESSE",
+        "slug": "ouesse",
+        "arrondissements": [
+          {
+            "nom": "Challa-Ogoi",
+            "slug": "challa-ogoi"
+          },
+          {
+            "nom": "Djègbè",
+            "slug": "djegbe"
+          },
+          {
+            "nom": "Gbanlin",
+            "slug": "gbanlin"
+          },
+          {
+            "nom": "Kèmon",
+            "slug": "kemon"
+          },
+          {
+            "nom": "Kilibo",
+            "slug": "kilibo"
+          },
+          {
+            "nom": "Laminou",
+            "slug": "laminou"
+          },
+          {
+            "nom": "Ouèssè",
+            "slug": "ouesse"
+          },
+          {
+            "nom": "Odougba",
+            "slug": "odougba"
+          },
+          {
+            "nom": "Toui",
+            "slug": "toui"
+          }
+        ]
+      },
+      {
+        "nom": "SAVALOU",
+        "slug": "savalou",
+        "arrondissements": [
+          {
+            "nom": "Djaloukou",
+            "slug": "djaloukou"
+          },
+          {
+            "nom": "Doumè",
+            "slug": "doume"
+          },
+          {
+            "nom": "Gobada",
+            "slug": "gobada"
+          },
+          {
+            "nom": "Kpataba",
+            "slug": "kpataba"
+          },
+          {
+            "nom": "Lahotan",
+            "slug": "lahotan"
+          },
+          {
+            "nom": "Lèma",
+            "slug": "lema"
+          },
+          {
+            "nom": "Logozohoué",
+            "slug": "logozohoue"
+          },
+          {
+            "nom": "Monkpa",
+            "slug": "monkpa"
+          },
+          {
+            "nom": "Ottola",
+            "slug": "ottola"
+          },
+          {
+            "nom": "Ouèssè",
+            "slug": "ouesse"
+          },
+          {
+            "nom": "Savalou-Aga",
+            "slug": "savalou-aga"
+          },
+          {
+            "nom": "Savalou-Agbado",
+            "slug": "savalou-agbado"
+          },
+          {
+            "nom": "Savalou-Attakè",
+            "slug": "savalou-attake"
+          },
+          {
+            "nom": "Tchetti",
+            "slug": "tchetti"
+          }
+        ]
+      },
+      {
+        "nom": "SAVE  ",
+        "slug": "save",
+        "arrondissements": [
+          {
+            "nom": "ADIDO",
+            "slug": "adido"
+          },
+          {
+            "nom": "Bèssè",
+            "slug": "besse"
+          },
+          {
+            "nom": "Boni",
+            "slug": "boni"
+          },
+          {
+            "nom": "Kaboua",
+            "slug": "kaboua"
+          },
+          {
+            "nom": "Ofè",
+            "slug": "ofe"
+          },
+          {
+            "nom": "Okpara",
+            "slug": "okpara"
+          },
+          {
+            "nom": "Plateau",
+            "slug": "plateau"
+          },
+          {
+            "nom": "Sakin",
+            "slug": "sakin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "DONGA",
+    "slug": "donga",
+    "communes": [
+      {
+        "nom": "BASSILA",
+        "slug": "bassila",
+        "arrondissements": [
+          {
+            "nom": "Alédjo",
+            "slug": "aledjo"
+          },
+          {
+            "nom": "Bassila",
+            "slug": "bassila"
+          },
+          {
+            "nom": "Manigri",
+            "slug": "manigri"
+          },
+          {
+            "nom": "Pénéssoulou",
+            "slug": "penessoulou"
+          }
+        ]
+      },
+      {
+        "nom": "COPARGO",
+        "slug": "copargo",
+        "arrondissements": [
+          {
+            "nom": "Anandana",
+            "slug": "anandana"
+          },
+          {
+            "nom": "Copargo",
+            "slug": "copargo"
+          },
+          {
+            "nom": "Pabégou",
+            "slug": "pabegou"
+          },
+          {
+            "nom": "Singré",
+            "slug": "singre"
+          }
+        ]
+      },
+      {
+        "nom": "DJOUGOU",
+        "slug": "djougou",
+        "arrondissements": [
+          {
+            "nom": "Barei",
+            "slug": "barei"
+          },
+          {
+            "nom": "Bariénou",
+            "slug": "barienou"
+          },
+          {
+            "nom": "Bélléfoungou",
+            "slug": "bellefoungou"
+          },
+          {
+            "nom": "Bougou",
+            "slug": "bougou"
+          },
+          {
+            "nom": "Djougou I",
+            "slug": "djougou-i"
+          },
+          {
+            "nom": "Djougou III",
+            "slug": "djougou-iii"
+          },
+          {
+            "nom": "Djougou II",
+            "slug": "djougou-ii"
+          },
+          {
+            "nom": "Kolokondé",
+            "slug": "kolokonde"
+          },
+          {
+            "nom": "Onklou",
+            "slug": "onklou"
+          },
+          {
+            "nom": "Patargo",
+            "slug": "patargo"
+          },
+          {
+            "nom": "Pélébina",
+            "slug": "pelebina"
+          },
+          {
+            "nom": "Sérou",
+            "slug": "serou"
+          }
+        ]
+      },
+      {
+        "nom": "OUAKE",
+        "slug": "ouake",
+        "arrondissements": [
+          {
+            "nom": "Badjoudè",
+            "slug": "badjoude"
+          },
+          {
+            "nom": "Kondé",
+            "slug": "konde"
+          },
+          {
+            "nom": "Ouaké",
+            "slug": "ouake"
+          },
+          {
+            "nom": "Sèmèrè I",
+            "slug": "semere-i"
+          },
+          {
+            "nom": "Sèmèrè II",
+            "slug": "semere-ii"
+          },
+          {
+            "nom": "Tchalinga",
+            "slug": "tchalinga"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "COUFFO",
+    "slug": "couffo",
+    "communes": [
+      {
+        "nom": "APLAHOUE",
+        "slug": "aplahoue",
+        "arrondissements": [
+          {
+            "nom": "Aplahoué",
+            "slug": "aplahoue"
+          },
+          {
+            "nom": "Atomè",
+            "slug": "atome"
+          },
+          {
+            "nom": "Azovè",
+            "slug": "azove"
+          },
+          {
+            "nom": "Dekpo",
+            "slug": "dekpo"
+          },
+          {
+            "nom": "Godohou",
+            "slug": "godohou"
+          },
+          {
+            "nom": "Kissamey",
+            "slug": "kissamey"
+          },
+          {
+            "nom": "Lonkly",
+            "slug": "lonkly"
+          }
+        ]
+      },
+      {
+        "nom": "DJAKOTOMEY",
+        "slug": "djakotomey",
+        "arrondissements": [
+          {
+            "nom": "Adjintimey",
+            "slug": "adjintimey"
+          },
+          {
+            "nom": "Bètoumey",
+            "slug": "betoumey"
+          },
+          {
+            "nom": "Djakotomey I",
+            "slug": "djakotomey-i"
+          },
+          {
+            "nom": "Djakotomey II",
+            "slug": "djakotomey-ii"
+          },
+          {
+            "nom": "Gohomey",
+            "slug": "gohomey"
+          },
+          {
+            "nom": "Houègamey",
+            "slug": "houegamey"
+          },
+          {
+            "nom": "Kinkinhoué",
+            "slug": "kinkinhoue"
+          },
+          {
+            "nom": "Kokohoué",
+            "slug": "kokohoue"
+          },
+          {
+            "nom": "Kpoba",
+            "slug": "kpoba"
+          },
+          {
+            "nom": "Sokouhoué",
+            "slug": "sokouhoue"
+          }
+        ]
+      },
+      {
+        "nom": "DOGBO ",
+        "slug": "dogbo",
+        "arrondissements": [
+          {
+            "nom": "Ayomi",
+            "slug": "ayomi"
+          },
+          {
+            "nom": "Dèvè",
+            "slug": "deve"
+          },
+          {
+            "nom": "Honton",
+            "slug": "honton"
+          },
+          {
+            "nom": "Lokogohoué",
+            "slug": "lokogohoue"
+          },
+          {
+            "nom": "Madjrè",
+            "slug": "madjre"
+          },
+          {
+            "nom": "Tota",
+            "slug": "tota"
+          },
+          {
+            "nom": "Totchagni",
+            "slug": "totchagni"
+          }
+        ]
+      },
+      {
+        "nom": "KLOUEKANME",
+        "slug": "klouekanme",
+        "arrondissements": [
+          {
+            "nom": "Adjanhonmè",
+            "slug": "adjanhonme"
+          },
+          {
+            "nom": "Ahogbèya",
+            "slug": "ahogbeya"
+          },
+          {
+            "nom": "Aya-Hohoué",
+            "slug": "aya-hohoue"
+          },
+          {
+            "nom": "Djotto",
+            "slug": "djotto"
+          },
+          {
+            "nom": "Hondji",
+            "slug": "hondji"
+          },
+          {
+            "nom": "Klouékanmè",
+            "slug": "klouekanme"
+          },
+          {
+            "nom": "Lanta",
+            "slug": "lanta"
+          },
+          {
+            "nom": "Tchikpé",
+            "slug": "tchikpe"
+          }
+        ]
+      },
+      {
+        "nom": "LALO",
+        "slug": "lalo",
+        "arrondissements": [
+          {
+            "nom": "Adoukandji",
+            "slug": "adoukandji"
+          },
+          {
+            "nom": "Ahondjinnako",
+            "slug": "ahondjinnako"
+          },
+          {
+            "nom": "Ahomadégbé",
+            "slug": "ahomadegbe"
+          },
+          {
+            "nom": "Banigbé",
+            "slug": "banigbe"
+          },
+          {
+            "nom": "Gnizounmè",
+            "slug": "gnizounme"
+          },
+          {
+            "nom": "Hlassamè",
+            "slug": "hlassame"
+          },
+          {
+            "nom": "Lalo",
+            "slug": "lalo"
+          },
+          {
+            "nom": "Lokogba",
+            "slug": "lokogba"
+          },
+          {
+            "nom": "Tchito",
+            "slug": "tchito"
+          },
+          {
+            "nom": "Tohou",
+            "slug": "tohou"
+          },
+          {
+            "nom": "Zalli",
+            "slug": "zalli"
+          }
+        ]
+      },
+      {
+        "nom": "TOVIKLIN",
+        "slug": "toviklin",
+        "arrondissements": [
+          {
+            "nom": "Adjido",
+            "slug": "adjido"
+          },
+          {
+            "nom": "Avédjin",
+            "slug": "avedjin"
+          },
+          {
+            "nom": "Doko",
+            "slug": "doko"
+          },
+          {
+            "nom": "Houédogli",
+            "slug": "houedogli"
+          },
+          {
+            "nom": "Missinko",
+            "slug": "missinko"
+          },
+          {
+            "nom": "Tannou-Gola",
+            "slug": "tannou-gola"
+          },
+          {
+            "nom": "Toviklin",
+            "slug": "toviklin"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "MONO",
+    "slug": "mono",
+    "communes": [
+      {
+        "nom": "ATHIEME",
+        "slug": "athieme",
+        "arrondissements": [
+          {
+            "nom": "Adohoun",
+            "slug": "adohoun"
+          },
+          {
+            "nom": "Atchannou",
+            "slug": "atchannou"
+          },
+          {
+            "nom": "Athiémè",
+            "slug": "athieme"
+          },
+          {
+            "nom": "Dédékpoé",
+            "slug": "dedekpoe"
+          },
+          {
+            "nom": "Kpinnou",
+            "slug": "kpinnou"
+          }
+        ]
+      },
+      {
+        "nom": "BOPA",
+        "slug": "bopa",
+        "arrondissements": [
+          {
+            "nom": "Agbodji",
+            "slug": "agbodji"
+          },
+          {
+            "nom": "Badazoui",
+            "slug": "badazoui"
+          },
+          {
+            "nom": "Bopa",
+            "slug": "bopa"
+          },
+          {
+            "nom": "Gbakpodji",
+            "slug": "gbakpodji"
+          },
+          {
+            "nom": "Lobogo",
+            "slug": "lobogo"
+          },
+          {
+            "nom": "Possotomè",
+            "slug": "possotome"
+          },
+          {
+            "nom": "Yégodoé",
+            "slug": "yegodoe"
+          }
+        ]
+      },
+      {
+        "nom": "COME",
+        "slug": "come",
+        "arrondissements": [
+          {
+            "nom": "Agatogbo",
+            "slug": "agatogbo"
+          },
+          {
+            "nom": "Akodéha",
+            "slug": "akodeha"
+          },
+          {
+            "nom": "Comè",
+            "slug": "come"
+          },
+          {
+            "nom": "Ouèdèmè-Pédah",
+            "slug": "ouedeme-pedah"
+          },
+          {
+            "nom": "Oumako",
+            "slug": "oumako"
+          }
+        ]
+      },
+      {
+        "nom": "GRAND-POPO",
+        "slug": "grand-popo",
+        "arrondissements": [
+          {
+            "nom": "Adjaha",
+            "slug": "adjaha"
+          },
+          {
+            "nom": "Agoué",
+            "slug": "agoue"
+          },
+          {
+            "nom": "Avloh",
+            "slug": "avloh"
+          },
+          {
+            "nom": "Djanglanmey",
+            "slug": "djanglanmey"
+          },
+          {
+            "nom": "Gbéhoué",
+            "slug": "gbehoue"
+          },
+          {
+            "nom": "Grand-Popo",
+            "slug": "grand-popo"
+          },
+          {
+            "nom": "Sazoué",
+            "slug": "sazoue"
+          }
+        ]
+      },
+      {
+        "nom": "HOUEYOGBE ",
+        "slug": "houeyogbe",
+        "arrondissements": [
+          {
+            "nom": "Dahé",
+            "slug": "dahe"
+          },
+          {
+            "nom": "Doutou",
+            "slug": "doutou"
+          },
+          {
+            "nom": "Honhoué",
+            "slug": "honhoue"
+          },
+          {
+            "nom": "Houéyogbé",
+            "slug": "houeyogbe"
+          },
+          {
+            "nom": "Sè",
+            "slug": "se"
+          },
+          {
+            "nom": "Zoungbonou",
+            "slug": "zoungbonou"
+          }
+        ]
+      },
+      {
+        "nom": "LOKOSSA",
+        "slug": "lokossa",
+        "arrondissements": [
+          {
+            "nom": "Agamé",
+            "slug": "agame"
+          },
+          {
+            "nom": "Houin",
+            "slug": "houin"
+          },
+          {
+            "nom": "Houèdèmè-Adja",
+            "slug": "houedeme-adja"
+          },
+          {
+            "nom": "Koudo",
+            "slug": "koudo"
+          },
+          {
+            "nom": "Lokossa",
+            "slug": "lokossa"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "OUEME",
+    "slug": "oueme",
+    "communes": [
+      {
+        "nom": "ADJARRA",
+        "slug": "adjarra",
+        "arrondissements": [
+          {
+            "nom": "Adjarra I",
+            "slug": "adjarra-i"
+          },
+          {
+            "nom": "Adjarra II",
+            "slug": "adjarra-ii"
+          },
+          {
+            "nom": "Aglogbé",
+            "slug": "aglogbe"
+          },
+          {
+            "nom": "Honvié",
+            "slug": "honvie"
+          },
+          {
+            "nom": "Malanhoui",
+            "slug": "malanhoui"
+          },
+          {
+            "nom": "Médédjonou",
+            "slug": "mededjonou"
+          }
+        ]
+      },
+      {
+        "nom": "ADJOHOUN",
+        "slug": "adjohoun",
+        "arrondissements": [
+          {
+            "nom": "Azowlissè",
+            "slug": "azowlisse"
+          },
+          {
+            "nom": "Akpadanou",
+            "slug": "akpadanou"
+          },
+          {
+            "nom": "Kodè",
+            "slug": "kode"
+          },
+          {
+            "nom": "Adjohoun",
+            "slug": "adjohoun"
+          },
+          {
+            "nom": "Dèmè",
+            "slug": "deme"
+          },
+          {
+            "nom": "Gangban",
+            "slug": "gangban"
+          },
+          {
+            "nom": "Awonou",
+            "slug": "awonou"
+          },
+          {
+            "nom": "Togbota",
+            "slug": "togbota"
+          }
+        ]
+      },
+      {
+        "nom": "AGUEGUE   ",
+        "slug": "aguegue",
+        "arrondissements": [
+          {
+            "nom": "Avagbodji",
+            "slug": "avagbodji"
+          },
+          {
+            "nom": "Houédomè",
+            "slug": "houedome"
+          },
+          {
+            "nom": "Zoungamè",
+            "slug": "zoungame"
+          }
+        ]
+      },
+      {
+        "nom": "AKPRO-MISSERETE",
+        "slug": "akpro-misserete",
+        "arrondissements": [
+          {
+            "nom": "Akpro-Missérété",
+            "slug": "akpro-misserete"
+          },
+          {
+            "nom": "Gomè-Sota",
+            "slug": "gome-sota"
+          },
+          {
+            "nom": "Katagon",
+            "slug": "katagon"
+          },
+          {
+            "nom": "Vakon",
+            "slug": "vakon"
+          },
+          {
+            "nom": "Zoungbomè",
+            "slug": "zoungbome"
+          }
+        ]
+      },
+      {
+        "nom": "AVRANKOU",
+        "slug": "avrankou",
+        "arrondissements": [
+          {
+            "nom": "Atchoukpa",
+            "slug": "atchoukpa"
+          },
+          {
+            "nom": "Avrankou",
+            "slug": "avrankou"
+          },
+          {
+            "nom": "Djomon",
+            "slug": "djomon"
+          },
+          {
+            "nom": "Gbozounmè",
+            "slug": "gbozounme"
+          },
+          {
+            "nom": "Kouty",
+            "slug": "kouty"
+          },
+          {
+            "nom": "Ouanho",
+            "slug": "ouanho"
+          },
+          {
+            "nom": "Sado",
+            "slug": "sado"
+          }
+        ]
+      },
+      {
+        "nom": "BONOU  ",
+        "slug": "bonou",
+        "arrondissements": [
+          {
+            "nom": "Affamè",
+            "slug": "affame"
+          },
+          {
+            "nom": "Atchonsa",
+            "slug": "atchonsa"
+          },
+          {
+            "nom": "Bonou",
+            "slug": "bonou"
+          },
+          {
+            "nom": "Damè-Wogon",
+            "slug": "dame-wogon"
+          },
+          {
+            "nom": "Houinviguè",
+            "slug": "houinvigue"
+          }
+        ]
+      },
+      {
+        "nom": "DANGBO",
+        "slug": "dangbo",
+        "arrondissements": [
+          {
+            "nom": "Dangbo",
+            "slug": "dangbo"
+          },
+          {
+            "nom": "Dékin",
+            "slug": "dekin"
+          },
+          {
+            "nom": "Gbéko",
+            "slug": "gbeko"
+          },
+          {
+            "nom": "Houédomey",
+            "slug": "houedomey"
+          },
+          {
+            "nom": "Hozin",
+            "slug": "hozin"
+          },
+          {
+            "nom": "Késsounou",
+            "slug": "kessounou"
+          },
+          {
+            "nom": "Zounguè",
+            "slug": "zoungue"
+          }
+        ]
+      },
+      {
+        "nom": "PORTO-NOVO",
+        "slug": "porto-novo",
+        "arrondissements": [
+          {
+            "nom": "AVAKPA GBEGO",
+            "slug": "avakpa-gbego"
+          },
+          {
+            "nom": "AVAKPA KPODJI",
+            "slug": "avakpa-kpodji"
+          },
+          {
+            "nom": "AVASSA  BAGORO  AGBOKOME",
+            "slug": "avassa-bagoro-agbokome"
+          },
+          {
+            "nom": "AYETORO",
+            "slug": "ayetoro"
+          },
+          {
+            "nom": "AYIMLONFIDE",
+            "slug": "ayimlonfide"
+          },
+          {
+            "nom": "KPOTA  SANDODO",
+            "slug": "kpota-sandodo"
+          },
+          {
+            "nom": "LOKOSSA",
+            "slug": "lokossa"
+          },
+          {
+            "nom": "OGANLA  ATAKPAME",
+            "slug": "oganla-atakpame"
+          },
+          {
+            "nom": "OGANLA  NORD",
+            "slug": "oganla-nord"
+          },
+          {
+            "nom": "OGANLA  POSTE",
+            "slug": "oganla-poste"
+          },
+          {
+            "nom": "OGANLA  SOKE",
+            "slug": "oganla-soke"
+          },
+          {
+            "nom": "OGANLA  SUD",
+            "slug": "oganla-sud"
+          },
+          {
+            "nom": "OGANLA-EST",
+            "slug": "oganla-est"
+          },
+          {
+            "nom": "ACCRON-GOGANKOME",
+            "slug": "accron-gogankome"
+          },
+          {
+            "nom": "ADJINA SUD",
+            "slug": "adjina-sud"
+          },
+          {
+            "nom": "ADOME",
+            "slug": "adome"
+          },
+          {
+            "nom": "AGBOKOU 1",
+            "slug": "agbokou-1"
+          },
+          {
+            "nom": "AGBOKOU 2",
+            "slug": "agbokou-2"
+          },
+          {
+            "nom": "AGBOKOU 3",
+            "slug": "agbokou-3"
+          },
+          {
+            "nom": "ATTAKE 2",
+            "slug": "attake-2"
+          },
+          {
+            "nom": "ATTAKE 1",
+            "slug": "attake-1"
+          },
+          {
+            "nom": "GBEKON",
+            "slug": "gbekon"
+          },
+          {
+            "nom": "HOUEYOGBE  GBEDJI",
+            "slug": "houeyogbe-gbedji"
+          },
+          {
+            "nom": "HOUEZOUME",
+            "slug": "houezoume"
+          },
+          {
+            "nom": "HOUINME  CHATEAU",
+            "slug": "houinme-chateau"
+          },
+          {
+            "nom": "HOUINME  GANTO",
+            "slug": "houinme-ganto"
+          },
+          {
+            "nom": "HOUINME  GBEDJROMEDE",
+            "slug": "houinme-gbedjromede"
+          },
+          {
+            "nom": "HOUINME DJAGUIDI",
+            "slug": "houinme-djaguidi"
+          },
+          {
+            "nom": "IDI-ARABA",
+            "slug": "idi-araba"
+          },
+          {
+            "nom": "ILEFIE",
+            "slug": "ilefie"
+          },
+          {
+            "nom": "KANDEVIE  MISSOGBE",
+            "slug": "kandevie-missogbe"
+          },
+          {
+            "nom": "KANDEVIE  OWODE",
+            "slug": "kandevie-owode"
+          },
+          {
+            "nom": "KANDEVIE 3",
+            "slug": "kandevie-3"
+          },
+          {
+            "nom": "OUINLINDA 1",
+            "slug": "ouinlinda-1"
+          },
+          {
+            "nom": "AGBOKOU",
+            "slug": "agbokou"
+          },
+          {
+            "nom": "EXTENSIONAGBOKOU-SUDOUINLINDA 2",
+            "slug": "extensionagbokou-sudouinlinda-2"
+          },
+          {
+            "nom": "ADJEGOUNLE",
+            "slug": "adjegounle"
+          },
+          {
+            "nom": "ADJINA NORD",
+            "slug": "adjina-nord"
+          },
+          {
+            "nom": "AHOUANTIKOME",
+            "slug": "ahouantikome"
+          },
+          {
+            "nom": "AKONABOUE",
+            "slug": "akonaboue"
+          },
+          {
+            "nom": "AKPASSA-ODO-OBA",
+            "slug": "akpassa-odo-oba"
+          },
+          {
+            "nom": "BASSOU-DODO",
+            "slug": "bassou-dodo"
+          },
+          {
+            "nom": "DJASSIN-DAHO",
+            "slug": "djassin-daho"
+          },
+          {
+            "nom": "DEGUE-GARE-GANTO",
+            "slug": "degue-gare-ganto"
+          },
+          {
+            "nom": "DJASSIN-ZOUME",
+            "slug": "djassin-zoume"
+          },
+          {
+            "nom": "DJILADO",
+            "slug": "djilado"
+          },
+          {
+            "nom": "DOTTA",
+            "slug": "dotta"
+          },
+          {
+            "nom": "FILLA-HONNOU-HONDJI",
+            "slug": "filla-honnou-hondji"
+          },
+          {
+            "nom": "FOUNFOUN-DJAGUIDI",
+            "slug": "founfoun-djaguidi"
+          },
+          {
+            "nom": "FOUNFOUN-GBEGO",
+            "slug": "founfoun-gbego"
+          },
+          {
+            "nom": "FOUNFOUN-SODJI",
+            "slug": "founfoun-sodji"
+          },
+          {
+            "nom": "FOUNFOUN-TOKPA",
+            "slug": "founfoun-tokpa"
+          },
+          {
+            "nom": "GBEZOUNKPA",
+            "slug": "gbezounkpa"
+          },
+          {
+            "nom": "HASSOE-AGUE",
+            "slug": "hassoe-ague"
+          },
+          {
+            "nom": "HLOGOU",
+            "slug": "hlogou"
+          },
+          {
+            "nom": "HOUEGBO-HLINKO",
+            "slug": "houegbo-hlinko"
+          },
+          {
+            "nom": "HOUSSOUKO",
+            "slug": "houssouko"
+          },
+          {
+            "nom": "OUANDO",
+            "slug": "ouando"
+          },
+          {
+            "nom": "SADOGNON-ADJEGOUNLE",
+            "slug": "sadognon-adjegounle"
+          },
+          {
+            "nom": "KOUTONGBE",
+            "slug": "koutongbe"
+          },
+          {
+            "nom": "SADOGNON-HOUSSA",
+            "slug": "sadognon-houssa"
+          },
+          {
+            "nom": "SAGBO-KOSSOU",
+            "slug": "sagbo-kossou"
+          },
+          {
+            "nom": "SODJEKO-TCHINVIE-HINKOUE",
+            "slug": "sodjeko-tchinvie-hinkoue"
+          },
+          {
+            "nom": "SOKOME-TOFFINKOME",
+            "slug": "sokome-toffinkome"
+          },
+          {
+            "nom": "TOGO-ADANDEKOME",
+            "slug": "togo-adandekome"
+          },
+          {
+            "nom": "VEKPA",
+            "slug": "vekpa"
+          },
+          {
+            "nom": "OUNDO",
+            "slug": "oundo"
+          },
+          {
+            "nom": "OUADO",
+            "slug": "ouado"
+          },
+          {
+            "nom": "AKONAKOUE",
+            "slug": "akonakoue"
+          },
+          {
+            "nom": "AKONABOE",
+            "slug": "akonaboe"
+          },
+          {
+            "nom": "DEGUEKOME",
+            "slug": "deguekome"
+          },
+          {
+            "nom": "ANAVIE",
+            "slug": "anavie"
+          },
+          {
+            "nom": "DJEGAN-DAHO",
+            "slug": "djegan-daho"
+          },
+          {
+            "nom": "DJEGAN-KPEVI",
+            "slug": "djegan-kpevi"
+          },
+          {
+            "nom": "DODJI",
+            "slug": "dodji"
+          },
+          {
+            "nom": "DOWA",
+            "slug": "dowa"
+          },
+          {
+            "nom": "GBODJE",
+            "slug": "gbodje"
+          },
+          {
+            "nom": "GUEVIE- DJEGANTO",
+            "slug": "guevie-djeganto"
+          },
+          {
+            "nom": "GUEVIE",
+            "slug": "guevie"
+          },
+          {
+            "nom": "GUEVIE-ZINKOME",
+            "slug": "guevie-zinkome"
+          },
+          {
+            "nom": "HOUINVIE",
+            "slug": "houinvie"
+          },
+          {
+            "nom": "HOUNSA",
+            "slug": "hounsa"
+          },
+          {
+            "nom": "LOUHO",
+            "slug": "louho"
+          },
+          {
+            "nom": "TOKPOTA 1",
+            "slug": "tokpota-1"
+          },
+          {
+            "nom": "TOKPOTA 2",
+            "slug": "tokpota-2"
+          },
+          {
+            "nom": "ZEBOU  AGA",
+            "slug": "zebou-aga"
+          },
+          {
+            "nom": "ZEBOU  AHOUANGBO",
+            "slug": "zebou-ahouangbo"
+          },
+          {
+            "nom": "ZEBOU  MASSE",
+            "slug": "zebou-masse"
+          },
+          {
+            "nom": "GUEVIE-DJEGANTODOWA",
+            "slug": "guevie-djegantodowa"
+          },
+          {
+            "nom": "EXTENSIONGUEVIE",
+            "slug": "extensionguevie"
+          },
+          {
+            "nom": "DJEGANTO",
+            "slug": "djeganto"
+          },
+          {
+            "nom": "AGBOKOU EXTENTION",
+            "slug": "agbokou-extention"
+          },
+          {
+            "nom": "DJOGBEZEBOU",
+            "slug": "djogbezebou"
+          },
+          {
+            "nom": "ITA-TIGRIGBOJE",
+            "slug": "ita-tigrigboje"
+          },
+          {
+            "nom": "ZOUNKPA",
+            "slug": "zounkpa"
+          }
+        ]
+      },
+      {
+        "nom": "SEME-KPODJI",
+        "slug": "seme-kpodji",
+        "arrondissements": [
+          {
+            "nom": "Agblangandan",
+            "slug": "agblangandan"
+          },
+          {
+            "nom": "ZONE",
+            "slug": "zone"
+          },
+          {
+            "nom": "CEN",
+            "slug": "cen"
+          },
+          {
+            "nom": "SAD",
+            "slug": "sad"
+          },
+          {
+            "nom": "Aholouyèmè",
+            "slug": "aholouyeme"
+          },
+          {
+            "nom": "Djrègbè",
+            "slug": "djregbe"
+          },
+          {
+            "nom": "Sèmè-Podji",
+            "slug": "seme-podji"
+          },
+          {
+            "nom": "Ekpè",
+            "slug": "ekpe"
+          },
+          {
+            "nom": "Tohouè",
+            "slug": "tohoue"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "PLATEAU",
+    "slug": "plateau",
+    "communes": [
+      {
+        "nom": "ADJA-OUERE",
+        "slug": "adja-ouere",
+        "arrondissements": [
+          {
+            "nom": "Adja-Ouèrè",
+            "slug": "adja-ouere"
+          },
+          {
+            "nom": "Oko-Akarè",
+            "slug": "oko-akare"
+          },
+          {
+            "nom": "Kpoulou",
+            "slug": "kpoulou"
+          },
+          {
+            "nom": "Massè",
+            "slug": "masse"
+          },
+          {
+            "nom": "Ikpinlè",
+            "slug": "ikpinle"
+          },
+          {
+            "nom": "Totonnoukon",
+            "slug": "totonnoukon"
+          }
+        ]
+      },
+      {
+        "nom": "IFANGNI",
+        "slug": "ifangni",
+        "arrondissements": [
+          {
+            "nom": "Banigbé",
+            "slug": "banigbe"
+          },
+          {
+            "nom": "Daagbé",
+            "slug": "daagbe"
+          },
+          {
+            "nom": "Ifangni",
+            "slug": "ifangni"
+          },
+          {
+            "nom": "Ko-Koumolou",
+            "slug": "ko-koumolou"
+          },
+          {
+            "nom": "Lagbé",
+            "slug": "lagbe"
+          },
+          {
+            "nom": "Tchaada",
+            "slug": "tchaada"
+          }
+        ]
+      },
+      {
+        "nom": "KETOU ",
+        "slug": "ketou",
+        "arrondissements": [
+          {
+            "nom": "Adakplamé",
+            "slug": "adakplame"
+          },
+          {
+            "nom": "Idigny",
+            "slug": "idigny"
+          },
+          {
+            "nom": "Kpankou",
+            "slug": "kpankou"
+          },
+          {
+            "nom": "Kétou",
+            "slug": "ketou"
+          },
+          {
+            "nom": "Odometa",
+            "slug": "odometa"
+          },
+          {
+            "nom": "Okpometa",
+            "slug": "okpometa"
+          }
+        ]
+      },
+      {
+        "nom": "POBE ",
+        "slug": "pobe",
+        "arrondissements": [
+          {
+            "nom": "Ahoyéyé",
+            "slug": "ahoyeye"
+          },
+          {
+            "nom": "Igana",
+            "slug": "igana"
+          },
+          {
+            "nom": "Issaba",
+            "slug": "issaba"
+          },
+          {
+            "nom": "Pobè",
+            "slug": "pobe"
+          },
+          {
+            "nom": "Towé",
+            "slug": "towe"
+          }
+        ]
+      },
+      {
+        "nom": "SAKETE  ",
+        "slug": "sakete",
+        "arrondissements": [
+          {
+            "nom": "Aguidi",
+            "slug": "aguidi"
+          },
+          {
+            "nom": "Ita-Djèbou",
+            "slug": "ita-djebou"
+          },
+          {
+            "nom": "Sakété I",
+            "slug": "sakete-i"
+          },
+          {
+            "nom": "Sakété II",
+            "slug": "sakete-ii"
+          },
+          {
+            "nom": "Takon",
+            "slug": "takon"
+          },
+          {
+            "nom": "Yoko",
+            "slug": "yoko"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "nom": "ZOU",
+    "slug": "zou",
+    "communes": [
+      {
+        "nom": "ABOMEY",
+        "slug": "abomey",
+        "arrondissements": [
+          {
+            "nom": "Agbokpa",
+            "slug": "agbokpa"
+          },
+          {
+            "nom": "Dètohou",
+            "slug": "detohou"
+          },
+          {
+            "nom": "Vidolè",
+            "slug": "vidole"
+          },
+          {
+            "nom": "Hounli",
+            "slug": "hounli"
+          },
+          {
+            "nom": "Sèhoun",
+            "slug": "sehoun"
+          },
+          {
+            "nom": "Zounzounmè",
+            "slug": "zounzounme"
+          },
+          {
+            "nom": "Djègbé",
+            "slug": "djegbe"
+          }
+        ]
+      },
+      {
+        "nom": "AGBANGNIZOUN",
+        "slug": "agbangnizoun",
+        "arrondissements": [
+          {
+            "nom": "Adahondjigon",
+            "slug": "adahondjigon"
+          },
+          {
+            "nom": "Adingningon",
+            "slug": "adingningon"
+          },
+          {
+            "nom": "Agbangnizoun",
+            "slug": "agbangnizoun"
+          },
+          {
+            "nom": "Kinta",
+            "slug": "kinta"
+          },
+          {
+            "nom": "Kpota",
+            "slug": "kpota"
+          },
+          {
+            "nom": "Lissazounmè",
+            "slug": "lissazounme"
+          },
+          {
+            "nom": "Sahé",
+            "slug": "sahe"
+          },
+          {
+            "nom": "Siwé",
+            "slug": "siwe"
+          },
+          {
+            "nom": "Tanvé",
+            "slug": "tanve"
+          },
+          {
+            "nom": "Zoungoudo",
+            "slug": "zoungoudo"
+          }
+        ]
+      },
+      {
+        "nom": "BOHICON",
+        "slug": "bohicon",
+        "arrondissements": [
+          {
+            "nom": "Agongointo",
+            "slug": "agongointo"
+          },
+          {
+            "nom": "Avogbana",
+            "slug": "avogbana"
+          },
+          {
+            "nom": "Bohicon I",
+            "slug": "bohicon-i"
+          },
+          {
+            "nom": "Bohicon II",
+            "slug": "bohicon-ii"
+          },
+          {
+            "nom": "Gnidjazoun",
+            "slug": "gnidjazoun"
+          },
+          {
+            "nom": "Lissèzoun",
+            "slug": "lissezoun"
+          },
+          {
+            "nom": "Ouassaho",
+            "slug": "ouassaho"
+          },
+          {
+            "nom": "Passagon",
+            "slug": "passagon"
+          },
+          {
+            "nom": "Saclo",
+            "slug": "saclo"
+          },
+          {
+            "nom": "Sodohomè",
+            "slug": "sodohome"
+          }
+        ]
+      },
+      {
+        "nom": "COVE",
+        "slug": "cove",
+        "arrondissements": [
+          {
+            "nom": "Adogbé",
+            "slug": "adogbe"
+          },
+          {
+            "nom": "Houèko",
+            "slug": "houeko"
+          },
+          {
+            "nom": "Gounli",
+            "slug": "gounli"
+          },
+          {
+            "nom": "ZOGBA",
+            "slug": "zogba"
+          },
+          {
+            "nom": "Lainta-Cogbè",
+            "slug": "lainta-cogbe"
+          },
+          {
+            "nom": "Naogon",
+            "slug": "naogon"
+          },
+          {
+            "nom": "SOLI",
+            "slug": "soli"
+          },
+          {
+            "nom": "Houin",
+            "slug": "houin"
+          },
+          {
+            "nom": "Hounso",
+            "slug": "hounso"
+          }
+        ]
+      },
+      {
+        "nom": "DJIDJA ",
+        "slug": "djidja",
+        "arrondissements": [
+          {
+            "nom": "Agondji",
+            "slug": "agondji"
+          },
+          {
+            "nom": "Agouna",
+            "slug": "agouna"
+          },
+          {
+            "nom": "Dan",
+            "slug": "dan"
+          },
+          {
+            "nom": "Djidja",
+            "slug": "djidja"
+          },
+          {
+            "nom": "Dohouimè",
+            "slug": "dohouime"
+          },
+          {
+            "nom": "Gobè",
+            "slug": "gobe"
+          },
+          {
+            "nom": "Monsourou",
+            "slug": "monsourou"
+          },
+          {
+            "nom": "Mougnon",
+            "slug": "mougnon"
+          },
+          {
+            "nom": "Oungbègamè",
+            "slug": "oungbegame"
+          },
+          {
+            "nom": "Outo",
+            "slug": "outo"
+          },
+          {
+            "nom": "Setto",
+            "slug": "setto"
+          },
+          {
+            "nom": "Zoukou",
+            "slug": "zoukou"
+          }
+        ]
+      },
+      {
+        "nom": "OUINHI  ",
+        "slug": "ouinhi",
+        "arrondissements": [
+          {
+            "nom": "Ouinhi",
+            "slug": "ouinhi"
+          },
+          {
+            "nom": "DASSO",
+            "slug": "dasso"
+          },
+          {
+            "nom": "SAGON",
+            "slug": "sagon"
+          },
+          {
+            "nom": "Tohoué",
+            "slug": "tohoue"
+          }
+        ]
+      },
+      {
+        "nom": "ZA-KPOTA",
+        "slug": "za-kpota",
+        "arrondissements": [
+          {
+            "nom": "Allahé",
+            "slug": "allahe"
+          },
+          {
+            "nom": "Assalin",
+            "slug": "assalin"
+          },
+          {
+            "nom": "Houngomey",
+            "slug": "houngomey"
+          },
+          {
+            "nom": "Kpakpamè",
+            "slug": "kpakpame"
+          },
+          {
+            "nom": "Kpozoun",
+            "slug": "kpozoun"
+          },
+          {
+            "nom": "Za-Kpota",
+            "slug": "za-kpota"
+          },
+          {
+            "nom": "Za-Tanta",
+            "slug": "za-tanta"
+          },
+          {
+            "nom": "Zèko",
+            "slug": "zeko"
+          }
+        ]
+      },
+      {
+        "nom": "ZAGNANADO",
+        "slug": "zagnanado",
+        "arrondissements": [
+          {
+            "nom": "Agonli-Houégbo",
+            "slug": "agonli-houegbo"
+          },
+          {
+            "nom": "Banamè",
+            "slug": "baname"
+          },
+          {
+            "nom": "Don-Tan",
+            "slug": "don-tan"
+          },
+          {
+            "nom": "Dovi",
+            "slug": "dovi"
+          },
+          {
+            "nom": "Zagnanado centre",
+            "slug": "zagnanado-centre"
+          },
+          {
+            "nom": "Kpédékpo",
+            "slug": "kpedekpo"
+          }
+        ]
+      },
+      {
+        "nom": "ZOGBODOMEY",
+        "slug": "zogbodomey",
+        "arrondissements": [
+          {
+            "nom": "Akiza",
+            "slug": "akiza"
+          },
+          {
+            "nom": "Avlamè",
+            "slug": "avlame"
+          },
+          {
+            "nom": "Cana I",
+            "slug": "cana-i"
+          },
+          {
+            "nom": "Cana II",
+            "slug": "cana-ii"
+          },
+          {
+            "nom": "Domè",
+            "slug": "dome"
+          },
+          {
+            "nom": "Koussoukpa",
+            "slug": "koussoukpa"
+          },
+          {
+            "nom": "Kpokissa",
+            "slug": "kpokissa"
+          },
+          {
+            "nom": "Massi",
+            "slug": "massi"
+          },
+          {
+            "nom": "Tanwé-Hessou",
+            "slug": "tanwe-hessou"
+          },
+          {
+            "nom": "Zogbodomey",
+            "slug": "zogbodomey"
+          },
+          {
+            "nom": "Zoukou",
+            "slug": "zoukou"
+          }
+        ]
+      }
+    ]
+  }
+]

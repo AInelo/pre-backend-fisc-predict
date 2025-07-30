@@ -1,5 +1,5 @@
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
-import {BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
+import { BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
 import tfuData from '../../../../data/tfu_data_with_slugs.json';
 
 // Type union pour le retour de la fonction
@@ -7,22 +7,22 @@ export type TFUCalculationResult = GlobalEstimationInfoData | BackendEstimationF
 
 // Interface pour les données TFU
 interface TFUInput {
-  departement: string;
-  commune: string;
-  arrondissement: string;
-  categorie: string;
-  squareMeters: number;
-  periodeFiscale: string;
+    departement: string;
+    commune: string;
+    arrondissement: string;
+    categorie: string;
+    squareMeters: number;
+    periodeFiscale: string;
 }
 
 // Interface pour les tarifs TFU
 interface TFUTarif {
-  nom_categorie: string;
-  slug_categorie: string;
-  description: string;
-  slug_description: string;
-  tfu_par_m2: number;
-  tfu_minimum: number;
+    nom_categorie: string;
+    slug_categorie: string;
+    description: string;
+    slug_description: string;
+    tfu_par_m2: number;
+    tfu_minimum: number;
 }
 
 class MoteurTFU {
@@ -30,14 +30,14 @@ class MoteurTFU {
         try {
             // Convertir en tableau pour un traitement uniforme
             const inputs = Array.isArray(input) ? input : [input];
-            
+
             if (inputs.length === 0) {
                 return this.genererReponseErreurValidation('Aucune donnée TFU fournie');
             }
 
             // Extraire l'année de la période fiscale (utiliser la première pour la validation)
             const annee = this.extraireAnnee(inputs[0].periodeFiscale);
-            
+
             // Vérifier si l'année est 2026 ou ultérieure
             if (annee >= 2026) {
                 return this.genererReponseErreur(inputs[0], annee);
@@ -96,14 +96,14 @@ class MoteurTFU {
 
                 impotDetailCalcule: [
                     {
-                        impotTitle: 'TFU (Taxe Foncière Urbaine)',
-                        impotDescription: inputs.length === 1 
+                        impotTitle: 'TFU (Taxe Foncière Unique)',
+                        impotDescription: inputs.length === 1
                             ? `Calculée selon le tarif de ${inputs[0].departement} - ${inputs[0].commune} - ${inputs[0].arrondissement}`
                             : `Calculée pour ${inputs.length} propriétés avec cumul des montants`,
                         impotValue: totalTFU,
                         impotValueCurrency: 'FCFA',
                         impotTaux: inputs.length === 1 ? `${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m²` : 'Tarifs variables',
-                        importCalculeDescription: inputs.length === 1 
+                        importCalculeDescription: inputs.length === 1
                             ? `TFU = ${inputs[0].squareMeters} m² × ${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m² = ${totalTFU.toLocaleString('fr-FR')} FCFA`
                             : `Cumul TFU pour ${inputs.length} propriétés: ${totalTFU.toLocaleString('fr-FR')} FCFA (Surface totale: ${totalSurface} m²)`
                     }
@@ -186,6 +186,42 @@ class MoteurTFU {
     }
 
     // Recherche du tarif TFU en utilisant les slugs pour une précision maximale
+    // private static findTFURate(input: TFUInput): TFUTarif | null {
+    //     try {
+    //         // On suppose que les champs d'entrée sont déjà des slugs ou à convertir en slug
+    //         const departement = tfuData.departements.find(d =>
+    //             d.slug === input.departement
+    //         );
+    //         if (!departement) return null;
+
+    //         const commune = departement.communes.find(c =>
+    //             c.slug === input.commune
+    //         );
+    //         if (!commune) return null;
+
+    //         const arrondissement = commune.arrondissements.find(a =>
+    //             a.slug === input.arrondissement
+    //         );
+    //         if (!arrondissement) return null;
+
+    //         // On suppose que input.categorie est le slug de la catégorie (slug_categorie)
+    //         // Il faut donc trouver la clé du tarif dont le slug_categorie correspond à input.categorie
+    //         const tarifKey = Object.keys(arrondissement.tarifs).find(key => {
+    //             const cat = arrondissement.tarifs[key as keyof typeof arrondissement.tarifs];
+    //             // On vérifie le slug de la catégorie
+    //             return cat.slug_categorie === input.categorie;
+    //         });
+
+    //         if (!tarifKey) return null;
+
+    //         const tarif = arrondissement.tarifs[tarifKey as keyof typeof arrondissement.tarifs];
+    //         return tarif || null;
+    //     } catch (error) {
+    //         return null;
+    //     }
+    // }
+
+    // Recherche du tarif TFU en utilisant les slugs pour une précision maximale
     private static findTFURate(input: TFUInput): TFUTarif | null {
         try {
             // On suppose que les champs d'entrée sont déjà des slugs ou à convertir en slug
@@ -204,12 +240,12 @@ class MoteurTFU {
             );
             if (!arrondissement) return null;
 
-            // On suppose que input.categorie est le slug de la catégorie (slug_categorie)
-            // Il faut donc trouver la clé du tarif dont le slug_categorie correspond à input.categorie
+            // CORRECTION: On compare maintenant avec slug_description au lieu de slug_categorie
+            // car c'est slug_description qui varie et identifie la catégorie spécifique
             const tarifKey = Object.keys(arrondissement.tarifs).find(key => {
                 const cat = arrondissement.tarifs[key as keyof typeof arrondissement.tarifs];
-                // On vérifie le slug de la catégorie
-                return cat.slug_categorie === input.categorie;
+                // On vérifie le slug de la description qui correspond à la catégorie spécifique
+                return cat.slug_description === input.categorie;
             });
 
             if (!tarifKey) return null;
@@ -227,7 +263,7 @@ class MoteurTFU {
         if (anneeMatch) {
             return parseInt(anneeMatch[1], 10);
         }
-        
+
         // Si aucune année n'est trouvée, retourner l'année courante par défaut
         return new Date().getFullYear();
     }
