@@ -86,7 +86,7 @@ class MoteurProfillage {
                 },
                 {
                     code: 'VPS',
-                    name: 'Versement pour Salaires',
+                    name: 'Versement Patronal sur Salaires',
                     category: 'Contribution sociale',
                     applicability: 'Obligatoire pour régime réel',
                     frequency: 'Mensuelle',
@@ -98,11 +98,11 @@ class MoteurProfillage {
                 // Taxes spécifiques aux EI en régime REEL
                 {
                     code: 'IBA',
-                    name: 'Impôt sur les Bénéfices Agricoles',
+                    name: "Impôt sur les Bénéfices d'affaire",
                     category: 'Impôt direct',
                     applicability: 'Spécifique aux entreprises individuelles',
                     frequency: 'Annuelle',
-                    description: 'Impôt sur les bénéfices des activités agricoles',
+                    description: 'Impôt sur les bénéfices des activités affaire',
                     priority: 'medium',
                     required: true,
                     icon: 'FileText',
@@ -127,7 +127,7 @@ class MoteurProfillage {
         ['TPS', [
             {
                 code: 'TPS',
-                name: 'Taxe Professionnelle de Synthèse',
+                name: 'Taxe Professionnelle Synthétique',
                 category: 'Impôt forfaitaire',
                 applicability: 'Obligatoire pour régime TPS',
                 frequency: 'Annuelle',
