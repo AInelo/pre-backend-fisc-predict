@@ -9,22 +9,23 @@ function extractFlatStructure(data) {
   const categoriesSet = new Map();
 
   data.departements.forEach(dept => {
-    departementsSet.set(dept.slug, { nom: dept.nom, slug: dept.slug });
+    departementsSet.set(dept.slug, { label: dept.nom, value: dept.slug });
 
     dept.communes.forEach(commune => {
-      communesSet.set(commune.slug, { nom: commune.nom, slug: commune.slug });
+      communesSet.set(commune.slug, { label: commune.nom, value: commune.slug });
 
       commune.arrondissements.forEach(arr => {
-        arrondissementsSet.set(arr.slug, { nom: arr.nom, slug: arr.slug });
+        arrondissementsSet.set(arr.slug, { label: arr.nom, value: arr.slug });
 
         Object.values(arr.tarifs).forEach(cat => {
-          if (cat.slug_categorie) {
-            categoriesSet.set(cat.slug_categorie, {
-              nom: cat.nom_categorie,
-              slug: cat.slug_categorie
+          if (cat && cat.description && cat.slug_description) {
+            categoriesSet.set(cat.slug_description, {
+              label: cat.description,
+              value: cat.slug_description
             });
           }
         });
+
       });
     });
   });

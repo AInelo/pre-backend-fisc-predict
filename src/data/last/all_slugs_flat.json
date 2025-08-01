@@ -116,7 +116,7 @@
     },
     {
       "label": "ABOMEY-CALAVI",
-      "value": "abomey_calavi"
+      "value": "abomey-calavi"
     },
     {
       "label": "ALLADA ",
@@ -132,7 +132,7 @@
     },
     {
       "label": "SÔ-AVA",
-      "value": "so_ava"
+      "value": "so-ava"
     },
     {
       "label": "TOFFO ",
@@ -140,7 +140,7 @@
     },
     {
       "label": "TORI-BOSSITO",
-      "value": "tori_bossito"
+      "value": "tori-bossito"
     },
     {
       "label": "ZE",
@@ -184,7 +184,7 @@
     },
     {
       "label": "DASSA-ZOUNME",
-      "value": "dassa_zounme"
+      "value": "dassa-zounme"
     },
     {
       "label": "GLAZOUE",
@@ -256,7 +256,7 @@
     },
     {
       "label": "GRAND-POPO",
-      "value": "grand_popo"
+      "value": "grand-popo"
     },
     {
       "label": "HOUEYOGBE ",
@@ -280,7 +280,7 @@
     },
     {
       "label": "AKPRO-MISSERETE",
-      "value": "akpro_misserete"
+      "value": "akpro-misserete"
     },
     {
       "label": "AVRANKOU",
@@ -296,15 +296,15 @@
     },
     {
       "label": "PORTO-NOVO",
-      "value": "porto_novo"
+      "value": "porto-novo"
     },
     {
       "label": "SEME-KPODJI",
-      "value": "seme_kpodji"
+      "value": "seme-kpodji"
     },
     {
       "label": "ADJA-OUERE",
-      "value": "adja_ouere"
+      "value": "adja-ouere"
     },
     {
       "label": "IFANGNI",
@@ -348,7 +348,7 @@
     },
     {
       "label": "ZA-KPOTA",
-      "value": "za_kpota"
+      "value": "za-kpota"
     },
     {
       "label": "ZAGNANADO",
@@ -362,7 +362,7 @@
   "arrondissements": [
     {
       "label": "Arrondissement 1",
-      "value": "arrondissement_1"
+      "value": "arrondissement-1"
     },
     {
       "label": "DONATEN",
@@ -378,15 +378,15 @@
     },
     {
       "label": "Arrondissement 2",
-      "value": "arrondissement_2"
+      "value": "arrondissement-2"
     },
     {
       "label": "Arrondissement 3",
-      "value": "arrondissement_3"
+      "value": "arrondissement-3"
     },
     {
       "label": "Arrondissement 4",
-      "value": "arrondissement_4"
+      "value": "arrondissement-4"
     },
     {
       "label": "ABOKICODJI",
@@ -406,7 +406,7 @@
     },
     {
       "label": "Arrondissement 5",
-      "value": "arrondissement_5"
+      "value": "arrondissement-5"
     },
     {
       "label": "ZONGO",
@@ -422,7 +422,7 @@
     },
     {
       "label": "Arrondissement 6",
-      "value": "arrondissement_6"
+      "value": "arrondissement-6"
     },
     {
       "label": "DANTOKPA",
@@ -430,31 +430,31 @@
     },
     {
       "label": "Arrondissement 7",
-      "value": "arrondissement_7"
+      "value": "arrondissement-7"
     },
     {
       "label": "Arrondissement 8",
-      "value": "arrondissement_8"
+      "value": "arrondissement-8"
     },
     {
       "label": "Arrondissement 9",
-      "value": "arrondissement_9"
+      "value": "arrondissement-9"
     },
     {
       "label": "Arrondissement 10",
-      "value": "arrondissement_10"
+      "value": "arrondissement-10"
     },
     {
       "label": "Arrondissement 11",
-      "value": "arrondissement_11"
+      "value": "arrondissement-11"
     },
     {
       "label": "Arrondissement 12",
-      "value": "arrondissement_12"
+      "value": "arrondissement-12"
     },
     {
       "label": "CADJEHOUN I",
-      "value": "cadjehoun_i"
+      "value": "cadjehoun-i"
     },
     {
       "label": "COCOTIER",
@@ -462,31 +462,31 @@
     },
     {
       "label": "FIDJROSSE CENTRE",
-      "value": "fidjrosse_centre"
+      "value": "fidjrosse-centre"
     },
     {
       "label": "CADJEHOUN 2",
-      "value": "cadjehoun_2"
+      "value": "cadjehoun-2"
     },
     {
       "label": "CADJEHOUN 3",
-      "value": "cadjehoun_3"
+      "value": "cadjehoun-3"
     },
     {
       "label": "CADJEHOUN 4",
-      "value": "cadjehoun_4"
+      "value": "cadjehoun-4"
     },
     {
       "label": "CADJEHOUN 5",
-      "value": "cadjehoun_5"
+      "value": "cadjehoun-5"
     },
     {
       "label": "CADJEHOUN KPOTA",
-      "value": "cadjehoun_kpota"
+      "value": "cadjehoun-kpota"
     },
     {
       "label": "Arrondissement 13",
-      "value": "arrondissement_13"
+      "value": "arrondissement-13"
     },
     {
       "label": "Banikoara",
@@ -550,7 +550,7 @@
     },
     {
       "label": "Zoungou-Pantrossi",
-      "value": "zoungou_pantrossi"
+      "value": "zoungou-pantrossi"
     },
     {
       "label": "Angaradébou",
@@ -566,15 +566,15 @@
     },
     {
       "label": "Kandi I",
-      "value": "kandi_i"
+      "value": "kandi-i"
     },
     {
       "label": "Kandi II",
-      "value": "kandi_ii"
+      "value": "kandi-ii"
     },
     {
       "label": "Kandi III",
-      "value": "kandi_iii"
+      "value": "kandi-iii"
     },
     {
       "label": "Kassakou",
@@ -594,11 +594,11 @@
     },
     {
       "label": "Birni-Lafia",
-      "value": "birni_lafia"
+      "value": "birni-lafia"
     },
     {
       "label": "Bogo-Bogo",
-      "value": "bogo_bogo"
+      "value": "bogo-bogo"
     },
     {
       "label": "Monsey",
@@ -718,11 +718,11 @@
     },
     {
       "label": "Chabi-Couma",
-      "value": "chabi_couma"
+      "value": "chabi-couma"
     },
     {
       "label": "Fô-Tancé",
-      "value": "fo_tance"
+      "value": "fo-tance"
     },
     {
       "label": "Guilmaro",
@@ -758,7 +758,7 @@
     },
     {
       "label": "Tchianhoun-Cossi",
-      "value": "tchianhoun_cossi"
+      "value": "tchianhoun-cossi"
     },
     {
       "label": "Kotapounga",
@@ -774,19 +774,19 @@
     },
     {
       "label": "Natitingou II",
-      "value": "natitingou_ii"
+      "value": "natitingou-ii"
     },
     {
       "label": "Natitingou I",
-      "value": "natitingou_i"
+      "value": "natitingou-i"
     },
     {
       "label": "Natitingou III",
-      "value": "natitingou_iii"
+      "value": "natitingou-iii"
     },
     {
       "label": "Natitingou IV",
-      "value": "natitingou_iv"
+      "value": "natitingou-iv"
     },
     {
       "label": "Perma",
@@ -794,7 +794,7 @@
     },
     {
       "label": "Tchoumi-Tchoumi",
-      "value": "tchoumi_tchoumi"
+      "value": "tchoumi-tchoumi"
     },
     {
       "label": "Gnémasson",
@@ -842,7 +842,7 @@
     },
     {
       "label": "Abomey-Calavi",
-      "value": "abomey_calavi"
+      "value": "abomey-calavi"
     },
     {
       "label": "Akassato",
@@ -854,7 +854,7 @@
     },
     {
       "label": "Glo-Djigbé",
-      "value": "glo_djigbe"
+      "value": "glo-djigbe"
     },
     {
       "label": "Hévié",
@@ -910,7 +910,7 @@
     },
     {
       "label": "Lon-Agonmey",
-      "value": "lon_agonmey"
+      "value": "lon-agonmey"
     },
     {
       "label": "Sékou",
@@ -922,7 +922,7 @@
     },
     {
       "label": "Tokpa-Avagoudo",
-      "value": "tokpa_avagoudo"
+      "value": "tokpa-avagoudo"
     },
     {
       "label": "Aganmalomè",
@@ -958,7 +958,7 @@
     },
     {
       "label": "Tokpa-Domè",
-      "value": "tokpa_dome"
+      "value": "tokpa-dome"
     },
     {
       "label": "Avlékété",
@@ -974,23 +974,23 @@
     },
     {
       "label": "Ouakpé-Daho",
-      "value": "ouakpe_daho"
+      "value": "ouakpe-daho"
     },
     {
       "label": "Ouidah I",
-      "value": "ouidah_i"
+      "value": "ouidah-i"
     },
     {
       "label": "Ouidah II",
-      "value": "ouidah_ii"
+      "value": "ouidah-ii"
     },
     {
       "label": "Ouidah III",
-      "value": "ouidah_iii"
+      "value": "ouidah-iii"
     },
     {
       "label": "Ouidah IV",
-      "value": "ouidah_iv"
+      "value": "ouidah-iv"
     },
     {
       "label": "Pahou",
@@ -1002,7 +1002,7 @@
     },
     {
       "label": "Ahomey-Lokpo",
-      "value": "ahomey_lokpo"
+      "value": "ahomey-lokpo"
     },
     {
       "label": "Dékanmey",
@@ -1010,19 +1010,19 @@
     },
     {
       "label": "Ganvié I",
-      "value": "ganvie_i"
+      "value": "ganvie-i"
     },
     {
       "label": "Ganvié II",
-      "value": "ganvie_ii"
+      "value": "ganvie-ii"
     },
     {
       "label": "Houédo-Aguékon",
-      "value": "houedo_aguekon"
+      "value": "houedo-aguekon"
     },
     {
       "label": "Sô-Ava",
-      "value": "so_ava"
+      "value": "so-ava"
     },
     {
       "label": "Vekky",
@@ -1034,7 +1034,7 @@
     },
     {
       "label": "Colli-Agbamè",
-      "value": "colli_agbame"
+      "value": "colli-agbame"
     },
     {
       "label": "Coussi",
@@ -1066,7 +1066,7 @@
     },
     {
       "label": "Toffo-Agué",
-      "value": "toffo_ague"
+      "value": "toffo-ague"
     },
     {
       "label": "Avamè",
@@ -1074,23 +1074,23 @@
     },
     {
       "label": "Azohouè-Aliho",
-      "value": "azohoue_aliho"
+      "value": "azohoue-aliho"
     },
     {
       "label": "Azohouè-Cada",
-      "value": "azohoue_cada"
+      "value": "azohoue-cada"
     },
     {
       "label": "Tori-Bossito",
-      "value": "tori_bossito"
+      "value": "tori-bossito"
     },
     {
       "label": "Tori-Cada",
-      "value": "tori_cada"
+      "value": "tori-cada"
     },
     {
       "label": "Tori-Gare",
-      "value": "tori_gare"
+      "value": "tori-gare"
     },
     {
       "label": "Adjan",
@@ -1106,7 +1106,7 @@
     },
     {
       "label": "Dodji-Bata",
-      "value": "dodji_bata"
+      "value": "dodji-bata"
     },
     {
       "label": "Hékanmè",
@@ -1118,15 +1118,15 @@
     },
     {
       "label": "Sèdjè-Dénou",
-      "value": "sedje_denou"
+      "value": "sedje-denou"
     },
     {
       "label": "Sèdjè-Houégoudo",
-      "value": "sedje_houegoudo"
+      "value": "sedje-houegoudo"
     },
     {
       "label": "Tangbo-Djevié",
-      "value": "tangbo_djevie"
+      "value": "tangbo-djevie"
     },
     {
       "label": "Yokpo",
@@ -1270,7 +1270,7 @@
     },
     {
       "label": "LADJI-FARANI",
-      "value": "ladji_farani"
+      "value": "ladji-farani"
     },
     {
       "label": "MADINA",
@@ -1278,7 +1278,7 @@
     },
     {
       "label": "OKE-DAMA",
-      "value": "oke_dama"
+      "value": "oke-dama"
     },
     {
       "label": "TRANZA",
@@ -1290,7 +1290,7 @@
     },
     {
       "label": "ZONGO-NORD",
-      "value": "zongo_nord"
+      "value": "zongo-nord"
     },
     {
       "label": "AGBAGBA",
@@ -1302,7 +1302,7 @@
     },
     {
       "label": "BA MORA",
-      "value": "ba_mora"
+      "value": "ba-mora"
     },
     {
       "label": "BAKINKOURA",
@@ -1322,7 +1322,7 @@
     },
     {
       "label": "GANOU GOUROU",
-      "value": "ganou_gourou"
+      "value": "ganou-gourou"
     },
     {
       "label": "GANRE",
@@ -1342,7 +1342,7 @@
     },
     {
       "label": "KPEROU GUERRA",
-      "value": "kperou_guerra"
+      "value": "kperou-guerra"
     },
     {
       "label": "LEMANDA",
@@ -1370,7 +1370,7 @@
     },
     {
       "label": "ZONGO-ZENON",
-      "value": "zongo_zenon"
+      "value": "zongo-zenon"
     },
     {
       "label": "BAKA",
@@ -1398,7 +1398,7 @@
     },
     {
       "label": "KORO BOROU",
-      "value": "koro_borou"
+      "value": "koro-borou"
     },
     {
       "label": "TOUROU",
@@ -1450,7 +1450,7 @@
     },
     {
       "label": "Fô-Bourè",
-      "value": "fo_boure"
+      "value": "fo-boure"
     },
     {
       "label": "Sèkèrè",
@@ -1534,11 +1534,11 @@
     },
     {
       "label": "Dassa I",
-      "value": "dassa_i"
+      "value": "dassa-i"
     },
     {
       "label": "Dassa II",
-      "value": "dassa_ii"
+      "value": "dassa-ii"
     },
     {
       "label": "Gbaffo",
@@ -1610,7 +1610,7 @@
     },
     {
       "label": "Challa-Ogoi",
-      "value": "challa_ogoi"
+      "value": "challa-ogoi"
     },
     {
       "label": "Djègbé",
@@ -1678,15 +1678,15 @@
     },
     {
       "label": "Savalou-Aga",
-      "value": "savalou_aga"
+      "value": "savalou-aga"
     },
     {
       "label": "Savalou-Agbado",
-      "value": "savalou_agbado"
+      "value": "savalou-agbado"
     },
     {
       "label": "Savalou-Attakè",
-      "value": "savalou_attake"
+      "value": "savalou-attake"
     },
     {
       "label": "Tchetti",
@@ -1774,15 +1774,15 @@
     },
     {
       "label": "Djougou I",
-      "value": "djougou_i"
+      "value": "djougou-i"
     },
     {
       "label": "Djougou III",
-      "value": "djougou_iii"
+      "value": "djougou-iii"
     },
     {
       "label": "Djougou II",
-      "value": "djougou_ii"
+      "value": "djougou-ii"
     },
     {
       "label": "Kolokondé",
@@ -1818,11 +1818,11 @@
     },
     {
       "label": "Sèmèrè I",
-      "value": "semere_i"
+      "value": "semere-i"
     },
     {
       "label": "Sèmèrè II",
-      "value": "semere_ii"
+      "value": "semere-ii"
     },
     {
       "label": "Tchalinga",
@@ -1866,11 +1866,11 @@
     },
     {
       "label": "Djakotomey I",
-      "value": "djakotomey_i"
+      "value": "djakotomey-i"
     },
     {
       "label": "Djakotomey II",
-      "value": "djakotomey_ii"
+      "value": "djakotomey-ii"
     },
     {
       "label": "Gohomey",
@@ -1934,7 +1934,7 @@
     },
     {
       "label": "Aya-Hohoué",
-      "value": "aya_hohoue"
+      "value": "aya-hohoue"
     },
     {
       "label": "Djotto",
@@ -2022,7 +2022,7 @@
     },
     {
       "label": "Tannou-Gola",
-      "value": "tannou_gola"
+      "value": "tannou-gola"
     },
     {
       "label": "Toviklin",
@@ -2090,7 +2090,7 @@
     },
     {
       "label": "Ouèdèmè-Pédah",
-      "value": "ouedeme_pedah"
+      "value": "ouedeme-pedah"
     },
     {
       "label": "Oumako",
@@ -2118,7 +2118,7 @@
     },
     {
       "label": "Grand-Popo",
-      "value": "grand_popo"
+      "value": "grand-popo"
     },
     {
       "label": "Sazoué",
@@ -2154,7 +2154,7 @@
     },
     {
       "label": "Houèdèmè-Adja",
-      "value": "houedeme_adja"
+      "value": "houedeme-adja"
     },
     {
       "label": "Koudo",
@@ -2166,11 +2166,11 @@
     },
     {
       "label": "Adjarra I",
-      "value": "adjarra_i"
+      "value": "adjarra-i"
     },
     {
       "label": "Adjarra II",
-      "value": "adjarra_ii"
+      "value": "adjarra-ii"
     },
     {
       "label": "Aglogbé",
@@ -2234,11 +2234,11 @@
     },
     {
       "label": "Akpro-Missérété",
-      "value": "akpro_misserete"
+      "value": "akpro-misserete"
     },
     {
       "label": "Gomè-Sota",
-      "value": "gome_sota"
+      "value": "gome-sota"
     },
     {
       "label": "Katagon",
@@ -2294,7 +2294,7 @@
     },
     {
       "label": "Damè-Wogon",
-      "value": "dame_wogon"
+      "value": "dame-wogon"
     },
     {
       "label": "Houinviguè",
@@ -2330,15 +2330,15 @@
     },
     {
       "label": "AVAKPA GBEGO",
-      "value": "avakpa_gbego"
+      "value": "avakpa-gbego"
     },
     {
       "label": "AVAKPA KPODJI",
-      "value": "avakpa_kpodji"
+      "value": "avakpa-kpodji"
     },
     {
       "label": "AVASSA  BAGORO  AGBOKOME",
-      "value": "avassa_bagoro_agbokome"
+      "value": "avassa-bagoro-agbokome"
     },
     {
       "label": "AYETORO",
@@ -2350,39 +2350,39 @@
     },
     {
       "label": "KPOTA  SANDODO",
-      "value": "kpota_sandodo"
+      "value": "kpota-sandodo"
     },
     {
       "label": "OGANLA  ATAKPAME",
-      "value": "oganla_atakpame"
+      "value": "oganla-atakpame"
     },
     {
       "label": "OGANLA  NORD",
-      "value": "oganla_nord"
+      "value": "oganla-nord"
     },
     {
       "label": "OGANLA  POSTE",
-      "value": "oganla_poste"
+      "value": "oganla-poste"
     },
     {
       "label": "OGANLA  SOKE",
-      "value": "oganla_soke"
+      "value": "oganla-soke"
     },
     {
       "label": "OGANLA  SUD",
-      "value": "oganla_sud"
+      "value": "oganla-sud"
     },
     {
       "label": "OGANLA-EST",
-      "value": "oganla_est"
+      "value": "oganla-est"
     },
     {
       "label": "ACCRON-GOGANKOME",
-      "value": "accron_gogankome"
+      "value": "accron-gogankome"
     },
     {
       "label": "ADJINA SUD",
-      "value": "adjina_sud"
+      "value": "adjina-sud"
     },
     {
       "label": "ADOME",
@@ -2390,23 +2390,23 @@
     },
     {
       "label": "AGBOKOU 1",
-      "value": "agbokou_1"
+      "value": "agbokou-1"
     },
     {
       "label": "AGBOKOU 2",
-      "value": "agbokou_2"
+      "value": "agbokou-2"
     },
     {
       "label": "AGBOKOU 3",
-      "value": "agbokou_3"
+      "value": "agbokou-3"
     },
     {
       "label": "ATTAKE 2",
-      "value": "attake_2"
+      "value": "attake-2"
     },
     {
       "label": "ATTAKE 1",
-      "value": "attake_1"
+      "value": "attake-1"
     },
     {
       "label": "GBEKON",
@@ -2414,7 +2414,7 @@
     },
     {
       "label": "HOUEYOGBE  GBEDJI",
-      "value": "houeyogbe_gbedji"
+      "value": "houeyogbe-gbedji"
     },
     {
       "label": "HOUEZOUME",
@@ -2422,23 +2422,23 @@
     },
     {
       "label": "HOUINME  CHATEAU",
-      "value": "houinme_chateau"
+      "value": "houinme-chateau"
     },
     {
       "label": "HOUINME  GANTO",
-      "value": "houinme_ganto"
+      "value": "houinme-ganto"
     },
     {
       "label": "HOUINME  GBEDJROMEDE",
-      "value": "houinme_gbedjromede"
+      "value": "houinme-gbedjromede"
     },
     {
       "label": "HOUINME DJAGUIDI",
-      "value": "houinme_djaguidi"
+      "value": "houinme-djaguidi"
     },
     {
       "label": "IDI-ARABA",
-      "value": "idi_araba"
+      "value": "idi-araba"
     },
     {
       "label": "ILEFIE",
@@ -2446,19 +2446,19 @@
     },
     {
       "label": "KANDEVIE  MISSOGBE",
-      "value": "kandevie_missogbe"
+      "value": "kandevie-missogbe"
     },
     {
       "label": "KANDEVIE  OWODE",
-      "value": "kandevie_owode"
+      "value": "kandevie-owode"
     },
     {
       "label": "KANDEVIE 3",
-      "value": "kandevie_3"
+      "value": "kandevie-3"
     },
     {
       "label": "OUINLINDA 1",
-      "value": "ouinlinda_1"
+      "value": "ouinlinda-1"
     },
     {
       "label": "AGBOKOU",
@@ -2466,7 +2466,7 @@
     },
     {
       "label": "EXTENSIONAGBOKOU-SUDOUINLINDA 2",
-      "value": "extensionagbokou_sudouinlinda_2"
+      "value": "extensionagbokou-sudouinlinda-2"
     },
     {
       "label": "ADJEGOUNLE",
@@ -2474,7 +2474,7 @@
     },
     {
       "label": "ADJINA NORD",
-      "value": "adjina_nord"
+      "value": "adjina-nord"
     },
     {
       "label": "AHOUANTIKOME",
@@ -2486,23 +2486,23 @@
     },
     {
       "label": "AKPASSA-ODO-OBA",
-      "value": "akpassa_odo_oba"
+      "value": "akpassa-odo-oba"
     },
     {
       "label": "BASSOU-DODO",
-      "value": "bassou_dodo"
+      "value": "bassou-dodo"
     },
     {
       "label": "DJASSIN-DAHO",
-      "value": "djassin_daho"
+      "value": "djassin-daho"
     },
     {
       "label": "DEGUE-GARE-GANTO",
-      "value": "degue_gare_ganto"
+      "value": "degue-gare-ganto"
     },
     {
       "label": "DJASSIN-ZOUME",
-      "value": "djassin_zoume"
+      "value": "djassin-zoume"
     },
     {
       "label": "DJILADO",
@@ -2514,23 +2514,23 @@
     },
     {
       "label": "FILLA-HONNOU-HONDJI",
-      "value": "filla_honnou_hondji"
+      "value": "filla-honnou-hondji"
     },
     {
       "label": "FOUNFOUN-DJAGUIDI",
-      "value": "founfoun_djaguidi"
+      "value": "founfoun-djaguidi"
     },
     {
       "label": "FOUNFOUN-GBEGO",
-      "value": "founfoun_gbego"
+      "value": "founfoun-gbego"
     },
     {
       "label": "FOUNFOUN-SODJI",
-      "value": "founfoun_sodji"
+      "value": "founfoun-sodji"
     },
     {
       "label": "FOUNFOUN-TOKPA",
-      "value": "founfoun_tokpa"
+      "value": "founfoun-tokpa"
     },
     {
       "label": "GBEZOUNKPA",
@@ -2538,7 +2538,7 @@
     },
     {
       "label": "HASSOE-AGUE",
-      "value": "hassoe_ague"
+      "value": "hassoe-ague"
     },
     {
       "label": "HLOGOU",
@@ -2546,7 +2546,7 @@
     },
     {
       "label": "HOUEGBO-HLINKO",
-      "value": "houegbo_hlinko"
+      "value": "houegbo-hlinko"
     },
     {
       "label": "HOUSSOUKO",
@@ -2558,7 +2558,7 @@
     },
     {
       "label": "SADOGNON-ADJEGOUNLE",
-      "value": "sadognon_adjegounle"
+      "value": "sadognon-adjegounle"
     },
     {
       "label": "KOUTONGBE",
@@ -2566,23 +2566,23 @@
     },
     {
       "label": "SADOGNON-HOUSSA",
-      "value": "sadognon_houssa"
+      "value": "sadognon-houssa"
     },
     {
       "label": "SAGBO-KOSSOU",
-      "value": "sagbo_kossou"
+      "value": "sagbo-kossou"
     },
     {
       "label": "SODJEKO-TCHINVIE-HINKOUE",
-      "value": "sodjeko_tchinvie_hinkoue"
+      "value": "sodjeko-tchinvie-hinkoue"
     },
     {
       "label": "SOKOME-TOFFINKOME",
-      "value": "sokome_toffinkome"
+      "value": "sokome-toffinkome"
     },
     {
       "label": "TOGO-ADANDEKOME",
-      "value": "togo_adandekome"
+      "value": "togo-adandekome"
     },
     {
       "label": "VEKPA",
@@ -2614,11 +2614,11 @@
     },
     {
       "label": "DJEGAN-DAHO",
-      "value": "djegan_daho"
+      "value": "djegan-daho"
     },
     {
       "label": "DJEGAN-KPEVI",
-      "value": "djegan_kpevi"
+      "value": "djegan-kpevi"
     },
     {
       "label": "DODJI",
@@ -2634,7 +2634,7 @@
     },
     {
       "label": "GUEVIE- DJEGANTO",
-      "value": "guevie_djeganto"
+      "value": "guevie-djeganto"
     },
     {
       "label": "GUEVIE",
@@ -2642,7 +2642,7 @@
     },
     {
       "label": "GUEVIE-ZINKOME",
-      "value": "guevie_zinkome"
+      "value": "guevie-zinkome"
     },
     {
       "label": "HOUINVIE",
@@ -2658,27 +2658,27 @@
     },
     {
       "label": "TOKPOTA 1",
-      "value": "tokpota_1"
+      "value": "tokpota-1"
     },
     {
       "label": "TOKPOTA 2",
-      "value": "tokpota_2"
+      "value": "tokpota-2"
     },
     {
       "label": "ZEBOU  AGA",
-      "value": "zebou_aga"
+      "value": "zebou-aga"
     },
     {
       "label": "ZEBOU  AHOUANGBO",
-      "value": "zebou_ahouangbo"
+      "value": "zebou-ahouangbo"
     },
     {
       "label": "ZEBOU  MASSE",
-      "value": "zebou_masse"
+      "value": "zebou-masse"
     },
     {
       "label": "GUEVIE-DJEGANTODOWA",
-      "value": "guevie_djegantodowa"
+      "value": "guevie-djegantodowa"
     },
     {
       "label": "EXTENSIONGUEVIE",
@@ -2690,7 +2690,7 @@
     },
     {
       "label": "AGBOKOU EXTENTION",
-      "value": "agbokou_extention"
+      "value": "agbokou-extention"
     },
     {
       "label": "DJOGBEZEBOU",
@@ -2698,7 +2698,7 @@
     },
     {
       "label": "ITA-TIGRIGBOJE",
-      "value": "ita_tigrigboje"
+      "value": "ita-tigrigboje"
     },
     {
       "label": "ZOUNKPA",
@@ -2730,7 +2730,7 @@
     },
     {
       "label": "Sèmè-Podji",
-      "value": "seme_podji"
+      "value": "seme-podji"
     },
     {
       "label": "Ekpè",
@@ -2742,11 +2742,11 @@
     },
     {
       "label": "Adja-Ouèrè",
-      "value": "adja_ouere"
+      "value": "adja-ouere"
     },
     {
       "label": "Oko-Akarè",
-      "value": "oko_akare"
+      "value": "oko-akare"
     },
     {
       "label": "Kpoulou",
@@ -2774,7 +2774,7 @@
     },
     {
       "label": "Ko-Koumolou",
-      "value": "ko_koumolou"
+      "value": "ko-koumolou"
     },
     {
       "label": "Lagbé",
@@ -2834,15 +2834,15 @@
     },
     {
       "label": "Ita-Djèbou",
-      "value": "ita_djebou"
+      "value": "ita-djebou"
     },
     {
       "label": "Sakété I",
-      "value": "sakete_i"
+      "value": "sakete-i"
     },
     {
       "label": "Sakété II",
-      "value": "sakete_ii"
+      "value": "sakete-ii"
     },
     {
       "label": "Takon",
@@ -2926,11 +2926,11 @@
     },
     {
       "label": "Bohicon I",
-      "value": "bohicon_i"
+      "value": "bohicon-i"
     },
     {
       "label": "Bohicon II",
-      "value": "bohicon_ii"
+      "value": "bohicon-ii"
     },
     {
       "label": "Gnidjazoun",
@@ -2974,7 +2974,7 @@
     },
     {
       "label": "Lainta-Cogbè",
-      "value": "lainta_cogbe"
+      "value": "lainta-cogbe"
     },
     {
       "label": "Naogon",
@@ -3070,11 +3070,11 @@
     },
     {
       "label": "Za-Kpota",
-      "value": "za_kpota"
+      "value": "za-kpota"
     },
     {
       "label": "Za-Tanta",
-      "value": "za_tanta"
+      "value": "za-tanta"
     },
     {
       "label": "Zèko",
@@ -3082,7 +3082,7 @@
     },
     {
       "label": "Agonli-Houégbo",
-      "value": "agonli_houegbo"
+      "value": "agonli-houegbo"
     },
     {
       "label": "Banamè",
@@ -3090,7 +3090,7 @@
     },
     {
       "label": "Don-Tan",
-      "value": "don_tan"
+      "value": "don-tan"
     },
     {
       "label": "Dovi",
@@ -3098,7 +3098,7 @@
     },
     {
       "label": "Zagnanado centre",
-      "value": "zagnanado_centre"
+      "value": "zagnanado-centre"
     },
     {
       "label": "Kpédékpo",
@@ -3114,11 +3114,11 @@
     },
     {
       "label": "Cana I",
-      "value": "cana_i"
+      "value": "cana-i"
     },
     {
       "label": "Cana II",
-      "value": "cana_ii"
+      "value": "cana-ii"
     },
     {
       "label": "Domè",
@@ -3138,7 +3138,7 @@
     },
     {
       "label": "Tanwé-Hessou",
-      "value": "tanwe_hessou"
+      "value": "tanwe-hessou"
     },
     {
       "label": "Zogbodomey",
@@ -3147,24 +3147,8 @@
   ],
   "categories": [
     {
-      "label": "Rez-de-chaussée",
-      "value": "rez_de_chaussee"
-    },
-    {
-      "label": "Rez-de-chaussée et 1 ou 2 niveaux",
-      "value": "rez_de_chaussee_et_1_ou_2_niveaux"
-    },
-    {
-      "label": "Rez-de-chaussée et 3 ou 4 niveaux",
-      "value": "rez_de_chaussee_et_3_ou_4_niveaux"
-    },
-    {
-      "label": "Rez-de-chaussée et 5 niveaux ou plus",
-      "value": "rez_de_chaussee_et_5_niveaux_ou_plus"
-    },
-    {
-      "label": "Catégorie supplémentaire",
-      "value": "categorie_supplementaire"
+      "label": "Bâtiments à toiture tôle et assimilés",
+      "value": "batiments-a-toiture-tole-et-assimiles"
     }
   ]
 }

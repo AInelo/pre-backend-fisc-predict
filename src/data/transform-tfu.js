@@ -2,16 +2,42 @@ const fs = require('fs');
 const path = require('path');
 
 // Fonction utilitaire pour créer des slugs
+// function createSlug(text) {
+//   return text
+//     .toLowerCase()
+//     .normalize("NFD") // Décompose les caractères accentués
+//     .replace(/[\u0300-\u036f]/g, "") // Supprime les accents
+//     .replace(/[^a-z0-9\s-]/g, "") // Supprime les caractères spéciaux
+//     .trim()
+//     .replace(/\s+/g, "-") // Remplace les espaces par des tirets
+//     .replace(/-+/g, "-"); // Supprime les tirets multiples
+// }
+
+// function createSlug(text) {
+//   return text
+//     .toLowerCase()
+//     .normalize("NFD")                     // Décompose les accents
+//     .replace(/[\u0300-\u036f]/g, "")     // Supprime les accents restants
+//     .replace(/[^a-z0-9\s]/g, "")         // Supprime les caractères spéciaux
+//     .trim()
+//     .replace(/\s+/g, "_")                // Remplace les espaces par des _
+//     .replace(/_+/g, "_");                // Réduit les multiples _ en un seul
+// }
+
+
 function createSlug(text) {
   return text
     .toLowerCase()
-    .normalize("NFD") // Décompose les caractères accentués
-    .replace(/[\u0300-\u036f]/g, "") // Supprime les accents
-    .replace(/[^a-z0-9\s-]/g, "") // Supprime les caractères spéciaux
+    .normalize("NFD")                     // Décompose les accents
+    .replace(/[\u0300-\u036f]/g, "")     // Supprime les accents
+    .replace(/-/g, "_")                  // Remplace explicitement les tirets par des underscores
+    .replace(/[^a-z0-9\s_]/g, "")        // Supprime les caractères spéciaux (sauf underscore)
     .trim()
-    .replace(/\s+/g, "-") // Remplace les espaces par des tirets
-    .replace(/-+/g, "-"); // Supprime les tirets multiples
+    .replace(/\s+/g, "_")                // Remplace les espaces par des underscores
+    .replace(/_+/g, "_");                // Réduit les underscores multiples
 }
+
+
 
 // Fonction pour transformer les données existantes
 function transformDataWithSlugs(originalData) {

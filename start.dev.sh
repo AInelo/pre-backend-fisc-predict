@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NETWORK_NAME=urmapha-network
-COMPOSE_FILE=backend-pci-app-docker-compose.dev.yml
+NETWORK_NAME=startax-network
+COMPOSE_FILE=backend-startax-docker-compose.dev.yml
 
 # Vérifie si le réseau Docker existe
 if ! docker network ls --format '{{.Name}}' | grep -wq "$NETWORK_NAME"; then

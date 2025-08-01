@@ -1,0 +1,565 @@
+{
+  "littoral": [
+    {
+      "value": "cotonou",
+      "label": {
+        "fr": "COTONOU",
+        "en": "COTONOU"
+      }
+    }
+  ],
+  "alibori": [
+    {
+      "value": "banikoara",
+      "label": {
+        "fr": "BANIKOARA",
+        "en": "BANIKOARA"
+      }
+    },
+    {
+      "value": "gogounou",
+      "label": {
+        "fr": "GOGOUNOU",
+        "en": "GOGOUNOU"
+      }
+    },
+    {
+      "value": "kandi",
+      "label": {
+        "fr": "KANDI",
+        "en": "KANDI"
+      }
+    },
+    {
+      "value": "karimama",
+      "label": {
+        "fr": "KARIMAMA",
+        "en": "KARIMAMA"
+      }
+    },
+    {
+      "value": "malanville",
+      "label": {
+        "fr": "MALANVILLE",
+        "en": "MALANVILLE"
+      }
+    },
+    {
+      "value": "segbanan",
+      "label": {
+        "fr": "SEGBANAN",
+        "en": "SEGBANAN"
+      }
+    }
+  ],
+  "atacora": [
+    {
+      "value": "bounkoumbe",
+      "label": {
+        "fr": "BOUNKOUMBE",
+        "en": "BOUNKOUMBE"
+      }
+    },
+    {
+      "value": "cobly",
+      "label": {
+        "fr": "COBLY",
+        "en": "COBLY"
+      }
+    },
+    {
+      "value": "kerou",
+      "label": {
+        "fr": "KEROU ",
+        "en": "KEROU "
+      }
+    },
+    {
+      "value": "kouande",
+      "label": {
+        "fr": "KOUANDE",
+        "en": "KOUANDE"
+      }
+    },
+    {
+      "value": "materi",
+      "label": {
+        "fr": "MATERI ",
+        "en": "MATERI "
+      }
+    },
+    {
+      "value": "natitingou",
+      "label": {
+        "fr": "NATITINGOU",
+        "en": "NATITINGOU"
+      }
+    },
+    {
+      "value": "pehunco",
+      "label": {
+        "fr": "PEHUNCO",
+        "en": "PEHUNCO"
+      }
+    },
+    {
+      "value": "tanguieta",
+      "label": {
+        "fr": "TANGUIETA",
+        "en": "TANGUIETA"
+      }
+    },
+    {
+      "value": "toucountouna",
+      "label": {
+        "fr": "TOUCOUNTOUNA",
+        "en": "TOUCOUNTOUNA"
+      }
+    }
+  ],
+  "atlantique": [
+    {
+      "value": "abomey_calavi",
+      "label": {
+        "fr": "ABOMEY-CALAVI",
+        "en": "ABOMEY-CALAVI"
+      }
+    },
+    {
+      "value": "allada",
+      "label": {
+        "fr": "ALLADA ",
+        "en": "ALLADA "
+      }
+    },
+    {
+      "value": "kpomasse",
+      "label": {
+        "fr": "KPOMASSE",
+        "en": "KPOMASSE"
+      }
+    },
+    {
+      "value": "ouidah",
+      "label": {
+        "fr": "OUIDAH",
+        "en": "OUIDAH"
+      }
+    },
+    {
+      "value": "so_ava",
+      "label": {
+        "fr": "SÔ-AVA",
+        "en": "SÔ-AVA"
+      }
+    },
+    {
+      "value": "toffo",
+      "label": {
+        "fr": "TOFFO ",
+        "en": "TOFFO "
+      }
+    },
+    {
+      "value": "tori_bossito",
+      "label": {
+        "fr": "TORI-BOSSITO",
+        "en": "TORI-BOSSITO"
+      }
+    },
+    {
+      "value": "ze",
+      "label": {
+        "fr": "ZE",
+        "en": "ZE"
+      }
+    }
+  ],
+  "borgou": [
+    {
+      "value": "bembereke",
+      "label": {
+        "fr": "BEMBEREKE",
+        "en": "BEMBEREKE"
+      }
+    },
+    {
+      "value": "kalale",
+      "label": {
+        "fr": "KALALE",
+        "en": "KALALE"
+      }
+    },
+    {
+      "value": "ndali",
+      "label": {
+        "fr": "N'DALI",
+        "en": "N'DALI"
+      }
+    },
+    {
+      "value": "nikki",
+      "label": {
+        "fr": "NIKKI ",
+        "en": "NIKKI "
+      }
+    },
+    {
+      "value": "parakou",
+      "label": {
+        "fr": "PARAKOU",
+        "en": "PARAKOU"
+      }
+    },
+    {
+      "value": "perere",
+      "label": {
+        "fr": "PERERE ",
+        "en": "PERERE "
+      }
+    },
+    {
+      "value": "sinende",
+      "label": {
+        "fr": "SINENDE",
+        "en": "SINENDE"
+      }
+    },
+    {
+      "value": "tchaourou",
+      "label": {
+        "fr": "TCHAOUROU",
+        "en": "TCHAOUROU"
+      }
+    }
+  ],
+  "collines": [
+    {
+      "value": "bante",
+      "label": {
+        "fr": "BANTE ",
+        "en": "BANTE "
+      }
+    },
+    {
+      "value": "dassa_zounme",
+      "label": {
+        "fr": "DASSA-ZOUNME",
+        "en": "DASSA-ZOUNME"
+      }
+    },
+    {
+      "value": "glazoue",
+      "label": {
+        "fr": "GLAZOUE",
+        "en": "GLAZOUE"
+      }
+    },
+    {
+      "value": "ouesse",
+      "label": {
+        "fr": "OUESSE",
+        "en": "OUESSE"
+      }
+    },
+    {
+      "value": "savalou",
+      "label": {
+        "fr": "SAVALOU",
+        "en": "SAVALOU"
+      }
+    },
+    {
+      "value": "save",
+      "label": {
+        "fr": "SAVE  ",
+        "en": "SAVE  "
+      }
+    }
+  ],
+  "donga": [
+    {
+      "value": "bassila",
+      "label": {
+        "fr": "BASSILA",
+        "en": "BASSILA"
+      }
+    },
+    {
+      "value": "copargo",
+      "label": {
+        "fr": "COPARGO",
+        "en": "COPARGO"
+      }
+    },
+    {
+      "value": "djougou",
+      "label": {
+        "fr": "DJOUGOU",
+        "en": "DJOUGOU"
+      }
+    },
+    {
+      "value": "ouake",
+      "label": {
+        "fr": "OUAKE",
+        "en": "OUAKE"
+      }
+    }
+  ],
+  "couffo": [
+    {
+      "value": "aplahoue",
+      "label": {
+        "fr": "APLAHOUE",
+        "en": "APLAHOUE"
+      }
+    },
+    {
+      "value": "djakotomey",
+      "label": {
+        "fr": "DJAKOTOMEY",
+        "en": "DJAKOTOMEY"
+      }
+    },
+    {
+      "value": "dogbo",
+      "label": {
+        "fr": "DOGBO ",
+        "en": "DOGBO "
+      }
+    },
+    {
+      "value": "klouekanme",
+      "label": {
+        "fr": "KLOUEKANME",
+        "en": "KLOUEKANME"
+      }
+    },
+    {
+      "value": "lalo",
+      "label": {
+        "fr": "LALO",
+        "en": "LALO"
+      }
+    },
+    {
+      "value": "toviklin",
+      "label": {
+        "fr": "TOVIKLIN",
+        "en": "TOVIKLIN"
+      }
+    }
+  ],
+  "mono": [
+    {
+      "value": "athieme",
+      "label": {
+        "fr": "ATHIEME",
+        "en": "ATHIEME"
+      }
+    },
+    {
+      "value": "bopa",
+      "label": {
+        "fr": "BOPA",
+        "en": "BOPA"
+      }
+    },
+    {
+      "value": "come",
+      "label": {
+        "fr": "COME",
+        "en": "COME"
+      }
+    },
+    {
+      "value": "grand_popo",
+      "label": {
+        "fr": "GRAND-POPO",
+        "en": "GRAND-POPO"
+      }
+    },
+    {
+      "value": "houeyogbe",
+      "label": {
+        "fr": "HOUEYOGBE ",
+        "en": "HOUEYOGBE "
+      }
+    },
+    {
+      "value": "lokossa",
+      "label": {
+        "fr": "LOKOSSA",
+        "en": "LOKOSSA"
+      }
+    }
+  ],
+  "oueme": [
+    {
+      "value": "adjarra",
+      "label": {
+        "fr": "ADJARRA",
+        "en": "ADJARRA"
+      }
+    },
+    {
+      "value": "adjohoun",
+      "label": {
+        "fr": "ADJOHOUN",
+        "en": "ADJOHOUN"
+      }
+    },
+    {
+      "value": "aguegue",
+      "label": {
+        "fr": "AGUEGUE   ",
+        "en": "AGUEGUE   "
+      }
+    },
+    {
+      "value": "akpro_misserete",
+      "label": {
+        "fr": "AKPRO-MISSERETE",
+        "en": "AKPRO-MISSERETE"
+      }
+    },
+    {
+      "value": "avrankou",
+      "label": {
+        "fr": "AVRANKOU",
+        "en": "AVRANKOU"
+      }
+    },
+    {
+      "value": "bonou",
+      "label": {
+        "fr": "BONOU  ",
+        "en": "BONOU  "
+      }
+    },
+    {
+      "value": "dangbo",
+      "label": {
+        "fr": "DANGBO",
+        "en": "DANGBO"
+      }
+    },
+    {
+      "value": "porto_novo",
+      "label": {
+        "fr": "PORTO-NOVO",
+        "en": "PORTO-NOVO"
+      }
+    },
+    {
+      "value": "seme_kpodji",
+      "label": {
+        "fr": "SEME-KPODJI",
+        "en": "SEME-KPODJI"
+      }
+    }
+  ],
+  "plateau": [
+    {
+      "value": "adja_ouere",
+      "label": {
+        "fr": "ADJA-OUERE",
+        "en": "ADJA-OUERE"
+      }
+    },
+    {
+      "value": "ifangni",
+      "label": {
+        "fr": "IFANGNI",
+        "en": "IFANGNI"
+      }
+    },
+    {
+      "value": "ketou",
+      "label": {
+        "fr": "KETOU ",
+        "en": "KETOU "
+      }
+    },
+    {
+      "value": "pobe",
+      "label": {
+        "fr": "POBE ",
+        "en": "POBE "
+      }
+    },
+    {
+      "value": "sakete",
+      "label": {
+        "fr": "SAKETE  ",
+        "en": "SAKETE  "
+      }
+    }
+  ],
+  "zou": [
+    {
+      "value": "abomey",
+      "label": {
+        "fr": "ABOMEY",
+        "en": "ABOMEY"
+      }
+    },
+    {
+      "value": "agbangnizoun",
+      "label": {
+        "fr": "AGBANGNIZOUN",
+        "en": "AGBANGNIZOUN"
+      }
+    },
+    {
+      "value": "bohicon",
+      "label": {
+        "fr": "BOHICON",
+        "en": "BOHICON"
+      }
+    },
+    {
+      "value": "cove",
+      "label": {
+        "fr": "COVE",
+        "en": "COVE"
+      }
+    },
+    {
+      "value": "djidja",
+      "label": {
+        "fr": "DJIDJA ",
+        "en": "DJIDJA "
+      }
+    },
+    {
+      "value": "ouinhi",
+      "label": {
+        "fr": "OUINHI  ",
+        "en": "OUINHI  "
+      }
+    },
+    {
+      "value": "za_kpota",
+      "label": {
+        "fr": "ZA-KPOTA",
+        "en": "ZA-KPOTA"
+      }
+    },
+    {
+      "value": "zagnanado",
+      "label": {
+        "fr": "ZAGNANADO",
+        "en": "ZAGNANADO"
+      }
+    },
+    {
+      "value": "zogbodomey",
+      "label": {
+        "fr": "ZOGBODOMEY",
+        "en": "ZOGBODOMEY"
+      }
+    }
+  ]
+}
