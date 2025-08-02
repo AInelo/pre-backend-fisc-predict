@@ -97,6 +97,12 @@ ssh -i "$TMP_KEY_FILE" -o StrictHostKeyChecking=no "$VPS_USER@$VPS_HOST" <<EOF
 
   chmod +x $REMOTE_FILE_TO_EXECUTE
   ./$REMOTE_FILE_TO_EXECUTE
+
+   # === Nettoyage automatique des scripts temporaires ===
+  echo "🧹 Nettoyage des scripts temporaires sur le serveur..."
+  sudo rm -f '$REMOTE_FILE_PATH' || rm -f '$REMOTE_FILE_PATH'
+  sudo rm -f '$REMOTE_ENV_SCRIPT' || rm -f '$REMOTE_ENV_SCRIPT'
+  echo "✅ Scripts temporaires supprimés."
 EOF
 
 
