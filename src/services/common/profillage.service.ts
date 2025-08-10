@@ -1,7 +1,7 @@
 import { ProfilingData, ApplicableTax } from '../../types/profilage.result.return.type'
 import { ListTypesContribuableEntreprise, ListTypesRegime } from '../../types/general.entreprise.type';
 import { BackendEstimationFailureResponse, BackendEstimationError, BackendEstimationContext } from '../../types/frontend.errors.estomation.type';
-// import { FileText, Calculator, CreditCard, Receipt, MapPin, Building, User, DollarSign } from 'lucide-react';
+
 
 interface donneesProfilageRecu {
     periodeFiscale: string;
@@ -20,7 +20,7 @@ class MoteurProfillage {
                 // Taxes communes pour REEL (EI et SI)
                 {
                     code: 'AIB',
-                    name: 'Avance sur Impôt Bénéfice',
+                    name: 'Acompte sur Impôt assis sur le Bénéfice',
                     category: 'Impôt direct',
                     applicability: 'Obligatoire pour régime réel',
                     frequency: 'Mensuelle',
@@ -37,7 +37,7 @@ class MoteurProfillage {
                     frequency: 'Annuelle',
                     description: 'Impôt sur les revenus de capitaux mobiliers',
                     priority: 'medium',
-                    required: true,
+                    required: false,
                     icon: 'FileText'
                 },
                 {
@@ -48,7 +48,7 @@ class MoteurProfillage {
                     frequency: 'Annuelle',
                     description: 'Impôt sur les revenus fonciers',
                     priority: 'medium',
-                    required: true,
+                    required: false,
                     icon: 'Building'
                 },
                 {
@@ -92,8 +92,19 @@ class MoteurProfillage {
                     frequency: 'Mensuelle',
                     description: 'Versement sur les salaires versés',
                     priority: 'medium',
-                    required: true,
+                    required: false,
                     icon: 'DollarSign'
+                },
+                {
+                    code: 'TFU',
+                    name: 'Taxe Forfaitaire Unique Entreprise',
+                    category: 'Contribution sociale',
+                    applicability: 'Taxe Forfaitaire Unique Entreprise',
+                    frequency: 'Annuelle',
+                    description: 'Versement sur les salaires versés',
+                    priority: 'medium',
+                    required: false,
+                    icon: 'Building'
                 },
                 // Taxes spécifiques aux EI en régime REEL
                 {
@@ -102,7 +113,7 @@ class MoteurProfillage {
                     category: 'Impôt direct',
                     applicability: 'Spécifique aux entreprises individuelles',
                     frequency: 'Annuelle',
-                    description: 'Impôt sur les bénéfices des activités affaire',
+                    description: "Impôt sur les Bénéfices d'affaire",
                     priority: 'medium',
                     required: true,
                     icon: 'FileText',

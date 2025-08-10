@@ -25,6 +25,9 @@ interface TFUTarif {
     tfu_minimum: number;
 }
 
+
+
+
 class MoteurTFU {
     public static calculerTFU(input: TFUInput | TFUInput[]): TFUCalculationResult {
         try {
