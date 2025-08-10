@@ -2,6 +2,7 @@ import { BackendEstimationFailureResponse } from "@/types/frontend.errors.estoma
 import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
 interface TVMInput {
+    hasVehicles: boolean;
     vehicles: VehicleInput[];
     periodeFiscale: string;
 }
@@ -17,6 +18,11 @@ export type TVMCalculationResult = GlobalEstimationInfoData | BackendEstimationF
 class MoteurTVM {
     public static calculerTVM(input: TVMInput): TVMCalculationResult {
         try {
+
+            if (!input.hasVehicles) {
+                return this.genererReponseErreurValidation('Aucun véhicule déclaré');
+            }
+
             // Validation des entrées
             if (!input.vehicles || input.vehicles.length === 0) {
                 return this.genererReponseErreurValidation('Aucun véhicule déclaré');

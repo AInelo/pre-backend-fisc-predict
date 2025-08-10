@@ -2,7 +2,7 @@ import { BackendEstimationFailureResponse } from "@/types/frontend.errors.estoma
 import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
 interface ISInput {
-    revenue: number;
+    chiffreAffaire: number;
     charges: number;
     secteur: 'education' | 'industry' | 'real-estate' | 'construction' | 'gas-station' | 'general';
     dureeCreation?: number;
@@ -20,7 +20,7 @@ class MoteurIS {
     public static calculerIS(input: ISInput): ISCalculationResult {
         try {
             // Validation des entrées
-            if (input.revenue <= 0) {
+            if (input.chiffreAffaire <= 0) {
                 return this.genererReponseErreurValidation('Le chiffre d\'affaires doit être positif');
             }
 
@@ -37,7 +37,7 @@ class MoteurIS {
             }
 
             // Calculer le bénéfice imposable
-            const beneficeImposable = Math.max(0, input.revenue - input.charges);
+            const beneficeImposable = Math.max(0, input.chiffreAffaire - input.charges);
             
             // Déterminer le taux d'imposition
             const tauxPrincipal = this.calculerTauxPrincipal(input.secteur);
@@ -54,7 +54,7 @@ class MoteurIS {
             
             // Appliquer l'impôt minimum si nécessaire
             const impotMinimum = Math.max(
-                input.revenue * tauxMinimum,
+                input.chiffreAffaire * tauxMinimum,
                 250000 // Impôt minimum absolu pour les entreprises
             );
             
@@ -77,7 +77,7 @@ class MoteurIS {
                 {
                     label: "Chiffre d'affaires",
                     description: "Revenus totaux de l'entreprise",
-                    value: input.revenue,
+                    value: input.chiffreAffaire,
                     currency: 'FCFA'
                 },
                 {
@@ -289,7 +289,7 @@ class MoteurIS {
             context: {
                 typeContribuable: 'Entreprise',
                 regime: 'IS',
-                chiffreAffaires: input.revenue,
+                chiffreAffaires: input.chiffreAffaire,
                 missingData: ['taux_is', 'seuils_imposition', 'barèmes_sectoriels']
             },
             timestamp: new Date().toISOString(),

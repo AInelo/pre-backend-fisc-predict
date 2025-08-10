@@ -2,7 +2,7 @@ import { BackendEstimationFailureResponse } from "@/types/frontend.errors.estoma
 import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
 interface PatenteInput {
-    revenue: number;
+    chiffreAffaire: number;
     location: 'cotonou' | 'porto-novo' | 'ouidah' | 'abomey' | 'parakou' | 'other-zone1' | 'other-zone2' | 'alibori' | 'atacora' | 'borgou' | 'donga' | 'atlantique' | 'collines' | 'couffo' | 'littoral' | 'mono' | 'oueme' | 'plateau' | 'zou';
     rentalValue: number;
     isImporter?: boolean;
@@ -17,7 +17,7 @@ class MoteurPatente {
     public static calculerPatente(input: PatenteInput): PatenteCalculationResult {
         try {
             // Validation des entrées
-            if (input.revenue <= 0) {
+            if (input.chiffreAffaire <= 0) {
                 return this.genererReponseErreurValidation('Le chiffre d\'affaires doit être positif');
             }
 
@@ -38,7 +38,7 @@ class MoteurPatente {
             const baseFixedRate = zone === 'first' ? 70000 : 60000;
             
             // Ajuster le taux fixe selon le chiffre d'affaires
-            let patentFixedRate = this.adjustForRevenue(baseFixedRate, input.revenue);
+            let patentFixedRate = this.adjustForchiffreAffaire(baseFixedRate, input.chiffreAffaire);
             
             // Ajuster pour les activités d'import-export
             patentFixedRate = this.adjustForImportExport(patentFixedRate, input);
@@ -56,7 +56,7 @@ class MoteurPatente {
                 {
                     label: "Chiffre d'affaires",
                     description: "Revenus totaux de l'activité",
-                    value: input.revenue,
+                    value: input.chiffreAffaire,
                     currency: 'FCFA'
                 },
                 {
@@ -230,9 +230,9 @@ class MoteurPatente {
         return Math.max(rate, minProportional);
     }
 
-    private static adjustForRevenue(baseRate: number, revenue: number): number {
-        if (revenue > 1000000000) {
-            const additionalBillions = Math.floor(revenue / 1000000000);
+    private static adjustForchiffreAffaire(baseRate: number, chiffreAffaire: number): number {
+        if (chiffreAffaire > 1000000000) {
+            const additionalBillions = Math.floor(chiffreAffaire / 1000000000);
             return baseRate + additionalBillions * 10000;
         }
         return baseRate;
@@ -288,7 +288,7 @@ class MoteurPatente {
             context: {
                 typeContribuable: 'Entreprise/Entrepreneur',
                 regime: 'Patente',
-                chiffreAffaires: input.revenue,
+                chiffreAffaires: input.chiffreAffaire,
                 missingData: ['taux_patente', 'seuils_imposition', 'tarifs_geographiques']
             },
             timestamp: new Date().toISOString(),

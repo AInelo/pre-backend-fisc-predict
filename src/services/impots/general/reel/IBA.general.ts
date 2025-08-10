@@ -2,7 +2,7 @@ import { BackendEstimationFailureResponse } from "@/types/frontend.errors.estoma
 import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
 interface IBAInput {
-    revenue: number;
+    chiffreAffaire: number;
     charges: number;
     secteur: 'education' | 'industry' | 'real-estate' | 'construction' | 'gas-station' | 'general';
     location?: string;
@@ -10,14 +10,13 @@ interface IBAInput {
     periodeFiscale: string;
 }
 
-
 export type IBACalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
 
 class MoteurIBA {
     public static calculerIBA(input: IBAInput): IBACalculationResult {
         try {
             // Validation des entrées
-            if (input.revenue <= 0) {
+            if (input.chiffreAffaire <= 0) {
                 return this.genererReponseErreurValidation('Le chiffre d\'affaires doit être positif');
             }
 
@@ -34,7 +33,7 @@ class MoteurIBA {
             }
 
             // Calculer le bénéfice imposable
-            const beneficeImposable = Math.max(0, input.revenue - input.charges);
+            const beneficeImposable = Math.max(0, input.chiffreAffaire - input.charges);
             
             // Déterminer le taux d'imposition
             const tauxPrincipal = this.calculerTauxPrincipal(input.secteur);
@@ -45,7 +44,7 @@ class MoteurIBA {
             
             // Appliquer l'impôt minimum si nécessaire
             const impotMinimum = Math.max(
-                input.revenue * tauxMinimum,
+                input.chiffreAffaire * tauxMinimum,
                 500000 // Impôt minimum absolu pour les entrepreneurs individuels
             );
             
@@ -66,7 +65,7 @@ class MoteurIBA {
                 {
                     label: "Chiffre d'affaires",
                     description: "Revenus totaux de l'activité",
-                    value: input.revenue,
+                    value: input.chiffreAffaire,
                     currency: 'FCFA'
                 },
                 {
@@ -262,7 +261,7 @@ class MoteurIBA {
             context: {
                 typeContribuable: 'Entrepreneur individuel',
                 regime: 'IBA',
-                chiffreAffaires: input.revenue,
+                chiffreAffaires: input.chiffreAffaire,
                 missingData: ['taux_iba', 'seuils_imposition', 'barèmes_sectoriels']
             },
             timestamp: new Date().toISOString(),

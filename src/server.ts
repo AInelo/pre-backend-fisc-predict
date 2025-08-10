@@ -9,12 +9,12 @@ import irfRoutes from './routes/impots/general/reel/IRF.general.route';
 import profillageRoutes from './routes/common/profillage.route';
 const app = express();
 
-// ✅ Middleware CORS pour autoriser toutes les origines
-app.use(cors({
-  origin: '*', // Autorise tout domaine
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// // ✅ Middleware CORS pour autoriser toutes les origines
+// app.use(cors({
+//   origin: '*', // Autorise tout domaine
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 
 app.use(bodyParser.json());
 
