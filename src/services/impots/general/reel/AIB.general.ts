@@ -167,7 +167,7 @@ class MoteurAIB {
             context: {
                 typeContribuable: 'Entreprise',
                 regime: 'AIB',
-                chiffreAffaires: input.aibCollected,
+                chiffreAffaire: input.aibCollected,
                 missingData: ['taux_aib', 'seuils_imposition', 'barèmes_mensuels']
             },
             timestamp: new Date().toISOString(),

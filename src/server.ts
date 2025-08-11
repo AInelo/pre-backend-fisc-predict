@@ -6,6 +6,7 @@ import tpsRoutes from './routes/impots/general/tps/TPS.general.route';
 import itsRoutes from './routes/impots/general/reel/ITS.general.route';
 import tfuRoutes from './routes/impots/general/reel/TFU.general.route';
 import irfRoutes from './routes/impots/general/reel/IRF.general.route';
+import entrepriseGeneralEstimationRoutes from './routes/impots/general/entreprise.general.estimation.route';
 import profillageRoutes from './routes/common/profillage.route';
 const app = express();
 
@@ -27,6 +28,7 @@ app.use('/api/general/', tpsRoutes);
 app.use('/api/general/', itsRoutes);
 app.use('/api/general/', tfuRoutes);
 app.use('/api/general/', irfRoutes);
+app.use('/api/general/', entrepriseGeneralEstimationRoutes);
 app.use('/api/', profillageRoutes);
 const PORT = 5001;
 

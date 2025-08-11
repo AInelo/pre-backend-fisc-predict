@@ -9,7 +9,7 @@ export interface BackendEstimationError {
 export interface BackendEstimationContext {
   typeContribuable?: string;
   regime?: string;
-  chiffreAffaires?: number;
+  chiffreAffaire?: number;
   missingData?: string[];
 }
 

@@ -332,7 +332,7 @@ class MoteurProfillage {
             context: {
                 typeContribuable: donneesProfilageRecu.typeContribuableEntreprise,
                 regime: 'À déterminer',
-                chiffreAffaires: donneesProfilageRecu.chiffreAffaire,
+                chiffreAffaire: donneesProfilageRecu.chiffreAffaire,
                 missingData: ['donnees_fiscales', 'tarifs_impots', 'reglementation_fiscale']
             },
             timestamp: new Date().toISOString(),

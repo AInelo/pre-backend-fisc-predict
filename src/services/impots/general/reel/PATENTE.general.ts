@@ -288,7 +288,7 @@ class MoteurPatente {
             context: {
                 typeContribuable: 'Entreprise/Entrepreneur',
                 regime: 'Patente',
-                chiffreAffaires: input.chiffreAffaire,
+                chiffreAffaire: input.chiffreAffaire,
                 missingData: ['taux_patente', 'seuils_imposition', 'tarifs_geographiques']
             },
             timestamp: new Date().toISOString(),

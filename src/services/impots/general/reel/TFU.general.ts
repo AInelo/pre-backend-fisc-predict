@@ -285,7 +285,7 @@ class MoteurTFU {
             context: {
                 typeContribuable: 'Propriétaire foncier',
                 regime: 'TFU',
-                chiffreAffaires: input.squareMeters,
+                chiffreAffaire: input.squareMeters,
                 missingData: ['tarifs_tfu', 'zones_geographiques', 'categories_construction']
             },
             timestamp: new Date().toISOString(),

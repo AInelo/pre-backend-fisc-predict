@@ -303,7 +303,7 @@ class MoteurTVM {
             context: {
                 typeContribuable: 'Propriétaire de véhicule',
                 regime: 'TVM',
-                chiffreAffaires: 0,
+                chiffreAffaire: 0,
                 missingData: ['taux_tvm', 'seuils_imposition', 'tarifs_vehicules']
             },
             timestamp: new Date().toISOString(),

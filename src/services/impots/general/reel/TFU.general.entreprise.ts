@@ -229,7 +229,7 @@ class MoteurTFUEntreprise {
             context: {
                 typeContribuable: 'Entreprise propriétaire foncière',
                 regime: 'TFU Entreprise',
-                chiffreAffaires: input.proprietes.reduce((sum, p) => sum + p.valeurLocative, 0),
+                chiffreAffaire: input.proprietes.reduce((sum, p) => sum + p.valeurLocative, 0),
                 missingData: ['taux_tfu', 'seuils_imposition', 'tarifs_geographiques']
             },
             timestamp: new Date().toISOString(),

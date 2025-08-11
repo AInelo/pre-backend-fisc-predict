@@ -5,16 +5,16 @@ import { BackendEstimationFailureResponse } from '../../../../types/frontend.err
 
 export const calculerTPS = (req: Request, res: Response): void => {
   try {
-    const { chiffreAffaires, periodeFiscale } = req.body;
+    const { chiffreAffaire, periodeFiscale } = req.body;
 
-    if (typeof chiffreAffaires !== 'number' || chiffreAffaires < 0) {
+    if (typeof chiffreAffaire !== 'number' || chiffreAffaire < 0) {
       res.status(400).json({
         error: 'Le chiffre d’affaires doit être un nombre positif.'
       });
       return 
     }
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse= MoteurTPSimplifie.calculerTPS(chiffreAffaires, periodeFiscale);
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse= MoteurTPSimplifie.calculerTPS(chiffreAffaire, periodeFiscale);
     res.status(200).json(estimation);
   } catch (error) {
     res.status(500).json({

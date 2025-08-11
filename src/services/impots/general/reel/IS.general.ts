@@ -8,7 +8,7 @@ interface ISInput {
     dureeCreation?: number;
     pourcentageActionsNonCotees?: number;
     estExoneree?: boolean;
-    metering?: number;
+    nbrLitreParAn?: number;
     periodeFiscale: string;
 }
 
@@ -64,8 +64,8 @@ class MoteurIS {
 
             // Calculer la taxe station-service si applicable
             let taxeStation = 0;
-            if (input.secteur === 'gas-station' && input.metering) {
-                taxeStation = input.metering * 0.6;
+            if (input.secteur === 'gas-station' && input.nbrLitreParAn) {
+                taxeStation = input.nbrLitreParAn * 0.6;
             }
 
             // Calculer l'impôt net
@@ -114,7 +114,7 @@ class MoteurIS {
                     impotValue: Math.round(taxeStation),
                     impotValueCurrency: 'FCFA',
                     impotTaux: '0.6 FCFA par litre',
-                    importCalculeDescription: `Taxe station = ${input.metering} litres × 0.6 FCFA = ${Math.round(taxeStation).toLocaleString('fr-FR')} FCFA`
+                    importCalculeDescription: `Taxe station = ${input.nbrLitreParAn} litres × 0.6 FCFA = ${Math.round(taxeStation).toLocaleString('fr-FR')} FCFA`
                 });
             }
 
@@ -289,7 +289,7 @@ class MoteurIS {
             context: {
                 typeContribuable: 'Entreprise',
                 regime: 'IS',
-                chiffreAffaires: input.chiffreAffaire,
+                chiffreAffaire: input.chiffreAffaire,
                 missingData: ['taux_is', 'seuils_imposition', 'barèmes_sectoriels']
             },
             timestamp: new Date().toISOString(),

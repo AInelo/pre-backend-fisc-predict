@@ -10,37 +10,37 @@ class MoteurITS {
     private static readonly REDEVANCE_ORTB_JUIN = 3_000;
     private static readonly REDEVANCE_ORTB_CUMULEE = 4_000;
 
-    public static calculerITS(salaireMensuel: number, periodeFiscale: string): ITSCalculationResult {
+    public static calculerITS(salaireAnnuel: number, periodeFiscale: string): ITSCalculationResult {
         // Extraire l'année de la période fiscale
         const annee = this.extraireAnnee(periodeFiscale);
         
         // Vérifier si l'année est 2026 ou ultérieure
         if (annee >= 2026) {
-            return this.genererReponseErreur(salaireMensuel, annee);
+            return this.genererReponseErreur(salaireAnnuel, annee);
         }
 
         // Calcul ITS selon barème progressif mensuel (CGI 2025)
         let itsTaxAmount = 0;
         let detailsITS: string[] = [];
 
-        if (salaireMensuel <= this.SEUIL_EXONERATION) {
+        if (salaireAnnuel <= this.SEUIL_EXONERATION) {
             itsTaxAmount = 0;
             detailsITS.push('Salaire mensuel ≤ 60 000 FCFA : exonération ITS');
-        } else if (salaireMensuel <= 150_000) {
-            itsTaxAmount = (salaireMensuel - this.SEUIL_EXONERATION) * 0.10;
-            detailsITS.push(`Tranche 60 001 - 150 000 FCFA : 10% de ${salaireMensuel - this.SEUIL_EXONERATION} FCFA`);
-        } else if (salaireMensuel <= 250_000) {
-            itsTaxAmount = 9_000 + (salaireMensuel - 150_000) * 0.15;
+        } else if (salaireAnnuel <= 150_000) {
+            itsTaxAmount = (salaireAnnuel - this.SEUIL_EXONERATION) * 0.10;
+            detailsITS.push(`Tranche 60 001 - 150 000 FCFA : 10% de ${salaireAnnuel - this.SEUIL_EXONERATION} FCFA`);
+        } else if (salaireAnnuel <= 250_000) {
+            itsTaxAmount = 9_000 + (salaireAnnuel - 150_000) * 0.15;
             detailsITS.push('Tranche 60 001 - 150 000 FCFA : 9 000 FCFA');
-            detailsITS.push(`Tranche 150 001 - 250 000 FCFA : 15% de ${salaireMensuel - 150_000} FCFA`);
-        } else if (salaireMensuel <= 500_000) {
-            itsTaxAmount = 24_000 + (salaireMensuel - 250_000) * 0.19;
+            detailsITS.push(`Tranche 150 001 - 250 000 FCFA : 15% de ${salaireAnnuel - 150_000} FCFA`);
+        } else if (salaireAnnuel <= 500_000) {
+            itsTaxAmount = 24_000 + (salaireAnnuel - 250_000) * 0.19;
             detailsITS.push('Tranche 60 001 - 250 000 FCFA : 24 000 FCFA');
-            detailsITS.push(`Tranche 250 001 - 500 000 FCFA : 19% de ${salaireMensuel - 250_000} FCFA`);
+            detailsITS.push(`Tranche 250 001 - 500 000 FCFA : 19% de ${salaireAnnuel - 250_000} FCFA`);
         } else {
-            itsTaxAmount = 71_500 + (salaireMensuel - 500_000) * 0.30;
+            itsTaxAmount = 71_500 + (salaireAnnuel - 500_000) * 0.30;
             detailsITS.push('Tranche 60 001 - 500 000 FCFA : 71 500 FCFA');
-            detailsITS.push(`Tranche > 500 000 FCFA : 30% de ${salaireMensuel - 500_000} FCFA`);
+            detailsITS.push(`Tranche > 500 000 FCFA : 30% de ${salaireAnnuel - 500_000} FCFA`);
         }
 
         itsTaxAmount = Math.round(itsTaxAmount);
@@ -52,7 +52,7 @@ class MoteurITS {
 
         if (currentMonth > 5) {
             // Après juin : redevance cumulée
-            if (salaireMensuel > this.SEUIL_EXONERATION) {
+            if (salaireAnnuel > this.SEUIL_EXONERATION) {
                 redevanceORTB = this.REDEVANCE_ORTB_CUMULEE;
                 detailsRedevance.push('Redevance ORTB cumulée (mars + juin) de 4 000 FCFA appliquée (date après juin).');
             } else {
@@ -60,7 +60,7 @@ class MoteurITS {
             }
         } else if (currentMonth === 2) {
             // Mars
-            if (salaireMensuel > this.SEUIL_EXONERATION) {
+            if (salaireAnnuel > this.SEUIL_EXONERATION) {
                 redevanceORTB = this.REDEVANCE_ORTB_MARS;
                 detailsRedevance.push('Redevance ORTB de mars (1 000 FCFA) appliquée.');
             } else {
@@ -68,7 +68,7 @@ class MoteurITS {
             }
         } else if (currentMonth === 5) {
             // Juin
-            if (salaireMensuel > this.SEUIL_EXONERATION) {
+            if (salaireAnnuel > this.SEUIL_EXONERATION) {
                 redevanceORTB = this.REDEVANCE_ORTB_JUIN;
                 detailsRedevance.push('Redevance ORTB de juin (3 000 FCFA) appliquée.');
             } else {
@@ -89,7 +89,7 @@ class MoteurITS {
                 {
                     label: "Salaire mensuel",
                     description: "Salaire mensuel brut du contribuable.",
-                    value: salaireMensuel,
+                    value: salaireAnnuel,
                     currency: 'FCFA',
                 }
             ],
@@ -183,7 +183,7 @@ class MoteurITS {
         return new Date().getFullYear();
     }
 
-    private static genererReponseErreur(salaireMensuel: number, annee: number): BackendEstimationFailureResponse {
+    private static genererReponseErreur(salaireAnnuel: number, annee: number): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -197,7 +197,7 @@ class MoteurITS {
             context: {
                 typeContribuable: 'Salarié',
                 regime: 'ITS',
-                chiffreAffaires: salaireMensuel,
+                chiffreAffaire: salaireAnnuel,
                 missingData: ['barème_its', 'seuils_exonération', 'redevance_ortb']
             },
             timestamp: new Date().toISOString(),

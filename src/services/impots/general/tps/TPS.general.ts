@@ -11,22 +11,22 @@ class MoteurTPSimplifie {
     private static readonly CONTRIBUTION_CCI = 20_000;
     private static readonly SEUIL_REGIME_REEL = 50_000_000;
 
-    public static calculerTPS(chiffreAffaires: number, periodeFiscale: string): TPSCalculationResult {
+    public static calculerTPS(chiffreAffaire: number, periodeFiscale: string): TPSCalculationResult {
         // Extraire l'année de la période fiscale
         const annee = this.extraireAnnee(periodeFiscale);
         
         // Vérifier si l'année est 2026 ou ultérieure
         if (annee >= 2026) {
-            return this.genererReponseErreurAnnee(chiffreAffaires, annee);
+            return this.genererReponseErreurAnnee(chiffreAffaire, annee);
         }
 
         // Vérifier si le chiffre d'affaires dépasse le seuil pour le régime réel
-        if (chiffreAffaires > this.SEUIL_REGIME_REEL) {
-            return this.genererReponseErreurRegimeReel(chiffreAffaires);
+        if (chiffreAffaire > this.SEUIL_REGIME_REEL) {
+            return this.genererReponseErreurRegimeReel(chiffreAffaire);
         }
 
         // Calcul normal pour les entreprises éligibles au régime TPS
-        const tpsCalculee = chiffreAffaires * this.TAUX_TPS;
+        const tpsCalculee = chiffreAffaire * this.TAUX_TPS;
         const tpsBase = Math.max(tpsCalculee, this.MONTANT_MINIMUM);
         const tpsTotale = tpsBase + this.REDEVANCE_RTB + this.CONTRIBUTION_CCI;
 
@@ -39,7 +39,7 @@ class MoteurTPSimplifie {
                 {
                     label: "Chiffre d'affaires annuel",
                     description: "Montant total des ventes ou revenus encaissés durant l'année fiscale.",
-                    value: chiffreAffaires,
+                    value: chiffreAffaire,
                     currency: 'FCFA',
                 }
             ],
@@ -134,7 +134,7 @@ class MoteurTPSimplifie {
         return new Date().getFullYear();
     }
 
-    private static genererReponseErreurAnnee(chiffreAffaires: number, annee: number): BackendEstimationFailureResponse {
+    private static genererReponseErreurAnnee(chiffreAffaire: number, annee: number): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -147,8 +147,8 @@ class MoteurTPSimplifie {
             ],
             context: {
                 typeContribuable: 'Entreprise',
-                regime: chiffreAffaires > this.SEUIL_REGIME_REEL ? 'Régime Réel' : 'Régime TPS',
-                chiffreAffaires: chiffreAffaires,
+                regime: chiffreAffaire > this.SEUIL_REGIME_REEL ? 'Régime Réel' : 'Régime TPS',
+                chiffreAffaire: chiffreAffaire,
                 missingData: ['taux_tps', 'montant_minimum', 'redevance_rtb', 'contribution_cci']
             },
             timestamp: new Date().toISOString(),
@@ -156,21 +156,21 @@ class MoteurTPSimplifie {
         };
     }
 
-    private static genererReponseErreurRegimeReel(chiffreAffaires: number): BackendEstimationFailureResponse {
+    private static genererReponseErreurRegimeReel(chiffreAffaire: number): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
                 {
                     code: 'CHIFFRE_AFFAIRES_DEPASSE_SEUIL_TPS',
                     message: `Chiffre d'affaires supérieur au seuil du régime TPS (${this.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA).`,
-                    details: `Avec un chiffre d'affaires de ${chiffreAffaires.toLocaleString('fr-FR')} FCFA, vous dépassez le seuil de ${this.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA et devez obligatoirement être soumis au régime réel. Veuillez effectuer votre simulation en tant qu'Entreprise Individuelle ou Société selon votre statut juridique pour obtenir le calcul approprié de vos impôts.`,
+                    details: `Avec un chiffre d'affaires de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA, vous dépassez le seuil de ${this.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA et devez obligatoirement être soumis au régime réel. Veuillez effectuer votre simulation en tant qu'Entreprise Individuelle ou Société selon votre statut juridique pour obtenir le calcul approprié de vos impôts.`,
                     severity: 'warning'
                 }
             ],
             context: {
                 typeContribuable: 'Entreprise',
                 regime: 'Régime Réel',
-                chiffreAffaires: chiffreAffaires,
+                chiffreAffaire: chiffreAffaire,
                 missingData: ['regime_reel_parameters']
             },
             timestamp: new Date().toISOString(),

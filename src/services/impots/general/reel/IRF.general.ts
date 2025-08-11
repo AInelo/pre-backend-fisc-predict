@@ -163,7 +163,7 @@ class MoteurIRF {
             context: {
                 typeContribuable: 'Propriétaire foncier',
                 regime: 'IRF',
-                chiffreAffaires: input.revenuLocatif,
+                chiffreAffaire: input.revenuLocatif,
                 missingData: ['taux_irf', 'redevance_ortb', 'seuils_imposition']
             },
             timestamp: new Date().toISOString(),

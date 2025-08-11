@@ -261,7 +261,7 @@ class MoteurIBA {
             context: {
                 typeContribuable: 'Entrepreneur individuel',
                 regime: 'IBA',
-                chiffreAffaires: input.chiffreAffaire,
+                chiffreAffaire: input.chiffreAffaire,
                 missingData: ['taux_iba', 'seuils_imposition', 'barèmes_sectoriels']
             },
             timestamp: new Date().toISOString(),
