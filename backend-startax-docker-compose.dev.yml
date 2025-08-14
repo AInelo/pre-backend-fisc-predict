@@ -1,31 +1,33 @@
 version: '3.8'
 
 services:
-  backend-startax:
+  startax-api:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    image: backend-startax:latest
+    image: startax/backend-api:latest
+    container_name: startax-backend-container
     restart: always
     ports:
       - "5001:5001"
     environment:
-      - DB_HOST=mysql_startax
+      - DB_HOST=startax-mysql-container
       - DB_PORT=3306
       - DB_USER=root
       - DB_PASSWORD=secret
       - DB_NAME=startax_db
-      - MONGO_URL=mongodb://mongo_startax:27017/startax_db
+      - MONGO_URL=mongodb://startax-mongo-container:27019/startax_db
     volumes:
       - .:/app
     depends_on:
-      - mysql_startax
-      - mongo_startax
+      - startax-database
+      - startax-mongodb
     networks:
       - startax-network
 
-  mysql_startax:
+  startax-database:
     image: mysql:8.0
+    container_name: startax-mysql-container
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secret
@@ -33,20 +35,23 @@ services:
     volumes:
       - ./mysql-data:/var/lib/mysql
     ports:
-      - "3307:3306"  # Attention: 3306 peut déjà être utilisé, donc on mappe sur 3307 ici
+      - "3307:3306"  # Port externe 3307 pour éviter les conflits
     networks:
       - startax-network
 
-  mongo_startax:
-    image: mongo:6
+  startax-mongodb:
+    image: mongo:6.0
+    container_name: startax-mongo-container
     restart: always
+    environment:
+      MONGO_INITDB_DATABASE: startax_db
     volumes:
       - ./mongo-data:/data/db
     ports:
-      - "27018:27017"  # De même, MongoDB sur 27018 si 27017 est déjà pris
+      - "27018:27017"  # Port externe 27018 pour éviter les conflits
     networks:
       - startax-network
 
 networks:
   startax-network:
-    external: true
+    driver: bridge

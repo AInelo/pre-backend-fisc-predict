@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { calculerEstimationGlobaleEntreprise } from '../../../services/impots/general/entreprise.general.estimation';
+import { BackendEstimationFailureResponse } from '../../../types/frontend.errors.estomation.type';
 
 export class EntrepriseGeneralEstimationController {
     
@@ -11,20 +12,56 @@ export class EntrepriseGeneralEstimationController {
         try {
             // Validation des données d'entrée
             if (!req.body || !req.body.dataImpot) {
+                const errorResponse: BackendEstimationFailureResponse = {
+                    success: false,
+                    errors: [
+                        {
+                            code: 'MISSING_DATA',
+                            message: 'Les données d\'impôts sont requises dans le corps de la requête',
+                            details: 'Le champ "dataImpot" est obligatoire',
+                            severity: 'error'
+                        }
+                    ],
+                    context: {
+                        typeContribuable: 'Entreprise',
+                        regime: 'Général'
+                    },
+                    timestamp: new Date().toISOString(),
+                    requestId: `estimation_globale_${Date.now()}`
+                };
+                
                 res.status(400).json({
                     success: false,
-                    message: 'Les données d\'impôts sont requises dans le corps de la requête',
-                    details: 'Le champ "dataImpot" est obligatoire'
+                    message: 'Données manquantes',
+                    data: errorResponse
                 });
                 return;
             }
 
             // Validation que dataImpot est un objet non vide
             if (typeof req.body.dataImpot !== 'object' || Object.keys(req.body.dataImpot).length === 0) {
+                const errorResponse: BackendEstimationFailureResponse = {
+                    success: false,
+                    errors: [
+                        {
+                            code: 'EMPTY_DATA',
+                            message: 'Les données d\'impôts ne peuvent pas être vides',
+                            details: 'Le champ "dataImpot" doit contenir au moins un impôt à calculer',
+                            severity: 'error'
+                        }
+                    ],
+                    context: {
+                        typeContribuable: 'Entreprise',
+                        regime: 'Général'
+                    },
+                    timestamp: new Date().toISOString(),
+                    requestId: `estimation_globale_${Date.now()}`
+                };
+                
                 res.status(400).json({
                     success: false,
-                    message: 'Les données d\'impôts ne peuvent pas être vides',
-                    details: 'Le champ "dataImpot" doit contenir au moins un impôt à calculer'
+                    message: 'Données vides',
+                    data: errorResponse
                 });
                 return;
             }
@@ -32,29 +69,72 @@ export class EntrepriseGeneralEstimationController {
             // Appeler le service de calcul
             const resultat = calculerEstimationGlobaleEntreprise(req.body);
             
-
             // Retourner le résultat
-            if (resultat.success) {
+            if (resultat && 'success' in resultat && resultat.success === true) {
                 res.status(200).json({
                     success: true,
                     message: 'Estimation globale calculée avec succès',
                     data: resultat
                 });
             } else {
+                // Gérer les erreurs de calcul
+                let errorDetails = 'Erreur inconnue lors du calcul';
+                if (resultat && 'errors' in resultat && Array.isArray(resultat.errors)) {
+                    errorDetails = resultat.errors.join(', ');
+                } else if (resultat && 'errors' in resultat && typeof resultat.errors === 'string') {
+                    errorDetails = resultat.errors;
+                }
+
+                const errorResponse: BackendEstimationFailureResponse = {
+                    success: false,
+                    errors: [
+                        {
+                            code: 'CALCULATION_ERROR',
+                            message: 'Erreur lors du calcul de l\'estimation globale',
+                            details: errorDetails,
+                            severity: 'error'
+                        }
+                    ],
+                    context: {
+                        typeContribuable: 'Entreprise',
+                        regime: 'Général'
+                    },
+                    timestamp: new Date().toISOString(),
+                    requestId: `estimation_globale_${Date.now()}`
+                };
+                
                 res.status(400).json({
                     success: false,
                     message: 'Erreur lors du calcul de l\'estimation globale',
-                    data: resultat
+                    data: errorResponse
                 });
             }
 
         } catch (error) {
             console.error('Erreur dans le contrôleur d\'estimation globale:', error);
             
+            const errorResponse: BackendEstimationFailureResponse = {
+                success: false,
+                errors: [
+                    {
+                        code: 'INTERNAL_SERVER_ERROR',
+                        message: 'Erreur interne du serveur',
+                        details: error instanceof Error ? error.message : 'Erreur inconnue',
+                        severity: 'error'
+                    }
+                ],
+                context: {
+                    typeContribuable: 'Entreprise',
+                    regime: 'Général'
+                },
+                timestamp: new Date().toISOString(),
+                requestId: `estimation_globale_${Date.now()}`
+            };
+            
             res.status(500).json({
                 success: false,
                 message: 'Erreur interne du serveur',
-                details: error instanceof Error ? error.message : 'Erreur inconnue'
+                data: errorResponse
             });
         }
     }
@@ -89,10 +169,28 @@ export class EntrepriseGeneralEstimationController {
         } catch (error) {
             console.error('Erreur lors de la récupération des impôts disponibles:', error);
             
+            const errorResponse: BackendEstimationFailureResponse = {
+                success: false,
+                errors: [
+                    {
+                        code: 'INTERNAL_SERVER_ERROR',
+                        message: 'Erreur interne du serveur',
+                        details: error instanceof Error ? error.message : 'Erreur inconnue',
+                        severity: 'error'
+                    }
+                ],
+                context: {
+                    typeContribuable: 'Entreprise',
+                    regime: 'Général'
+                },
+                timestamp: new Date().toISOString(),
+                requestId: `impots_disponibles_${Date.now()}`
+            };
+            
             res.status(500).json({
                 success: false,
                 message: 'Erreur interne du serveur',
-                details: error instanceof Error ? error.message : 'Erreur inconnue'
+                data: errorResponse
             });
         }
     }
@@ -106,9 +204,28 @@ export class EntrepriseGeneralEstimationController {
             const { code } = req.params;
             
             if (!code) {
+                const errorResponse: BackendEstimationFailureResponse = {
+                    success: false,
+                    errors: [
+                        {
+                            code: 'MISSING_CODE',
+                            message: 'Le code de l\'impôt est requis',
+                            details: 'Le paramètre "code" est obligatoire dans l\'URL',
+                            severity: 'error'
+                        }
+                    ],
+                    context: {
+                        typeContribuable: 'Entreprise',
+                        regime: 'Général'
+                    },
+                    timestamp: new Date().toISOString(),
+                    requestId: `impot_details_${Date.now()}`
+                };
+                
                 res.status(400).json({
                     success: false,
-                    message: 'Le code de l\'impôt est requis'
+                    message: 'Code manquant',
+                    data: errorResponse
                 });
                 return;
             }
@@ -122,9 +239,28 @@ export class EntrepriseGeneralEstimationController {
             );
 
             if (!impot) {
+                const errorResponse: BackendEstimationFailureResponse = {
+                    success: false,
+                    errors: [
+                        {
+                            code: 'IMPOT_NOT_FOUND',
+                            message: `Impôt avec le code "${code}" non trouvé`,
+                            details: 'Le code d\'impôt spécifié n\'existe pas dans le système',
+                            severity: 'error'
+                        }
+                    ],
+                    context: {
+                        typeContribuable: 'Entreprise',
+                        regime: 'Général'
+                    },
+                    timestamp: new Date().toISOString(),
+                    requestId: `impot_details_${Date.now()}`
+                };
+                
                 res.status(404).json({
                     success: false,
-                    message: `Impôt avec le code "${code}" non trouvé`
+                    message: 'Impôt non trouvé',
+                    data: errorResponse
                 });
                 return;
             }
@@ -144,10 +280,28 @@ export class EntrepriseGeneralEstimationController {
         } catch (error) {
             console.error('Erreur lors de la récupération des détails de l\'impôt:', error);
             
+            const errorResponse: BackendEstimationFailureResponse = {
+                success: false,
+                errors: [
+                    {
+                        code: 'INTERNAL_SERVER_ERROR',
+                        message: 'Erreur interne du serveur',
+                        details: error instanceof Error ? error.message : 'Erreur inconnue',
+                        severity: 'error'
+                    }
+                ],
+                context: {
+                    typeContribuable: 'Entreprise',
+                    regime: 'Général'
+                },
+                timestamp: new Date().toISOString(),
+                requestId: `impot_details_${Date.now()}`
+            };
+            
             res.status(500).json({
                 success: false,
                 message: 'Erreur interne du serveur',
-                details: error instanceof Error ? error.message : 'Erreur inconnue'
+                data: errorResponse
             });
         }
     }
@@ -165,7 +319,8 @@ export class EntrepriseGeneralEstimationController {
             'TVM': 'Taxe sur les Véhicules à Moteur',
             'TVA': 'Taxe sur la Valeur Ajoutée',
             'VPS': 'Versement Patronal de Sécurité',
-            'IRCM': 'Impôt sur les Revenus des Capitaux Mobiliers'
+            'IRCM': 'Impôt sur les Revenus des Capitaux Mobiliers',
+            'TPS': 'Taxe Professionnelle Synthétique'
         };
         return noms[code] || code;
     }
@@ -182,7 +337,8 @@ export class EntrepriseGeneralEstimationController {
             'TVM': 'Taxe annuelle sur les véhicules à moteur',
             'TVA': 'Taxe sur la consommation',
             'VPS': 'Contribution patronale de sécurité sociale',
-            'IRCM': 'Impôt sur les revenus de placements'
+            'IRCM': 'Impôt sur les revenus de placements',
+            'TPS': 'Taxe professionnelle simplifiée pour petites entreprises'
         };
         return descriptions[code] || 'Description non disponible';
     }

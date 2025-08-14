@@ -7,6 +7,13 @@ import {
     BackendEstimationContext 
 } from '../../../types/frontend.errors.estomation.type';
 
+// Interface pour l'estimation globale qui étend GlobalEstimationInfoData
+interface GlobalEstimationResult extends GlobalEstimationInfoData {
+    success: boolean;
+    estimationsParImpot: Record<string, any>;
+    errors?: string[];
+}
+
 import MoteurTPSimplifie from './tps/TPS.general';
 import MoteurAIB from './reel/AIB.general';
 import MoteurIBA from './reel/IBA.general';
@@ -107,25 +114,12 @@ interface EntrepriseGeneralEstimationRequest {
     dataImpot : Record<string, AIBInput | IBAInput | IRFInput | ISInput | PatenteInput | ITSInput | TFUEntrepriseInput | TVMInput | TPSInput>;
 }
 
-// INTERFACE FOR THE GLOBAL ESTIMATION RESPONSE
-interface EntrepriseGeneralEstimationResponse {
-    success: boolean;
-    totalEstimation: number;
-    totalEstimationCurrency: string;
-    contribuableRegime: string;
-    VariableEnter: Record<string, any[]>;
-    impotDetailCalcule: Record<string, any[]>;
-    obligationEcheance: Record<string, any[]>;
-    infosSupplementaires: Record<string, any[]>;
-    impotConfig: Record<string, any>;
-    estimationsParImpot: Record<string, any>;
-    errors?: string[];
-}
+
 
 // MÉTHODE PRINCIPALE POUR L'ESTIMATION GLOBALE DES IMPÔTS DES ENTREPRISES
 export class EntrepriseGeneralEstimation {
     
-    public static calculerEstimationGlobale(request: EntrepriseGeneralEstimationRequest): EntrepriseGeneralEstimationResponse {
+    public static calculerEstimationGlobale(request: EntrepriseGeneralEstimationRequest): GlobalEstimationResult | BackendEstimationFailureResponse {
         try {
             const resultats: Record<string, any> = {};
             const variablesEnter: Record<string, any[]> = {};
@@ -153,7 +147,7 @@ export class EntrepriseGeneralEstimation {
 
                 try {
                     // Calculer l'impôt selon son type
-                    const resultat = this.calculerImpot(impotCode, dataImpot);
+                    const resultat = EntrepriseGeneralEstimation.calculerImpot(impotCode, dataImpot);
                     
                     if (resultat && 'success' in resultat && resultat.success === false) {
                         // Gérer les erreurs de calcul
@@ -286,8 +280,8 @@ export class EntrepriseGeneralEstimation {
                 return MoteurTPSimplifie.calculerTPS(tpsData.chiffreAffaire, tpsData.periodeFiscale);
                 
             case 'ITS':
-                // TODO: Implémenter quand le moteur ITS sera disponible
-                throw new Error(`Le moteur pour l'impôt ${impotCode} n'est pas encore implémenté`);
+                const itsData = dataImpot as ITSInput;
+                return MoteurITS.calculerITS(itsData.salaireAnnuel, itsData.periodeFiscale);
                 
             default:
                 throw new Error(`Type d'impôt non reconnu: ${impotCode}`);

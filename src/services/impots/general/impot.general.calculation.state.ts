@@ -18,7 +18,7 @@ export const impotGeneralCalculationState: impotCalculationState[] = [
     },
     {
         impotCode: 'IRF',
-        state: 'available'
+        state: 'not_available'
     },
     {
         impotCode: 'ITS',
@@ -34,6 +34,10 @@ export const impotGeneralCalculationState: impotCalculationState[] = [
     },
     {
         impotCode: 'TVM',
+        state: 'available'
+    },
+    {
+        impotCode: 'TPS',
         state: 'available'
     },
     {

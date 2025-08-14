@@ -14,7 +14,7 @@ class MoteurProfillage {
     private static CHIFFRE_AFFAIRE_SEUIL = 50_000_000;
 
     // Map des taxes par régime - selon les nouvelles spécifications
-      private static readonly TAXES_PAR_REGIME = new Map<string, ApplicableTax[]>([
+    private static readonly TAXES_PAR_REGIME = new Map<string, ApplicableTax[]>([
         [
             'REEL', [
                 // Taxes communes pour REEL (EI et SI)
@@ -92,20 +92,10 @@ class MoteurProfillage {
                     frequency: 'Mensuelle',
                     description: 'Versement sur les salaires versés',
                     priority: 'medium',
-                    required: false,
+                    required: true,
                     icon: 'DollarSign'
                 },
-                {
-                    code: 'TFU',
-                    name: 'Taxe Forfaitaire Unique Entreprise',
-                    category: 'Contribution sociale',
-                    applicability: 'Taxe Forfaitaire Unique Entreprise',
-                    frequency: 'Annuelle',
-                    description: 'Versement sur les salaires versés',
-                    priority: 'medium',
-                    required: false,
-                    icon: 'Building'
-                },
+
                 // Taxes spécifiques aux EI en régime REEL
                 {
                     code: 'IBA',
@@ -127,7 +117,7 @@ class MoteurProfillage {
                     applicability: 'Spécifique aux sociétés',
                     frequency: 'Annuelle',
                     description: 'Impôt sur les bénéfices des sociétés',
-                    priority: 'high',   
+                    priority: 'high',
                     required: true,
                     icon: 'Building',
                     typeContribuableOnly: ['SI']
@@ -160,6 +150,17 @@ class MoteurProfillage {
                 priority: 'high',
                 required: false,
                 icon: 'CreditCard'
+            },
+            {
+                code: 'TFU',
+                name: 'Taxe Forfaitaire Unique Entreprise',
+                category: 'Contribution sociale',
+                applicability: 'Taxe Forfaitaire Unique Entreprise',
+                frequency: 'Annuelle',
+                description: 'Versement sur les salaires versés',
+                priority: 'medium',
+                required: false,
+                icon: 'Building'
             }
         ]]
     ]);
@@ -168,7 +169,7 @@ class MoteurProfillage {
         try {
             // Validation de la période fiscale
             const annee = this.extraireAnnee(donneesProfilageRecu.periodeFiscale);
-            
+
             // Vérifier si l'année est 2026 ou ultérieure
             if (annee >= 2026) {
                 return this.genererReponseErreur(donneesProfilageRecu, annee);
