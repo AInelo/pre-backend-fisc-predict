@@ -1,18 +1,103 @@
 import { BackendEstimationFailureResponse } from "@/types/frontend.errors.estomation.type";
 import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
+// Énumérations pour classer tous les secteurs IBA
+export enum TypeActivite {
+    // Secteurs avec taux ou minimums spécifiques
+    ENSEIGNEMENT_PRIVE = 'enseignement-prive',        // taux réduit 25%
+    INDUSTRIE = 'industrie',                          // ex: transformation, fabrication
+    BTP = 'batiment-travaux-publics',                 // minimum 3%
+    IMMOBILIER = 'immobilier',                        // minimum 10%
+    STATIONS_SERVICES = 'stations-services',          // minimum par litre
+    ARTISANAT = 'artisanat',                          // réduction possible 50%
+    // Autres catégories du CGI
+    AGRICULTURE = 'agriculture',                      // soumis sauf si exonéré art. 58
+    PECHE = 'peche',                                  // idem
+    ELEVAGE = 'elevage',                              // idem
+    CHERCHEUR_VARIETE = 'chercheur-variete-vegetale', // obtenteurs nouvelles variétés
+    PROFESSION_LIBERALE = 'profession-liberale',      // avocats, médecins, etc.
+    CHARGES_OFFICES = 'charges-offices',              // notaires, huissiers hors commerçants
+    PROPRIETE_INTELLECTUELLE = 'propriete-intellectuelle', // brevets, droits d'auteur
+    LOCATION_ETABLISSEMENT = 'location-etablissement-commercial', 
+    INTERMEDIAIRE_IMMO = 'intermediaire-immobilier', 
+    ACHAT_REVENTE_IMMO = 'achat-revente-immobilier',
+    LOTISSEMENT_TERRAIN = 'lotissement-terrain',
+    // Par défaut
+    AUTRE = 'autre'
+}
+
+// Conditions pour réductions spécifiques
+export enum ConditionsReduction {
+    ARTISANALE = 'artisanale', // réduction 50% si conditions remplies
+    NORMALE = 'normale'
+}
+
 interface IBAInput {
     chiffreAffaire: number;
     charges: number;
-    secteur: 'education' | 'industry' | 'real-estate' | 'construction' | 'gas-station' | 'general';
-    location?: string;
-    isArtisanWithFamily?: boolean;
+    secteur: TypeActivite;
+    conditionsReduction?: ConditionsReduction;
     periodeFiscale: string;
+    nbrLitreAnnee?: number; // Nouveau paramètre pour le volume de carburant (stations-services)
 }
+
+
 
 export type IBACalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
 
+// Types pour les règles sectorielles
+interface RegleSecteurBase {
+    taux?: number;
+    min?: number;
+}
+
+interface RegleSecteurPourcentage extends RegleSecteurBase {
+    minPourcent: number;
+}
+
+interface RegleSecteurStations {
+    tauxParLitre: number;
+    min: number;
+}
+
+interface RegleSecteurArtisanat extends RegleSecteurBase {
+    reductionArtisanale: number;
+}
+
+type RegleSecteur = RegleSecteurBase | RegleSecteurPourcentage | RegleSecteurStations | RegleSecteurArtisanat;
+
 class MoteurIBA {
+    // Constantes réglementaires générales
+    private static readonly CONSTANTES = {
+        TAUX_GENERAL: 0.30,                    // τg - taux général
+        MINIMUM_GENERAL_POURCENT: 0.015,       // τmin - minimum général en %
+        MINIMUM_ABSOLU_GENERAL: 500_000,       // Mg - minimum absolu général
+        REDEVANCE_ORTB: 4_000,                 // RORTB
+        FACTEUR_REDUCTION_ARTISANALE: 0.5      // Réduction 50% pour artisans
+    } as const;
+
+    // Règles spécifiques par secteur d'activité
+    private static readonly REGLES_SECTEUR: Record<TypeActivite, RegleSecteur> = {
+        [TypeActivite.ENSEIGNEMENT_PRIVE]: { taux: 0.25, min: 500_000 },
+        [TypeActivite.INDUSTRIE]: { taux: 0.25, min: 500_000 },
+        [TypeActivite.BTP]: { taux: 0.30, minPourcent: 0.03 },
+        [TypeActivite.IMMOBILIER]: { taux: 0.30, minPourcent: 0.10 },
+        [TypeActivite.STATIONS_SERVICES]: { tauxParLitre: 0.60, min: 250_000 },
+        [TypeActivite.ARTISANAT]: { taux: 0.30, reductionArtisanale: 0.5 },
+        [TypeActivite.AGRICULTURE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.PECHE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.ELEVAGE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.CHERCHEUR_VARIETE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.PROFESSION_LIBERALE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.CHARGES_OFFICES]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.PROPRIETE_INTELLECTUELLE]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.LOCATION_ETABLISSEMENT]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.INTERMEDIAIRE_IMMO]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.ACHAT_REVENTE_IMMO]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.LOTISSEMENT_TERRAIN]: { taux: 0.30, min: 500_000 },
+        [TypeActivite.AUTRE]: { taux: 0.30, min: 500_000 }
+    } as const;
+
     public static calculerIBA(input: IBAInput): IBACalculationResult {
         try {
             // Validation des entrées
@@ -22,6 +107,11 @@ class MoteurIBA {
 
             if (input.charges < 0) {
                 return this.genererReponseErreurValidation('Les charges ne peuvent pas être négatives');
+            }
+
+            // Validation spécifique pour les stations-services
+            if (input.secteur === TypeActivite.STATIONS_SERVICES && (!input.nbrLitreAnnee || input.nbrLitreAnnee <= 0)) {
+                return this.genererReponseErreurValidation('Le nombre de litres vendus annuellement est requis et doit être positif pour les stations-services');
             }
 
             // Extraire l'année de la période fiscale
@@ -35,30 +125,32 @@ class MoteurIBA {
             // Calculer le bénéfice imposable
             const beneficeImposable = Math.max(0, input.chiffreAffaire - input.charges);
             
-            // Déterminer le taux d'imposition
-            const tauxPrincipal = this.calculerTauxPrincipal(input.secteur);
-            const tauxMinimum = this.calculerTauxMinimum(input.secteur);
+            // Déterminer les taux et seuils selon le secteur
+            const reglesSecteur = this.REGLES_SECTEUR[input.secteur];
+            const tauxPrincipal = this.obtenirTauxPrincipal(reglesSecteur);
             
-            // Calculer l'impôt brut
-            let impotBrut = beneficeImposable * tauxPrincipal;
+            // Calculer l'impôt nominal
+            let impotNominal = beneficeImposable * tauxPrincipal;
             
-            // Appliquer l'impôt minimum si nécessaire
-            const impotMinimum = Math.max(
-                input.chiffreAffaire * tauxMinimum,
-                500000 // Impôt minimum absolu pour les entrepreneurs individuels
-            );
+            // Calculer l'impôt minimum sectoriel
+            const impotMinimumSectoriel = this.calculerImpotMinimumSectoriel(input.secteur, input.chiffreAffaire, input.nbrLitreAnnee);
             
-            if (impotBrut < impotMinimum) {
-                impotBrut = impotMinimum;
-            }
-
-            // Appliquer la réduction pour artisans avec famille
-            let impotNet = impotBrut;
-            if (input.isArtisanWithFamily) {
-                impotNet = impotBrut / 2;
-            }
-
-            const impotNetArrondi = Math.round(impotNet);
+            // Déterminer l'impôt minimum absolu selon le secteur
+            const minimumAbsolu = this.obtenirMinimumAbsolu(reglesSecteur);
+            
+            // Calculer l'impôt de base (maximum des trois)
+            const impotBase = Math.max(impotNominal, impotMinimumSectoriel, minimumAbsolu);
+            
+            // Déterminer les conditions de réduction
+            const conditionsReduction = this.determinerConditionsReduction(input);
+            
+            // Appliquer les réductions
+            const facteurReduction = this.obtenirFacteurReduction(conditionsReduction, input.secteur);
+            let impotApresReduction = impotBase * facteurReduction;
+            
+            // Ajouter la redevance ORTB si applicable
+            const redevanceORTB = this.CONSTANTES.REDEVANCE_ORTB;
+            const impotFinal = Math.round(impotApresReduction + redevanceORTB);
 
             // Préparer les variables d'entrée
             const variablesEnter = [
@@ -82,34 +174,60 @@ class MoteurIBA {
                 }
             ];
 
-            // Préparer les détails de calcul
-            const impotDetailCalcule = [
-                {
-                    impotTitle: 'Impôt sur le Bénéfice d\'Affaire (IBA)',
-                    impotDescription: `Calculé selon le taux de ${(tauxPrincipal * 100).toFixed(1)}% applicable au secteur ${input.secteur}`,
-                    impotValue: impotNetArrondi,
-                    impotValueCurrency: 'FCFA',
-                    impotTaux: `${(tauxPrincipal * 100).toFixed(1)}%`,
-                    importCalculeDescription: `IBA = ${beneficeImposable.toLocaleString('fr-FR')} FCFA × ${(tauxPrincipal * 100).toFixed(1)}% = ${impotBrut.toLocaleString('fr-FR')} FCFA${input.isArtisanWithFamily ? ` ÷ 2 (réduction artisan) = ${impotNetArrondi.toLocaleString('fr-FR')} FCFA` : ''}`
-                }
-            ];
+            // Ajouter le volume de litres pour les stations-services
+            if (input.secteur === TypeActivite.STATIONS_SERVICES && input.nbrLitreAnnee) {
+                variablesEnter.push({
+                    label: "Volume de carburant vendu",
+                    description: "Nombre de litres vendus dans l'année",
+                    value: input.nbrLitreAnnee,
+                    currency: 'litres'
+                });
+            }
 
-            // Ajouter la réduction artisan si applicable
-            if (input.isArtisanWithFamily) {
+            // Préparer les détails de calcul
+            const impotDetailCalcule = [];
+
+            // IBA principal
+            impotDetailCalcule.push({
+                impotTitle: 'Impôt sur le Bénéfice d\'Affaire (IBA) - Base',
+                impotDescription: `Calculé selon le taux de ${(tauxPrincipal * 100).toFixed(1)}% applicable au secteur ${input.secteur}`,
+                impotValue: Math.round(impotBase),
+                impotValueCurrency: 'FCFA',
+                impotTaux: `${(tauxPrincipal * 100).toFixed(1)}%`,
+                importCalculeDescription: this.genererDescriptionCalculBase(
+                    impotNominal, impotMinimumSectoriel, minimumAbsolu, impotBase, tauxPrincipal, input.secteur, input.nbrLitreAnnee
+                )
+            });
+
+            // Réduction artisanale si applicable
+            if (conditionsReduction === ConditionsReduction.ARTISANALE) {
+                const montantReduction = impotBase - impotApresReduction;
                 impotDetailCalcule.push({
-                    impotTitle: 'Réduction artisan avec famille',
-                    impotDescription: 'Réduction de 50% de l\'IBA pour artisan travaillant avec sa famille',
-                    impotValue: Math.round(impotBrut / 2),
+                    impotTitle: 'Réduction artisanale',
+                    impotDescription: 'Réduction de 50% de l\'IBA pour activité artisanale avec famille',
+                    impotValue: Math.round(montantReduction),
                     impotValueCurrency: 'FCFA',
                     impotTaux: '50%',
-                    importCalculeDescription: `Réduction = ${impotBrut.toLocaleString('fr-FR')} FCFA × 50% = ${Math.round(impotBrut / 2).toLocaleString('fr-FR')} FCFA`
+                    importCalculeDescription: `Réduction = ${Math.round(impotBase).toLocaleString('fr-FR')} FCFA × 50% = ${Math.round(montantReduction).toLocaleString('fr-FR')} FCFA`
+                });
+            }
+
+            // Redevance ORTB
+            if (redevanceORTB > 0) {
+                impotDetailCalcule.push({
+                    impotTitle: 'Redevance ORTB',
+                    impotDescription: 'Redevance forfaitaire pour l\'Office de Radiodiffusion et Télévision du Bénin',
+                    impotValue: redevanceORTB,
+                    impotValueCurrency: 'FCFA',
+                    impotTaux: 'Forfait',
+                    importCalculeDescription: `Redevance ORTB = ${redevanceORTB.toLocaleString('fr-FR')} FCFA (forfait)`
                 });
             }
 
             return {
-                totalEstimation: impotNetArrondi,
+                totalEstimation: impotFinal,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'IBA (Impôt sur le Bénéfice d\'Affaire)',
+                contribuableRegime: `IBA (Impôt sur le Bénéfice d'Affaire)${conditionsReduction === ConditionsReduction.ARTISANALE ? ' - Régime Artisanal' : ''}`,
 
                 VariableEnter: variablesEnter,
                 impotDetailCalcule: impotDetailCalcule,
@@ -160,29 +278,34 @@ class MoteurIBA {
                 infosSupplementaires: [
                     {
                         infosTitle: 'Taux d\'imposition par secteur',
-                        infosDescription: [
-                            `Secteur Éducation : ${(this.calculerTauxPrincipal('education') * 100).toFixed(1)}%`,
-                            `Secteur Industrie : ${(this.calculerTauxPrincipal('industry') * 100).toFixed(1)}%`,
-                            `Secteur Immobilier : ${(this.calculerTauxPrincipal('real-estate') * 100).toFixed(1)}%`,
-                            `Secteur Construction : ${(this.calculerTauxPrincipal('construction') * 100).toFixed(1)}%`,
-                            `Secteur Station-service : ${(this.calculerTauxPrincipal('gas-station') * 100).toFixed(1)}%`,
-                            `Secteur Général : ${(this.calculerTauxPrincipal('general') * 100).toFixed(1)}%`
-                        ]
+                        infosDescription: this.genererInfosTauxSecteurs()
                     },
                     {
-                        infosTitle: 'Impôt minimum',
+                        infosTitle: 'Impôt minimum et calcul de base',
                         infosDescription: [
-                            "L'impôt minimum est calculé sur le chiffre d'affaires selon le secteur d'activité.",
-                            "Il s'applique si l'impôt calculé sur le bénéfice est inférieur à ce minimum.",
-                            "L'impôt minimum absolu est de 500 000 FCFA pour les entrepreneurs individuels."
+                            "L'IBA est calculé comme le maximum de :",
+                            "- L'impôt nominal (bénéfice × taux sectoriel)",
+                            "- L'impôt minimum sectoriel (CA × taux minimum)",
+                            "- L'impôt minimum absolu (500 000 FCFA général, 250 000 FCFA stations-services)",
+                            "Une redevance ORTB de 4 000 FCFA s'ajoute au montant final."
                         ]
                     },
                     {
                         infosTitle: 'Réductions et avantages',
                         infosDescription: [
                             "Réduction de 50% de l'IBA pour les artisans travaillant avec leur famille.",
-                            "Possibilité de report des déficits sur les exercices suivants.",
-                            "Déduction des charges réellement supportées pour l'activité."
+                            "Cette réduction s'applique sur l'impôt de base avant ajout de la redevance ORTB.",
+                            "Les conditions d'éligibilité doivent être vérifiées auprès de l'administration fiscale.",
+                            "Possibilité de report des déficits sur les exercices suivants."
+                        ]
+                    },
+                    {
+                        infosTitle: 'Calcul spécifique stations-services',
+                        infosDescription: [
+                            "Pour les stations-services, l'impôt minimum est calculé selon :",
+                            "- 0,60 FCFA par litre de carburant vendu dans l'année",
+                            "- Minimum absolu de 250 000 FCFA",
+                            "Le volume de carburant vendu doit être déclaré précisément."
                         ]
                     }
                 ],
@@ -191,9 +314,10 @@ class MoteurIBA {
                     impotTitle: 'Impôt sur le Bénéfice d\'Affaire (IBA)',
                     label: 'IBA',
                     description: `L'Impôt sur le Bénéfice d'Affaire est un impôt direct calculé sur le bénéfice imposable des entrepreneurs individuels.
-                            Le taux varie selon le secteur d'activité et s'applique après déduction des charges.
-                            Des acomptes trimestriels sont obligatoires, avec un solde au 30 avril.
-                            Une réduction de 50% s'applique aux artisans travaillant avec leur famille.`,
+                            Le taux varie selon le secteur d'activité. L'impôt final est le maximum entre l'impôt nominal, l'impôt minimum sectoriel et l'impôt minimum absolu.
+                            Une réduction de 50% s'applique aux artisans travaillant avec leur famille.
+                            Pour les stations-services, l'impôt minimum est calculé sur la base du volume de carburant vendu (0,60 FCFA/litre).
+                            Une redevance ORTB de 4 000 FCFA s'ajoute au montant calculé.`,
                     competentCenter: "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.",
                     paymentSchedule: [
                         {
@@ -224,26 +348,126 @@ class MoteurIBA {
         }
     }
 
-    private static calculerTauxPrincipal(secteur: string): number {
-        if (secteur === 'education') return 0.25;
-        if (secteur === 'industry') return 0.25;
-        return 0.30; // Taux général pour les autres secteurs
+    private static obtenirTauxPrincipal(regles: RegleSecteur): number {
+        if ('taux' in regles && regles.taux !== undefined) {
+            return regles.taux;
+        }
+        return this.CONSTANTES.TAUX_GENERAL;
     }
 
-    private static calculerTauxMinimum(secteur: string): number {
-        if (secteur === 'real-estate') return 0.10;
-        if (secteur === 'construction') return 0.03;
-        return 0.015; // Taux minimum pour les entrepreneurs individuels
+    private static obtenirMinimumAbsolu(regles: RegleSecteur): number {
+        if ('min' in regles && regles.min !== undefined) {
+            return regles.min;
+        }
+        return this.CONSTANTES.MINIMUM_ABSOLU_GENERAL;
+    }
+
+    private static calculerImpotMinimumSectoriel(secteur: TypeActivite, chiffreAffaire: number, nbrLitreAnnee?: number): number {
+        const regles = this.REGLES_SECTEUR[secteur];
+        
+        if ('minPourcent' in regles) {
+            // Secteurs avec minimum en pourcentage du CA (BTP, Immobilier)
+            return chiffreAffaire * regles.minPourcent;
+        }
+        
+        if ('tauxParLitre' in regles && secteur === TypeActivite.STATIONS_SERVICES) {
+            // Stations-services : calcul basé sur le volume en litres
+            if (nbrLitreAnnee && nbrLitreAnnee > 0) {
+                return nbrLitreAnnee * regles.tauxParLitre;
+            }
+            // Si pas de volume fourni, utiliser le minimum général comme fallback
+            console.warn('Stations-services : volume en litres manquant, utilisation du minimum général');
+            return chiffreAffaire * this.CONSTANTES.MINIMUM_GENERAL_POURCENT;
+        }
+        
+        // Minimum général pour les autres secteurs
+        return chiffreAffaire * this.CONSTANTES.MINIMUM_GENERAL_POURCENT;
+    }
+
+    private static determinerConditionsReduction(input: IBAInput): ConditionsReduction {
+        // Si explicitement défini dans l'input
+        if (input.conditionsReduction) {
+            return input.conditionsReduction;
+        }
+        
+        // Auto-détection pour secteur artisanat
+        if (input.secteur === TypeActivite.ARTISANAT) {
+            return ConditionsReduction.ARTISANALE;
+        }
+        
+        return ConditionsReduction.NORMALE;
+    }
+
+    private static obtenirFacteurReduction(conditions: ConditionsReduction, secteur: TypeActivite): number {
+        if (conditions === ConditionsReduction.ARTISANALE) {
+            const regles = this.REGLES_SECTEUR[secteur];
+            if ('reductionArtisanale' in regles) {
+                return regles.reductionArtisanale;
+            }
+            return this.CONSTANTES.FACTEUR_REDUCTION_ARTISANALE;
+        }
+        return 1.0;
+    }
+
+    private static genererInfosTauxSecteurs(): string[] {
+        const infos = [];
+        
+        // Secteurs avec taux spéciaux
+        infos.push(`Enseignement privé : 25%`);
+        infos.push(`Industrie : 25%`);
+        infos.push(`Autres secteurs : 30%`);
+        infos.push(``);
+        infos.push(`Minimums sectoriels :`);
+        infos.push(`- BTP : 3% du CA`);
+        infos.push(`- Immobilier : 10% du CA`);
+        infos.push(`- Stations-services : 0,60 FCFA/litre`);
+        infos.push(`- Autres : 1,5% du CA`);
+        infos.push(``);
+        infos.push(`Minimums absolus :`);
+        infos.push(`- Général : 500 000 FCFA`);
+        infos.push(`- Stations-services : 250 000 FCFA`);
+        
+        return infos;
+    }
+
+    private static genererDescriptionCalculBase(
+        impotNominal: number, 
+        impotMinimumSectoriel: number, 
+        minimumAbsolu: number, 
+        impotBase: number,
+        tauxPrincipal: number,
+        secteur: TypeActivite,
+        nbrLitreAnnee?: number
+    ): string {
+        const regles = this.REGLES_SECTEUR[secteur];
+        let descriptionMinimum = '';
+        
+        if ('minPourcent' in regles) {
+            descriptionMinimum = `${(regles.minPourcent * 100).toFixed(1)}% du CA`;
+        } else if ('tauxParLitre' in regles && secteur === TypeActivite.STATIONS_SERVICES) {
+            if (nbrLitreAnnee && nbrLitreAnnee > 0) {
+                descriptionMinimum = `${nbrLitreAnnee.toLocaleString('fr-FR')} litres × ${regles.tauxParLitre} FCFA/litre`;
+            } else {
+                descriptionMinimum = `${regles.tauxParLitre} FCFA/litre (volume non fourni, fallback : ${(this.CONSTANTES.MINIMUM_GENERAL_POURCENT * 100).toFixed(1)}% du CA)`;
+            }
+        } else {
+            descriptionMinimum = `${(this.CONSTANTES.MINIMUM_GENERAL_POURCENT * 100).toFixed(1)}% du CA`;
+        }
+        
+        const descriptions = [
+            `Impôt nominal = ${Math.round(impotNominal).toLocaleString('fr-FR')} FCFA (${(tauxPrincipal * 100).toFixed(1)}%)`,
+            `Impôt minimum sectoriel = ${Math.round(impotMinimumSectoriel).toLocaleString('fr-FR')} FCFA (${descriptionMinimum})`,
+            `Minimum absolu = ${minimumAbsolu.toLocaleString('fr-FR')} FCFA`
+        ];
+        
+        return `IBA base = MAX(${descriptions.join(', ')}) = ${Math.round(impotBase).toLocaleString('fr-FR')} FCFA`;
     }
 
     private static extraireAnnee(periodeFiscale: string): number {
-        // Essayer d'extraire l'année de différents formats possibles
         const anneeMatch = periodeFiscale.match(/(\d{4})/);
         if (anneeMatch) {
             return parseInt(anneeMatch[1], 10);
         }
-        
-        // Si aucune année n'est trouvée, retourner l'année courante par défaut
         return new Date().getFullYear();
     }
 

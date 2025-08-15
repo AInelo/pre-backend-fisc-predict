@@ -17,6 +17,8 @@ const app = express();
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 
+// app.use(bodyParser.json());
+
 app.use(bodyParser.json());
 
 // ➕ Route pour vérifier que l'API est vivante
