@@ -14,7 +14,7 @@ interface GlobalEstimationResult extends GlobalEstimationInfoData {
     errors?: string[];
 }
 
-import MoteurTPSimplifie from './tps/TPS.general';
+import MoteurTPSimplifie, { TypeEntreprise } from './tps/TPS.general';
 import MoteurAIB from './reel/AIB.general';
 import MoteurIBA from './reel/IBA.general';
 import MoteurIRF from './reel/IRF.general';
@@ -140,6 +140,7 @@ interface VehicleInput {
 interface TPSInput {
     chiffreAffaire: number;
     periodeFiscale: string;
+    typeEntreprise: TypeEntreprise;
 }
 
 
@@ -312,7 +313,7 @@ export class EntrepriseGeneralEstimation {
 
             case 'TPS':
                 const tpsData = dataImpot as TPSInput;
-                return MoteurTPSimplifie.calculerTPS(tpsData.chiffreAffaire, tpsData.periodeFiscale);
+                return MoteurTPSimplifie.calculerTPS(dataImpot as TPSInput);
 
             case 'ITS':
                 const itsData = dataImpot as ITSInput;

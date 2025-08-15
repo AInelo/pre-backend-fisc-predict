@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import  MoteurTPSimplifie from '../../../../services/impots/general/tps/TPS.general';
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
-
+import { TypeEntreprise } from '../../../../services/impots/general/tps/TPS.general';
 export const calculerTPS = (req: Request, res: Response): void => {
   try {
-    const { chiffreAffaire, periodeFiscale } = req.body;
+    const { chiffreAffaire, periodeFiscale, typeEntreprise } = req.body;
 
     if (typeof chiffreAffaire !== 'number' || chiffreAffaire < 0) {
       res.status(400).json({
@@ -14,7 +14,11 @@ export const calculerTPS = (req: Request, res: Response): void => {
       return 
     }
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse= MoteurTPSimplifie.calculerTPS(chiffreAffaire, periodeFiscale);
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = MoteurTPSimplifie.calculerTPS({
+      chiffreAffaire,
+      periodeFiscale,
+      typeEntreprise
+    });
     res.status(200).json(estimation);
   } catch (error) {
     res.status(500).json({
