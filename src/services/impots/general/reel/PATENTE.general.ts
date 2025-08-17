@@ -113,8 +113,6 @@ class MoteurPatente {
             return {
                 totalEstimation: patenteTotaleArrondie,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'Patente',
-
                 VariableEnter: variablesEnter,
                 impotDetailCalcule: impotDetailCalcule,
 

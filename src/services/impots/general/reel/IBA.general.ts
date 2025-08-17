@@ -227,8 +227,6 @@ class MoteurIBA {
             return {
                 totalEstimation: impotFinal,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: `IBA (Impôt sur le Bénéfice d'Affaire)${conditionsReduction === ConditionsReduction.ARTISANALE ? ' - Régime Artisanal' : ''}`,
-
                 VariableEnter: variablesEnter,
                 impotDetailCalcule: impotDetailCalcule,
 

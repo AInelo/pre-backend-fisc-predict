@@ -1,7 +1,7 @@
 export interface GlobalEstimationInfoData {
     totalEstimation : number,
     totalEstimationCurrency : string,
-    contribuableRegime : string,
+    contribuableRegime? : string,
     VariableEnter: VariableEnter[] | Record<string, VariableEnter[]>,
     impotDetailCalcule: ImpotDetailCalcule[] | Record<string, ImpotDetailCalcule[]>,
     obligationEcheance: ObligationEcheance[] | Record<string, ObligationEcheance[]>,

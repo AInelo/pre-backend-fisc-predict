@@ -90,7 +90,6 @@ class MoteurTFUEntreprise {
             return {
                 totalEstimation: totalTFUArrondi,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'TFU Entreprise',
 
                 VariableEnter: variablesEnter,
 

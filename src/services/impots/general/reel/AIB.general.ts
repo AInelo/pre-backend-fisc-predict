@@ -48,8 +48,6 @@ class MoteurAIB {
             return {
                 totalEstimation: aibNetArrondi,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'AIB',
-
                 VariableEnter: variablesEnter,
 
                 impotDetailCalcule: [

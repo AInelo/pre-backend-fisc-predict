@@ -40,17 +40,6 @@ class MoteurProfillage {
                     required: false,
                     icon: 'FileText'
                 },
-                // {
-                //     code: 'IRF',
-                //     name: 'Impôt sur le Revenu Foncier',
-                //     category: 'Impôt direct',
-                //     applicability: 'Obligatoire pour régime réel',
-                //     frequency: 'Annuelle',
-                //     description: 'Impôt sur les revenus fonciers',
-                //     priority: 'medium',
-                //     required: false,
-                //     icon: 'Building'
-                // },
                 {
                     code: 'IRF',
                     name: 'Impôt sur le Revenu Foncier',
@@ -173,19 +162,6 @@ class MoteurProfillage {
                 required: false,
                 icon: 'Home'
             }
-            
-            
-            // {
-            //     code: 'TFU',
-            //     name: 'Taxe Forfaitaire Unique Entreprise',
-            //     category: 'Contribution sociale',
-            //     applicability: 'Taxe Forfaitaire Unique Entreprise',
-            //     frequency: 'Annuelle',
-            //     description: 'Versement sur les salaires versés',
-            //     priority: 'medium',
-            //     required: false,
-            //     icon: 'Building'
-            // }
         ]]
     ]);
 

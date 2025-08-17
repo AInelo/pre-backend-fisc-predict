@@ -97,7 +97,6 @@ class MoteurTVM {
             return {
                 totalEstimation: totalTVMArrondi,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'TVM (Taxe sur les Véhicules à Moteur)',
 
                 VariableEnter: variablesEnter,
                 impotDetailCalcule: impotDetailCalcule,

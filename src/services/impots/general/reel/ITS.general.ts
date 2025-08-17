@@ -83,8 +83,6 @@ class MoteurITS {
         return {
             totalEstimation: totalTax,
             totalEstimationCurrency: 'FCFA',
-            contribuableRegime: 'ITS',
-
             VariableEnter: [
                 {
                     label: "Salaire mensuel",

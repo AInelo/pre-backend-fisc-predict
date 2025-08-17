@@ -43,8 +43,6 @@ class MoteurIRF {
             return {
                 totalEstimation: totalTax,
                 totalEstimationCurrency: 'FCFA',
-                contribuableRegime: 'IRF',
-
                 VariableEnter: [
                     {
                         label: "Revenu locatif annuel",
