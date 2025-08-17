@@ -98,11 +98,17 @@ interface ISInput {
 
 interface PatenteInput {
     chiffreAffaire: number;
-    location: 'cotonou' | 'porto-novo' | 'ouidah' | 'abomey' | 'parakou' | 'other-zone1' | 'other-zone2' | 'alibori' | 'atacora' | 'borgou' | 'donga' | 'atlantique' | 'collines' | 'couffo' | 'littoral' | 'mono' | 'oueme' | 'plateau' | 'zou';
-    rentalValue: number;
+    periodeFiscale: string;
+    etablissements: Etablissement[];
     isImporter?: boolean;
     importExportAmount?: number;
-    periodeFiscale: string;
+}
+
+interface Etablissement {
+    location: 'cotonou' | 'porto-novo' | 'ouidah' | 'abomey' | 'parakou' | 'other-zone1' | 'other-zone2' | 'alibori' | 'atacora' | 'borgou' | 'donga' | 'atlantique' | 'collines' | 'couffo' | 'littoral' | 'mono' | 'oueme' | 'plateau' | 'zou';
+    rentalValue: number;
+    nom?: string; // Nom de l'établissement (optionnel)
+    adresse?: string; // Adresse (optionnel)
 }
 
 
