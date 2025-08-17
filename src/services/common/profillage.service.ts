@@ -164,15 +164,27 @@ class MoteurProfillage {
             },
             {
                 code: 'TFU',
-                name: 'Taxe Forfaitaire Unique Entreprise',
-                category: 'Contribution sociale',
-                applicability: 'Taxe Forfaitaire Unique Entreprise',
-                frequency: 'Annuelle',
-                description: 'Versement sur les salaires versés',
-                priority: 'medium',
-                required: false,
-                icon: 'Building'
+                name: 'Taxe Foncière Unique',
+                category: 'Impôt direct local',
+                applicability: 'Applicable aux propriétaires de biens bâtis et non bâtis, ainsi qu’aux usufruitiers, emphytéotes ou preneurs de baux à construction. En cas d’impossibilité d’atteindre le propriétaire, le possesseur ou le locataire est redevable.',
+                frequency: 'Annuelle (avec acomptes : 50% avant le 10 février et solde avant le 30 avril)',
+                description: 'Impôt local sur les propriétés bâties (base : valeur locative) et non bâties (base : évaluation administrative). Les taux sont fixés par les conseils communaux, avec des plafonds fixés par le CGI.',
+                priority: 'high',
+                required: true,
+                icon: 'Home'
             }
+            
+            // {
+            //     code: 'TFU',
+            //     name: 'Taxe Forfaitaire Unique Entreprise',
+            //     category: 'Contribution sociale',
+            //     applicability: 'Taxe Forfaitaire Unique Entreprise',
+            //     frequency: 'Annuelle',
+            //     description: 'Versement sur les salaires versés',
+            //     priority: 'medium',
+            //     required: false,
+            //     icon: 'Building'
+            // }
         ]]
     ]);
 
