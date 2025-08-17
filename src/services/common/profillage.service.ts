@@ -55,9 +55,9 @@ class MoteurProfillage {
                     code: 'IRF',
                     name: 'Impôt sur le Revenu Foncier',
                     category: 'Impôt direct',
-                    applicability: 'Applicable aux personnes physiques, entreprises individuelles (IBA) et associés de sociétés immobilières non soumises à l’IS. Non applicable aux sociétés soumises à l’IS.',
+                    applicability: 'Personnes physiques, entreprises individuelles (IBA) et associés de sociétés immobilières non soumises à l’IS',
                     frequency: 'Annuelle',
-                    description: 'Impôt sur les revenus fonciers (loyers, terrains, baux, concessions, etc.) au taux unique de 12% + redevance ORTB 4 000 FCFA.',
+                    description: 'Taxe sur revenus fonciers au taux de 12% + 4 000 FCFA ORTB',
                     priority: 'medium',
                     required: false,
                     icon: 'Building'
@@ -166,13 +166,14 @@ class MoteurProfillage {
                 code: 'TFU',
                 name: 'Taxe Foncière Unique',
                 category: 'Impôt direct local',
-                applicability: 'Applicable aux propriétaires de biens bâtis et non bâtis, ainsi qu’aux usufruitiers, emphytéotes ou preneurs de baux à construction. En cas d’impossibilité d’atteindre le propriétaire, le possesseur ou le locataire est redevable.',
-                frequency: 'Annuelle (avec acomptes : 50% avant le 10 février et solde avant le 30 avril)',
-                description: 'Impôt local sur les propriétés bâties (base : valeur locative) et non bâties (base : évaluation administrative). Les taux sont fixés par les conseils communaux, avec des plafonds fixés par le CGI.',
+                applicability: 'Propriétaires fonciers et assimilés',
+                frequency: 'Annuelle',
+                description: 'Taxe sur propriétés bâties et non bâties selon taux communal',
                 priority: 'high',
-                required: true,
+                required: false,
                 icon: 'Home'
             }
+            
             
             // {
             //     code: 'TFU',
