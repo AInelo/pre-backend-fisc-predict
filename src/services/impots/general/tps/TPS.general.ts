@@ -103,7 +103,7 @@ class MoteurTPSimplifie {
                     impotTitle: 'Contribution CCI Bénin',
                     impotDescription: `Contribution à la Chambre de Commerce et d'Industrie du Bénin selon le barème en vigueur (${this.getDescriptionBaremeCCI(chiffreAffaire, typeEntreprise)}).`,
                     impotValue: contributionCCI,
-                    impotTaux: `${contributionCCI} FCFA`,
+                    impotTaux: `${contributionCCI} FCFA : barème CCI`,
                     impotValueCurrency: 'FCFA',
                     importCalculeDescription: `Montant calculé selon le barème CCI pour ${typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'entreprise individuelle' : 'société'} avec CA de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA.`
                 }

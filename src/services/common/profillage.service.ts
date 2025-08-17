@@ -40,13 +40,24 @@ class MoteurProfillage {
                     required: false,
                     icon: 'FileText'
                 },
+                // {
+                //     code: 'IRF',
+                //     name: 'Impôt sur le Revenu Foncier',
+                //     category: 'Impôt direct',
+                //     applicability: 'Obligatoire pour régime réel',
+                //     frequency: 'Annuelle',
+                //     description: 'Impôt sur les revenus fonciers',
+                //     priority: 'medium',
+                //     required: false,
+                //     icon: 'Building'
+                // },
                 {
                     code: 'IRF',
                     name: 'Impôt sur le Revenu Foncier',
                     category: 'Impôt direct',
-                    applicability: 'Obligatoire pour régime réel',
+                    applicability: 'Applicable aux personnes physiques, entreprises individuelles (IBA) et associés de sociétés immobilières non soumises à l’IS. Non applicable aux sociétés soumises à l’IS.',
                     frequency: 'Annuelle',
-                    description: 'Impôt sur les revenus fonciers',
+                    description: 'Impôt sur les revenus fonciers (loyers, terrains, baux, concessions, etc.) au taux unique de 12% + redevance ORTB 4 000 FCFA.',
                     priority: 'medium',
                     required: false,
                     icon: 'Building'
