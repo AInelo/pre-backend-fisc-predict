@@ -3,11 +3,13 @@ import { GlobalEstimationInfoData } from "@/types/frontend.result.return.type";
 
 interface PatenteInput {
     chiffreAffaire: number;
+    periodeFiscale: string;
+    
     location: 'cotonou' | 'porto-novo' | 'ouidah' | 'abomey' | 'parakou' | 'other-zone1' | 'other-zone2' | 'alibori' | 'atacora' | 'borgou' | 'donga' | 'atlantique' | 'collines' | 'couffo' | 'littoral' | 'mono' | 'oueme' | 'plateau' | 'zou';
     rentalValue: number;
+
     isImporter?: boolean;
     importExportAmount?: number;
-    periodeFiscale: string;
 }
 
 
