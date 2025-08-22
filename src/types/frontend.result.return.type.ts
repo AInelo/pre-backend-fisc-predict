@@ -12,7 +12,7 @@ export interface GlobalEstimationInfoData {
 export interface VariableEnter {
     label: string,
     description : string,
-    value: number
+    value: number | string,
     currency : string
 }
 
