@@ -117,6 +117,8 @@ class CCICalculator {
             return "Échelon maximum du barème";
         }
 
+    
+
         const index = TPSConfig.CCI_RATES.indexOf(cciRate);
         const minRevenue = index > 0 ? TPSConfig.CCI_RATES[index - 1].maxRevenue + 1 : 0;
         

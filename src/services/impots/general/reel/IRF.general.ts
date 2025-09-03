@@ -11,143 +11,30 @@ interface IRFInput {
   periodeFiscale: string;
 }
 
-class MoteurIRF {
-    private static readonly REDEVANCE_ORTB = 4_000;
+// Interface pour les options de calcul
+interface IRFCalculationOptions {
+    includeRedevanceORTB?: boolean;
+    customRedevanceORTB?: number;
+    customTauxIRF?: number;
+}
 
-    public static calculerIRF(input: IRFInput): IRFCalculationResult {
-        try {
-            // Extraire l'année de la période fiscale
-            const annee = this.extraireAnnee(input.periodeFiscale);
-            
-            // Vérifier si l'année est 2026 ou ultérieure
-            if (annee >= 2026) {
-                return this.genererReponseErreur(input, annee);
-            }
+// Configuration de l'impôt IRF
+class IRFConfig {
+    static readonly REDEVANCE_ORTB = 4_000;
+    static readonly TAUX_STANDARD = 0.12;        // 12% pour revenus non taxés
+    static readonly TAUX_REDUIT = 0.10;          // 10% pour revenus déjà taxés
+    
+    static readonly TITLE = 'Impôt sur les Revenus Fonciers';
+    static readonly LABEL = 'IRF';
+    static readonly DESCRIPTION = `L'IRF est calculé sur les revenus locatifs avec un taux de 10% si le revenu est déjà soumis à IBA/IS, sinon 12%.
+            Une redevance ORTB de 4 000 FCFA s'ajoute obligatoirement.
+            La déclaration et le paiement doivent être effectués avant le 30 avril.`;
+    static readonly COMPETENT_CENTER = "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.";
+}
 
-            // Validation des entrées
-            if (!input.revenuLocatif || input.revenuLocatif <= 0) {
-                return this.genererReponseErreurValidation('Le revenu locatif doit être un montant positif');
-            }
-
-            // Déterminer le taux selon si le revenu est déjà taxé
-            const taux = input.isAlreadyTaxed ? 0.10 : 0.12;
-            const tauxPourcentage = input.isAlreadyTaxed ? '10%' : '12%';
-
-            // Calculer l'IRF
-            const irfMontant = input.revenuLocatif * taux;
-            const irfArrondi = Math.round(irfMontant);
-
-            // Calculer le total avec la redevance ORTB
-            const totalTax = irfArrondi + this.REDEVANCE_ORTB;
-
-            return {
-                totalEstimation: totalTax,
-                totalEstimationCurrency: 'FCFA',
-                VariableEnter: [
-                    {
-                        label: "Revenu locatif annuel",
-                        description: "Montant total des revenus locatifs perçus durant l'année fiscale.",
-                        value: input.revenuLocatif,
-                        currency: 'FCFA',
-                    },
-                    {
-                        label: "Revenu déjà taxé",
-                        description: "Indique si le revenu est déjà soumis à IBA/IS (taux réduit de 10%).",
-                        value: input.isAlreadyTaxed ? 1 : 0,
-                        currency: '',
-                    }
-                ],
-
-                impotDetailCalcule: [
-                    {
-                        impotTitle: 'IRF (Impôt sur les Revenus Fonciers)',
-                        impotDescription: `Calculé sur le revenu locatif avec un taux de ${tauxPourcentage}`,
-                        impotValue: irfArrondi,
-                        impotValueCurrency: 'FCFA',
-                        impotTaux: tauxPourcentage,
-                        importCalculeDescription: `IRF = ${input.revenuLocatif.toLocaleString('fr-FR')} FCFA × ${tauxPourcentage} = ${irfArrondi.toLocaleString('fr-FR')} FCFA`
-                    },
-                    {
-                        impotTitle: 'Redevance ORTB',
-                        impotDescription: 'Redevance audiovisuelle obligatoire pour l\'Office de Radiodiffusion et Télévision du Bénin.',
-                        impotValue: this.REDEVANCE_ORTB,
-                        impotValueCurrency: 'FCFA',
-                        impotTaux: 'Forfait',
-                        importCalculeDescription: 'Redevance ORTB fixe de 4 000 FCFA'
-                    }
-                ],
-
-                obligationEcheance: [
-                    {
-                        impotTitle: 'IRF - Déclaration et paiement',
-                        echeancePaiement: {
-                            echeancePeriodeLimite: '30 avril',
-                            echeanceDescription: "Déclaration annuelle et paiement de l'IRF."
-                        },
-                        obligationDescription: "Déclarer vos revenus fonciers annuellement avant le 30 avril."
-                    },
-                    {
-                        impotTitle: 'IRF - Paiement mensuel',
-                        echeancePaiement: {
-                            echeancePeriodeLimite: '10 du mois suivant',
-                            echeanceDescription: "Paiement avant le 10 du mois suivant la perception des revenus locatifs."
-                        },
-                        obligationDescription: "L'IRF doit être déclaré et payé avant le 10 du mois suivant la perception des revenus locatifs."
-                    }
-                ],
-
-                infosSupplementaires: [
-                    {
-                        infosTitle: 'Taux d\'imposition',
-                        infosDescription: [
-                            input.isAlreadyTaxed 
-                                ? "Taux réduit de 10% appliqué (revenu déjà soumis à IBA/IS)"
-                                : "Taux standard de 12% appliqué",
-                            "Redevance ORTB de 4 000 FCFA appliquée"
-                        ]
-                    },
-                    {
-                        infosTitle: 'Obligations de conservation',
-                        infosDescription: [
-                            "Conservez vos justificatifs de paiement ou de déclaration.",
-                            "Les justificatifs doivent être conservés pendant 5 ans."
-                        ]
-                    },
-                    {
-                        infosTitle: 'Centre compétent',
-                        infosDescription: [
-                            "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.",
-                            "Pour toute information, contactez la Cellule de Services aux Contribuables (CSC) au 133."
-                        ]
-                    }
-                ],
-
-                impotConfig: {
-                    impotTitle: 'Impôt sur les Revenus Fonciers',
-                    label: 'IRF',
-                    description: `L'IRF est calculé sur les revenus locatifs avec un taux de 10% si le revenu est déjà soumis à IBA/IS, sinon 12%.
-                            Une redevance ORTB de 4 000 FCFA s'ajoute obligatoirement.
-                            La déclaration et le paiement doivent être effectués avant le 30 avril.`,
-                    competentCenter: "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
-                }
-            };
-        } catch (error) {
-            return this.genererReponseErreurValidation(error instanceof Error ? error.message : 'Erreur lors du calcul de l\'IRF');
-        }
-    }
-
-    private static extraireAnnee(periodeFiscale: string): number {
-        // Essayer d'extraire l'année de différents formats possibles
-        const anneeMatch = periodeFiscale.match(/(\d{4})/);
-        if (anneeMatch) {
-            return parseInt(anneeMatch[1], 10);
-        }
-        
-        // Si aucune année n'est trouvée, retourner l'année courante par défaut
-        return new Date().getFullYear();
-    }
-
-    private static genererReponseErreur(input: IRFInput, annee: number): BackendEstimationFailureResponse {
+// Classe pour la gestion des erreurs
+class IRFErrorHandler {
+    static genererErreurAnnee(input: IRFInput, annee: number): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -169,7 +56,7 @@ class MoteurIRF {
         };
     }
 
-    private static genererReponseErreurValidation(message: string): BackendEstimationFailureResponse {
+    static genererErreurValidation(message: string): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -188,6 +75,325 @@ class MoteurIRF {
             timestamp: new Date().toISOString(),
             requestId: `irf_calc_${Date.now()}`
         };
+    }
+}
+
+// Builder pour construire la réponse de manière modulaire
+class IRFResponseBuilder {
+    private input: IRFInput;
+    private options: IRFCalculationOptions;
+    private tauxIRF: number = 0;
+    private tauxPourcentage: string = '';
+    private irfMontant: number = 0;
+    private irfArrondi: number = 0;
+    private redevanceORTB: number = 0;
+    private totalTax: number = 0;
+
+    constructor(input: IRFInput, options: IRFCalculationOptions = {}) {
+        this.input = input;
+        this.options = {
+            includeRedevanceORTB: true,
+            ...options
+        };
+        
+        this.initializeCalculations();
+    }
+
+    private initializeCalculations() {
+        // Déterminer le taux selon si le revenu est déjà taxé
+        if (this.options.customTauxIRF !== undefined) {
+            this.tauxIRF = this.options.customTauxIRF;
+            this.tauxPourcentage = `${(this.tauxIRF * 100).toFixed(1)}%`;
+        } else {
+            this.tauxIRF = this.input.isAlreadyTaxed ? IRFConfig.TAUX_REDUIT : IRFConfig.TAUX_STANDARD;
+            this.tauxPourcentage = this.input.isAlreadyTaxed ? '10%' : '12%';
+        }
+
+        // Calculer l'IRF
+        this.irfMontant = this.input.revenuLocatif * this.tauxIRF;
+        this.irfArrondi = Math.round(this.irfMontant);
+
+        // Calculer le total avec la redevance ORTB si applicable
+        this.redevanceORTB = this.options.includeRedevanceORTB ? 
+            (this.options.customRedevanceORTB ?? IRFConfig.REDEVANCE_ORTB) : 0;
+        
+        this.totalTax = this.irfArrondi + this.redevanceORTB;
+    }
+
+    private buildVariablesEnter() {
+        const variables = [
+            {
+                label: "Revenu locatif annuel",
+                description: "Montant total des revenus locatifs perçus durant l'année fiscale.",
+                value: this.input.revenuLocatif,
+                currency: 'FCFA',
+            }
+        ];
+
+        if (this.options.customTauxIRF === undefined) {
+            variables.push({
+                label: "Revenu déjà taxé",
+                description: "Indique si le revenu est déjà soumis à IBA/IS (taux réduit de 10%).",
+                value: this.input.isAlreadyTaxed ? 1 : 0,
+                currency: '',
+            });
+        } else {
+            variables.push({
+                label: "Taux IRF personnalisé",
+                description: "Taux personnalisé appliqué au revenu locatif.",
+                value: this.tauxIRF,
+                currency: '',
+            });
+        }
+
+        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+            variables.push({
+                label: "Redevance ORTB",
+                description: "Redevance audiovisuelle pour l'Office de Radiodiffusion et Télévision du Bénin",
+                value: this.redevanceORTB,
+                currency: 'FCFA'
+            });
+        }
+
+        return variables;
+    }
+
+    private buildImpotDetailCalcule() {
+        const details = [
+            {
+                impotTitle: 'IRF (Impôt sur les Revenus Fonciers)',
+                impotDescription: `Calculé sur le revenu locatif avec un taux de ${this.tauxPourcentage}`,
+                impotValue: this.irfArrondi,
+                impotValueCurrency: 'FCFA',
+                impotTaux: this.tauxPourcentage,
+                importCalculeDescription: `IRF = ${this.input.revenuLocatif.toLocaleString('fr-FR')} FCFA × ${this.tauxPourcentage} = ${this.irfArrondi.toLocaleString('fr-FR')} FCFA`
+            }
+        ];
+
+        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+            details.push({
+                impotTitle: 'Redevance ORTB',
+                impotDescription: `Redevance audiovisuelle ${this.options.customRedevanceORTB ? 'personnalisée' : 'obligatoire'} pour l'Office de Radiodiffusion et Télévision du Bénin.`,
+                impotValue: this.redevanceORTB,
+                impotValueCurrency: 'FCFA',
+                impotTaux: this.options.customRedevanceORTB ? 'Personnalisée' : 'Forfait',
+                importCalculeDescription: `Redevance ORTB ${this.options.customRedevanceORTB ? 'personnalisée' : 'fixe'} de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA`
+            });
+        }
+
+        return details;
+    }
+
+    private buildObligationEcheance() {
+        return [
+            {
+                impotTitle: 'IRF - Déclaration et paiement',
+                echeancePaiement: {
+                    echeancePeriodeLimite: '30 avril',
+                    echeanceDescription: "Déclaration annuelle et paiement de l'IRF."
+                },
+                obligationDescription: "Déclarer vos revenus fonciers annuellement avant le 30 avril."
+            },
+            {
+                impotTitle: 'IRF - Paiement mensuel',
+                echeancePaiement: {
+                    echeancePeriodeLimite: '10 du mois suivant',
+                    echeanceDescription: "Paiement avant le 10 du mois suivant la perception des revenus locatifs."
+                },
+                obligationDescription: "L'IRF doit être déclaré et payé avant le 10 du mois suivant la perception des revenus locatifs."
+            }
+        ];
+    }
+
+    private buildInfosSupplementaires() {
+        const infos = [
+            {
+                infosTitle: 'Taux d\'imposition',
+                infosDescription: [
+                    this.options.customTauxIRF !== undefined
+                        ? `Taux personnalisé de ${this.tauxPourcentage} appliqué`
+                        : (this.input.isAlreadyTaxed 
+                            ? "Taux réduit de 10% appliqué (revenu déjà soumis à IBA/IS)"
+                            : "Taux standard de 12% appliqué"),
+                    this.options.includeRedevanceORTB 
+                        ? `Redevance ORTB de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA appliquée`
+                        : "Aucune redevance ORTB incluse dans ce calcul"
+                ]
+            }
+        ];
+
+        if (this.options.customTauxIRF !== undefined) {
+            infos.push({
+                infosTitle: 'Taux personnalisé',
+                infosDescription: [
+                    `Le taux de ${this.tauxPourcentage} a été personnalisé pour ce calcul.`,
+                    "Ce taux peut différer des taux réglementaires standard (10% ou 12%).",
+                    "Vérifiez la conformité avec la réglementation fiscale en vigueur."
+                ]
+            });
+        }
+
+        if (this.options.customRedevanceORTB !== undefined) {
+            infos.push({
+                infosTitle: 'Redevance ORTB personnalisée',
+                infosDescription: [
+                    `La redevance ORTB de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA a été personnalisée.`,
+                    "Le montant standard est de 4 000 FCFA.",
+                    "Vérifiez la conformité avec la réglementation en vigueur."
+                ]
+            });
+        }
+
+        if (!this.options.includeRedevanceORTB) {
+            infos.push({
+                infosTitle: 'Calcul sans redevance ORTB',
+                infosDescription: [
+                    'Ce calcul n\'inclut pas la redevance ORTB.',
+                    'Dans la pratique, cette redevance est généralement obligatoire.',
+                    'Le montant total correspond uniquement à l\'IRF de base.'
+                ]
+            });
+        }
+
+        infos.push({
+            infosTitle: 'Obligations de conservation',
+            infosDescription: [
+                "Conservez vos justificatifs de paiement ou de déclaration.",
+                "Les justificatifs doivent être conservés pendant 5 ans."
+            ]
+        });
+
+        infos.push({
+            infosTitle: 'Centre compétent',
+            infosDescription: [
+                "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.",
+                "Pour toute information, contactez la Cellule de Services aux Contribuables (CSC) au 133."
+            ]
+        });
+
+        return infos;
+    }
+
+    private buildImpotConfig() {
+        return {
+            impotTitle: IRFConfig.TITLE,
+            label: IRFConfig.LABEL,
+            description: IRFConfig.DESCRIPTION,
+            competentCenter: IRFConfig.COMPETENT_CENTER,
+            paymentSchedule: [
+                {
+                    date: "30 avril",
+                    description: "Déclaration annuelle et paiement de l'IRF"
+                },
+                {
+                    date: "10 du mois suivant",
+                    description: "Paiement mensuel après perception des revenus"
+                }
+            ]
+        };
+    }
+
+    build(): GlobalEstimationInfoData {
+        const suffixe = this.getSuffixeCalcul();
+        
+        return {
+            totalEstimation: this.totalTax,
+            totalEstimationCurrency: 'FCFA',
+            contribuableRegime: `Régime IRF${suffixe}`,
+            VariableEnter: this.buildVariablesEnter(),
+            impotDetailCalcule: this.buildImpotDetailCalcule(),
+            obligationEcheance: this.buildObligationEcheance(),
+            infosSupplementaires: this.buildInfosSupplementaires(),
+            impotConfig: this.buildImpotConfig()
+        };
+    }
+
+    private getSuffixeCalcul(): string {
+        if (!this.options.includeRedevanceORTB) {
+            return ' (Sans ORTB)';
+        } else if (this.options.customTauxIRF !== undefined || this.options.customRedevanceORTB !== undefined) {
+            return ' (Personnalisé)';
+        }
+        return '';
+    }
+}
+
+// Utilitaire pour l'extraction d'année
+class DateUtils {
+    static extraireAnnee(periodeFiscale: string): number {
+        const anneeMatch = periodeFiscale.match(/(\d{4})/);
+        return anneeMatch ? parseInt(anneeMatch[1], 10) : new Date().getFullYear();
+    }
+}
+
+// Classe principale avec méthodes spécialisées
+class MoteurIRF {
+    // Méthode principale avec toutes les composantes
+    public static calculerIRF(input: IRFInput): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, {});
+    }
+
+    // Méthode sans redevance ORTB
+    public static calculerIRFWithoutRedevanceORTB(input: IRFInput): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, { includeRedevanceORTB: false });
+    }
+
+    // Méthode avec taux personnalisé
+    public static calculerIRFWithCustomTaux(input: IRFInput, customTaux: number): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, { customTauxIRF: customTaux });
+    }
+
+    // Méthode avec redevance ORTB personnalisée
+    public static calculerIRFWithCustomRedevanceORTB(input: IRFInput, customRedevanceORTB: number): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, { customRedevanceORTB: customRedevanceORTB });
+    }
+
+    // Méthode avec montants personnalisés
+    public static calculerIRFPersonnalise(
+        input: IRFInput, 
+        customTaux?: number, 
+        customRedevanceORTB?: number
+    ): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, {
+            customTauxIRF: customTaux,
+            customRedevanceORTB: customRedevanceORTB
+        });
+    }
+
+    // Méthode générique avec options
+    public static calculerIRFvecOptions(
+        input: IRFInput, 
+        options: IRFCalculationOptions
+    ): IRFCalculationResult {
+        try {
+            // Validation des entrées
+            if (!input.revenuLocatif || input.revenuLocatif <= 0) {
+                return IRFErrorHandler.genererErreurValidation('Le revenu locatif doit être un montant positif');
+            }
+
+            // Validation du taux personnalisé si fourni
+            if (options.customTauxIRF !== undefined && (options.customTauxIRF <= 0 || options.customTauxIRF > 1)) {
+                return IRFErrorHandler.genererErreurValidation('Le taux personnalisé doit être compris entre 0 et 1 (0% à 100%)');
+            }
+
+            // Validation de la redevance personnalisée si fournie
+            if (options.customRedevanceORTB !== undefined && options.customRedevanceORTB < 0) {
+                return IRFErrorHandler.genererErreurValidation('La redevance ORTB personnalisée ne peut pas être négative');
+            }
+
+            // Extraire l'année de la période fiscale
+            const annee = DateUtils.extraireAnnee(input.periodeFiscale);
+            
+            // Vérifier si l'année est 2026 ou ultérieure
+            if (annee >= 2026) {
+                return IRFErrorHandler.genererErreurAnnee(input, annee);
+            }
+
+            // Construction de la réponse avec les options spécifiées
+            return new IRFResponseBuilder(input, options).build();
+        } catch (error) {
+            return IRFErrorHandler.genererErreurValidation(error instanceof Error ? error.message : 'Erreur lors du calcul de l\'IRF');
+        }
     }
 }
 
