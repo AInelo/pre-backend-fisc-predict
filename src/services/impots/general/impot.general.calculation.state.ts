@@ -1,12 +1,14 @@
 interface impotCalculationState {
     impotCode: string;
-    state : "available" | "not_available"
+    state : "available" | "not_available",
+    isJustInformative? : boolean
 }
 
 export const impotGeneralCalculationState: impotCalculationState[] = [
     {
         impotCode: 'AIB',
-        state: 'available'
+        state: 'available',
+        isJustInformative : true
     },
     {
         impotCode: 'IS',
