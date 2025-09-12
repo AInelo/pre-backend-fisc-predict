@@ -290,6 +290,7 @@ class ITSResponseBuilder {
 
 // Classe principale
 class MoteurITS {
+    
     public static calculerITS(salaireMensuel: number, periodeFiscale: string): ITSCalculationResult {
         // Extraire l'année de la période fiscale
         const annee = DateUtils.extraireAnnee(periodeFiscale);

@@ -347,6 +347,7 @@ class TVMResponseBuilder {
 
 // Classe principale
 class MoteurTVM {
+    
     public static calculerTVM(input: TVMInput): TVMCalculationResult {
         try {
             if (!input.hasVehicles) {

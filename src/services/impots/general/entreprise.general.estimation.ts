@@ -105,9 +105,29 @@ interface PatenteInput {
 }
 
 interface Etablissement {
-    location: 'cotonou' | 'porto-novo' | 'ouidah' | 'abomey' | 'parakou' | 'other-zone1' | 'other-zone2' | 'alibori' | 'atacora' | 'borgou' | 'donga' | 'atlantique' | 'collines' | 'couffo' | 'littoral' | 'mono' | 'oueme' | 'plateau' | 'zou';
+    location: 
+        | 'cotonou' 
+        | 'porto-novo' 
+        | 'ouidah' 
+        | 'abomey' 
+        | 'parakou' 
+        | 'other-zone1' 
+        | 'other-zone2' 
+        | 'alibori' 
+        | 'atacora' 
+        | 'borgou' 
+        | 'donga' 
+        | 'atlantique' 
+        | 'collines' 
+        | 'couffo' 
+        | 'littoral' 
+        | 'mono' 
+        | 'oueme' 
+        | 'plateau' 
+        | 'zou';
+    
     rentalValue: number;
-    nom?: string; // Nom de l'établissement (optionnel)
+    nom?: string;     // Nom de l'établissement (optionnel)
     adresse?: string; // Adresse (optionnel)
 }
 
@@ -297,13 +317,15 @@ export class EntrepriseGeneralEstimation {
 
         switch (codeUpper) {
             case 'AIB':
-                return MoteurAIB.calculerAIB(dataImpot as AIBInput);
+                return MoteurAIB.calculerAIBWithoutCCI_RedevanceSRTB(dataImpot as AIBInput)
+                // calculerAIB(dataImpot as AIBInput);
 
             case 'IBA':
                 return MoteurIBA.calculerIBA(dataImpot as IBAInput);
 
             case 'IRF':
-                return MoteurIRF.calculerIRF(dataImpot as IRFInput);
+                return MoteurIRF.calculerIRFWithoutRedevanceORTB(dataImpot as IRFInput)
+                // calculerIRF(dataImpot as IRFInput);
 
             case 'IS':
                 return MoteurIS.calculerIS(dataImpot as ISInput);
@@ -323,7 +345,8 @@ export class EntrepriseGeneralEstimation {
 
             case 'ITS':
                 const itsData = dataImpot as ITSInput;
-                return MoteurITS.calculerITS(itsData.salaireAnnuel, itsData.periodeFiscale);
+                return MoteurITS.calculerITSWithoutRedevanceORTB(itsData.salaireAnnuel, itsData.periodeFiscale)
+                // calculerITS(itsData.salaireAnnuel, itsData.periodeFiscale);
 
             default:
                 throw new Error(`Type d'impôt non reconnu: ${impotCode}`);

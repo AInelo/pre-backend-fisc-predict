@@ -328,6 +328,8 @@ class DateUtils {
 
 // Classe principale avec méthodes spécialisées
 class MoteurIRF {
+
+    
     // Méthode principale avec toutes les composantes
     public static calculerIRF(input: IRFInput): IRFCalculationResult {
         return this.calculerIRFvecOptions(input, {});

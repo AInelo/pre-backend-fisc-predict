@@ -280,6 +280,7 @@ class TFUEntrepriseResponseBuilder {
 }
 
 class MoteurTFUEntreprise {
+    
     public static calculerTFUEntreprise(input: TFUEntrepriseInput): TFUEntrepriseCalculationResult {
         try {
             // Validation des entrées
