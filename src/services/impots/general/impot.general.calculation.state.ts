@@ -24,7 +24,7 @@ export const impotGeneralCalculationState: impotCalculationState[] = [
     },
     {
         impotCode: 'ITS',
-        state: 'available'
+        state: 'not_available'
     },   
     {
         impotCode: 'IBA',
