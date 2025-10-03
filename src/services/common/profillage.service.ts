@@ -65,7 +65,7 @@ class MoteurProfillage {
                 {
                     code: 'PATENTE',
                     name: 'Contribution des Patentes',
-                    category: 'Contribution locale',
+                    category: 'Impôt direct',
                     applicability: 'Obligatoire pour régime réel',
                     frequency: 'Annuelle',
                     description: "Contribution locale liée à l'activité exercée",
@@ -78,7 +78,7 @@ class MoteurProfillage {
                     name: 'Taxe sur la Valeur Ajoutée',
                     category: 'Impôt indirect',
                     applicability: 'Obligatoire pour régime réel',
-                    frequency: 'Mensuelle ou Trimestrielle',
+                    frequency: 'Mensuelle',
                     description: 'Taxe sur la consommation facturée au client final',
                     priority: 'high',
                     required: true,
@@ -87,7 +87,7 @@ class MoteurProfillage {
                 {
                     code: 'VPS',
                     name: 'Versement Patronal sur Salaires',
-                    category: 'Contribution sociale',
+                    category: 'Impôt direct',
                     applicability: 'Obligatoire pour régime réel',
                     frequency: 'Mensuelle',
                     description: 'Versement sur les salaires versés',

@@ -179,13 +179,3 @@ export class EstimationSummarizer {
     }
 }
 
-// Exemple d'utilisation
-/*
-const summarizer = new EstimationSummarizer();
-const summary = summarizer.summarize(estimationData);
-console.log(summary);
-
-// Ou version compacte
-const compactSummary = summarizer.summarizeCompact(estimationData);
-console.log(compactSummary);
-*/

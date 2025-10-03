@@ -70,8 +70,8 @@ function transformDataWithSlugs(originalData) {
         Object.keys(arr.tarifs).forEach((categorieKey) => {
           const categorie = arr.tarifs[categorieKey];
           transformedArr.tarifs[categorieKey] = {
-            nom_categorie: categorie.nom_categorie,
-            slug_categorie: createSlug(categorie.nom_categorie),
+            // nom_categorie: categorie.nom_categorie,
+            // slug_categorie: createSlug(categorie.nom_categorie),
             description: categorie.description,
             slug_description: createSlug(categorie.description),
             tfu_par_m2: categorie.tfu_par_m2,
@@ -143,7 +143,7 @@ async function main() {
     console.log('🚀 Début de la transformation des données TFU...');
     
     // Chemin vers le fichier JSON d'origine
-    const inputFilePath = path.join(__dirname, 'tfu_data.json');
+    const inputFilePath = path.join(__dirname, 'tfu_data_final.json');
     const outputFilePath = path.join(__dirname, 'tfu_data_with_slugs.json');
     
     // Vérifier si le fichier d'entrée existe

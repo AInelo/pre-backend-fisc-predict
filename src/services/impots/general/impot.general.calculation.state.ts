@@ -8,7 +8,6 @@ export const impotGeneralCalculationState: impotCalculationState[] = [
     {
         impotCode: 'AIB',
         state: 'available',
-        isJustInformative : false
     },
     {
         impotCode: 'IS',
