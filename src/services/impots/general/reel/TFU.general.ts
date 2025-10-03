@@ -18,7 +18,7 @@ interface TFUInput {
 // Interface pour les tarifs TFU
 interface TFUTarif {
     // nom_categorie: string;
-    slug_categorie: string;
+    // slug_categorie: string;
     description: string;
     slug_description: string;
     tfu_par_m2: number;
