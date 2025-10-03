@@ -76,10 +76,14 @@ class MoteurTFU {
                 totalTFU += tfuArrondie;
                 totalSurface += singleInput.squareMeters;
 
-                // Ajouter les détails du calcul
-                detailsCalculs.push(
-                    `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuArrondie.toLocaleString('fr-FR')} FCFA`
-                );
+                // Ajouter les détails du calcul avec indication du minimum si appliqué
+                const tfuCalculee = Math.round(tfu);
+                const minimumApplique = tfuArrondie > tfuCalculee;
+                const detailCalcul = minimumApplique 
+                    ? `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuCalculee.toLocaleString('fr-FR')} FCFA → Minimum appliqué : ${tfuArrondie.toLocaleString('fr-FR')} FCFA`
+                    : `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuArrondie.toLocaleString('fr-FR')} FCFA`;
+                
+                detailsCalculs.push(detailCalcul);
 
                 // Ajouter les variables d'entrée
                 variablesEnter.push({
@@ -106,7 +110,15 @@ class MoteurTFU {
                         impotValueCurrency: 'FCFA',
                         impotTaux: inputs.length === 1 ? `${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m²` : 'Tarifs variables',
                         importCalculeDescription: inputs.length === 1
-                            ? `TFU = ${inputs[0].squareMeters} m² × ${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m² = ${totalTFU.toLocaleString('fr-FR')} FCFA`
+                            ? (() => {
+                                const rateData = this.findTFURate(inputs[0]);
+                                if (!rateData) return `TFU = ${totalTFU.toLocaleString('fr-FR')} FCFA`;
+                                const tfuCalculee = Math.round(inputs[0].squareMeters * rateData.tfu_par_m2);
+                                const minimumApplique = totalTFU > tfuCalculee;
+                                return minimumApplique 
+                                    ? `TFU = ${inputs[0].squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuCalculee.toLocaleString('fr-FR')} FCFA → Minimum appliqué : ${totalTFU.toLocaleString('fr-FR')} FCFA`
+                                    : `TFU = ${inputs[0].squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${totalTFU.toLocaleString('fr-FR')} FCFA`;
+                            })()
                             : `Cumul TFU pour ${inputs.length} propriétés: ${totalTFU.toLocaleString('fr-FR')} FCFA (Surface totale: ${totalSurface} m²)`
                     }
                 ],

@@ -143,7 +143,7 @@ class MoteurProfillage {
             {
                 code: 'TVM',
                 name: 'Taxe sur les Vehicules a Moteur',
-                category: 'Impôt indirect',
+                category: 'Impôt direct',
                 applicability: 'Obligatoire pour régime TVM',
                 frequency: 'Mensuelle',
                 description: 'Taxe sur la valeur des marchandises importées',
