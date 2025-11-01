@@ -14,8 +14,8 @@ interface ISInput {
 
 // Options de calcul pour IS
 interface ISCalculationOptions {
-    includeRedevanceORTB?: boolean;
-    customRedevanceORTB?: number;
+    includeRedevanceSRTB?: boolean;
+    customRedevanceSRTB?: number;
     includeCCI?: boolean;
     customCCIRate?: number;
     customTauxSecteur?: number; // Remplace le taux sectoriel standard
@@ -26,7 +26,7 @@ export type ISCalculationResult = GlobalEstimationInfoData | BackendEstimationFa
 
 // Configuration centrale
 class ISConfig {
-    static readonly REDEVANCE_ORTB = 4_000;
+    static readonly REDEVANCE_SRTB = 4_000;
     static readonly IMPOT_MINIMUM_ABSOLU_ENTREPRISE = 250_000;
     static readonly TAUX_TAXE_STATION_PAR_LITRE = 0.6;
 
@@ -134,13 +134,13 @@ class ISResponseBuilder {
     private impotBrut: number = 0;
     private impotNet: number = 0;
     private impotNetArrondi: number = 0;
-    private redevanceORTB: number = 0;
+    private redevanceSRTB: number = 0;
     private contributionCCI: number = 0;
 
     constructor(input: ISInput, options: ISCalculationOptions = {}) {
         this.input = input;
         this.options = {
-            includeRedevanceORTB: true,
+            includeRedevanceSRTB: true,
             includeCCI: true,
             ...options
         };
@@ -170,7 +170,7 @@ class ISResponseBuilder {
         this.impotNet = Math.max(0, this.impotBrut + this.taxeStation);
         this.impotNetArrondi = Math.round(this.impotNet);
 
-        this.redevanceORTB = this.options.includeRedevanceORTB ? (this.options.customRedevanceORTB ?? ISConfig.REDEVANCE_ORTB) : 0;
+        this.redevanceSRTB = this.options.includeRedevanceSRTB ? (this.options.customRedevanceSRTB ?? ISConfig.REDEVANCE_SRTB) : 0;
         this.contributionCCI = this.options.includeCCI ? (this.options.customCCIRate ?? CCICalculator.calculerPourIS(this.input.chiffreAffaire)) : 0;
     }
 
@@ -205,11 +205,11 @@ class ISResponseBuilder {
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             variables.push({
-                label: 'Redevance ORTB',
+                label: 'Redevance SRTB',
                 description: "Redevance audiovisuelle obligatoire",
-                value: this.redevanceORTB,
+                value: this.redevanceSRTB,
                 currency: 'FCFA'
             });
         }
@@ -267,14 +267,14 @@ class ISResponseBuilder {
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             details.push({
-                impotTitle: 'Redevance ORTB',
+                impotTitle: 'Redevance SRTB',
                 impotDescription: "Redevance audiovisuelle obligatoire pour l'Office de Radiodiffusion et Télévision du Bénin.",
-                impotValue: this.redevanceORTB,
+                impotValue: this.redevanceSRTB,
                 impotValueCurrency: 'FCFA',
                 impotTaux: 'Forfait',
-                importCalculeDescription: `Redevance ORTB ${this.options.customRedevanceORTB ? 'personnalisée' : 'fixe'} de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA`
+                importCalculeDescription: `Redevance SRTB ${this.options.customRedevanceSRTB ? 'personnalisée' : 'fixe'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA`
             });
         }
 
@@ -370,11 +370,11 @@ class ISResponseBuilder {
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             infos.push({
-                infosTitle: 'Redevance ORTB',
+                infosTitle: 'Redevance SRTB',
                 infosDescription: [
-                    `Redevance ORTB ${this.options.customRedevanceORTB ? 'personnalisée' : 'fixe'} de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA appliquée.`
+                    `Redevance SRTB ${this.options.customRedevanceSRTB ? 'personnalisée' : 'fixe'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA appliquée.`
                 ]
             });
         }
@@ -416,7 +416,7 @@ class ISResponseBuilder {
     build(): GlobalEstimationInfoData {
         const suffixe = this.getSuffixeCalcul();
         return {
-            totalEstimation: this.impotNetArrondi + (this.options.includeRedevanceORTB ? this.redevanceORTB : 0) + (this.options.includeCCI ? this.contributionCCI : 0),
+            totalEstimation: this.impotNetArrondi + (this.options.includeRedevanceSRTB ? this.redevanceSRTB : 0) + (this.options.includeCCI ? this.contributionCCI : 0),
             totalEstimationCurrency: 'FCFA',
             contribuableRegime: `Régime IS${suffixe}`,
             VariableEnter: this.buildVariablesEnter(),
@@ -428,13 +428,13 @@ class ISResponseBuilder {
     }
 
     private getSuffixeCalcul(): string {
-        if (!this.options.includeCCI && !this.options.includeRedevanceORTB) {
+        if (!this.options.includeCCI && !this.options.includeRedevanceSRTB) {
             return ' (Base uniquement)';
         } else if (!this.options.includeCCI) {
             return ' (Sans CCI)';
-        } else if (!this.options.includeRedevanceORTB) {
-            return ' (Sans ORTB)';
-        } else if (this.options.customCCIRate !== undefined || this.options.customRedevanceORTB !== undefined || this.options.customTauxSecteur !== undefined || this.options.customTauxMinimumSecteur !== undefined) {
+        } else if (!this.options.includeRedevanceSRTB) {
+            return ' (Sans SRTB)';
+        } else if (this.options.customCCIRate !== undefined || this.options.customRedevanceSRTB !== undefined || this.options.customTauxSecteur !== undefined || this.options.customTauxMinimumSecteur !== undefined) {
             return ' (Personnalisé)';
         }
         return '';
@@ -452,31 +452,31 @@ class MoteurIS {
         return this.calculerISAvecOptions(input, { includeCCI: false });
     }
 
-    // Méthode sans redevance ORTB
-    public static calculerISWithoutRedevanceORTB(input: ISInput): ISCalculationResult {
-        return this.calculerISAvecOptions(input, { includeRedevanceORTB: false });
+    // Méthode sans redevance SRTB
+    public static calculerISWithoutRedevanceSRTB(input: ISInput): ISCalculationResult {
+        return this.calculerISAvecOptions(input, { includeRedevanceSRTB: false });
     }
 
-    // Méthode sans CCI ni redevance ORTB
-    public static calculerISWithoutCCI_RedevanceORTB(input: ISInput): ISCalculationResult {
-        return this.calculerISAvecOptions(input, { includeCCI: false, includeRedevanceORTB: false });
+    // Méthode sans CCI ni redevance SRTB
+    public static calculerISWithoutCCI_RedevanceSRTB(input: ISInput): ISCalculationResult {
+        return this.calculerISAvecOptions(input, { includeCCI: false, includeRedevanceSRTB: false });
     }
 
-    // Méthode personnalisée (CCI et ORTB)
+    // Méthode personnalisée (CCI et SRTB)
     public static calculerISPersonnalise(
         input: ISInput,
         customCCIRate?: number,
-        customRedevanceORTB?: number,
+        customRedevanceSRTB?: number,
         customTauxSecteur?: number,
         customTauxMinimumSecteur?: number
     ): ISCalculationResult {
         return this.calculerISAvecOptions(input, {
             customCCIRate,
-            customRedevanceORTB,
+            customRedevanceSRTB,
             customTauxSecteur,
             customTauxMinimumSecteur,
             includeCCI: customCCIRate !== undefined,
-            includeRedevanceORTB: customRedevanceORTB !== undefined
+            includeRedevanceSRTB: customRedevanceSRTB !== undefined
         });
     }
 

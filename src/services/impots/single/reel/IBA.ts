@@ -41,7 +41,7 @@ export interface ResultatIBA {
   impotMinimumSectoriel: number;         // Imin
   impotBase: number;                     // Ibase
   impotApresReduction: number;           // Ired
-  redevanceORTB: number;                 // RORTB
+  redevanceSRTB: number;                 // RSRTB
   details: {
     tauxNominal: number;
     tauxMinimumSectoriel: number;
@@ -60,7 +60,7 @@ const CONSTANTES = {
   TAUX_PETROLIER: 0.60,                  // τpet (FCFA par litre)
   MINIMUM_ABSOLU_GENERAL: 500_000,       // Mg
   MINIMUM_ABSOLU_STATIONS: 250_000,      // Mpet
-  REDEVANCE_ORTB: 4_000,                 // RORTB
+  REDEVANCE_SRTB: 4_000,                 // RSRTB
   SEUIL_REGIME_REEL: 50_000_000          // Seuil passage TPS vers Régime Réel
 } as const;
 
@@ -110,7 +110,7 @@ export class CalculateurIBA {
     const impotApresReduction = impotBase * facteurReduction;
 
     // Étape 6: Calcul final
-    const iba = impotApresReduction + CONSTANTES.REDEVANCE_ORTB;
+    const iba = impotApresReduction + CONSTANTES.REDEVANCE_SRTB;
 
     return {
       iba: Math.round(iba),
@@ -118,7 +118,7 @@ export class CalculateurIBA {
       impotMinimumSectoriel: Math.round(impotMinimumSectoriel),
       impotBase: Math.round(impotBase),
       impotApresReduction: Math.round(impotApresReduction),
-      redevanceORTB: CONSTANTES.REDEVANCE_ORTB,
+      redevanceSRTB: CONSTANTES.REDEVANCE_SRTB,
       details: {
         tauxNominal,
         tauxMinimumSectoriel,
@@ -207,7 +207,7 @@ export class CalculateurIBA {
       impotMinimumSectoriel: 0,
       impotBase: 0,
       impotApresReduction: 0,
-      redevanceORTB: 0,
+      redevanceSRTB: 0,
       details: {
         tauxNominal: 0,
         tauxMinimumSectoriel: 0,

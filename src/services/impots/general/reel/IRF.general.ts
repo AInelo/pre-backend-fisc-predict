@@ -13,21 +13,21 @@ interface IRFInput {
 
 // Interface pour les options de calcul
 interface IRFCalculationOptions {
-    includeRedevanceORTB?: boolean;
-    customRedevanceORTB?: number;
+    includeRedevanceSRTB?: boolean;
+    customRedevanceSRTB?: number;
     customTauxIRF?: number;
 }
 
 // Configuration de l'impôt IRF
 class IRFConfig {
-    static readonly REDEVANCE_ORTB = 4_000;
+    static readonly REDEVANCE_SRTB = 4_000;
     static readonly TAUX_STANDARD = 0.12;        // 12% pour revenus non taxés
     static readonly TAUX_REDUIT = 0.10;          // 10% pour revenus déjà taxés
     
     static readonly TITLE = 'Impôt sur les Revenus Fonciers';
     static readonly LABEL = 'IRF';
     static readonly DESCRIPTION = `L'IRF est calculé sur les revenus locatifs avec un taux de 10% si le revenu est déjà soumis à IBA/IS, sinon 12%.
-            Une redevance ORTB de 4 000 FCFA s'ajoute obligatoirement.
+            Une redevance SRTB de 4 000 FCFA s'ajoute obligatoirement.
             La déclaration et le paiement doivent être effectués avant le 30 avril.`;
     static readonly COMPETENT_CENTER = "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.";
 }
@@ -86,13 +86,13 @@ class IRFResponseBuilder {
     private tauxPourcentage: string = '';
     private irfMontant: number = 0;
     private irfArrondi: number = 0;
-    private redevanceORTB: number = 0;
+    private redevanceSRTB: number = 0;
     private totalTax: number = 0;
 
     constructor(input: IRFInput, options: IRFCalculationOptions = {}) {
         this.input = input;
         this.options = {
-            includeRedevanceORTB: true,
+            includeRedevanceSRTB: true,
             ...options
         };
         
@@ -113,11 +113,11 @@ class IRFResponseBuilder {
         this.irfMontant = this.input.revenuLocatif * this.tauxIRF;
         this.irfArrondi = Math.round(this.irfMontant);
 
-        // Calculer le total avec la redevance ORTB si applicable
-        this.redevanceORTB = this.options.includeRedevanceORTB ? 
-            (this.options.customRedevanceORTB ?? IRFConfig.REDEVANCE_ORTB) : 0;
+        // Calculer le total avec la redevance SRTB si applicable
+        this.redevanceSRTB = this.options.includeRedevanceSRTB ? 
+            (this.options.customRedevanceSRTB ?? IRFConfig.REDEVANCE_SRTB) : 0;
         
-        this.totalTax = this.irfArrondi + this.redevanceORTB;
+        this.totalTax = this.irfArrondi + this.redevanceSRTB;
     }
 
     private buildVariablesEnter() {
@@ -146,11 +146,11 @@ class IRFResponseBuilder {
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             variables.push({
-                label: "Redevance ORTB",
+                label: "Redevance SRTB",
                 description: "Redevance audiovisuelle pour l'Office de Radiodiffusion et Télévision du Bénin",
-                value: this.redevanceORTB,
+                value: this.redevanceSRTB,
                 currency: 'FCFA'
             });
         }
@@ -170,14 +170,14 @@ class IRFResponseBuilder {
             }
         ];
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             details.push({
-                impotTitle: 'Redevance ORTB',
-                impotDescription: `Redevance audiovisuelle ${this.options.customRedevanceORTB ? 'personnalisée' : 'obligatoire'} pour l'Office de Radiodiffusion et Télévision du Bénin.`,
-                impotValue: this.redevanceORTB,
+                impotTitle: 'Redevance SRTB',
+                impotDescription: `Redevance audiovisuelle ${this.options.customRedevanceSRTB ? 'personnalisée' : 'obligatoire'} pour l'Office de Radiodiffusion et Télévision du Bénin.`,
+                impotValue: this.redevanceSRTB,
                 impotValueCurrency: 'FCFA',
-                impotTaux: this.options.customRedevanceORTB ? 'Personnalisée' : 'Forfait',
-                importCalculeDescription: `Redevance ORTB ${this.options.customRedevanceORTB ? 'personnalisée' : 'fixe'} de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA`
+                impotTaux: this.options.customRedevanceSRTB ? 'Personnalisée' : 'Forfait',
+                importCalculeDescription: `Redevance SRTB ${this.options.customRedevanceSRTB ? 'personnalisée' : 'fixe'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA`
             });
         }
 
@@ -215,9 +215,9 @@ class IRFResponseBuilder {
                         : (this.input.isAlreadyTaxed 
                             ? "Taux réduit de 10% appliqué (revenu déjà soumis à IBA/IS)"
                             : "Taux standard de 12% appliqué"),
-                    this.options.includeRedevanceORTB 
-                        ? `Redevance ORTB de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA appliquée`
-                        : "Aucune redevance ORTB incluse dans ce calcul"
+                    this.options.includeRedevanceSRTB 
+                        ? `Redevance SRTB de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA appliquée`
+                        : "Aucune redevance SRTB incluse dans ce calcul"
                 ]
             }
         ];
@@ -233,22 +233,22 @@ class IRFResponseBuilder {
             });
         }
 
-        if (this.options.customRedevanceORTB !== undefined) {
+        if (this.options.customRedevanceSRTB !== undefined) {
             infos.push({
-                infosTitle: 'Redevance ORTB personnalisée',
+                infosTitle: 'Redevance SRTB personnalisée',
                 infosDescription: [
-                    `La redevance ORTB de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA a été personnalisée.`,
+                    `La redevance SRTB de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA a été personnalisée.`,
                     "Le montant standard est de 4 000 FCFA.",
                     "Vérifiez la conformité avec la réglementation en vigueur."
                 ]
             });
         }
 
-        if (!this.options.includeRedevanceORTB) {
+        if (!this.options.includeRedevanceSRTB) {
             infos.push({
-                infosTitle: 'Calcul sans redevance ORTB',
+                infosTitle: 'Calcul sans redevance SRTB',
                 infosDescription: [
-                    'Ce calcul n\'inclut pas la redevance ORTB.',
+                    'Ce calcul n\'inclut pas la redevance SRTB.',
                     'Dans la pratique, cette redevance est généralement obligatoire.',
                     'Le montant total correspond uniquement à l\'IRF de base.'
                 ]
@@ -309,9 +309,9 @@ class IRFResponseBuilder {
     }
 
     private getSuffixeCalcul(): string {
-        if (!this.options.includeRedevanceORTB) {
-            return ' (Sans ORTB)';
-        } else if (this.options.customTauxIRF !== undefined || this.options.customRedevanceORTB !== undefined) {
+        if (!this.options.includeRedevanceSRTB) {
+            return ' (Sans SRTB)';
+        } else if (this.options.customTauxIRF !== undefined || this.options.customRedevanceSRTB !== undefined) {
             return ' (Personnalisé)';
         }
         return '';
@@ -335,9 +335,9 @@ class MoteurIRF {
         return this.calculerIRFvecOptions(input, {});
     }
 
-    // Méthode sans redevance ORTB
-    public static calculerIRFWithoutRedevanceORTB(input: IRFInput): IRFCalculationResult {
-        return this.calculerIRFvecOptions(input, { includeRedevanceORTB: false });
+    // Méthode sans redevance SRTB
+    public static calculerIRFWithoutRedevanceSRTB(input: IRFInput): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, { includeRedevanceSRTB: false });
     }
 
     // Méthode avec taux personnalisé
@@ -345,20 +345,20 @@ class MoteurIRF {
         return this.calculerIRFvecOptions(input, { customTauxIRF: customTaux });
     }
 
-    // Méthode avec redevance ORTB personnalisée
-    public static calculerIRFWithCustomRedevanceORTB(input: IRFInput, customRedevanceORTB: number): IRFCalculationResult {
-        return this.calculerIRFvecOptions(input, { customRedevanceORTB: customRedevanceORTB });
+    // Méthode avec redevance SRTB personnalisée
+    public static calculerIRFWithCustomRedevanceSRTB(input: IRFInput, customRedevanceSRTB: number): IRFCalculationResult {
+        return this.calculerIRFvecOptions(input, { customRedevanceSRTB: customRedevanceSRTB });
     }
 
     // Méthode avec montants personnalisés
     public static calculerIRFPersonnalise(
         input: IRFInput, 
         customTaux?: number, 
-        customRedevanceORTB?: number
+        customRedevanceSRTB?: number
     ): IRFCalculationResult {
         return this.calculerIRFvecOptions(input, {
             customTauxIRF: customTaux,
-            customRedevanceORTB: customRedevanceORTB
+            customRedevanceSRTB: customRedevanceSRTB
         });
     }
 
@@ -379,8 +379,8 @@ class MoteurIRF {
             }
 
             // Validation de la redevance personnalisée si fournie
-            if (options.customRedevanceORTB !== undefined && options.customRedevanceORTB < 0) {
-                return IRFErrorHandler.genererErreurValidation('La redevance ORTB personnalisée ne peut pas être négative');
+            if (options.customRedevanceSRTB !== undefined && options.customRedevanceSRTB < 0) {
+                return IRFErrorHandler.genererErreurValidation('La redevance SRTB personnalisée ne peut pas être négative');
             }
 
             // Extraire l'année de la période fiscale

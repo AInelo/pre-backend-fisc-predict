@@ -2,7 +2,7 @@
 export const CONSTANTES_IRF = {
   TAUX_NORMAL: 0.12,      // 12%
   TAUX_REDUIT: 0.10,      // 10%
-  RORTB: 4000,            // FCFA
+  RSRTB: 4000,            // FCFA
   JOUR_ECHEANCE: 10       // 10ème jour du mois
 } as const;
 

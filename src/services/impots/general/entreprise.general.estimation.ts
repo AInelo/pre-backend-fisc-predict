@@ -324,7 +324,7 @@ export class EntrepriseGeneralEstimation {
                 return MoteurIBA.calculerIBA(dataImpot as IBAInput);
 
             case 'IRF':
-                return MoteurIRF.calculerIRFWithoutRedevanceORTB(dataImpot as IRFInput)
+                return MoteurIRF.calculerIRFWithoutRedevanceSRTB(dataImpot as IRFInput)
                 // calculerIRF(dataImpot as IRFInput);
 
             case 'IS':
@@ -345,7 +345,7 @@ export class EntrepriseGeneralEstimation {
 
             case 'ITS':
                 const itsData = dataImpot as ITSInput;
-                return MoteurITS.calculerITSWithoutRedevanceORTB(itsData.salaireAnnuel, itsData.periodeFiscale)
+                return MoteurITS.calculerITSWithoutRedevanceSRTB(itsData.salaireAnnuel, itsData.periodeFiscale)
                 // calculerITS(itsData.salaireAnnuel, itsData.periodeFiscale);
 
             default:

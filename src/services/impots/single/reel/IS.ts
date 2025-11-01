@@ -28,7 +28,7 @@ export interface ResultatCalculIS {
   impotMinimumEffectif: number;
   impotSocietes: number;
   impotFinal: number;
-  redevanceORTB: number;
+  redevanceSRTB: number;
   montantTotal: number;
   tauxApplique: number;
   details: {
@@ -58,7 +58,7 @@ export class CalculateurIS {
     
     // Montants fixes
     IMPOT_MIN_ABSOLU: 250000, // FCFA
-    REDEVANCE_ORTB: 4000,     // FCFA
+    REDEVANCE_SRTB: 4000,     // FCFA
     
     // Quote-parts
     QUOTE_PART_MOBILIER: 0.30
@@ -184,7 +184,7 @@ export class CalculateurIS {
     const impotFinal = impotSocietes * coefficientExoneration;
     
     // 9. Montant total à payer
-    const montantTotal = impotFinal + CalculateurIS.CONSTANTES_FISCALES.REDEVANCE_ORTB;
+    const montantTotal = impotFinal + CalculateurIS.CONSTANTES_FISCALES.REDEVANCE_SRTB;
     
     this.resultatCalcul = {
       baseImposable,
@@ -194,7 +194,7 @@ export class CalculateurIS {
       impotMinimumEffectif,
       impotSocietes,
       impotFinal,
-      redevanceORTB: CalculateurIS.CONSTANTES_FISCALES.REDEVANCE_ORTB,
+      redevanceSRTB: CalculateurIS.CONSTANTES_FISCALES.REDEVANCE_SRTB,
       montantTotal,
       tauxApplique: tauxPrincipal,
       details: {
@@ -407,7 +407,7 @@ export class CalculateurIS {
 // - Impôt sur les sociétés: ${CalculateurIS.formaterMontant(r.impotSocietes)}
 // ${r.details.estExoneree ? '- EXONÉRATION APPLIQUÉE' : ''}
 // - Impôt final: ${CalculateurIS.formaterMontant(r.impotFinal)}
-// - Redevance ORTB: ${CalculateurIS.formaterMontant(r.redevanceORTB)}
+// - Redevance SRTB: ${CalculateurIS.formaterMontant(r.redevanceSRTB)}
 // - MONTANT TOTAL À PAYER: ${CalculateurIS.formaterMontant(r.montantTotal)}
 //     `.trim();
 //   }
@@ -476,7 +476,7 @@ export class CalculateurIS {
 //   impotMinimumEffectif: number;
 //   impotSocietes: number;
 //   impotFinal: number;
-//   redevanceORTB: number;
+//   redevanceSRTB: number;
 //   montantTotal: number;
 //   tauxApplique: number;
 //   details: {
@@ -502,7 +502,7 @@ export class CalculateurIS {
   
 //   // Montants fixes
 //   IMPOT_MIN_ABSOLU: 250000, // FCFA
-//   REDEVANCE_ORTB: 4000,     // FCFA
+//   REDEVANCE_SRTB: 4000,     // FCFA
   
 //   // Quote-parts
 //   QUOTE_PART_MOBILIER: 0.30
@@ -617,7 +617,7 @@ export class CalculateurIS {
 //   const impotFinal = impotSocietes * coefficientExoneration;
   
 //   // 9. Montant total à payer
-//   const montantTotal = impotFinal + CONSTANTES_FISCALES.REDEVANCE_ORTB;
+//   const montantTotal = impotFinal + CONSTANTES_FISCALES.REDEVANCE_SRTB;
   
 //   return {
 //     baseImposable,
@@ -627,7 +627,7 @@ export class CalculateurIS {
 //     impotMinimumEffectif,
 //     impotSocietes,
 //     impotFinal,
-//     redevanceORTB: CONSTANTES_FISCALES.REDEVANCE_ORTB,
+//     redevanceSRTB: CONSTANTES_FISCALES.REDEVANCE_SRTB,
 //     montantTotal,
 //     tauxApplique: tauxPrincipal,
 //     details: {
@@ -698,7 +698,7 @@ export class CalculateurIS {
 // - Impôt sur les sociétés (hors exonération): ${formaterMontant(resultat.impotSocietes)}
 // - Exonération capital-risque: ${resultat.details.exonerationCapitalRisque ? 'Oui' : 'Non'}
 // - Impôt final: ${formaterMontant(resultat.impotFinal)}
-// - Redevance ORTB: ${formaterMontant(resultat.redevanceORTB)}
+// - Redevance SRTB: ${formaterMontant(resultat.redevanceSRTB)}
 
 // MONTANT TOTAL À PAYER: ${formaterMontant(resultat.montantTotal)}
 // ================================================================

@@ -400,7 +400,7 @@ export class REELRegimeCalculator {
     this.calculateTVA();
     this.calculatePatent();
     this.calculateCCIContribution();
-    this.calculateORTBFee();
+    this.calculateSRTBFee();
     this.calculateSpecialTaxes();
     this.calculatePropertyTaxes();
     this.addCalculationDetails();
@@ -484,10 +484,10 @@ export class REELRegimeCalculator {
     this.totalTax += cciAmount;
   }
 
-  private calculateORTBFee(): void {
+  private calculateSRTBFee(): void {
     const ortbAmount = 4000;
     this.breakdown.push({
-      name: 'Redevance ORTB',
+      name: 'Redevance SRTB',
       amount: ortbAmount,
       rate: 'Montant fixe',
       description: 'Contribution annuelle à l\'Office de Radiodiffusion et Télévision du Bénin',
@@ -570,7 +570,7 @@ export class REELRegimeCalculator {
 
   private addAdditionalInfo(): void {
     this.additionalInfo.push(
-      'Le régime réel inclut l\'impôt sur les bénéfices (IBA/IS), la patente, la redevance ORTB, la TVA, et d\'autres taxes spécifiques.',
+      'Le régime réel inclut l\'impôt sur les bénéfices (IBA/IS), la patente, la redevance SRTB, la TVA, et d\'autres taxes spécifiques.',
       'Acomptes IS/IBA : 10 mars, 10 juin, 10 septembre, 10 décembre ; solde au 30 avril.',
       'Déclarations mensuelles (TVA, AIB) obligatoires avant le 10 du mois suivant.',
       'Déclaration annuelle (bilan OHADA) avant le 30 avril.',

@@ -7,7 +7,7 @@
 export const CONSTANTES_IRF = {
   TAUX_NORMAL: 0.12,      // 12%
   TAUX_REDUIT: 0.10,      // 10%
-  RORTB: 4000,            // FCFA
+  RSRTB: 4000,            // FCFA
   JOUR_ECHEANCE: 10       // 10ème jour du mois
 } as const;
 
@@ -60,7 +60,7 @@ export interface ResultatCalculIRF {
 
 export interface ResultatCalculAnnuel {
   retenuesTotales: number;
-  obligationTotale: number; // Retenues + RORTB
+  obligationTotale: number; // Retenues + RSRTB
   tauxEffectif: number;
   impactFinancier: number;
   nombreTransactions: number;
@@ -183,7 +183,7 @@ export class CalculateurIRF {
     }
 
     // Calculs des métriques
-    const obligationTotale = retenuesTotales + CONSTANTES_IRF.RORTB;
+    const obligationTotale = retenuesTotales + CONSTANTES_IRF.RSRTB;
     const tauxEffectif = loyerBrutTotal > 0 ? (retenuesTotales / loyerBrutTotal) * 100 : 0;
     const impactFinancier = tauxEffectif / 100;
 
@@ -288,7 +288,7 @@ export class CalculateurIRF {
     details += `- Nombre de transactions: ${params.transactions.length}\n`;
     details += `- Loyers bruts totaux: ${Math.round(loyerBrutTotal).toLocaleString()} FCFA\n`;
     details += `- Retenues fiscales totales: ${Math.round(retenuesTotales).toLocaleString()} FCFA\n`;
-    details += `- RORTB: ${CONSTANTES_IRF.RORTB.toLocaleString()} FCFA\n`;
+    details += `- RSRTB: ${CONSTANTES_IRF.RSRTB.toLocaleString()} FCFA\n`;
     details += `- Obligation totale: ${Math.round(obligationTotale).toLocaleString()} FCFA\n`;
     details += `- Taux effectif: ${tauxEffectif.toFixed(2)}%\n`;
     details += `- Impact financier: ${(tauxEffectif / 100).toFixed(4)}`;

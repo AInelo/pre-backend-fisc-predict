@@ -46,7 +46,7 @@ class MoteurProfillage {
                     category: 'Impôt direct',
                     applicability: 'Personnes physiques, entreprises individuelles (IBA) et associés de sociétés immobilières non soumises à l’IS',
                     frequency: 'Annuelle',
-                    description: 'Taxe sur revenus fonciers au taux de 12% + 4 000 FCFA ORTB',
+                    description: 'Taxe sur revenus fonciers au taux de 12% + 4 000 FCFA SRTB',
                     priority: 'medium',
                     required: false,
                     icon: 'Building'

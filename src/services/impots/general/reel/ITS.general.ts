@@ -6,21 +6,21 @@ export type ITSCalculationResult = GlobalEstimationInfoData | BackendEstimationF
 
 // Options de calcul ITS
 interface ITSCalculationOptions {
-    includeRedevanceORTB?: boolean;
-    customRedevanceORTB?: number; // Remplace le calcul dynamique (mars/juin/cumul)
+    includeRedevanceSRTB?: boolean;
+    customRedevanceSRTB?: number; // Remplace le calcul dynamique (mars/juin/cumul)
 }
 
 // Configuration centrale ITS
 class ITSConfig {
     static readonly SEUIL_EXONERATION = 60_000;
-    static readonly REDEVANCE_ORTB_MARS = 1_000;
-    static readonly REDEVANCE_ORTB_JUIN = 3_000;
-    static readonly REDEVANCE_ORTB_CUMULEE = 4_000;
+    static readonly REDEVANCE_SRTB_MARS = 1_000;
+    static readonly REDEVANCE_SRTB_JUIN = 3_000;
+    static readonly REDEVANCE_SRTB_CUMULEE = 4_000;
 
     static readonly TITLE = 'Impôt sur les Traitements et Salaires';
     static readonly LABEL = 'ITS';
     static readonly DESCRIPTION = `L'ITS est un impôt progressif calculé sur les traitements et salaires selon un barème mensuel.
-            Il est prélevé mensuellement à la source par l'employeur. Une redevance ORTB s'ajoute selon le mois de l'année.
+            Il est prélevé mensuellement à la source par l'employeur. Une redevance SRTB s'ajoute selon le mois de l'année.
             Une régularisation annuelle est effectuée en juillet.`;
     static readonly COMPETENT_CENTER = "Centre des Impôts territorialement compétent selon l'adresse du contribuable.";
 }
@@ -86,7 +86,7 @@ class ITSResponseBuilder {
     private options: ITSCalculationOptions;
 
     private itsTaxAmount: number = 0;
-    private redevanceORTB: number = 0;
+    private redevanceSRTB: number = 0;
     private detailsITS: string[] = [];
     private detailsRedevance: string[] = [];
 
@@ -94,7 +94,7 @@ class ITSResponseBuilder {
         this.salaireMensuel = salaireMensuel;
         this.periodeFiscale = periodeFiscale;
         this.options = {
-            includeRedevanceORTB: true,
+            includeRedevanceSRTB: true,
             ...options
         };
         this.initializeCalculations();
@@ -124,40 +124,40 @@ class ITSResponseBuilder {
 
         this.itsTaxAmount = Math.round(this.itsTaxAmount);
 
-        // Calcul redevance ORTB (optionnelle et personnalisable)
-        if (this.options.includeRedevanceORTB) {
-            if (this.options.customRedevanceORTB !== undefined) {
-                this.redevanceORTB = this.options.customRedevanceORTB;
-                this.detailsRedevance.push(`Redevance ORTB personnalisée de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA.`);
+        // Calcul redevance SRTB (optionnelle et personnalisable)
+        if (this.options.includeRedevanceSRTB) {
+            if (this.options.customRedevanceSRTB !== undefined) {
+                this.redevanceSRTB = this.options.customRedevanceSRTB;
+                this.detailsRedevance.push(`Redevance SRTB personnalisée de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA.`);
             } else {
                 const currentMonth = new Date().getMonth();
                 if (currentMonth > 5) {
                     if (this.salaireMensuel > ITSConfig.SEUIL_EXONERATION) {
-                        this.redevanceORTB = ITSConfig.REDEVANCE_ORTB_CUMULEE;
-                        this.detailsRedevance.push('Redevance ORTB cumulée (mars + juin) de 4 000 FCFA appliquée (date après juin).');
+                        this.redevanceSRTB = ITSConfig.REDEVANCE_SRTB_CUMULEE;
+                        this.detailsRedevance.push('Redevance SRTB cumulée (mars + juin) de 4 000 FCFA appliquée (date après juin).');
                     } else {
-                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération des redevances ORTB.');
+                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération des redevances SRTB.');
                     }
                 } else if (currentMonth === 2) {
                     if (this.salaireMensuel > ITSConfig.SEUIL_EXONERATION) {
-                        this.redevanceORTB = ITSConfig.REDEVANCE_ORTB_MARS;
-                        this.detailsRedevance.push('Redevance ORTB de mars (1 000 FCFA) appliquée.');
+                        this.redevanceSRTB = ITSConfig.REDEVANCE_SRTB_MARS;
+                        this.detailsRedevance.push('Redevance SRTB de mars (1 000 FCFA) appliquée.');
                     } else {
-                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération de la redevance ORTB de mars.');
+                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération de la redevance SRTB de mars.');
                     }
                 } else if (currentMonth === 5) {
                     if (this.salaireMensuel > ITSConfig.SEUIL_EXONERATION) {
-                        this.redevanceORTB = ITSConfig.REDEVANCE_ORTB_JUIN;
-                        this.detailsRedevance.push('Redevance ORTB de juin (3 000 FCFA) appliquée.');
+                        this.redevanceSRTB = ITSConfig.REDEVANCE_SRTB_JUIN;
+                        this.detailsRedevance.push('Redevance SRTB de juin (3 000 FCFA) appliquée.');
                     } else {
-                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération de la redevance ORTB de juin.');
+                        this.detailsRedevance.push('Salaire ≤ 60 000 FCFA : exonération de la redevance SRTB de juin.');
                     }
                 } else {
-                    this.detailsRedevance.push('Pas de redevance ORTB applicable ce mois-ci.');
+                    this.detailsRedevance.push('Pas de redevance SRTB applicable ce mois-ci.');
                 }
             }
         } else {
-            this.redevanceORTB = 0;
+            this.redevanceSRTB = 0;
         }
     }
 
@@ -171,11 +171,11 @@ class ITSResponseBuilder {
             }
         ];
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             variables.push({
-                label: 'Redevance ORTB',
+                label: 'Redevance SRTB',
                 description: "Redevance audiovisuelle applicable selon le mois.",
-                value: this.redevanceORTB,
+                value: this.redevanceSRTB,
                 currency: 'FCFA'
             });
         }
@@ -195,13 +195,13 @@ class ITSResponseBuilder {
             }
         ];
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             details.push({
-                impotTitle: 'Redevance ORTB',
+                impotTitle: 'Redevance SRTB',
                 impotDescription: "Redevance spéciale pour l'Office de Radiodiffusion et Télévision du Bénin.",
-                impotValue: this.redevanceORTB,
+                impotValue: this.redevanceSRTB,
                 impotValueCurrency: 'FCFA',
-                impotTaux: this.options.customRedevanceORTB ? 'Personnalisée' : 'Forfait',
+                impotTaux: this.options.customRedevanceSRTB ? 'Personnalisée' : 'Forfait',
                 importCalculeDescription: this.detailsRedevance.join(' ; ')
             });
         }
@@ -244,9 +244,9 @@ class ITSResponseBuilder {
             }
         ];
 
-        if (this.options.includeRedevanceORTB) {
+        if (this.options.includeRedevanceSRTB) {
             infos.push({
-                infosTitle: 'Redevance ORTB',
+                infosTitle: 'Redevance SRTB',
                 infosDescription: [
                     "Mars : 1 000 FCFA (si salaire > 60 000 FCFA)",
                     "Juin : 3 000 FCFA (si salaire > 60 000 FCFA)",
@@ -255,9 +255,9 @@ class ITSResponseBuilder {
             });
         } else {
             infos.push({
-                infosTitle: 'Calcul sans redevance ORTB',
+                infosTitle: 'Calcul sans redevance SRTB',
                 infosDescription: [
-                    "Ce calcul n'inclut pas la redevance ORTB.",
+                    "Ce calcul n'inclut pas la redevance SRTB.",
                     "Dans la pratique, cette redevance est généralement obligatoire."
                 ]
             });
@@ -277,7 +277,7 @@ class ITSResponseBuilder {
 
     build(): GlobalEstimationInfoData {
         return {
-            totalEstimation: this.itsTaxAmount + (this.options.includeRedevanceORTB ? this.redevanceORTB : 0),
+            totalEstimation: this.itsTaxAmount + (this.options.includeRedevanceSRTB ? this.redevanceSRTB : 0),
             totalEstimationCurrency: 'FCFA',
             VariableEnter: this.buildVariablesEnter(),
             impotDetailCalcule: this.buildImpotDetailCalcule(),
@@ -308,7 +308,7 @@ class MoteurITS {
         return new ITSResponseBuilder(salaireMensuel, periodeFiscale, {}).build();
     }
 
-    public static calculerITSWithoutRedevanceORTB(salaireMensuel: number, periodeFiscale: string): ITSCalculationResult {
+    public static calculerITSWithoutRedevanceSRTB(salaireMensuel: number, periodeFiscale: string): ITSCalculationResult {
         const annee = DateUtils.extraireAnnee(periodeFiscale);
         if (annee >= 2026) {
             return ITSErrorHandler.genererErreurAnnee(salaireMensuel, annee);
@@ -316,13 +316,13 @@ class MoteurITS {
         if (!salaireMensuel || salaireMensuel <= 0) {
             return ITSErrorHandler.genererErreurValidation('Le salaire doit être un montant positif');
         }
-        return new ITSResponseBuilder(salaireMensuel, periodeFiscale, { includeRedevanceORTB: false }).build();
+        return new ITSResponseBuilder(salaireMensuel, periodeFiscale, { includeRedevanceSRTB: false }).build();
     }
 
     public static calculerITSPersonnalise(
         salaireMensuel: number,
         periodeFiscale: string,
-        customRedevanceORTB?: number
+        customRedevanceSRTB?: number
     ): ITSCalculationResult {
         const annee = DateUtils.extraireAnnee(periodeFiscale);
         if (annee >= 2026) {
@@ -332,8 +332,8 @@ class MoteurITS {
             return ITSErrorHandler.genererErreurValidation('Le salaire doit être un montant positif');
         }
         return new ITSResponseBuilder(salaireMensuel, periodeFiscale, { 
-            includeRedevanceORTB: customRedevanceORTB !== undefined,
-            customRedevanceORTB
+            includeRedevanceSRTB: customRedevanceSRTB !== undefined,
+            customRedevanceSRTB
         }).build();
     }
 

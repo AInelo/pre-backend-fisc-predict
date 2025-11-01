@@ -19,7 +19,7 @@ export type AIBCalculationResult = GlobalEstimationInfoData | BackendEstimationF
 
 // Configuration de l'impôt AIB
 class AIBConfig {
-    static readonly REDEVANCE_RTB = 4_000;
+    static readonly REDEVANCE_SRTB = 4_000;
     static readonly TITLE = 'Accompte sur l\'Impôt sur les Bénéfices';
     static readonly LABEL = 'AIB';
     static readonly DESCRIPTION = `L'AIB est un acompte mensuel sur l'impôt sur les bénéfices, calculé sur le chiffre d'affaires ou le bénéfice.
@@ -94,7 +94,7 @@ class AIBResponseBuilder {
         this.aibNet = input.aibCollected - input.aibGranted;
         this.aibNetArrondi = Math.round(this.aibNet);
         this.redevanceSRTB = this.options.includeRedevanceSRTB ? 
-            (this.options.customRedevance ?? AIBConfig.REDEVANCE_RTB) : 0;
+            (this.options.customRedevance ?? AIBConfig.REDEVANCE_SRTB) : 0;
         this.contributionCCI = this.options.includeCCI ? 
             (this.options.customCCIRate ?? 0) : 0;
         this.totalAIB = this.aibNetArrondi + this.redevanceSRTB + this.contributionCCI;

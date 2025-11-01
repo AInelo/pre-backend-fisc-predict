@@ -66,7 +66,7 @@ export interface ResultatAIB {
     montantTransaction: number;
     taux: number;
     acompteAIB: number;
-    redevanceORTB: number;
+    redevanceSRTB: number;
     montantTotal: number;
     exonerationAppliquee: boolean;
     dateEcheance: string;
@@ -84,7 +84,7 @@ const TAUX = {
     T5: 0.05  // 5%
 } as const;
 
-const REDEVANCE_ORTB = 4000; // FCFA
+const REDEVANCE_SRTB = 4000; // FCFA
 
 
 /**
@@ -143,10 +143,10 @@ export class CalculateurAIB {
     }
 
     /**
-     * Calcule la redevance ORTB
+     * Calcule la redevance SRTB
      */
-    private static calculerRedevanceORTB(mois: string): number {
-        return mois.toLowerCase() === "mars" ? REDEVANCE_ORTB : 0;
+    private static calculerRedevanceSRTB(mois: string): number {
+        return mois.toLowerCase() === "mars" ? REDEVANCE_SRTB : 0;
     }
 
     /**
@@ -197,11 +197,11 @@ export class CalculateurAIB {
         // Calcul de l'acompte AIB
         const acompteAIB = exonerationAppliquee ? 0 : montant * taux;
 
-        // Calcul de la redevance ORTB
-        const redevanceORTB = this.calculerRedevanceORTB(mois);
+        // Calcul de la redevance SRTB
+        const redevanceSRTB = this.calculerRedevanceSRTB(mois);
 
         // Montant total
-        const montantTotal = acompteAIB + redevanceORTB;
+        const montantTotal = acompteAIB + redevanceSRTB;
 
         // Date d'échéance
         const dateEcheance = this.calculerDateEcheance(new Date());
@@ -210,7 +210,7 @@ export class CalculateurAIB {
             montantTransaction: montant,
             taux: taux,
             acompteAIB: acompteAIB,
-            redevanceORTB: redevanceORTB,
+            redevanceSRTB: redevanceSRTB,
             montantTotal: montantTotal,
             exonerationAppliquee: exonerationAppliquee,
             dateEcheance: dateEcheance
@@ -235,14 +235,14 @@ export class CalculateurAIB {
     
         /**
          * 3. Simulation en phase de négociation avec un client/public
-         * Fournit le net attendu après AIB + ORTB
+         * Fournit le net attendu après AIB + SRTB
          */
         public static simulerRetenuePourNegociation(parametres: ParametresAIB): {
             resultat: ResultatAIB;
             montantNetPerçu: number;
         } {
             const resultat = this.calculerAIB(parametres);
-            const montantNetPerçu = parametres.montant - resultat.acompteAIB - resultat.redevanceORTB;
+            const montantNetPerçu = parametres.montant - resultat.acompteAIB - resultat.redevanceSRTB;
             return { resultat, montantNetPerçu };
         }
     
@@ -251,16 +251,16 @@ export class CalculateurAIB {
          */
         public static planifierChargesFiscales(previsions: ParametresAIB[]): {
             totalAIB: number;
-            totalORTB: number;
+            totalSRTB: number;
             totalGlobal: number;
             resultats: ResultatAIB[];
         } {
             const resultats = previsions.map(p => this.calculerAIB(p));
             const totalAIB = resultats.reduce((sum, r) => sum + r.acompteAIB, 0);
-            const totalORTB = resultats.reduce((sum, r) => sum + r.redevanceORTB, 0);
-            const totalGlobal = totalAIB + totalORTB;
+            const totalSRTB = resultats.reduce((sum, r) => sum + r.redevanceSRTB, 0);
+            const totalGlobal = totalAIB + totalSRTB;
     
-            return { totalAIB, totalORTB, totalGlobal, resultats };
+            return { totalAIB, totalSRTB, totalGlobal, resultats };
         }
     
         /**
@@ -270,7 +270,7 @@ export class CalculateurAIB {
         public static reconstituerPourControle(operations: ParametresAIB[]): {
             resultats: ResultatAIB[];
             totalAIB: number;
-            totalORTB: number;
+            totalSRTB: number;
             montantTotal: number;
             recapitulatif: {
                 exonerations: number;
@@ -279,15 +279,15 @@ export class CalculateurAIB {
         } {
             const resultats = operations.map(op => this.calculerAIB(op));
             const totalAIB = resultats.reduce((acc, r) => acc + r.acompteAIB, 0);
-            const totalORTB = resultats.reduce((acc, r) => acc + r.redevanceORTB, 0);
-            const montantTotal = totalAIB + totalORTB;
+            const totalSRTB = resultats.reduce((acc, r) => acc + r.redevanceSRTB, 0);
+            const montantTotal = totalAIB + totalSRTB;
             const exonerations = resultats.filter(r => r.exonerationAppliquee).length;
             const nonExonerations = resultats.length - exonerations;
     
             return {
                 resultats,
                 totalAIB,
-                totalORTB,
+                totalSRTB,
                 montantTotal,
                 recapitulatif: {
                     exonerations,

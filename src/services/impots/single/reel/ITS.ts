@@ -15,7 +15,7 @@ export interface ResultatITS {
   salaireBrut: number;
   baseImposable: number;
   impotITS: number;
-  redevanceORTB: number;
+  redevanceSRTB: number;
   totalPrelevements: number;
   salaireNet: number;
   trancheAppliquee: number;
@@ -57,11 +57,11 @@ const TRANCHES_ITS: TrancheITS[] = [
 ];
 
 /**
- * Constantes ORTB
+ * Constantes SRTB
  */
-const ORTB_MARS = 1000; // FCFA
-const ORTB_JUIN = 3000; // FCFA
-const SEUIL_EXONERATION_ORTB_JUIN = 60000; // FCFA
+const SRTB_MARS = 1000; // FCFA
+const SRTB_JUIN = 3000; // FCFA
+const SEUIL_EXONERATION_SRTB_JUIN = 60000; // FCFA
 
 /**
  * Classe principale pour le calcul de l'ITS
@@ -141,15 +141,15 @@ export class CalculateurITS {
   }
 
   /**
-   * Calcule la redevance ORTB selon le mois et le salaire
+   * Calcule la redevance SRTB selon le mois et le salaire
    */
-  private static calculerRedevanceORTB(baseImposable: number, mois: number): number {
+  private static calculerRedevanceSRTB(baseImposable: number, mois: number): number {
     if (mois === 3) {
       // Mars
-      return ORTB_MARS;
+      return SRTB_MARS;
     } else if (mois === 6) {
       // Juin
-      return baseImposable > SEUIL_EXONERATION_ORTB_JUIN ? ORTB_JUIN : 0;
+      return baseImposable > SEUIL_EXONERATION_SRTB_JUIN ? SRTB_JUIN : 0;
     }
     return 0;
   }
@@ -188,11 +188,11 @@ export class CalculateurITS {
     // Calcul de l'ITS
     const { impot: impotITS, detailTranches } = this.calculerITSProgresif(baseImposable);
 
-    // Calcul de la redevance ORTB
-    const redevanceORTB = this.calculerRedevanceORTB(baseImposable, mois);
+    // Calcul de la redevance SRTB
+    const redevanceSRTB = this.calculerRedevanceSRTB(baseImposable, mois);
 
     // Total des prélèvements
-    const totalPrelevements = impotITS + redevanceORTB;
+    const totalPrelevements = impotITS + redevanceSRTB;
 
     // Salaire net
     const salaireNet = salaireBrut - totalPrelevements;
@@ -204,7 +204,7 @@ export class CalculateurITS {
       salaireBrut: salaireBrut,
       baseImposable: baseImposable,
       impotITS: impotITS,
-      redevanceORTB: redevanceORTB,
+      redevanceSRTB: redevanceSRTB,
       totalPrelevements: totalPrelevements,
       salaireNet: salaireNet,
       trancheAppliquee: trancheAppliquee,
@@ -239,25 +239,25 @@ export class CalculateurITS {
    */
   public static calculerITSAnnuel(salaireBrutMensuel: number): {
     totalITS: number;
-    totalORTB: number;
+    totalSRTB: number;
     totalPrelevements: number;
     detailMensuel: ResultatITS[];
   } {
     const detailMensuel: ResultatITS[] = [];
     let totalITS = 0;
-    let totalORTB = 0;
+    let totalSRTB = 0;
 
     for (let mois = 1; mois <= 12; mois++) {
       const resultat = this.calculerITS({ salaireBrut: salaireBrutMensuel, mois });
       detailMensuel.push(resultat);
       totalITS += resultat.impotITS;
-      totalORTB += resultat.redevanceORTB;
+      totalSRTB += resultat.redevanceSRTB;
     }
 
     return {
       totalITS,
-      totalORTB,
-      totalPrelevements: totalITS + totalORTB,
+      totalSRTB,
+      totalPrelevements: totalITS + totalSRTB,
       detailMensuel
     };
   }
@@ -275,7 +275,7 @@ export class CalculateurITS {
    */
    public static calculerITSParPeriode(salaireBrutMensuel: number, moisDebut: number, moisFin: number): {
     totalITS: number;
-    totalORTB: number;
+    totalSRTB: number;
     totalPrelevements: number;
     detailMensuel: ResultatITS[];
   } {
@@ -285,19 +285,19 @@ export class CalculateurITS {
 
     const detailMensuel: ResultatITS[] = [];
     let totalITS = 0;
-    let totalORTB = 0;
+    let totalSRTB = 0;
 
     for (let mois = moisDebut; mois <= moisFin; mois++) {
       const resultat = this.calculerITS({ salaireBrut: salaireBrutMensuel, mois });
       detailMensuel.push(resultat);
       totalITS += resultat.impotITS;
-      totalORTB += resultat.redevanceORTB;
+      totalSRTB += resultat.redevanceSRTB;
     }
 
     return {
       totalITS,
-      totalORTB,
-      totalPrelevements: totalITS + totalORTB,
+      totalSRTB,
+      totalPrelevements: totalITS + totalSRTB,
       detailMensuel
     };
   }
@@ -343,7 +343,7 @@ export class CalculateurITS {
     moisApresDebut: number
   ): {
     totalITS: number;
-    totalORTB: number;
+    totalSRTB: number;
     totalPrelevements: number;
     detailMensuel: ResultatITS[];
   } {
@@ -356,7 +356,7 @@ export class CalculateurITS {
 
     return {
       totalITS: avant.totalITS + apres.totalITS,
-      totalORTB: avant.totalORTB + apres.totalORTB,
+      totalSRTB: avant.totalSRTB + apres.totalSRTB,
       totalPrelevements: avant.totalPrelevements + apres.totalPrelevements,
       detailMensuel: [...avant.detailMensuel, ...apres.detailMensuel]
     };
@@ -443,10 +443,10 @@ export class CalculateurITS {
   //   resume += `
   //       --- RÉCAPITULATIF ---
   //       Impôt ITS: ${this.formaterMontant(resultat.impotITS)}
-  //       Redevance ORTB: ${this.formaterMontant(resultat.redevanceORTB)}
+  //       Redevance SRTB: ${this.formaterMontant(resultat.redevanceSRTB)}
   //   `;
 
-  //   if (resultat.redevanceORTB > 0) {
+  //   if (resultat.redevanceSRTB > 0) {
   //     if (mois === 3) {
   //       resume += ` (Mars)`;
   //     } else if (mois === 6) {
@@ -499,9 +499,9 @@ export class CalculateurITS {
 //   }
 
 //   /**
-//    * Exemple avec ORTB Mars
+//    * Exemple avec SRTB Mars
 //    */
-//   static exempleORTBMars(): ResultatITS {
+//   static exempleSRTBMars(): ResultatITS {
 //     return CalculateurITS.calculerITS({
 //       salaireBrut: 200000,
 //       mois: 3 // Mars
@@ -509,9 +509,9 @@ export class CalculateurITS {
 //   }
 
 //   /**
-//    * Exemple avec ORTB Juin (salaire > 60 000)
+//    * Exemple avec SRTB Juin (salaire > 60 000)
 //    */
-//   static exempleORTBJuin(): ResultatITS {
+//   static exempleSRTBJuin(): ResultatITS {
 //     return CalculateurITS.calculerITS({
 //       salaireBrut: 100000,
 //       mois: 6 // Juin
@@ -519,9 +519,9 @@ export class CalculateurITS {
 //   }
 
 //   /**
-//    * Exemple avec ORTB Juin exonéré (salaire ≤ 60 000)
+//    * Exemple avec SRTB Juin exonéré (salaire ≤ 60 000)
 //    */
-//   static exempleORTBJuinExonere(): ResultatITS {
+//   static exempleSRTBJuinExonere(): ResultatITS {
 //     return CalculateurITS.calculerITS({
 //       salaireBrut: 50000,
 //       mois: 6 // Juin
@@ -580,16 +580,16 @@ export class CalculateurITS {
   //   console.log(CalculateurITS.afficherResume(this.exemple2(1), 1));
   //   console.log("\n");
 
-  //   console.log("Exemple 3 - Salaire 200 000 FCFA avec ORTB Mars:");
-  //   console.log(CalculateurITS.afficherResume(this.exempleORTBMars(), 3));
+  //   console.log("Exemple 3 - Salaire 200 000 FCFA avec SRTB Mars:");
+  //   console.log(CalculateurITS.afficherResume(this.exempleSRTBMars(), 3));
   //   console.log("\n");
 
-  //   console.log("Exemple 4 - Salaire 100 000 FCFA avec ORTB Juin:");
-  //   console.log(CalculateurITS.afficherResume(this.exempleORTBJuin(), 6));
+  //   console.log("Exemple 4 - Salaire 100 000 FCFA avec SRTB Juin:");
+  //   console.log(CalculateurITS.afficherResume(this.exempleSRTBJuin(), 6));
   //   console.log("\n");
 
-  //   console.log("Exemple 5 - Salaire 50 000 FCFA en Juin (ORTB exonéré):");
-  //   console.log(CalculateurITS.afficherResume(this.exempleORTBJuinExonere(), 6));
+  //   console.log("Exemple 5 - Salaire 50 000 FCFA en Juin (SRTB exonéré):");
+  //   console.log(CalculateurITS.afficherResume(this.exempleSRTBJuinExonere(), 6));
   // }
 
   // /**

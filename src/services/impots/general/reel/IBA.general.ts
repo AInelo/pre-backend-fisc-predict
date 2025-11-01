@@ -43,9 +43,9 @@ interface IBAInput {
 
 // Interface pour les options de calcul
 interface IBACalculationOptions {
-    includeRedevanceORTB?: boolean;
+    includeRedevanceSRTB?: boolean;
     includeReductionArtisanale?: boolean;
-    customRedevanceORTB?: number;
+    customRedevanceSRTB?: number;
     customReductionArtisanale?: number;
 }
 
@@ -77,7 +77,7 @@ class IBAConfig {
     static readonly TAUX_GENERAL = 0.30;                    // τg - taux général
     static readonly MINIMUM_GENERAL_POURCENT = 0.015;       // τmin - minimum général en %
     static readonly MINIMUM_ABSOLU_GENERAL = 500_000;       // Mg - minimum absolu général
-    static readonly REDEVANCE_ORTB = 4_000;                 // RORTB
+    static readonly REDEVANCE_SRTB = 4_000;                 // RSRTB
     static readonly FACTEUR_REDUCTION_ARTISANALE = 0.5;     // Réduction 50% pour artisans
     
     static readonly TITLE = 'Impôt sur le Bénéfice d\'Affaire (IBA)';
@@ -86,7 +86,7 @@ class IBAConfig {
             Le taux varie selon le secteur d'activité. L'impôt final est le maximum entre l'impôt nominal, l'impôt minimum sectoriel et l'impôt minimum absolu.
             Une réduction de 50% s'applique aux artisans travaillant avec leur famille.
             Pour les stations-services, l'impôt minimum est calculé sur la base du volume de carburant vendu (0,60 FCFA/litre).
-            Une redevance ORTB de 4 000 FCFA s'ajoute au montant calculé.`;
+            Une redevance SRTB de 4 000 FCFA s'ajoute au montant calculé.`;
     static readonly COMPETENT_CENTER = "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.";
 }
 
@@ -143,7 +143,7 @@ class IBAResponseBuilder {
     private beneficeImposable: number = 0;
     private impotBase: number = 0;
     private impotApresReduction: number = 0;
-    private redevanceORTB: number = 0;
+    private redevanceSRTB: number = 0;
     private impotFinal: number = 0;
     private tauxPrincipal: number = 0;
     private impotNominal: number = 0;
@@ -154,7 +154,7 @@ class IBAResponseBuilder {
     constructor(input: IBAInput, options: IBACalculationOptions = {}) {
         this.input = input;
         this.options = {
-            includeRedevanceORTB: true,
+            includeRedevanceSRTB: true,
             includeReductionArtisanale: true,
             ...options
         };
@@ -189,11 +189,11 @@ class IBAResponseBuilder {
         const facteurReduction = this.obtenirFacteurReduction();
         this.impotApresReduction = this.impotBase * facteurReduction;
         
-        // Ajouter la redevance ORTB si applicable
-        this.redevanceORTB = this.options.includeRedevanceORTB ? 
-            (this.options.customRedevanceORTB ?? IBAConfig.REDEVANCE_ORTB) : 0;
+        // Ajouter la redevance SRTB si applicable
+        this.redevanceSRTB = this.options.includeRedevanceSRTB ? 
+            (this.options.customRedevanceSRTB ?? IBAConfig.REDEVANCE_SRTB) : 0;
         
-        this.impotFinal = Math.round(this.impotApresReduction + this.redevanceORTB);
+        this.impotFinal = Math.round(this.impotApresReduction + this.redevanceSRTB);
     }
 
     private getReglesSecteur(): RegleSecteur {
@@ -293,11 +293,11 @@ class IBAResponseBuilder {
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             variables.push({
-                label: "Redevance ORTB",
+                label: "Redevance SRTB",
                 description: "Redevance forfaitaire pour l'Office de Radiodiffusion et Télévision du Bénin",
-                value: this.redevanceORTB,
+                value: this.redevanceSRTB,
                 currency: 'FCFA'
             });
         }
@@ -331,15 +331,15 @@ class IBAResponseBuilder {
             });
         }
 
-        // Redevance ORTB
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        // Redevance SRTB
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             details.push({
-                impotTitle: 'Redevance ORTB',
-                impotDescription: `Redevance ${this.options.customRedevanceORTB ? 'personnalisée' : 'forfaitaire'} pour l'Office de Radiodiffusion et Télévision du Bénin`,
-                impotValue: this.redevanceORTB,
+                impotTitle: 'Redevance SRTB',
+                impotDescription: `Redevance ${this.options.customRedevanceSRTB ? 'personnalisée' : 'forfaitaire'} pour l'Office de Radiodiffusion et Télévision du Bénin`,
+                impotValue: this.redevanceSRTB,
                 impotValueCurrency: 'FCFA',
-                impotTaux: this.options.customRedevanceORTB ? 'Personnalisée' : 'Forfait',
-                importCalculeDescription: `Redevance ORTB = ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA (${this.options.customRedevanceORTB ? 'personnalisée' : 'forfait'})`
+                impotTaux: this.options.customRedevanceSRTB ? 'Personnalisée' : 'Forfait',
+                importCalculeDescription: `Redevance SRTB = ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA (${this.options.customRedevanceSRTB ? 'personnalisée' : 'forfait'})`
             });
         }
 
@@ -404,7 +404,7 @@ class IBAResponseBuilder {
                     "- L'impôt nominal (bénéfice × taux sectoriel)",
                     "- L'impôt minimum sectoriel (CA × taux minimum)",
                     "- L'impôt minimum absolu (500 000 FCFA général, 250 000 FCFA stations-services)",
-                    this.options.includeRedevanceORTB ? "Une redevance ORTB s'ajoute au montant final." : "Aucune redevance ORTB n'est incluse dans ce calcul."
+                    this.options.includeRedevanceSRTB ? "Une redevance SRTB s'ajoute au montant final." : "Aucune redevance SRTB n'est incluse dans ce calcul."
                 ]
             }
         ];
@@ -414,28 +414,28 @@ class IBAResponseBuilder {
                 infosTitle: 'Réductions et avantages',
                 infosDescription: [
                     "Réduction de 50% de l'IBA pour les artisans travaillant avec leur famille.",
-                    "Cette réduction s'applique sur l'impôt de base avant ajout de la redevance ORTB.",
+                    "Cette réduction s'applique sur l'impôt de base avant ajout de la redevance SRTB.",
                     "Les conditions d'éligibilité doivent être vérifiées auprès de l'administration fiscale.",
                     "Possibilité de report des déficits sur les exercices suivants."
                 ]
             });
         }
 
-        if (this.options.includeRedevanceORTB && this.redevanceORTB > 0) {
+        if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             infos.push({
-                infosTitle: 'Redevance ORTB',
+                infosTitle: 'Redevance SRTB',
                 infosDescription: [
-                    `La redevance ORTB de ${this.redevanceORTB.toLocaleString('fr-FR')} FCFA est ${this.options.customRedevanceORTB ? 'personnalisée' : 'fixe et obligatoire'}.`,
+                    `La redevance SRTB de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA est ${this.options.customRedevanceSRTB ? 'personnalisée' : 'fixe et obligatoire'}.`,
                     "Elle finance l'Office de Radiodiffusion et Télévision du Bénin."
                 ]
             });
         }
 
-        if (!this.options.includeRedevanceORTB && !this.options.includeReductionArtisanale) {
+        if (!this.options.includeRedevanceSRTB && !this.options.includeReductionArtisanale) {
             infos.push({
                 infosTitle: 'Calcul simplifié',
                 infosDescription: [
-                    'Ce calcul n\'inclut ni la redevance ORTB ni les réductions artisanales.',
+                    'Ce calcul n\'inclut ni la redevance SRTB ni les réductions artisanales.',
                     'Le montant total correspond uniquement à l\'IBA de base.'
                 ]
             });
@@ -547,13 +547,13 @@ class IBAResponseBuilder {
     }
 
     private getSuffixeCalcul(): string {
-        if (!this.options.includeRedevanceORTB && !this.options.includeReductionArtisanale) {
+        if (!this.options.includeRedevanceSRTB && !this.options.includeReductionArtisanale) {
             return ' (Base uniquement)';
-        } else if (!this.options.includeRedevanceORTB) {
-            return ' (Sans ORTB)';
+        } else if (!this.options.includeRedevanceSRTB) {
+            return ' (Sans SRTB)';
         } else if (!this.options.includeReductionArtisanale) {
             return ' (Sans réduction)';
-        } else if (this.options.customRedevanceORTB || this.options.customReductionArtisanale) {
+        } else if (this.options.customRedevanceSRTB || this.options.customReductionArtisanale) {
             return ' (Personnalisé)';
         }
         return '';
@@ -597,9 +597,9 @@ class MoteurIBA {
         return this.calculerIBAvecOptions(input, {});
     }
 
-    // Méthode sans redevance ORTB
-    public static calculerIBAWithoutRedevanceORTB(input: IBAInput): IBACalculationResult {
-        return this.calculerIBAvecOptions(input, { includeRedevanceORTB: false });
+    // Méthode sans redevance SRTB
+    public static calculerIBAWithoutRedevanceSRTB(input: IBAInput): IBACalculationResult {
+        return this.calculerIBAvecOptions(input, { includeRedevanceSRTB: false });
     }
 
     // Méthode sans réduction artisanale
@@ -607,10 +607,10 @@ class MoteurIBA {
         return this.calculerIBAvecOptions(input, { includeReductionArtisanale: false });
     }
 
-    // Méthode sans ORTB ni réduction artisanale
-    public static calculerIBAWithoutORTB_ReductionArtisanale(input: IBAInput): IBACalculationResult {
+    // Méthode sans SRTB ni réduction artisanale
+    public static calculerIBAWithoutSRTB_ReductionArtisanale(input: IBAInput): IBACalculationResult {
         return this.calculerIBAvecOptions(input, { 
-            includeRedevanceORTB: false, 
+            includeRedevanceSRTB: false, 
             includeReductionArtisanale: false 
         });
     }
@@ -618,13 +618,13 @@ class MoteurIBA {
     // Méthode avec montants personnalisés
     public static calculerIBAPersonnalise(
         input: IBAInput, 
-        customRedevanceORTB?: number, 
+        customRedevanceSRTB?: number, 
         customReductionArtisanale?: number
     ): IBACalculationResult {
         return this.calculerIBAvecOptions(input, {
-            customRedevanceORTB: customRedevanceORTB,
+            customRedevanceSRTB: customRedevanceSRTB,
             customReductionArtisanale: customReductionArtisanale,
-            includeRedevanceORTB: customRedevanceORTB !== undefined,
+            includeRedevanceSRTB: customRedevanceSRTB !== undefined,
             includeReductionArtisanale: customReductionArtisanale !== undefined
         });
     }
