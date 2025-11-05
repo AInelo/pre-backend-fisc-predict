@@ -1,8 +1,9 @@
-import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
+import { GlobalEstimationInfoData, ObligationEcheance } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
 
 // Interface pour les données d'entrée
 interface TPSInput {
+    dateCreation?: Date;        // Date de création de l'entreprise pour déterminer la première année
     chiffreAffaire: number;
     periodeFiscale: string;
     typeEntreprise: TypeEntreprise;
@@ -138,15 +139,30 @@ class TPSResponseBuilder {
     private contributionCCI: number;
     private redevanceSRTB: number;
     private tpsTotale: number;
+    private dateCreation?: Date;
+    private periodeFiscale: string;
+    private anneeCourante: number;
+    private estPremiereAnnee: boolean;
 
-    constructor(chiffreAffaire: number, typeEntreprise: TypeEntreprise, options: TPSCalculationOptions = {}) {
+    constructor(
+        chiffreAffaire: number, 
+        typeEntreprise: TypeEntreprise, 
+        periodeFiscale: string,
+        dateCreation?: Date,
+        options: TPSCalculationOptions = {}
+    ) {
         this.chiffreAffaire = chiffreAffaire;
         this.typeEntreprise = typeEntreprise;
+        this.periodeFiscale = periodeFiscale;
+        this.dateCreation = dateCreation;
         this.options = {
             includeCCI: true,
             includeRedevanceSRTB: true,
             ...options
         };
+        
+        this.anneeCourante = DateUtils.extraireAnnee(periodeFiscale);
+        this.estPremiereAnnee = this.determinerPremiereAnnee();
         
         this.tpsBase = Math.max(chiffreAffaire * TPSConfig.TAUX_TPS, TPSConfig.MONTANT_MINIMUM);
         this.contributionCCI = this.options.includeCCI ? 
@@ -154,6 +170,18 @@ class TPSResponseBuilder {
         this.redevanceSRTB = this.options.includeRedevanceSRTB ? 
             (this.options.customRedevance ?? TPSConfig.REDEVANCE_RTB) : 0;
         this.tpsTotale = this.tpsBase + this.redevanceSRTB + this.contributionCCI;
+    }
+
+    /**
+     * Détermine si c'est la première année d'activité
+     * Selon la documentation : anneeCreation = anneeCourante => Dispense d'acomptes
+     */
+    private determinerPremiereAnnee(): boolean {
+        if (!this.dateCreation) {
+            return false; // Si pas de date, on considère que ce n'est pas la première année
+        }
+        const anneeCreation = this.dateCreation.getFullYear();
+        return anneeCreation === this.anneeCourante;
     }
 
     private buildVariablesEnter() {
@@ -210,17 +238,23 @@ class TPSResponseBuilder {
         return details;
     }
 
-    private buildObligationEcheance() {
-        return [
+    private buildObligationEcheance(): ObligationEcheance[] {
+        const obligations: ObligationEcheance[] = [
             {
                 impotTitle: 'TPS - Solde à payer',
                 echeancePaiement: {
                     echeancePeriodeLimite: '30 avril N+1',
                     echeanceDescription: "Solde à verser au plus tard le 30 avril de l'année suivante."
                 },
-                obligationDescription: 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
-            },
-            {
+                obligationDescription: this.estPremiereAnnee 
+                    ? 'En première année d\'activité, aucun acompte n\'est dû. Le solde correspond à la TPS totale.'
+                    : 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
+            }
+        ];
+
+        // Acomptes uniquement si ce n'est PAS la première année
+        if (!this.estPremiereAnnee) {
+            obligations.push({
                 impotTitle: 'TPS - Acomptes provisionnels',
                 echeancePaiement: [
                     {
@@ -233,20 +267,43 @@ class TPSResponseBuilder {
                     }
                 ],
                 obligationDescription: "Applicable sauf pour la première année d'activité."
-            }
-        ];
+            });
+        } else {
+            // Message informatif pour première année
+            obligations.push({
+                impotTitle: 'TPS - Dispense d\'acomptes (Première année)',
+                echeancePaiement: {
+                    echeancePeriodeLimite: 'Aucun acompte requis',
+                    echeanceDescription: "Première année d'activité : dispense d'acomptes provisionnels."
+                },
+                obligationDescription: "Pour cette première année d'activité, aucun acompte n'est dû. Seul le solde final sera à payer le 30 avril de l'année suivante."
+            });
+        }
+
+        return obligations;
     }
 
     private buildInfosSupplementaires() {
-        const infos = [
-            {
+        const infos = [];
+
+        // Informations sur les acomptes selon le cas
+        if (this.estPremiereAnnee) {
+            infos.push({
+                infosTitle: 'Dispense d\'acomptes - Première année',
+                infosDescription: [
+                    "Première année d'activité : dispense d'acomptes provisionnels conformément à la réglementation.",
+                    "Aucun acompte n'est dû en février et juin. Le solde total de la TPS sera à payer le 30 avril de l'année suivante."
+                ]
+            });
+        } else {
+            infos.push({
                 infosTitle: 'Acomptes et Solde',
                 infosDescription: [
                     "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
                     "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
                 ]
-            }
-        ];
+            });
+        }
 
         if (this.options.includeCCI && this.contributionCCI > 0) {
             infos.push({
@@ -385,7 +442,7 @@ class MoteurTPSimplifie {
         input: TPSInput, 
         options: TPSCalculationOptions
     ): TPSCalculationResult {
-        const { chiffreAffaire, periodeFiscale, typeEntreprise } = input;
+        const { chiffreAffaire, periodeFiscale, typeEntreprise, dateCreation } = input;
         
         // Validation de l'année
         const annee = DateUtils.extraireAnnee(periodeFiscale);
@@ -399,7 +456,13 @@ class MoteurTPSimplifie {
         }
 
         // Construction de la réponse avec les options spécifiées
-        return new TPSResponseBuilder(chiffreAffaire, typeEntreprise, options).build();
+        return new TPSResponseBuilder(
+            chiffreAffaire, 
+            typeEntreprise, 
+            periodeFiscale,
+            dateCreation,
+            options
+        ).build();
     }
 }
 
