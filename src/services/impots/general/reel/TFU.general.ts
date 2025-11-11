@@ -1,98 +1,181 @@
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
-import { BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
+import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
 import tfuData from '../../../../data/tfu_data_with_slugs.json';
 
 // Type union pour le retour de la fonction
 export type TFUCalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
 
-// Interface pour les données TFU
-interface TFUInput {
+// Interfaces pour la nouvelle modélisation TFU
+interface TFUBatimentInfos {
+    categorie: string;
+    squareMeters: number;
+}
+
+interface TFUParcelleInfos {
     departement: string;
     commune: string;
     arrondissement: string;
-    categorie: string;
-    squareMeters: number;
+    nbrBatiments: number;
+    batiments: TFUBatimentInfos | TFUBatimentInfos[];
+    nbrPiscines: number;
+}
+
+interface TFUInput {
     periodeFiscale: string;
+    nbrParcelles: number;
+    parcelles: TFUParcelleInfos | TFUParcelleInfos[];
 }
 
 // Interface pour les tarifs TFU
 interface TFUTarif {
-    // nom_categorie: string;
-    // slug_categorie: string;
     description: string;
     slug_description: string;
     tfu_par_m2: number;
     tfu_minimum: number;
 }
 
-
-
-
 class MoteurTFU {
-    public static calculerTFU(input: TFUInput | TFUInput[]): TFUCalculationResult {
+    public static calculerTFU(input: TFUInput): TFUCalculationResult {
         try {
-            // Convertir en tableau pour un traitement uniforme
-            const inputs = Array.isArray(input) ? input : [input];
-
-            if (inputs.length === 0) {
+            if (!input) {
                 return this.genererReponseErreurValidation('Aucune donnée TFU fournie');
             }
 
-            // Extraire l'année de la période fiscale (utiliser la première pour la validation)
-            const annee = this.extraireAnnee(inputs[0].periodeFiscale);
+            const parcelles = Array.isArray(input.parcelles)
+                ? input.parcelles
+                : input.parcelles
+                    ? [input.parcelles]
+                    : [];
 
-            // Vérifier si l'année est 2026 ou ultérieure
-            if (annee >= 2026) {
-                return this.genererReponseErreur(inputs[0], annee);
+            if (parcelles.length === 0) {
+                return this.genererReponseErreurValidation('Aucune parcelle fournie pour le calcul de la TFU');
             }
 
-            // Calculer la TFU pour chaque propriété
+            const annee = this.extraireAnnee(input.periodeFiscale);
+
+            if (annee >= 2026) {
+                return this.genererReponseErreur(parcelles[0], annee);
+            }
+
             let totalTFU = 0;
             let totalSurface = 0;
+            let totalPiscines = 0;
             const detailsCalculs: string[] = [];
             const variablesEnter: any[] = [];
+            const surfacesParcelles: number[] = [];
+            const piscinesParcelles: number[] = [];
 
-            for (const singleInput of inputs) {
-                // Validation des entrées
-                if (singleInput.squareMeters < 0) {
-                    return this.genererReponseErreurValidation('La surface en mètres carrés ne peut pas être négative');
+            for (let parcelleIndex = 0; parcelleIndex < parcelles.length; parcelleIndex++) {
+                const parcelle = parcelles[parcelleIndex];
+                const batiments = Array.isArray(parcelle.batiments)
+                    ? parcelle.batiments
+                    : parcelle.batiments
+                        ? [parcelle.batiments]
+                        : [];
+
+                if (batiments.length === 0) {
+                    return this.genererReponseErreurValidation(`Aucun bâtiment renseigné pour la parcelle ${parcelleIndex + 1}`);
                 }
 
-                // Récupérer les données de tarif
-                const rateData = this.findTFURate(singleInput);
-                if (!rateData) {
-                    return this.genererReponseErreurValidation(`Tarif TFU non trouvé pour ${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}`);
+                if (typeof parcelle.nbrBatiments === 'number' && parcelle.nbrBatiments >= 0 && parcelle.nbrBatiments !== batiments.length) {
+                    return this.genererReponseErreurValidation(
+                        `Le nombre de bâtiments indiqué (${parcelle.nbrBatiments}) ne correspond pas au nombre de bâtiments fournis (${batiments.length}) pour la parcelle ${parcelleIndex + 1}`
+                    );
                 }
 
-                // Calculer la TFU : nombre de mètres carrés × TFU par m²
-                let tfu = singleInput.squareMeters * rateData.tfu_par_m2;
+                let sommeTFUBatiments = 0;
+                let surfaceParcelle = 0;
+                let minimumBatimentLePlusGrand = 0;
+                let surfaceBatimentLePlusGrand = 0;
+                const detailsBatiments: string[] = [];
 
-                // Appliquer le minimum si le résultat est inférieur
-                const tfuFinale = Math.max(tfu, rateData.tfu_minimum);
+                for (let batimentIndex = 0; batimentIndex < batiments.length; batimentIndex++) {
+                    const batiment = batiments[batimentIndex];
 
-                // Arrondir à l'entier le plus proche
-                const tfuArrondie = Math.round(tfuFinale);
+                    if (batiment.squareMeters < 0) {
+                        return this.genererReponseErreurValidation(`La surface du bâtiment ${batimentIndex + 1} de la parcelle ${parcelleIndex + 1} ne peut pas être négative`);
+                    }
 
-                totalTFU += tfuArrondie;
-                totalSurface += singleInput.squareMeters;
+                    const rateData = this.findTFURate(
+                        parcelle.departement,
+                        parcelle.commune,
+                        parcelle.arrondissement,
+                        batiment.categorie
+                    );
 
-                // Ajouter les détails du calcul avec indication du minimum si appliqué
-                const tfuCalculee = Math.round(tfu);
-                const minimumApplique = tfuArrondie > tfuCalculee;
-                const detailCalcul = minimumApplique 
-                    ? `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuCalculee.toLocaleString('fr-FR')} FCFA → Minimum appliqué : ${tfuArrondie.toLocaleString('fr-FR')} FCFA`
-                    : `${singleInput.departement} - ${singleInput.commune} - ${singleInput.arrondissement}: ${singleInput.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuArrondie.toLocaleString('fr-FR')} FCFA`;
-                
-                detailsCalculs.push(detailCalcul);
+                    if (!rateData) {
+                        return this.genererReponseErreurValidation(`Tarif TFU non trouvé pour ${parcelle.departement} - ${parcelle.commune} - ${parcelle.arrondissement} (catégorie ${batiment.categorie})`);
+                    }
 
-                // Ajouter les variables d'entrée
+                    const tfu = batiment.squareMeters * rateData.tfu_par_m2;
+                    const tfuFinale = Math.max(tfu, rateData.tfu_minimum);
+                    const tfuArrondie = Math.round(tfuFinale);
+
+                    sommeTFUBatiments += tfuArrondie;
+                    surfaceParcelle += batiment.squareMeters;
+                    totalSurface += batiment.squareMeters;
+
+                    if (batiment.squareMeters >= surfaceBatimentLePlusGrand) {
+                        surfaceBatimentLePlusGrand = batiment.squareMeters;
+                        minimumBatimentLePlusGrand = rateData.tfu_minimum;
+                    }
+
+                    const tfuCalculee = Math.round(tfu);
+                    const minimumApplique = tfuArrondie > tfuCalculee;
+                    const detailBatiment = minimumApplique
+                        ? `Bâtiment ${batimentIndex + 1}: ${batiment.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuCalculee.toLocaleString('fr-FR')} FCFA → Minimum appliqué : ${tfuArrondie.toLocaleString('fr-FR')} FCFA`
+                        : `Bâtiment ${batimentIndex + 1}: ${batiment.squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuArrondie.toLocaleString('fr-FR')} FCFA`;
+
+                    detailsBatiments.push(detailBatiment);
+                }
+
+                const nombrePiscines = parcelle.nbrPiscines ?? 0;
+                if (nombrePiscines < 0) {
+                    return this.genererReponseErreurValidation(`Le nombre de piscines pour la parcelle ${parcelleIndex + 1} ne peut pas être négatif`);
+                }
+                const montantMinimumBatimentLePlusGrand = Math.round(minimumBatimentLePlusGrand);
+                const montantPiscines = nombrePiscines * 30000;
+                totalPiscines += nombrePiscines;
+
+                const tfuBatimentsRetenue = Math.max(sommeTFUBatiments, montantMinimumBatimentLePlusGrand);
+                const tfuParcelle = tfuBatimentsRetenue + montantPiscines;
+                totalTFU += tfuParcelle;
+                surfacesParcelles.push(surfaceParcelle);
+                piscinesParcelles.push(nombrePiscines);
+
+                const detailParcelle = [
+                    `Parcelle ${parcelleIndex + 1} - ${parcelle.departement} / ${parcelle.commune} / ${parcelle.arrondissement}`,
+                    ...detailsBatiments,
+                    `Somme TFU bâtiments : ${sommeTFUBatiments.toLocaleString('fr-FR')} FCFA`,
+                    `Minimum (bâtiment le plus grand) : ${montantMinimumBatimentLePlusGrand.toLocaleString('fr-FR')} FCFA`,
+                    `TFU retenue pour la parcelle : ${tfuBatimentsRetenue.toLocaleString('fr-FR')} FCFA`,
+                    `Piscines (${nombrePiscines}) : ${montantPiscines.toLocaleString('fr-FR')} FCFA`,
+                    `Montant total parcelle : ${tfuParcelle.toLocaleString('fr-FR')} FCFA`
+                ].join(' | ');
+
+                detailsCalculs.push(detailParcelle);
+
                 variablesEnter.push({
-                    label: `Surface - ${singleInput.departement}`,
-                    description: `Surface de la propriété à ${singleInput.commune}`,
-                    value: singleInput.squareMeters,
+                    label: `Parcelle ${parcelleIndex + 1}`,
+                    description: `Surface totale des bâtiments (${batiments.length} bâtiment(s))`,
+                    value: surfaceParcelle,
                     currency: 'm²',
                 });
+
+                if (nombrePiscines > 0) {
+                    variablesEnter.push({
+                        label: `Piscines - Parcelle ${parcelleIndex + 1}`,
+                        description: `Nombre de piscines déclarées`,
+                        value: nombrePiscines,
+                        currency: 'unité(s)',
+                    });
+                }
             }
+
+            const premiereParcelle = parcelles[0];
+            const detailsDescription = detailsCalculs.length > 0
+                ? `Détails par parcelle:\n${detailsCalculs.join('\n')}`
+                : 'Aucun détail de calcul disponible';
 
             return {
                 totalEstimation: totalTFU,
@@ -102,24 +185,14 @@ class MoteurTFU {
 
                 impotDetailCalcule: [
                     {
-                        impotTitle: 'TFU (Taxe Foncière Unique)',
-                        impotDescription: inputs.length === 1
-                            ? `Calculée selon le tarif de ${inputs[0].departement} - ${inputs[0].commune} - ${inputs[0].arrondissement}`
-                            : `Calculée pour ${inputs.length} propriétés avec cumul des montants`,
+                        impotTitle: 'TFU (Taxe Foncière Urbaine)',
+                        impotDescription: parcelles.length === 1
+                            ? `Calculée pour la parcelle située à ${premiereParcelle.departement} - ${premiereParcelle.commune} - ${premiereParcelle.arrondissement} (surface totale des bâtiments : ${surfacesParcelles[0]} m², piscines : ${piscinesParcelles[0]})`
+                            : `Calculée pour ${parcelles.length} parcelles (surface totale : ${totalSurface} m², piscines : ${totalPiscines})`,
                         impotValue: totalTFU,
                         impotValueCurrency: 'FCFA',
-                        impotTaux: inputs.length === 1 ? `${this.findTFURate(inputs[0])?.tfu_par_m2.toFixed(2)} FCFA/m²` : 'Tarifs variables',
-                        importCalculeDescription: inputs.length === 1
-                            ? (() => {
-                                const rateData = this.findTFURate(inputs[0]);
-                                if (!rateData) return `TFU = ${totalTFU.toLocaleString('fr-FR')} FCFA`;
-                                const tfuCalculee = Math.round(inputs[0].squareMeters * rateData.tfu_par_m2);
-                                const minimumApplique = totalTFU > tfuCalculee;
-                                return minimumApplique 
-                                    ? `TFU = ${inputs[0].squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${tfuCalculee.toLocaleString('fr-FR')} FCFA → Minimum appliqué : ${totalTFU.toLocaleString('fr-FR')} FCFA`
-                                    : `TFU = ${inputs[0].squareMeters} m² × ${rateData.tfu_par_m2.toFixed(2)} FCFA/m² = ${totalTFU.toLocaleString('fr-FR')} FCFA`;
-                            })()
-                            : `Cumul TFU pour ${inputs.length} propriétés: ${totalTFU.toLocaleString('fr-FR')} FCFA (Surface totale: ${totalSurface} m²)`
+                        impotTaux: 'Tarifs variables par bâtiment et par zone',
+                        importCalculeDescription: detailsDescription
                     }
                 ],
 
@@ -200,21 +273,26 @@ class MoteurTFU {
     }
 
     // Recherche du tarif TFU en utilisant les slugs pour une précision maximale
-    private static findTFURate(input: TFUInput): TFUTarif | null {
+    private static findTFURate(
+        departementSlug: string,
+        communeSlug: string,
+        arrondissementSlug: string,
+        categorieSlug: string
+    ): TFUTarif | null {
         try {
             // On suppose que les champs d'entrée sont déjà des slugs ou à convertir en slug
             const departement = tfuData.departements.find(d =>
-                d.slug === input.departement
+                d.slug === departementSlug
             );
             if (!departement) return null;
 
             const commune = departement.communes.find(c =>
-                c.slug === input.commune
+                c.slug === communeSlug
             );
             if (!commune) return null;
 
             const arrondissement = commune.arrondissements.find(a =>
-                a.slug === input.arrondissement
+                a.slug === arrondissementSlug
             );
             if (!arrondissement) return null;
 
@@ -223,7 +301,7 @@ class MoteurTFU {
             const tarifKey = Object.keys(arrondissement.tarifs).find(key => {
                 const cat = arrondissement.tarifs[key as keyof typeof arrondissement.tarifs];
                 // On vérifie le slug de la description qui correspond à la catégorie spécifique
-                return cat.slug_description === input.categorie;
+                return cat.slug_description === categorieSlug;
             });
 
             if (!tarifKey) return null;
@@ -235,7 +313,9 @@ class MoteurTFU {
         }
     }
 
-    private static extraireAnnee(periodeFiscale: string): number {
+    private static extraireAnnee(
+            periodeFiscale: string
+        ): number {
         // Essayer d'extraire l'année de différents formats possibles
         const anneeMatch = periodeFiscale.match(/(\d{4})/);
         if (anneeMatch) {
@@ -246,7 +326,10 @@ class MoteurTFU {
         return new Date().getFullYear();
     }
 
-    private static genererReponseErreur(input: TFUInput, annee: number): BackendEstimationFailureResponse {
+    private static genererReponseErreur(
+            parcelle: TFUParcelleInfos, 
+            annee: number
+        ): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -260,7 +343,7 @@ class MoteurTFU {
             context: {
                 typeContribuable: 'Propriétaire foncier',
                 regime: 'TFU',
-                chiffreAffaire: input.squareMeters,
+                chiffreAffaire: parcelle.nbrBatiments,
                 missingData: ['tarifs_tfu', 'zones_geographiques', 'categories_construction']
             },
             timestamp: new Date().toISOString(),
@@ -268,7 +351,9 @@ class MoteurTFU {
         };
     }
 
-    private static genererReponseErreurValidation(message: string): BackendEstimationFailureResponse {
+    private static genererReponseErreurValidation(
+            message: string
+        ): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
@@ -282,7 +367,7 @@ class MoteurTFU {
             context: {
                 typeContribuable: 'Propriétaire foncier',
                 regime: 'TFU',
-                missingData: ['donnees_entree']
+                missingData: ['parcelles', 'batiments']
             },
             timestamp: new Date().toISOString(),
             requestId: `tfu_calc_${Date.now()}`
@@ -290,4 +375,4 @@ class MoteurTFU {
     }
 }
 
-export default MoteurTFU; 
+export default MoteurTFU;
