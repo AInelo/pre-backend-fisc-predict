@@ -189,17 +189,21 @@ export class EntrepriseGeneralEstimation {
         const codeUpper = impotCode.toUpperCase();
         
         if (codeUpper === 'TVM') {
-            // TVM est applicable seulement si hasVehicles est true ET qu'il y a des véhicules
-            return dataImpot?.hasVehicles === true && 
-                   Array.isArray(dataImpot.vehicles) && 
-                   dataImpot.vehicles.length > 0;
+            // TVM est applicable seulement si hasVehicles est explicitement true ET qu'il y a des véhicules
+            // Si hasVehicles est false, null, undefined ou absent, l'impôt n'est pas applicable
+            if (dataImpot?.hasVehicles !== true) {
+                return false;
+            }
+            return Array.isArray(dataImpot.vehicles) && dataImpot.vehicles.length > 0;
         }
         
         if (codeUpper === 'TFU') {
-            // TFU est applicable seulement si possessionProprietes est true ET qu'il y a des propriétés
-            return dataImpot?.possessionProprietes === true && 
-                   Array.isArray(dataImpot.proprietes) && 
-                   dataImpot.proprietes.length > 0;
+            // TFU est applicable seulement si possessionProprietes est explicitement true ET qu'il y a des propriétés
+            // Si possessionProprietes est false, null, undefined ou absent, l'impôt n'est pas applicable
+            if (dataImpot?.possessionProprietes !== true) {
+                return false;
+            }
+            return Array.isArray(dataImpot.proprietes) && dataImpot.proprietes.length > 0;
         }
         
         // Pour les autres impôts, on considère qu'ils sont toujours applicables
@@ -253,15 +257,23 @@ export class EntrepriseGeneralEstimation {
                                 ? resultat.errors[0]?.message || ''
                                 : '';
                             
-                            if (errorMessage.includes('Aucun véhicule') || 
-                                errorMessage.includes('Aucune propriété') || 
-                                errorMessage.includes('liste des propriétés est vide')) {
+                            // Messages d'erreur possibles pour les impôts conditionnels non applicables
+                            const messagesNonApplicables = [
+                                'Aucun véhicule',
+                                'Aucune propriété',
+                                'liste des propriétés est vide',
+                                'Aucun véhicule déclaré',
+                                'Aucune propriété déclarée'
+                            ];
+                            
+                            if (messagesNonApplicables.some(msg => errorMessage.includes(msg))) {
                                 // Ignorer silencieusement - l'impôt n'est simplement pas applicable
                                 continue;
                             }
                         }
                         
                         // Gérer les erreurs de calcul pour les impôts obligatoires
+                        // Ne pas ignorer les erreurs des impôts obligatoires
                         if ('errors' in resultat && resultat.errors) {
                             resultat.errors.forEach((error: any) => {
                                 errors.push(`${impotCode}: ${error.message}`);
