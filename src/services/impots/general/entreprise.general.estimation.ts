@@ -234,8 +234,8 @@ export class EntrepriseGeneralEstimation {
 
                 // Vérifier si l'impôt conditionnel est applicable avant de le calculer
                 const codeUpper = impotCode.toUpperCase();
-                if (this.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
-                    if (!this.estImpotConditionnelApplicable(codeUpper, dataImpot)) {
+                if (EntrepriseGeneralEstimation.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
+                    if (!EntrepriseGeneralEstimation.estImpotConditionnelApplicable(codeUpper, dataImpot)) {
                         // Ignorer silencieusement les impôts conditionnels non applicables
                         continue;
                     }
@@ -247,7 +247,7 @@ export class EntrepriseGeneralEstimation {
 
                     if (resultat && 'success' in resultat && resultat.success === false) {
                         // Pour les impôts conditionnels, vérifier si l'erreur est due à l'absence de données
-                        if (this.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
+                        if (EntrepriseGeneralEstimation.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
                             // Vérifier si l'erreur est liée à l'absence de données (non applicable)
                             const errorMessage = 'errors' in resultat && resultat.errors && Array.isArray(resultat.errors) 
                                 ? resultat.errors[0]?.message || ''
