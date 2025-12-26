@@ -181,6 +181,31 @@ interface EntrepriseGeneralEstimationRequest {
 // MÉTHODE PRINCIPALE POUR L'ESTIMATION GLOBALE DES IMPÔTS DES ENTREPRISES
 export class EntrepriseGeneralEstimation {
 
+    // Liste des impôts conditionnels (optionnels) - ne génèrent pas d'erreur s'ils ne sont pas applicables
+    private static readonly IMPOTS_CONDITIONNELS = ['TVM', 'TFU'];
+
+    // Méthode pour vérifier si un impôt conditionnel est applicable
+    private static estImpotConditionnelApplicable(impotCode: string, dataImpot: any): boolean {
+        const codeUpper = impotCode.toUpperCase();
+        
+        if (codeUpper === 'TVM') {
+            // TVM est applicable seulement si hasVehicles est true ET qu'il y a des véhicules
+            return dataImpot?.hasVehicles === true && 
+                   Array.isArray(dataImpot.vehicles) && 
+                   dataImpot.vehicles.length > 0;
+        }
+        
+        if (codeUpper === 'TFU') {
+            // TFU est applicable seulement si possessionProprietes est true ET qu'il y a des propriétés
+            return dataImpot?.possessionProprietes === true && 
+                   Array.isArray(dataImpot.proprietes) && 
+                   dataImpot.proprietes.length > 0;
+        }
+        
+        // Pour les autres impôts, on considère qu'ils sont toujours applicables
+        return true;
+    }
+
     public static calculerEstimationGlobale(request: EntrepriseGeneralEstimationRequest): GlobalEstimationResult | BackendEstimationFailureResponse {
         try {
             const resultats: Record<string, any> = {};
@@ -207,12 +232,36 @@ export class EntrepriseGeneralEstimation {
                     continue;
                 }
 
+                // Vérifier si l'impôt conditionnel est applicable avant de le calculer
+                const codeUpper = impotCode.toUpperCase();
+                if (this.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
+                    if (!this.estImpotConditionnelApplicable(codeUpper, dataImpot)) {
+                        // Ignorer silencieusement les impôts conditionnels non applicables
+                        continue;
+                    }
+                }
+
                 try {
                     // Calculer l'impôt selon son type
                     const resultat = EntrepriseGeneralEstimation.calculerImpot(impotCode, dataImpot);
 
                     if (resultat && 'success' in resultat && resultat.success === false) {
-                        // Gérer les erreurs de calcul
+                        // Pour les impôts conditionnels, vérifier si l'erreur est due à l'absence de données
+                        if (this.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
+                            // Vérifier si l'erreur est liée à l'absence de données (non applicable)
+                            const errorMessage = 'errors' in resultat && resultat.errors && Array.isArray(resultat.errors) 
+                                ? resultat.errors[0]?.message || ''
+                                : '';
+                            
+                            if (errorMessage.includes('Aucun véhicule') || 
+                                errorMessage.includes('Aucune propriété') || 
+                                errorMessage.includes('liste des propriétés est vide')) {
+                                // Ignorer silencieusement - l'impôt n'est simplement pas applicable
+                                continue;
+                            }
+                        }
+                        
+                        // Gérer les erreurs de calcul pour les impôts obligatoires
                         if ('errors' in resultat && resultat.errors) {
                             resultat.errors.forEach((error: any) => {
                                 errors.push(`${impotCode}: ${error.message}`);
