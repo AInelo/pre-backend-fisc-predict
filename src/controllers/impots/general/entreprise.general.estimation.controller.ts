@@ -66,6 +66,15 @@ export class EntrepriseGeneralEstimationController {
                 return;
             }
 
+            // Log pour déboguer les données reçues
+            console.log(`[DEBUG] Données reçues dans le contrôleur:`, JSON.stringify({
+                hasChiffreAffaire: 'chiffreAffaire' in req.body,
+                chiffreAffaire: req.body.chiffreAffaire,
+                hasDataImpot: 'dataImpot' in req.body,
+                dataImpotKeys: req.body.dataImpot ? Object.keys(req.body.dataImpot) : [],
+                allKeys: Object.keys(req.body || {})
+            }));
+
             // Appeler le service de calcul
             const resultat = calculerEstimationGlobaleEntreprise(req.body);
             
@@ -79,11 +88,18 @@ export class EntrepriseGeneralEstimationController {
             } else {
                 // Gérer les erreurs de calcul
                 let errorDetails = 'Erreur inconnue lors du calcul';
-                if (resultat && 'errors' in resultat && Array.isArray(resultat.errors)) {
-                    errorDetails = resultat.errors.join(', ');
-                } else if (resultat && 'errors' in resultat && typeof resultat.errors === 'string') {
-                    errorDetails = resultat.errors;
+                if (resultat && 'errors' in resultat) {
+                    if (Array.isArray(resultat.errors)) {
+                        errorDetails = resultat.errors.join('; ');
+                    } else if (typeof resultat.errors === 'string') {
+                        errorDetails = resultat.errors;
+                    }
                 }
+
+                // Ajouter des informations de débogage si disponibles
+                const debugInfo = resultat && 'estimationsParImpot' in resultat 
+                    ? ` Impôts traités: ${Object.keys(resultat.estimationsParImpot || {}).join(', ')}`
+                    : '';
 
                 const errorResponse: BackendEstimationFailureResponse = {
                     success: false,
@@ -91,7 +107,7 @@ export class EntrepriseGeneralEstimationController {
                         {
                             code: 'CALCULATION_ERROR',
                             message: 'Erreur lors du calcul de l\'estimation globale',
-                            details: errorDetails,
+                            details: errorDetails + debugInfo,
                             severity: 'error'
                         }
                     ],

@@ -11,31 +11,11 @@ services:
     ports:
       - "5001:5001"
     environment:
-      - DB_HOST=startax-mysql-container
-      - DB_PORT=3306
-      - DB_USER=root
-      - DB_PASSWORD=secret
-      - DB_NAME=startax_db
-      - MONGO_URL=mongodb://startax-mongo-container:27019/startax_db
+      - MONGO_URL=mongodb://startax-mongo-container:27017/startax_db
     volumes:
       - .:/app
     depends_on:
-      - startax-database
       - startax-mongodb
-    networks:
-      - startax-network
-
-  startax-database:
-    image: mysql:8.0
-    container_name: startax-mysql-container
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: startax_db
-    volumes:
-      - ./mysql-data:/var/lib/mysql
-    ports:
-      - "3307:3306"  # Port externe 3307 pour éviter les conflits
     networks:
       - startax-network
 

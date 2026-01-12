@@ -174,6 +174,9 @@ interface TPSInput {
 
 interface EntrepriseGeneralEstimationRequest {
     dataImpot: Record<string, AIBInput | IBAInput | IRFInput | ISInput | PatenteInput | ITSInput | TFUEntrepriseInput | TVMInput | TPSInput>;
+    chiffreAffaire?: number;  // Chiffre d'affaires global (optionnel, peut être dans dataImpot)
+    periodeFiscale?: string;  // Période fiscale globale (optionnel, peut être dans dataImpot)
+    typeEntreprise?: TypeEntreprise;  // Type d'entreprise global (optionnel)
 }
 
 
@@ -183,6 +186,9 @@ export class EntrepriseGeneralEstimation {
 
     // Liste des impôts conditionnels (optionnels) - ne génèrent pas d'erreur s'ils ne sont pas applicables
     private static readonly IMPOTS_CONDITIONNELS = ['TVM', 'TFU'];
+    
+    // Seuil pour déterminer le régime TPS vs REEL
+    private static readonly SEUIL_REGIME_REEL = 50_000_000;
 
     // Méthode pour vérifier si un impôt conditionnel est applicable
     private static estImpotConditionnelApplicable(impotCode: string, dataImpot: any): boolean {
@@ -224,32 +230,50 @@ export class EntrepriseGeneralEstimation {
             let totalEstimationCurrency = 'FCFA';
             let contribuableRegime = 'Entreprise - Régime Général';
 
+            // Extraire le chiffre d'affaires pour déterminer le régime
+            const chiffreAffaire = EntrepriseGeneralEstimation.extraireChiffreAffaire(request);
+            const regime = EntrepriseGeneralEstimation.determinerRegime(chiffreAffaire);
+            console.log(`[DEBUG] Chiffre d'affaires extrait: ${chiffreAffaire}, Régime déterminé: ${regime}`);
+
             // Traiter chaque impôt dans la requête
+            console.log(`[DEBUG] Traitement de ${Object.keys(request.dataImpot).length} impôt(s):`, Object.keys(request.dataImpot));
+            
             for (const [impotCode, dataImpot] of Object.entries(request.dataImpot)) {
+                console.log(`[DEBUG] Traitement de l'impôt: ${impotCode}`);
+                
                 // Vérifier si l'impôt est disponible
                 const impotState = impotGeneralCalculationState.find(impot =>
                     impot.impotCode === impotCode.toUpperCase()
                 );
 
                 if (!impotState || impotState.state !== 'available') {
-                    errors.push(`L'impôt ${impotCode} n'est pas disponible pour le calcul`);
+                    const errorMsg = `L'impôt ${impotCode} n'est pas disponible pour le calcul`;
+                    console.log(`[DEBUG] ${errorMsg}`);
+                    errors.push(errorMsg);
                     continue;
                 }
 
                 // Vérifier si l'impôt conditionnel est applicable avant de le calculer
                 const codeUpper = impotCode.toUpperCase();
                 if (EntrepriseGeneralEstimation.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
-                    if (!EntrepriseGeneralEstimation.estImpotConditionnelApplicable(codeUpper, dataImpot)) {
+                    const estApplicable = EntrepriseGeneralEstimation.estImpotConditionnelApplicable(codeUpper, dataImpot);
+                    console.log(`[DEBUG] ${impotCode} est conditionnel, applicable: ${estApplicable}`);
+                    if (!estApplicable) {
                         // Ignorer silencieusement les impôts conditionnels non applicables
+                        console.log(`[DEBUG] ${impotCode} ignoré car non applicable`);
                         continue;
                     }
                 }
 
                 try {
                     // Calculer l'impôt selon son type
+                    console.log(`[DEBUG] Calcul de ${impotCode}...`);
                     const resultat = EntrepriseGeneralEstimation.calculerImpot(impotCode, dataImpot);
+                    console.log(`[DEBUG] Résultat de ${impotCode}:`, resultat ? (resultat.success !== false ? 'SUCCÈS' : 'ERREUR') : 'NULL/UNDEFINED');
 
+                    // Vérifier si le résultat est une erreur
                     if (resultat && 'success' in resultat && resultat.success === false) {
+                        console.log(`[DEBUG] ${impotCode} a retourné une erreur`);
                         // Pour les impôts conditionnels, vérifier si l'erreur est due à l'absence de données
                         if (EntrepriseGeneralEstimation.IMPOTS_CONDITIONNELS.includes(codeUpper)) {
                             // Vérifier si l'erreur est liée à l'absence de données (non applicable)
@@ -282,7 +306,9 @@ export class EntrepriseGeneralEstimation {
                         continue;
                     }
 
+                    // Vérifier si le résultat contient totalEstimation (succès)
                     if (resultat && 'totalEstimation' in resultat) {
+                        console.log(`[DEBUG] ${impotCode} calculé avec succès: ${resultat.totalEstimation} FCFA`);
                         // Ajouter le résultat au total
                         totalEstimation += resultat.totalEstimation;
 
@@ -317,15 +343,103 @@ export class EntrepriseGeneralEstimation {
                         if (resultat.impotConfig) {
                             impotConfig[impotCode] = resultat.impotConfig;
                         }
+                    } else if (!resultat) {
+                        // Si le résultat est null ou undefined, c'est une erreur
+                        errors.push(`${impotCode}: Le calcul a retourné un résultat vide`);
                     }
 
                 } catch (error) {
-                    errors.push(`Erreur lors du calcul de ${impotCode}: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
+                    // Capturer les exceptions non gérées
+                    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
+                    const errorStack = error instanceof Error ? error.stack : '';
+                    errors.push(`Erreur lors du calcul de ${impotCode}: ${errorMessage}`);
+                    console.error(`Erreur détaillée pour ${impotCode}:`, errorMessage, errorStack);
                 }
             }
 
             // Vérifier s'il y a des résultats
+            console.log(`[DEBUG] Nombre d'impôts calculés avec succès: ${Object.keys(resultats).length}`);
+            console.log(`[DEBUG] Impôts calculés:`, Object.keys(resultats));
+            console.log(`[DEBUG] Nombre d'erreurs collectées: ${errors.length}`);
+            console.log(`[DEBUG] Erreurs:`, errors);
+            
+            // Si aucun impôt n'a été calculé et que le régime est TPS, calculer automatiquement la TPS
+            if (Object.keys(resultats).length === 0 && regime === 'TPS') {
+                if (chiffreAffaire <= 0) {
+                    console.log(`[DEBUG] Impossible de calculer la TPS automatiquement: chiffre d'affaires non trouvé ou invalide`);
+                    errors.push('Le chiffre d\'affaires est requis pour calculer la TPS. Veuillez fournir le chiffre d\'affaires dans votre requête.');
+                } else {
+                    console.log(`[DEBUG] Aucun impôt calculé, calcul automatique de la TPS pour régime TPS`);
+                    
+                    try {
+                        // Préparer les données TPS
+                        const tpsInput: TPSInput = {
+                            chiffreAffaire: chiffreAffaire,
+                            periodeFiscale: EntrepriseGeneralEstimation.extrairePeriodeFiscale(request),
+                            typeEntreprise: EntrepriseGeneralEstimation.extraireTypeEntreprise(request)
+                        };
+
+                        console.log(`[DEBUG] Données TPS préparées:`, tpsInput);
+
+                        // Calculer la TPS
+                        const resultatTPS = MoteurTPSimplifie.calculerTPS(tpsInput);
+                        
+                        // Vérifier que le résultat est un succès (GlobalEstimationInfoData) et non une erreur
+                        if (resultatTPS && 'totalEstimation' in resultatTPS && !('success' in resultatTPS && resultatTPS.success === false)) {
+                            const tpsResult = resultatTPS as GlobalEstimationInfoData;
+                            console.log(`[DEBUG] TPS calculée automatiquement avec succès: ${tpsResult.totalEstimation} FCFA`);
+                            
+                            totalEstimation += tpsResult.totalEstimation;
+                            resultats['TPS'] = tpsResult;
+                            contribuableRegime = 'Entreprise - Régime TPS';
+
+                            // Extraire les composants pour la réponse globale
+                            if (tpsResult.VariableEnter) {
+                                variablesEnter['TPS'] = Array.isArray(tpsResult.VariableEnter)
+                                    ? tpsResult.VariableEnter
+                                    : [tpsResult.VariableEnter];
+                            }
+
+                            if (tpsResult.impotDetailCalcule) {
+                                impotDetailCalcule['TPS'] = Array.isArray(tpsResult.impotDetailCalcule)
+                                    ? tpsResult.impotDetailCalcule
+                                    : [tpsResult.impotDetailCalcule];
+                            }
+
+                            if (tpsResult.obligationEcheance) {
+                                obligationEcheance['TPS'] = Array.isArray(tpsResult.obligationEcheance)
+                                    ? tpsResult.obligationEcheance
+                                    : [tpsResult.obligationEcheance];
+                            }
+
+                            if (tpsResult.infosSupplementaires) {
+                                infosSupplementaires['TPS'] = Array.isArray(tpsResult.infosSupplementaires)
+                                    ? tpsResult.infosSupplementaires
+                                    : [tpsResult.infosSupplementaires];
+                            }
+
+                            if (tpsResult.impotConfig) {
+                                impotConfig['TPS'] = tpsResult.impotConfig;
+                            }
+                        } else {
+                            console.error(`[ERROR] Échec du calcul automatique de la TPS`);
+                            errors.push('Impossible de calculer automatiquement la TPS');
+                        }
+                    } catch (error) {
+                        console.error(`[ERROR] Erreur lors du calcul automatique de la TPS:`, error);
+                        errors.push(`Erreur lors du calcul automatique de la TPS: ${error instanceof Error ? error.message : 'Erreur inconnue'}`);
+                    }
+                }
+            }
+            
             if (Object.keys(resultats).length === 0) {
+                // Ajouter des informations de débogage dans les erreurs
+                const debugInfo = errors.length > 0 
+                    ? errors.join('; ') 
+                    : 'Aucun impôt n\'a pu être calculé. Vérifiez que les données d\'entrée sont correctes.';
+                
+                console.error(`[ERROR] Aucun impôt calculé. Erreurs:`, debugInfo);
+                
                 return {
                     success: false,
                     totalEstimation: 0,
@@ -337,7 +451,7 @@ export class EntrepriseGeneralEstimation {
                     infosSupplementaires: {},
                     impotConfig: {},
                     estimationsParImpot: {},
-                    errors: errors.length > 0 ? errors : ['Aucun impôt n\'a pu être calculé']
+                    errors: [debugInfo]
                 };
             }
 
@@ -412,6 +526,93 @@ export class EntrepriseGeneralEstimation {
             default:
                 throw new Error(`Type d'impôt non reconnu: ${impotCode}`);
         }
+    }
+
+    // Méthodes utilitaires pour extraire les données nécessaires
+    private static extraireChiffreAffaire(request: EntrepriseGeneralEstimationRequest | any): number {
+        console.log(`[DEBUG] Extraction du chiffre d'affaires depuis:`, JSON.stringify(Object.keys(request || {})));
+        
+        // 1. Chercher d'abord dans le body directement avec différentes variantes
+        if (request.chiffreAffaire && typeof request.chiffreAffaire === 'number') {
+            console.log(`[DEBUG] Chiffre d'affaires trouvé dans request.chiffreAffaire: ${request.chiffreAffaire}`);
+            return request.chiffreAffaire;
+        }
+        
+        // Chercher avec d'autres noms possibles
+        if (request.chiffreAffaires && typeof request.chiffreAffaires === 'number') {
+            console.log(`[DEBUG] Chiffre d'affaires trouvé dans request.chiffreAffaires: ${request.chiffreAffaires}`);
+            return request.chiffreAffaires;
+        }
+        
+        if (request.ca && typeof request.ca === 'number') {
+            console.log(`[DEBUG] Chiffre d'affaires trouvé dans request.ca: ${request.ca}`);
+            return request.ca;
+        }
+        
+        // 2. Chercher dans les différents impôts qui contiennent le chiffre d'affaires
+        if (request.dataImpot && typeof request.dataImpot === 'object') {
+            for (const [code, data] of Object.entries(request.dataImpot)) {
+                if (data && typeof data === 'object') {
+                    const dataObj = data as any;
+                    // Vérifier si c'est un type qui contient chiffreAffaire
+                    if ('chiffreAffaire' in dataObj && typeof dataObj.chiffreAffaire === 'number') {
+                        console.log(`[DEBUG] Chiffre d'affaires trouvé dans ${code}.chiffreAffaire: ${dataObj.chiffreAffaire}`);
+                        return dataObj.chiffreAffaire;
+                    }
+                    // Chercher avec d'autres variantes
+                    if ('chiffreAffaires' in dataObj && typeof dataObj.chiffreAffaires === 'number') {
+                        console.log(`[DEBUG] Chiffre d'affaires trouvé dans ${code}.chiffreAffaires: ${dataObj.chiffreAffaires}`);
+                        return dataObj.chiffreAffaires;
+                    }
+                    if ('ca' in dataObj && typeof dataObj.ca === 'number') {
+                        console.log(`[DEBUG] Chiffre d'affaires trouvé dans ${code}.ca: ${dataObj.ca}`);
+                        return dataObj.ca;
+                    }
+                }
+            }
+        }
+        
+        console.log(`[DEBUG] Aucun chiffre d'affaires trouvé dans la requête`);
+        return 0;
+    }
+
+    private static extrairePeriodeFiscale(request: EntrepriseGeneralEstimationRequest): string {
+        // 1. Chercher d'abord dans le body directement
+        if (request.periodeFiscale && typeof request.periodeFiscale === 'string') {
+            return request.periodeFiscale;
+        }
+        
+        // 2. Chercher dans les données des impôts
+        for (const [code, data] of Object.entries(request.dataImpot)) {
+            if (data && typeof data === 'object' && data.periodeFiscale) {
+                return data.periodeFiscale;
+            }
+        }
+        // Par défaut, utiliser l'année courante
+        return new Date().getFullYear().toString();
+    }
+
+    private static extraireTypeEntreprise(request: EntrepriseGeneralEstimationRequest): TypeEntreprise {
+        // 1. Chercher d'abord dans le body directement
+        if (request.typeEntreprise) {
+            return request.typeEntreprise;
+        }
+        
+        // 2. Chercher dans les données des impôts (seulement TPS contient typeEntreprise)
+        for (const [code, data] of Object.entries(request.dataImpot)) {
+            if (data && typeof data === 'object' && 'typeEntreprise' in data) {
+                const tpsData = data as TPSInput;
+                if (tpsData.typeEntreprise) {
+                    return tpsData.typeEntreprise;
+                }
+            }
+        }
+        // Par défaut, utiliser SOCIETE
+        return TypeEntreprise.SOCIETE;
+    }
+
+    private static determinerRegime(chiffreAffaire: number): 'TPS' | 'REEL' {
+        return chiffreAffaire >= this.SEUIL_REGIME_REEL ? 'REEL' : 'TPS';
     }
 }
 

@@ -1,14 +1,14 @@
-interface GenerateFromFrontendForEntreprise {
-    periodeFiscale: string;
-    statutJuridique: string;
-    chiffreAffairesPeriodeFiscale: number;
-    dateCreation: string;
-}
+// interface GenerateFromFrontendForEntreprise {
+//     periodeFiscale: string;
+//     statutJuridique: string;
+//     chiffreAffairesPeriodeFiscale: number;
+//     dateCreation: string;
+// }
 
-interface GenerateFromFrontendForEntrepriseTPS {
+// interface GenerateFromFrontendForEntrepriseTPS {
 
-}
+// }
 
-interface GenerateFromFrontendForEntrepriseReel {
+// interface GenerateFromFrontendForEntrepriseReel {
 
-}
+// }

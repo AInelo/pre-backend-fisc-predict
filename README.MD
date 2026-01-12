@@ -27,7 +27,7 @@ API Node.js/Express (TypeScript) pour les calculs et estimations fiscales. Le pr
   - `GET /api/general/entreprise/impots-disponibles`
   - `GET /api/general/entreprise/impot/:code`
 
-En développement via Docker Compose, l’API s’exécute avec MySQL et MongoDB (pour stockage/expansion future).
+En développement via Docker Compose, l'API s'exécute avec MongoDB (pour stockage/expansion future).
 
 ---
 
@@ -65,7 +65,6 @@ npm run dev
 ### Option 2 — Docker Compose (dev)
 Le fichier `backend-startax-docker-compose.dev.yml` lance:
 - `startax-api`: image Node basée sur `Dockerfile.dev`, volume monté `.:/app`, port `5001:5001`
-- `startax-database`: MySQL 8 (`3307:3306`), DB `startax_db`
 - `startax-mongodb`: MongoDB 6 (`27018:27017`), DB `startax_db`
 
 ```bash
@@ -90,8 +89,7 @@ curl -X POST http://localhost:5001/api/general/entreprise/estimation-globale -H 
 ## Environnements et variables
 
 ### Dev (Compose)
-Injectées via `backend-startax-docker-compose.dev.yml` pour l’API:
-- `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
+Injectées via `backend-startax-docker-compose.dev.yml` pour l'API:
 - `MONGO_URL`
 
 ### Prod
@@ -100,7 +98,6 @@ Variables requises par les scripts de build/deploy:
 - `USER_SERVEUR`, `IP_SERVEUR`, `SSH_SERVEUR` (clé privée SSH au format texte pour connexion au VPS)
 
 Variables applicatives (exemples typiques à préparer côté infra):
-- MySQL: `PROD_DB_HOST`, `PROD_DB_PORT`, `PROD_DB_USER`, `PROD_DB_PASSWORD`, `PROD_DB_NAME`
 - MongoDB: `PROD_MONGO_URL`, `PROD_MONGO_DB_NAME`
 - Auth: `PROD_JWT_SECRET`
 - Mail: `PROD_EMAIL_HOST`, `PROD_EMAIL_USER`, `PROD_EMAIL_PASS`
@@ -224,11 +221,11 @@ bash scripts/reload_nginx.sh "$KEY"
 │
 ├── Dockerfile                        # Image de production
 ├── Dockerfile.dev                    # Image de développement
-├── backend-startax-docker-compose.dev.yml   # Stack dev (API+MySQL+Mongo)
+├── backend-startax-docker-compose.dev.yml   # Stack dev (API+Mongo)
 ├── backend-startax-docker-compose.build.yml # Build image prod locale
 ├── scripts/                          # Scripts d’automatisation (build/push/deploy, NGINX/SSL)
 ├── nginx/                            # Conf NGINX prod
-└── mongo-data/ | mysql-data/         # Volumes de données (dev)
+└── mongo-data/                       # Volumes de données (dev)
 ```
 
 ---

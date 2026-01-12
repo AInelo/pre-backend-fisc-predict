@@ -4,13 +4,6 @@
 # echo "📦 Génération du fichier .env.prod à partir des variables d’environnement..."
 
 # cat <<EOL > .env.prod
-# # ==== MySQL ====
-# DB_HOST=${PROD_DB_HOST:?}
-# DB_PORT=${PROD_DB_PORT:?}
-# DB_USER=${PROD_DB_USER:?}
-# DB_PASSWORD=${PROD_DB_PASSWORD:?}
-# DB_NAME=${PROD_DB_NAME:?}
-
 # # ==== MongoDB ====
 # MONGO_URL=${PROD_MONGO_URL:?}
 # MONGO_DB_NAME=${PROD_MONGO_DB_NAME:?}
@@ -72,12 +65,6 @@
 
 # echo "📦 Exportation des variables d'environnement pour la prod..."
 
-# export DB_HOST="${PROD_DB_HOST:?}"
-# export DB_PORT="${PROD_DB_PORT:?}"
-# export DB_USER="${PROD_DB_USER:?}"
-# export DB_PASSWORD="${PROD_DB_PASSWORD:?}"
-# export DB_NAME="${PROD_DB_NAME:?}"
-
 # export MONGO_URL="${PROD_MONGO_URL:?}"
 # export MONGO_DB_NAME="${PROD_MONGO_DB_NAME:?}"
 
@@ -91,13 +78,6 @@
 # echo "🛠 Création du fichier .env.prod..."
 
 # cat <<EOL > .env.prod
-# # ==== MySQL ====
-# DB_HOST=$DB_HOST
-# DB_PORT=$DB_PORT
-# DB_USER=$DB_USER
-# DB_PASSWORD=$DB_PASSWORD
-# DB_NAME=$DB_NAME
-
 # # ==== MongoDB ====
 # MONGO_URL=$MONGO_URL
 # MONGO_DB_NAME=$MONGO_DB_NAME

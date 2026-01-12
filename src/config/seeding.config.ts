@@ -15,24 +15,14 @@
 //     // Hasher les mots de passe
 //     hashPasswords: boolean;
     
-//     // Ordre de seeding MySQL (TypeORM) - dépendances
-//     mysqlSeedingOrder: string[];
-    
 //     // Ordre de seeding MongoDB (Mongoose) - dépendances
 //     mongoSeedingOrder: string[];
-    
-//     // Tables MySQL à ignorer lors du nettoyage
-//     protectedMySQLTables: string[];
     
 //     // Collections MongoDB à ignorer lors du nettoyage
 //     protectedMongoCollections: string[];
     
 //     // Configuration spécifique aux bases de données
 //     databaseConfig: {
-//         mysql: {
-//             enabled: boolean;
-//             checkConnection: boolean;
-//         };
 //         mongo: {
 //             enabled: boolean;
 //             checkConnection: boolean;
@@ -72,26 +62,6 @@
 //     checkExistingData: true,
 //     hashPasswords: true,
     
-//     // Ordre de seeding MySQL (TypeORM) - respecter les dépendances
-//     mysqlSeedingOrder: [
-//         'etablissements',           // Base pour les autres entités
-//         'utilisateurs_ministere',   // Indépendant
-//         'professionnels',           // Indépendant
-//         'patients',                 // Indépendant
-//         'dossiers_medicaux',        // Dépend de patients
-//         'consultations',            // Dépend de patients, professionnels, établissements
-//         'analyses_medicales',       // Dépend de patients, professionnels, établissements
-//         'analyse_resultats',        // Dépend de analyses_medicales
-//         'ordonnances',              // Dépend de patients, professionnels, établissements
-//         'ordonnance_medicaments',   // Dépend de ordonnances
-//         'vaccinations',             // Dépend de patients, professionnels, établissements
-//         'vaccination_reactions',    // Dépend de vaccinations
-//         'assurances_sante',         // Dépend de patients, professionnels
-//         'banques_sang',             // Dépend de établissements
-//         'lits',                     // Dépend de établissements
-//         'produits_medicaments'      // Dépend de établissements
-//     ],
-    
 //     // Ordre de seeding MongoDB (Mongoose) - respecter les dépendances
 //     mongoSeedingOrder: [
 //         'users',                    // Base pour les autres entités
@@ -107,16 +77,6 @@
 //         'ressources_medicales',     // Dépend de patients
 //         'map_cartographie',         // Dépend de établissements
 //         'rapports_etablissement'    // Dépend de établissements
-//     ],
-    
-//     // Tables MySQL protégées
-//     protectedMySQLTables: [
-//         'migrations',
-//         'typeorm_metadata',
-//         'information_schema',
-//         'performance_schema',
-//         'mysql',
-//         'sys'
 //     ],
     
 //     // Collections MongoDB protégées
@@ -177,10 +137,6 @@
         
 //         // Configuration des bases de données
 //         databaseConfig: {
-//             mysql: {
-//                 enabled: process.env.MYSQL_ENABLED !== 'false',
-//                 checkConnection: process.env.MYSQL_CHECK_CONNECTION !== 'false'
-//             },
 //             mongo: {
 //                 enabled: process.env.MONGO_ENABLED !== 'false',
 //                 checkConnection: process.env.MONGO_CHECK_CONNECTION !== 'false'
@@ -306,11 +262,6 @@
 //     // Vérifier la configuration de production
 //     if (config.allowProductionSeeding && process.env.NODE_ENV === 'production') {
 //         errors.push('⚠️ ATTENTION: Le seeding en production est activé !');
-//     }
-    
-//     // Vérifier l'ordre de seeding MySQL
-//     if (config.mysqlSeedingOrder.length === 0) {
-//         errors.push('❌ L\'ordre de seeding MySQL ne peut pas être vide');
 //     }
     
 //     // Vérifier l'ordre de seeding MongoDB
