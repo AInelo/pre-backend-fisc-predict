@@ -42,15 +42,19 @@ class TPSConfig {
     static readonly COMPETENT_CENTER = "Centre des Impôts territorialement compétent selon l'adresse du contribuable.";
     
     static readonly CCI_RATES = [
-        { maxRevenue: 5000000, individual: 20000, company: 100000 },
-        { maxRevenue: 25000000, individual: 50000, company: 200000 },
-        { maxRevenue: 50000000, individual: 150000, company: 300000 },
-        { maxRevenue: 400000000, individual: 400000, company: 400000 },
-        { maxRevenue: 800000000, individual: 600000, company: 600000 },
-        { maxRevenue: 1000000000, individual: 800000, company: 800000 },
-        { maxRevenue: 2000000000, individual: 1200000, company: 1200000 },
-        { maxRevenue: 4000000000, individual: 1600000, company: 1600000 },
-        { maxRevenue: Infinity, individual: 2000000, company: 2000000 },
+        { maxRevenue: 5_000_000, amount: 20_000 },
+        { maxRevenue: 10_000_000, amount: 30_000 },
+        { maxRevenue: 25_000_000, amount: 50_000 },
+        { maxRevenue: 50_000_000, amount: 150_000 },
+        { maxRevenue: 100_000_000, amount: 250_000 },
+        { maxRevenue: 300_000_000, amount: 300_000 },
+        { maxRevenue: 500_000_000, amount: 400_000 },
+        { maxRevenue: 700_000_000, amount: 500_000 },
+        { maxRevenue: 800_000_000, amount: 600_000 },
+        { maxRevenue: 1_000_000_000, amount: 800_000 },
+        { maxRevenue: 2_000_000_000, amount: 1_200_000 },
+        { maxRevenue: 4_000_000_000, amount: 1_600_000 },
+        { maxRevenue: Infinity, amount: 2_000_000 },
     ];
 }
 
@@ -103,12 +107,10 @@ class CCICalculator {
         const cciRate = TPSConfig.CCI_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
         
         if (!cciRate) {
-            return 2000000; // Fallback au montant maximum
+            return 2_000_000; // Fallback au montant maximum
         }
 
-        return typeEntreprise === TypeEntreprise.SOCIETE 
-            ? cciRate.company 
-            : cciRate.individual;
+        return cciRate.amount; // Barème unifié pour tous les types d'entreprise
     }
 
     static getDescriptionBareme(chiffreAffaire: number): string {
@@ -309,8 +311,8 @@ class TPSResponseBuilder {
             infos.push({
                 infosTitle: 'Contribution CCI Bénin',
                 infosDescription: [
-                    `La contribution CCI ${this.options.customCCIRate ? 'a été personnalisée' : 'varie selon le chiffre d\'affaires et le type d\'entreprise'}.`,
-                    `Pour votre situation (${this.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'entreprise individuelle' : 'société'}, CA: ${this.chiffreAffaire.toLocaleString('fr-FR')} FCFA), la contribution est de ${this.contributionCCI.toLocaleString('fr-FR')} FCFA.`
+                    `La contribution CCI ${this.options.customCCIRate ? 'a été personnalisée' : 'varie selon le chiffre d\'affaires'}.`,
+                    `Pour votre situation (CA: ${this.chiffreAffaire.toLocaleString('fr-FR')} FCFA), la contribution est de ${this.contributionCCI.toLocaleString('fr-FR')} FCFA.`
                 ]
             });
         }

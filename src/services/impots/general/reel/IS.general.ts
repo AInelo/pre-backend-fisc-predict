@@ -38,15 +38,19 @@ class ISConfig {
     static readonly COMPETENT_CENTER = "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial.";
 
     static readonly CCI_RATES = [
-        { maxRevenue: 5_000_000, individual: 20_000, company: 100_000 },
-        { maxRevenue: 25_000_000, individual: 50_000, company: 200_000 },
-        { maxRevenue: 50_000_000, individual: 150_000, company: 300_000 },
-        { maxRevenue: 400_000_000, individual: 400_000, company: 400_000 },
-        { maxRevenue: 800_000_000, individual: 600_000, company: 600_000 },
-        { maxRevenue: 1_000_000_000, individual: 800_000, company: 800_000 },
-        { maxRevenue: 2_000_000_000, individual: 1_200_000, company: 1_200_000 },
-        { maxRevenue: 4_000_000_000, individual: 1_600_000, company: 1_600_000 },
-        { maxRevenue: Infinity, individual: 2_000_000, company: 2_000_000 },
+        { maxRevenue: 5_000_000, amount: 20_000 },
+        { maxRevenue: 10_000_000, amount: 30_000 },
+        { maxRevenue: 25_000_000, amount: 50_000 },
+        { maxRevenue: 50_000_000, amount: 150_000 },
+        { maxRevenue: 100_000_000, amount: 250_000 },
+        { maxRevenue: 300_000_000, amount: 300_000 },
+        { maxRevenue: 500_000_000, amount: 400_000 },
+        { maxRevenue: 700_000_000, amount: 500_000 },
+        { maxRevenue: 800_000_000, amount: 600_000 },
+        { maxRevenue: 1_000_000_000, amount: 800_000 },
+        { maxRevenue: 2_000_000_000, amount: 1_200_000 },
+        { maxRevenue: 4_000_000_000, amount: 1_600_000 },
+        { maxRevenue: Infinity, amount: 2_000_000 },
     ] as const;
 }
 
@@ -108,7 +112,7 @@ class CCICalculator {
     static calculerPourIS(chiffreAffaire: number): number {
         const cciRate = ISConfig.CCI_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
         if (!cciRate) return 2_000_000;
-        return cciRate.company; // IS concerne les sociétés
+        return cciRate.amount; // Barème unifié pour toutes les entreprises
     }
 
     static getDescriptionBareme(chiffreAffaire: number): string {
