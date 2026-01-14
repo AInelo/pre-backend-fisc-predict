@@ -12,11 +12,11 @@ import estimationSummaryRoutes from './routes/common/summurize.route';
 const app = express();
 
 // ✅ Middleware CORS pour autoriser toutes les origines
-app.use(cors({
-  origin: '*', // Autorise tout domaine
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+// app.use(cors({
+//   origin: '*', // Autorise tout domaine
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
 
 
 
