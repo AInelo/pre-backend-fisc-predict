@@ -1,13 +1,12 @@
-version: '3.8'
-
 services:
   backend-startax:
     container_name: backend-startax
     image: ainelo/backend-startax:latest
     restart: always
     ports:
-      - "5001:5001"
+      - "5400:5400"
     environment:
+      - PORT=5400
       - MONGO_URL=mongodb://mongo_startax:27017
       - MONGO_DB_NAME=startax_mongo_db
     depends_on:
@@ -21,6 +20,8 @@ services:
     restart: always
     volumes:
       - /home/admin/STARTAX_DATABASE/mongo:/data/db
+    ports:
+      - "5401:27017"
     networks:
       - startax-network
 

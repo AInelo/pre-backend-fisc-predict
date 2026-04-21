@@ -3,7 +3,7 @@ import MoteurProfillage from '../../services/common/profillage.service';
 import { ProfilingData } from '../../types/profilage.result.return.type';
 import { BackendEstimationFailureResponse } from '../../types/frontend.errors.estomation.type';
 
-export const getProfil = (req: Request, res: Response): void => {
+export const getProfil = async (req: Request, res: Response): Promise<void> => {
   try {
     const { periodeFiscale, chiffreAffaire, typeContribuableEntreprise, dateDebutExercice } = req.body;
 
@@ -38,7 +38,7 @@ export const getProfil = (req: Request, res: Response): void => {
     }
 
     // Obtention du profil fiscal
-    const resultat = MoteurProfillage.getProfil(donneesProfilage);
+    const resultat = await MoteurProfillage.getProfil(donneesProfilage);
     
     // Vérifier si c'est une erreur ou un succès
     if ('success' in resultat && !resultat.success) {

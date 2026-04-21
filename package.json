@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "start": "npm run build && node dist/server.js",
-    "dev": "nodemon --watch src --exec ts-node ./src/server.ts",
+    "dev": "nodemon --watch src --exec \"ts-node -r tsconfig-paths/register ./src/server.ts\"",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "tsc",
     "postbuild": "node addJsExtension.js",
@@ -59,6 +59,7 @@
     "nodemon": "^3.1.9",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.7.3"
   }
 }

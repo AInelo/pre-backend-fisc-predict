@@ -1,11 +1,11 @@
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
-import tfuData from '../../../../data/tfu_data_with_slugs.json';
+import { buildFiscalParametersFailureResponse, FiscalParametersError } from '@/services/fiscal-parameters/errors';
+import { fiscalParameterResolver } from '@/services/fiscal-parameters/FiscalParameterResolver';
+import { TfuArrondissement, TfuDepartement, TfuParticulierFiscalParams, TfuTarifCategorie } from '@/types/fiscal-parameters';
 
-// Type union pour le retour de la fonction
 export type TFUCalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
 
-// Interfaces pour la nouvelle modélisation TFU
 interface TFUBatimentInfos {
     categorie: string;
     squareMeters: number;
@@ -26,16 +26,8 @@ interface TFUInput {
     parcelles: TFUParcelleInfos | TFUParcelleInfos[];
 }
 
-// Interface pour les tarifs TFU
-interface TFUTarif {
-    description: string;
-    slug_description: string;
-    tfu_par_m2: number;
-    tfu_minimum: number;
-}
-
 class MoteurTFU {
-    public static calculerTFU(input: TFUInput): TFUCalculationResult {
+    public static async calculerTFU(input: TFUInput): Promise<TFUCalculationResult> {
         try {
             if (!input) {
                 return this.genererReponseErreurValidation('Aucune donnée TFU fournie');
@@ -51,11 +43,11 @@ class MoteurTFU {
                 return this.genererReponseErreurValidation('Aucune parcelle fournie pour le calcul de la TFU');
             }
 
-            const annee = this.extraireAnnee(input.periodeFiscale);
-
-            if (annee >= 2026) {
-                return this.genererReponseErreur(parcelles[0], annee);
-            }
+            const params = await fiscalParameterResolver.resolveRequiredParams<'TFU'>({
+                codeImpot: 'TFU',
+                typeContribuable: 'PARTICULIER',
+                periodeFiscale: input.periodeFiscale,
+            }) as unknown as TfuParticulierFiscalParams;
 
             let totalTFU = 0;
             let totalSurface = 0;
@@ -97,6 +89,7 @@ class MoteurTFU {
                     }
 
                     const rateData = this.findTFURate(
+                        params.departements,
                         parcelle.departement,
                         parcelle.commune,
                         parcelle.arrondissement,
@@ -134,7 +127,7 @@ class MoteurTFU {
                     return this.genererReponseErreurValidation(`Le nombre de piscines pour la parcelle ${parcelleIndex + 1} ne peut pas être négatif`);
                 }
                 const montantMinimumBatimentLePlusGrand = Math.round(minimumBatimentLePlusGrand);
-                const montantPiscines = nombrePiscines * 30000;
+                const montantPiscines = nombrePiscines * params.montant_piscine;
                 totalPiscines += nombrePiscines;
 
                 const tfuBatimentsRetenue = Math.max(sommeTFUBatiments, montantMinimumBatimentLePlusGrand);
@@ -259,107 +252,58 @@ class MoteurTFU {
                 ],
 
                 impotConfig: {
-                    impotTitle: 'Taxe Foncière Urbaine',
-                    label: 'TFU',
-                    description: `La TFU est calculée selon la surface de la propriété et les tarifs en vigueur dans la zone géographique.
-                            Le calcul prend en compte le tarif par m² et applique un minimum forfaitaire.
-                            Les tarifs varient selon le département, la commune, l'arrondissement et la catégorie de construction.`,
-                    competentCenter: "Centre des Impôts territorialement compétent selon l'adresse de la propriété."
+                    impotTitle: params.title,
+                    label: params.label,
+                    description: params.description,
+                    competentCenter: params.competent_center
                 }
             };
         } catch (error) {
+            if (error instanceof FiscalParametersError) {
+                return buildFiscalParametersFailureResponse(error, {
+                    typeContribuable: 'Propriétaire foncier',
+                    regime: 'TFU',
+                });
+            }
             return this.genererReponseErreurValidation(error instanceof Error ? error.message : 'Erreur lors du calcul de la TFU');
         }
     }
 
-    // Recherche du tarif TFU en utilisant les slugs pour une précision maximale
     private static findTFURate(
+        departements: TfuDepartement[],
         departementSlug: string,
         communeSlug: string,
         arrondissementSlug: string,
         categorieSlug: string
-    ): TFUTarif | null {
+    ): TfuTarifCategorie | null {
         try {
-            // On suppose que les champs d'entrée sont déjà des slugs ou à convertir en slug
-            const departement = tfuData.departements.find(d =>
-                d.slug === departementSlug
-            );
+            const departement = departements.find(d => d.slug === departementSlug);
             if (!departement) return null;
 
-            const commune = departement.communes.find(c =>
-                c.slug === communeSlug
-            );
+            const commune = departement.communes.find(c => c.slug === communeSlug);
             if (!commune) return null;
 
-            const arrondissement = commune.arrondissements.find(a =>
-                a.slug === arrondissementSlug
-            );
+            const arrondissement = commune.arrondissements.find(a => a.slug === arrondissementSlug);
             if (!arrondissement) return null;
 
-            // CORRECTION: On compare maintenant avec slug_description au lieu de slug_categorie
-            // car c'est slug_description qui varie et identifie la catégorie spécifique
-            const tarifKey = Object.keys(arrondissement.tarifs).find(key => {
-                const cat = arrondissement.tarifs[key as keyof typeof arrondissement.tarifs];
-                // On vérifie le slug de la description qui correspond à la catégorie spécifique
-                return cat.slug_description === categorieSlug;
-            });
-
+            const tarifKey = Object.keys(arrondissement.tarifs).find(key =>
+                arrondissement.tarifs[key].slug_description === categorieSlug
+            );
             if (!tarifKey) return null;
 
-            const tarif = arrondissement.tarifs[tarifKey as keyof typeof arrondissement.tarifs];
-            return tarif || null;
-        } catch (error) {
+            return arrondissement.tarifs[tarifKey] ?? null;
+        } catch {
             return null;
         }
     }
 
-    private static extraireAnnee(
-            periodeFiscale: string
-        ): number {
-        // Essayer d'extraire l'année de différents formats possibles
-        const anneeMatch = periodeFiscale.match(/(\d{4})/);
-        if (anneeMatch) {
-            return parseInt(anneeMatch[1], 10);
-        }
-
-        // Si aucune année n'est trouvée, retourner l'année courante par défaut
-        return new Date().getFullYear();
-    }
-
-    private static genererReponseErreur(
-            parcelle: TFUParcelleInfos, 
-            annee: number
-        ): BackendEstimationFailureResponse {
-        return {
-            success: false,
-            errors: [
-                {
-                    code: 'CONSTANTES_NON_DISPONIBLES',
-                    message: `Les tarifs TFU pour l'année ${annee} ne sont pas encore disponibles.`,
-                    details: `Le calcul de la Taxe Foncière Urbaine pour l'année ${annee} ne peut pas être effectué car les tarifs officiels n'ont pas encore été publiés par l'administration fiscale béninoise.`,
-                    severity: 'info'
-                }
-            ],
-            context: {
-                typeContribuable: 'Propriétaire foncier',
-                regime: 'TFU',
-                chiffreAffaire: parcelle.nbrBatiments,
-                missingData: ['tarifs_tfu', 'zones_geographiques', 'categories_construction']
-            },
-            timestamp: new Date().toISOString(),
-            requestId: `tfu_calc_${Date.now()}`
-        };
-    }
-
-    private static genererReponseErreurValidation(
-            message: string
-        ): BackendEstimationFailureResponse {
+    private static genererReponseErreurValidation(message: string): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [
                 {
                     code: 'VALIDATION_ERROR',
-                    message: message,
+                    message,
                     details: `Erreur de validation des données d'entrée pour le calcul de la TFU.`,
                     severity: 'error'
                 }

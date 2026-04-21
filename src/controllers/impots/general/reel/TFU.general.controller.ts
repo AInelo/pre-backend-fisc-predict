@@ -23,7 +23,7 @@ interface TFUInput {
   parcelles: TFUParcelleInfos[];
 }
 
-export const calculerTFU = (req: Request, res: Response): void => {
+export const calculerTFU = async (req: Request, res: Response): Promise<void> => {
   try {
     const { parcelles, periodeFiscale } = req.body;
 
@@ -128,7 +128,7 @@ export const calculerTFU = (req: Request, res: Response): void => {
       })
     };
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = MoteurTFU.calculerTFU(tfuInput);
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = await MoteurTFU.calculerTFU(tfuInput);
 
     res.status(200).json(estimation);
   } catch (error) {

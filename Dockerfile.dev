@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # Expose le port utilisé par l'app
-EXPOSE 5001
+EXPOSE 5400
 
 # Commande de dev : ici on suppose que tu as un script "dev" genre ts-node-dev ou nodemon
 CMD ["npm", "run", "dev"]

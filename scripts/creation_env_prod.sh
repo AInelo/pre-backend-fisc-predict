@@ -23,7 +23,7 @@
 # FRONTEND_URL=${FRONTEND_URL:?}
 
 # # ==== App ====
-# PORT=5002
+# PORT=5400
 # EOL
 
 # echo "✅ Fichier .env.prod créé avec succès."
@@ -97,7 +97,7 @@
 # FRONTEND_URL=$FRONTEND_URL
 
 # # ==== App ====
-# PORT=5002
+# PORT=5400
 # EOL
 
 # echo "✅ Fichier .env.prod créé avec succès."

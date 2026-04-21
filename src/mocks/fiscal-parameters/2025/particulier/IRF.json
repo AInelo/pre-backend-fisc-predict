@@ -1,0 +1,20 @@
+{
+  "code_impot": "IRF",
+  "type_contribuable": "PARTICULIER",
+  "annee": 2025,
+  "actif": true,
+  "parametres": {
+    "redevance_srtb": 4000,
+    "taux_standard": 0.12,
+    "taux_reduit": 0.10,
+    "title": "Impôt sur les Revenus Fonciers",
+    "label": "IRF",
+    "description": "Impôt calculé sur les revenus locatifs avec taux réduit ou standard.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse de la propriété."
+  },
+  "meta": {
+    "label": "IRF - Particulier",
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

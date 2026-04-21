@@ -3,7 +3,7 @@ import MoteurITS from '../../../../services/impots/general/reel/ITS.general';
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
 
-export const calculerITS = (req: Request, res: Response): void => {
+export const calculerITS = async (req: Request, res: Response): Promise<void> => {
   try {
     const { salaireMensuel, periodeFiscale } = req.body;
 
@@ -14,7 +14,7 @@ export const calculerITS = (req: Request, res: Response): void => {
       return;
     }
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = MoteurITS.calculerITS(salaireMensuel, periodeFiscale);
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = await MoteurITS.calculerITS(salaireMensuel, periodeFiscale);
     res.status(200).json(estimation);
   } catch (error) {
     res.status(500).json({

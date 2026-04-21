@@ -1,0 +1,28 @@
+{
+  "code_impot": "ITS",
+  "type_contribuable": "ENTREPRISE",
+  "annee": 2025,
+  "actif": true,
+  "parametres": {
+    "seuil_exoneration": 60000,
+    "redevance_srtb_mars": 1000,
+    "redevance_srtb_juin": 3000,
+    "redevance_srtb_cumulee": 4000,
+    "bareme": [
+      { "borneInf": 0, "borneSup": 60000, "taux": 0, "montantFixe": 0 },
+      { "borneInf": 60000, "borneSup": 150000, "taux": 0.10, "montantFixe": 0 },
+      { "borneInf": 150000, "borneSup": 250000, "taux": 0.15, "montantFixe": 9000 },
+      { "borneInf": 250000, "borneSup": 500000, "taux": 0.19, "montantFixe": 24000 },
+      { "borneInf": 500000, "borneSup": null, "taux": 0.30, "montantFixe": 71500 }
+    ],
+    "title": "Impôt sur les Traitements et Salaires",
+    "label": "ITS",
+    "description": "Impôt progressif mensuel sur les traitements et salaires.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
+  },
+  "meta": {
+    "label": "ITS - Entreprise",
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

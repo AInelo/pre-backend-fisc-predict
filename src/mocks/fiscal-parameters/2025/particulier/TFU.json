@@ -1,0 +1,18 @@
+{
+  "code_impot": "TFU",
+  "type_contribuable": "PARTICULIER",
+  "annee": 2025,
+  "actif": true,
+  "parametres": {
+    "montant_piscine": 30000,
+    "title": "Taxe Foncière Urbaine",
+    "label": "TFU — Particulier",
+    "description": "TFU calculée selon la surface des bâtiments, les tarifs par zone géographique et les catégories de construction.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse de la propriété."
+  },
+  "meta": {
+    "label": "TFU - Particulier",
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

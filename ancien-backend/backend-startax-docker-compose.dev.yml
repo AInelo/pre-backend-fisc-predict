@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  startax-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: startax/backend-api:latest
+    container_name: startax-backend-container
+    restart: always
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URL=mongodb://startax-mongo-container:27017/startax_db
+    volumes:
+      - .:/app
+    depends_on:
+      - startax-mongodb
+    networks:
+      - startax-network
+
+  startax-mongodb:
+    image: mongo:6.0
+    container_name: startax-mongo-container
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: startax_db
+    volumes:
+      - ./mongo-data:/data/db
+    ports:
+      - "27018:27017"  # Port externe 27018 pour éviter les conflits
+    networks:
+      - startax-network
+
+networks:
+  startax-network:
+    driver: bridge

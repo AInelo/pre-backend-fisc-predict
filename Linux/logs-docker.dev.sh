@@ -17,6 +17,11 @@ show_detected_config
 SERVICE_NAME=${1:-""}
 LOG_OPTIONS=${@:2}
 
+# Permet d'utiliser "app" comme alias du service principal détecté
+if [ "$SERVICE_NAME" = "app" ]; then
+    SERVICE_NAME="$MAIN_SERVICE"
+fi
+
 cd ..
 
 echo "📋 Affichage des logs Docker..."

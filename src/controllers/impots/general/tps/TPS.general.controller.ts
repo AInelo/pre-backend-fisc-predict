@@ -3,7 +3,7 @@ import  MoteurTPSimplifie from '../../../../services/impots/general/tps/TPS.gene
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
 import { TypeEntreprise } from '../../../../services/impots/general/tps/TPS.general';
-export const calculerTPS = (req: Request, res: Response): void => {
+export const calculerTPS = async (req: Request, res: Response): Promise<void> => {
   try {
     const { chiffreAffaire, periodeFiscale, typeEntreprise } = req.body;
 
@@ -14,7 +14,7 @@ export const calculerTPS = (req: Request, res: Response): void => {
       return 
     }
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = MoteurTPSimplifie.calculerTPS({
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = await MoteurTPSimplifie.calculerTPS({
       chiffreAffaire,
       periodeFiscale,
       typeEntreprise

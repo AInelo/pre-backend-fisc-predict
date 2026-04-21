@@ -76,7 +76,7 @@ export class EntrepriseGeneralEstimationController {
             }));
 
             // Appeler le service de calcul
-            const resultat = calculerEstimationGlobaleEntreprise(req.body);
+            const resultat = await calculerEstimationGlobaleEntreprise(req.body);
             
             // Retourner le résultat
             if (resultat && 'success' in resultat && resultat.success === true) {

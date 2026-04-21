@@ -3,7 +3,7 @@ import MoteurIRF from '../../../../services/impots/general/reel/IRF.general';
 import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
 import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
 
-export const calculerIRF = (req: Request, res: Response): void => {
+export const calculerIRF = async (req: Request, res: Response): Promise<void> => {
   try {
     const { revenuLocatif, isAlreadyTaxed, periodeFiscale } = req.body;
 
@@ -46,7 +46,7 @@ export const calculerIRF = (req: Request, res: Response): void => {
       return;
     }
 
-    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = MoteurIRF.calculerIRF({
+    const estimation: GlobalEstimationInfoData | BackendEstimationFailureResponse = await MoteurIRF.calculerIRF({
       revenuLocatif,
       isAlreadyTaxed: isTaxedBoolean,
       periodeFiscale

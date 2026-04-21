@@ -1,24 +1,24 @@
 import { GlobalEstimationInfoData, ObligationEcheance } from '../../../../types/frontend.result.return.type';
-import { BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
+import { BackendEstimationFailureResponse } from '../../../../types/frontend.errors.estomation.type';
+import { buildFiscalParametersFailureResponse, FiscalParametersError } from '@/services/fiscal-parameters/errors';
+import { fiscalParameterResolver } from '@/services/fiscal-parameters/FiscalParameterResolver';
+import { describeRevenueBracket, findAmountFromRevenueBrackets } from '@/services/fiscal-parameters/helpers';
+import { TpsFiscalParams } from '@/types/fiscal-parameters';
 
-// Interface pour les données d'entrée
 interface TPSInput {
-    dateCreation?: Date;        // Date de création de l'entreprise pour déterminer la première année
+    dateCreation?: Date;
     chiffreAffaire: number;
     periodeFiscale: string;
     typeEntreprise: TypeEntreprise;
 }
 
-// Enum pour le type d'entreprise
 enum TypeEntreprise {
     ENTREPRISE_INDIVIDUELLE = 'entreprise_individuelle',
     SOCIETE = 'societe'
 }
 
-// Type union pour le retour de la fonction
 export type TPSCalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
 
-// Interface pour les options de calcul
 interface TPSCalculationOptions {
     includeCCI?: boolean;
     includeRedevanceSRTB?: boolean;
@@ -26,164 +26,83 @@ interface TPSCalculationOptions {
     customCCIRate?: number;
 }
 
-// Configuration de l'impôt TPS
-class TPSConfig {
-    static readonly TAUX_TPS = 0.05;
-    static readonly MONTANT_MINIMUM = 10_000;
-    static readonly REDEVANCE_RTB = 4_000;
-    static readonly SEUIL_REGIME_REEL = 50_000_000;
-    
-    static readonly TITLE = 'Taxe Professionnelle Synthétique';
-    static readonly LABEL = 'TPS';
-    static readonly DESCRIPTION = `La TPS est égale à 5% du chiffre d'affaires annuel avec un minimum forfaitaire de 10 000 FCFA.
-                    Une redevance audiovisuelle de 4 000 FCFA est ajoutée à la TPS.
-                    Une contribution variable à la Chambre de Commerce et d'Industrie du Bénin (CCI Bénin) est également ajoutée selon le barème en vigueur.
-                    En cas de chiffre d'affaires > 50 millions FCFA, le contribuable passe au régime réel.`;
-    static readonly COMPETENT_CENTER = "Centre des Impôts territorialement compétent selon l'adresse du contribuable.";
-    
-    static readonly CCI_RATES = [
-        { maxRevenue: 5_000_000, amount: 20_000 },
-        { maxRevenue: 10_000_000, amount: 30_000 },
-        { maxRevenue: 25_000_000, amount: 50_000 },
-        { maxRevenue: 50_000_000, amount: 150_000 },
-        { maxRevenue: 100_000_000, amount: 250_000 },
-        { maxRevenue: 300_000_000, amount: 300_000 },
-        { maxRevenue: 500_000_000, amount: 400_000 },
-        { maxRevenue: 700_000_000, amount: 500_000 },
-        { maxRevenue: 800_000_000, amount: 600_000 },
-        { maxRevenue: 1_000_000_000, amount: 800_000 },
-        { maxRevenue: 2_000_000_000, amount: 1_200_000 },
-        { maxRevenue: 4_000_000_000, amount: 1_600_000 },
-        { maxRevenue: Infinity, amount: 2_000_000 },
-    ];
-}
-
-// Classe pour la gestion des erreurs
 class TPSErrorHandler {
-    static genererErreurAnnee(chiffreAffaire: number, annee: number): BackendEstimationFailureResponse {
-        return {
-            success: false,
-            errors: [{
-                code: 'CONSTANTES_NON_DISPONIBLES',
-                message: `Les constantes de calcul de la TPS pour l'année ${annee} ne sont pas encore disponibles.`,
-                details: `Le calcul de la Taxe Professionnelle Synthétique pour l'année ${annee} ne peut pas être effectué car les taux, montants minimums et contributions officiels n'ont pas encore été publiés par l'administration fiscale béninoise.`,
-                severity: 'info'
-            }],
-            context: {
-                typeContribuable: 'Entreprise',
-                regime: chiffreAffaire > TPSConfig.SEUIL_REGIME_REEL ? 'Régime Réel' : 'Régime TPS',
-                chiffreAffaire: chiffreAffaire,
-                missingData: ['taux_tps', 'montant_minimum', 'redevance_rtb', 'contribution_cci']
-            },
-            timestamp: new Date().toISOString(),
-            requestId: `tps_calc_${Date.now()}`
-        };
-    }
-
-    static genererErreurRegimeReel(chiffreAffaire: number): BackendEstimationFailureResponse {
+    static genererErreurRegimeReel(chiffreAffaire: number, seuilRegimeReel: number): BackendEstimationFailureResponse {
         return {
             success: false,
             errors: [{
                 code: 'CHIFFRE_AFFAIRES_DEPASSE_SEUIL_TPS',
-                message: `Chiffre d'affaires supérieur au seuil du régime TPS (${TPSConfig.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA).`,
-                details: `Avec un chiffre d'affaires de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA, vous dépassez le seuil de ${TPSConfig.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA et devez obligatoirement être soumis au régime réel. Veuillez effectuer votre simulation en tant qu'Entreprise Individuelle ou Société selon votre statut juridique pour obtenir le calcul approprié de vos impôts.`,
+                message: `Chiffre d'affaires supérieur au seuil du régime TPS (${seuilRegimeReel.toLocaleString('fr-FR')} FCFA).`,
+                details: `Avec un chiffre d'affaires de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA, vous dépassez le seuil de ${seuilRegimeReel.toLocaleString('fr-FR')} FCFA et devez obligatoirement être soumis au régime réel.`,
                 severity: 'warning'
             }],
             context: {
                 typeContribuable: 'Entreprise',
                 regime: 'Régime Réel',
-                chiffreAffaire: chiffreAffaire,
+                chiffreAffaire,
                 missingData: ['regime_reel_parameters']
             },
             timestamp: new Date().toISOString(),
             requestId: `tps_seuil_depasse_${Date.now()}`
         };
     }
-}
 
-// Calculateur de contribution CCI
-class CCICalculator {
-    static calculer(chiffreAffaire: number, typeEntreprise: TypeEntreprise): number {
-        const cciRate = TPSConfig.CCI_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
-        
-        if (!cciRate) {
-            return 2_000_000; // Fallback au montant maximum
-        }
-
-        return cciRate.amount; // Barème unifié pour tous les types d'entreprise
-    }
-
-    static getDescriptionBareme(chiffreAffaire: number): string {
-        const cciRate = TPSConfig.CCI_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
-        
-        if (!cciRate) {
-            return "Échelon maximum du barème";
-        }
-
-    
-
-        const index = TPSConfig.CCI_RATES.indexOf(cciRate);
-        const minRevenue = index > 0 ? TPSConfig.CCI_RATES[index - 1].maxRevenue + 1 : 0;
-        
-        const maxRevenue = cciRate.maxRevenue === Infinity ? "et plus" : cciRate.maxRevenue.toLocaleString('fr-FR');
-        const minRevenueStr = minRevenue === 0 ? "0" : (minRevenue - 1).toLocaleString('fr-FR');
-        
-        return `Tranche ${minRevenueStr} - ${maxRevenue} FCFA`;
+    static genererErreurValidation(message: string): BackendEstimationFailureResponse {
+        return {
+            success: false,
+            errors: [{
+                code: 'VALIDATION_ERROR',
+                message,
+                details: `Erreur de validation des données d'entrée pour le calcul de la TPS.`,
+                severity: 'error'
+            }],
+            context: {
+                typeContribuable: 'Entreprise',
+                regime: 'Régime TPS',
+                missingData: ['donnees_entree']
+            },
+            timestamp: new Date().toISOString(),
+            requestId: `tps_validation_${Date.now()}`
+        };
     }
 }
 
-// Builder pour construire la réponse de manière modulaire
 class TPSResponseBuilder {
-    private chiffreAffaire: number;
-    private typeEntreprise: TypeEntreprise;
-    private options: TPSCalculationOptions;
-    private tpsBase: number;
-    private contributionCCI: number;
-    private redevanceSRTB: number;
-    private tpsTotale: number;
-    private dateCreation?: Date;
-    private periodeFiscale: string;
-    private anneeCourante: number;
-    private estPremiereAnnee: boolean;
+    private readonly anneeCourante: number;
+    private readonly estPremiereAnnee: boolean;
+    private readonly tpsBase: number;
+    private readonly contributionCCI: number;
+    private readonly redevanceSRTB: number;
+    private readonly tpsTotale: number;
 
     constructor(
-        chiffreAffaire: number, 
-        typeEntreprise: TypeEntreprise, 
-        periodeFiscale: string,
-        dateCreation?: Date,
-        options: TPSCalculationOptions = {}
+        private readonly input: TPSInput,
+        private readonly params: TpsFiscalParams,
+        private readonly options: TPSCalculationOptions = {}
     ) {
-        this.chiffreAffaire = chiffreAffaire;
-        this.typeEntreprise = typeEntreprise;
-        this.periodeFiscale = periodeFiscale;
-        this.dateCreation = dateCreation;
         this.options = {
             includeCCI: true,
             includeRedevanceSRTB: true,
             ...options
         };
-        
-        this.anneeCourante = DateUtils.extraireAnnee(periodeFiscale);
+
+        this.anneeCourante = fiscalParameterResolver.extractYear(input.periodeFiscale);
         this.estPremiereAnnee = this.determinerPremiereAnnee();
-        
-        this.tpsBase = Math.max(chiffreAffaire * TPSConfig.TAUX_TPS, TPSConfig.MONTANT_MINIMUM);
-        this.contributionCCI = this.options.includeCCI ? 
-            (this.options.customCCIRate ?? CCICalculator.calculer(chiffreAffaire, typeEntreprise)) : 0;
-        this.redevanceSRTB = this.options.includeRedevanceSRTB ? 
-            (this.options.customRedevance ?? TPSConfig.REDEVANCE_RTB) : 0;
-        this.tpsTotale = this.tpsBase + this.redevanceSRTB + this.contributionCCI;
+        this.tpsBase = Math.max(input.chiffreAffaire * params.taux_tps, params.montant_minimum);
+        this.contributionCCI = this.options.includeCCI
+            ? (this.options.customCCIRate ?? findAmountFromRevenueBrackets(input.chiffreAffaire, params.cci_rates))
+            : 0;
+        this.redevanceSRTB = this.options.includeRedevanceSRTB
+            ? (this.options.customRedevance ?? params.redevance_rtb)
+            : 0;
+        this.tpsTotale = Math.round(this.tpsBase + this.contributionCCI + this.redevanceSRTB);
     }
 
-    /**
-     * Détermine si c'est la première année d'activité
-     * Selon la documentation : anneeCreation = anneeCourante => Dispense d'acomptes
-     */
     private determinerPremiereAnnee(): boolean {
-        if (!this.dateCreation) {
-            return false; // Si pas de date, on considère que ce n'est pas la première année
+        if (!this.input.dateCreation) {
+            return false;
         }
-        const anneeCreation = this.dateCreation.getFullYear();
-        return anneeCreation === this.anneeCourante;
+        return this.input.dateCreation.getFullYear() === this.anneeCourante;
     }
 
     private buildVariablesEnter() {
@@ -191,13 +110,13 @@ class TPSResponseBuilder {
             {
                 label: "Chiffre d'affaires annuel",
                 description: "Montant total des ventes ou revenus encaissés durant l'année fiscale.",
-                value: this.chiffreAffaire,
+                value: this.input.chiffreAffaire,
                 currency: 'FCFA',
             },
             {
                 label: "Type d'entreprise",
                 description: "Statut juridique de l'entreprise (individuelle ou société).",
-                value: this.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'Entreprise Individuelle' : 'Société',
+                value: this.input.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'Entreprise Individuelle' : 'Société',
                 currency: '',
             }
         ];
@@ -207,33 +126,33 @@ class TPSResponseBuilder {
         const details = [
             {
                 impotTitle: 'TPS (Taxe Professionnelle Synthétique)',
-                impotDescription: "Calculée à 5% du chiffre d'affaires annuel avec un minimum de 10 000 FCFA.",
-                impotValue: this.tpsBase,
+                impotDescription: `Calculée à ${(this.params.taux_tps * 100).toFixed(1)}% du chiffre d'affaires annuel avec un minimum de ${this.params.montant_minimum.toLocaleString('fr-FR')} FCFA.`,
+                impotValue: Math.round(this.tpsBase),
                 impotValueCurrency: 'FCFA',
-                impotTaux: '5%',
-                importCalculeDescription: `TPS = max(5% du chiffre d'affaires, 10 000 FCFA) → ${this.tpsBase.toLocaleString('fr-FR')} FCFA`
+                impotTaux: `${(this.params.taux_tps * 100).toFixed(1)}%`,
+                importCalculeDescription: `TPS = max(${(this.params.taux_tps * 100).toFixed(1)}% du chiffre d'affaires, ${this.params.montant_minimum.toLocaleString('fr-FR')} FCFA) -> ${Math.round(this.tpsBase).toLocaleString('fr-FR')} FCFA`
             }
         ];
 
         if (this.options.includeRedevanceSRTB && this.redevanceSRTB > 0) {
             details.push({
                 impotTitle: 'Redevance SRTB',
-                impotDescription: `Montant ${this.options.customRedevance ? 'personnalisé' : 'fixe'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA ajouté à la TPS pour la radiodiffusion et télévision nationale.`,
+                impotDescription: `Montant ${this.options.customRedevance ? 'personnalisé' : 'fixe'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA ajouté à la TPS.`,
                 impotValue: this.redevanceSRTB,
                 impotTaux: `${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA`,
                 impotValueCurrency: 'FCFA',
-                importCalculeDescription: `${this.options.customRedevance ? 'Redevance personnalisée' : 'Conformément à la loi, une redevance audiovisuelle'} de ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA est ajoutée.`
+                importCalculeDescription: `Redevance SRTB = ${this.redevanceSRTB.toLocaleString('fr-FR')} FCFA`
             });
         }
 
         if (this.options.includeCCI && this.contributionCCI > 0) {
             details.push({
                 impotTitle: 'Contribution CCI Bénin',
-                impotDescription: `Contribution à la Chambre de Commerce et d'Industrie du Bénin ${this.options.customCCIRate ? 'personnalisée' : `selon le barème en vigueur (${CCICalculator.getDescriptionBareme(this.chiffreAffaire)})`}.`,
+                impotDescription: `Contribution à la Chambre de Commerce et d'Industrie du Bénin ${this.options.customCCIRate ? 'personnalisée' : `selon le barème en vigueur (${describeRevenueBracket(this.input.chiffreAffaire, this.params.cci_rates)})`}.`,
                 impotValue: this.contributionCCI,
-                impotTaux: `${this.contributionCCI.toLocaleString('fr-FR')} FCFA ${this.options.customCCIRate ? ': montant personnalisé' : ': barème CCI'}`,
+                impotTaux: `${this.contributionCCI.toLocaleString('fr-FR')} FCFA`,
                 impotValueCurrency: 'FCFA',
-                importCalculeDescription: `Montant ${this.options.customCCIRate ? 'personnalisé' : 'calculé selon le barème CCI'} pour ${this.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'entreprise individuelle' : 'société'} avec CA de ${this.chiffreAffaire.toLocaleString('fr-FR')} FCFA.`
+                importCalculeDescription: `Contribution CCI = ${this.contributionCCI.toLocaleString('fr-FR')} FCFA`
             });
         }
 
@@ -248,13 +167,12 @@ class TPSResponseBuilder {
                     echeancePeriodeLimite: '30 avril N+1',
                     echeanceDescription: "Solde à verser au plus tard le 30 avril de l'année suivante."
                 },
-                obligationDescription: this.estPremiereAnnee 
+                obligationDescription: this.estPremiereAnnee
                     ? 'En première année d\'activité, aucun acompte n\'est dû. Le solde correspond à la TPS totale.'
                     : 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
             }
         ];
 
-        // Acomptes uniquement si ce n'est PAS la première année
         if (!this.estPremiereAnnee) {
             obligations.push({
                 impotTitle: 'TPS - Acomptes provisionnels',
@@ -270,106 +188,48 @@ class TPSResponseBuilder {
                 ],
                 obligationDescription: "Applicable sauf pour la première année d'activité."
             });
-        } else {
-            // Message informatif pour première année
-            obligations.push({
-                impotTitle: 'TPS - Dispense d\'acomptes (Première année)',
-                echeancePaiement: {
-                    echeancePeriodeLimite: 'Aucun acompte requis',
-                    echeanceDescription: "Première année d'activité : dispense d'acomptes provisionnels."
-                },
-                obligationDescription: "Pour cette première année d'activité, aucun acompte n'est dû. Seul le solde final sera à payer le 30 avril de l'année suivante."
-            });
         }
 
         return obligations;
     }
 
     private buildInfosSupplementaires() {
-        const infos = [];
-
-        // Informations sur les acomptes selon le cas
-        if (this.estPremiereAnnee) {
-            infos.push({
-                infosTitle: 'Dispense d\'acomptes - Première année',
-                infosDescription: [
-                    "Première année d'activité : dispense d'acomptes provisionnels conformément à la réglementation.",
-                    "Aucun acompte n'est dû en février et juin. Le solde total de la TPS sera à payer le 30 avril de l'année suivante."
-                ]
-            });
-        } else {
-            infos.push({
+        return [
+            {
                 infosTitle: 'Acomptes et Solde',
-                infosDescription: [
-                    "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
-                    "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
-                ]
-            });
-        }
-
-        if (this.options.includeCCI && this.contributionCCI > 0) {
-            infos.push({
+                infosDescription: this.estPremiereAnnee
+                    ? [
+                        "Première année d'activité : dispense d'acomptes provisionnels.",
+                        "Le solde total de la TPS sera à payer le 30 avril de l'année suivante."
+                    ]
+                    : [
+                        "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
+                        "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
+                    ]
+            },
+            {
                 infosTitle: 'Contribution CCI Bénin',
                 infosDescription: [
-                    `La contribution CCI ${this.options.customCCIRate ? 'a été personnalisée' : 'varie selon le chiffre d\'affaires'}.`,
-                    `Pour votre situation (CA: ${this.chiffreAffaire.toLocaleString('fr-FR')} FCFA), la contribution est de ${this.contributionCCI.toLocaleString('fr-FR')} FCFA.`
+                    `Pour votre situation (CA: ${this.input.chiffreAffaire.toLocaleString('fr-FR')} FCFA), la contribution est de ${this.contributionCCI.toLocaleString('fr-FR')} FCFA.`,
                 ]
-            });
-        }
-
-        if (!this.options.includeCCI && !this.options.includeRedevanceSRTB) {
-            infos.push({
-                infosTitle: 'Calcul simplifié',
-                infosDescription: [
-                    'Ce calcul n\'inclut ni la contribution CCI Bénin ni la redevance SRTB.',
-                    'Le montant total correspond uniquement à la TPS de base.'
-                ]
-            });
-        } else if (!this.options.includeCCI) {
-            infos.push({
-                infosTitle: 'Calcul sans CCI',
-                infosDescription: [
-                    'Ce calcul n\'inclut pas la contribution CCI Bénin.',
-                    'Dans la pratique, cette contribution est généralement obligatoire.'
-                ]
-            });
-        } else if (!this.options.includeRedevanceSRTB) {
-            infos.push({
-                infosTitle: 'Calcul sans redevance SRTB',
-                infosDescription: [
-                    'Ce calcul n\'inclut pas la redevance SRTB.',
-                    'Dans la pratique, cette redevance est généralement obligatoire.'
-                ]
-            });
-        }
-
-        infos.push({
-            infosTitle: 'Amendes possibles',
-            infosDescription: [
-                'Tout paiement ≥ 100 000 FCFA doit être effectué par voie bancaire. Sinon, amende de 5%.',
-                'Amende pour non-présentation de comptabilité : 1 000 000 FCFA par exercice.'
-            ]
-        });
-
-        return infos;
+            }
+        ];
     }
 
     private buildImpotConfig() {
         return {
-            impotTitle: TPSConfig.TITLE,
-            label: TPSConfig.LABEL,
-            description: TPSConfig.DESCRIPTION,
-            competentCenter: TPSConfig.COMPETENT_CENTER
+            impotTitle: this.params.title,
+            label: this.params.label,
+            description: this.params.description,
+            competentCenter: this.params.competent_center
         };
     }
 
     build(): GlobalEstimationInfoData {
-        const suffixe = this.getSuffixeCalcul();
-        
         return {
             totalEstimation: this.tpsTotale,
             totalEstimationCurrency: 'FCFA',
-            contribuableRegime: `Régime TPS${suffixe}`,
+            contribuableRegime: 'Régime TPS',
             VariableEnter: this.buildVariablesEnter(),
             impotDetailCalcule: this.buildImpotDetailCalcule(),
             obligationEcheance: this.buildObligationEcheance(),
@@ -377,400 +237,71 @@ class TPSResponseBuilder {
             impotConfig: this.buildImpotConfig()
         };
     }
-
-    private getSuffixeCalcul(): string {
-        if (!this.options.includeCCI && !this.options.includeRedevanceSRTB) {
-            return ' (Base uniquement)';
-        } else if (!this.options.includeCCI) {
-            return ' (Sans CCI)';
-        } else if (!this.options.includeRedevanceSRTB) {
-            return ' (Sans SRTB)';
-        } else if (this.options.customCCIRate || this.options.customRedevance) {
-            return ' (Personnalisé)';
-        }
-        return '';
-    }
 }
 
-// Utilitaire pour l'extraction d'année
-class DateUtils {
-    static extraireAnnee(periodeFiscale: string): number {
-        const anneeMatch = periodeFiscale.match(/(\d{4})/);
-        return anneeMatch ? parseInt(anneeMatch[1], 10) : new Date().getFullYear();
-    }
-}
-
-// Classe principale avec méthodes spécialisées
 class MoteurTPSimplifie {
-    // Méthode principale avec toutes les composantes
-    public static calculerTPS(input: TPSInput): TPSCalculationResult {
+    public static async calculerTPS(input: TPSInput): Promise<TPSCalculationResult> {
         return this.calculerTPSAvecOptions(input, {});
     }
 
-    // Méthode sans contribution CCI Bénin
-    public static calculerTPSWithoutCCI(input: TPSInput): TPSCalculationResult {
+    public static async calculerTPSWithoutCCI(input: TPSInput): Promise<TPSCalculationResult> {
         return this.calculerTPSAvecOptions(input, { includeCCI: false });
     }
 
-    // Méthode sans redevance SRTB
-    public static calculerTPSWithoutRedevanceSRTB(input: TPSInput): TPSCalculationResult {
+    public static async calculerTPSWithoutRedevanceSRTB(input: TPSInput): Promise<TPSCalculationResult> {
         return this.calculerTPSAvecOptions(input, { includeRedevanceSRTB: false });
     }
 
-    // Méthode sans CCI ni redevance SRTB
-    public static calculerTPSWithoutCCI_RedevanceSRTB(input: TPSInput): TPSCalculationResult {
-        return this.calculerTPSAvecOptions(input, { 
-            includeCCI: false, 
-            includeRedevanceSRTB: false 
-        });
+    public static async calculerTPSWithoutCCI_RedevanceSRTB(input: TPSInput): Promise<TPSCalculationResult> {
+        return this.calculerTPSAvecOptions(input, { includeCCI: false, includeRedevanceSRTB: false });
     }
 
-    // Méthode avec montants personnalisés
-    public static calculerTPSPersonnalise(
-        input: TPSInput, 
-        customCCI?: number, 
+    public static async calculerTPSPersonnalise(
+        input: TPSInput,
+        customCCI?: number,
         customRedevance?: number
-    ): TPSCalculationResult {
+    ): Promise<TPSCalculationResult> {
         return this.calculerTPSAvecOptions(input, {
             customCCIRate: customCCI,
-            customRedevance: customRedevance,
+            customRedevance,
             includeCCI: customCCI !== undefined,
             includeRedevanceSRTB: customRedevance !== undefined
         });
     }
 
-    // Méthode générique avec options
-    public static calculerTPSAvecOptions(
-        input: TPSInput, 
+    public static async calculerTPSAvecOptions(
+        input: TPSInput,
         options: TPSCalculationOptions
-    ): TPSCalculationResult {
-        const { chiffreAffaire, periodeFiscale, typeEntreprise, dateCreation } = input;
-        
-        // Validation de l'année
-        const annee = DateUtils.extraireAnnee(periodeFiscale);
-        if (annee >= 2026) {
-            return TPSErrorHandler.genererErreurAnnee(chiffreAffaire, annee);
-        }
+    ): Promise<TPSCalculationResult> {
+        try {
+            if (input.chiffreAffaire < 0) {
+                return TPSErrorHandler.genererErreurValidation("Le chiffre d'affaires doit être positif");
+            }
 
-        // Validation du seuil de régime
-        if (chiffreAffaire > TPSConfig.SEUIL_REGIME_REEL) {
-            return TPSErrorHandler.genererErreurRegimeReel(chiffreAffaire);
-        }
+            const params = await fiscalParameterResolver.resolveRequiredParams<'TPS'>({
+                codeImpot: 'TPS',
+                typeContribuable: 'ENTREPRISE',
+                periodeFiscale: input.periodeFiscale
+            });
 
-        // Construction de la réponse avec les options spécifiées
-        return new TPSResponseBuilder(
-            chiffreAffaire, 
-            typeEntreprise, 
-            periodeFiscale,
-            dateCreation,
-            options
-        ).build();
+            if (input.chiffreAffaire > params.seuil_regime_reel) {
+                return TPSErrorHandler.genererErreurRegimeReel(input.chiffreAffaire, params.seuil_regime_reel);
+            }
+
+            return new TPSResponseBuilder(input, params, options).build();
+        } catch (error) {
+            if (error instanceof FiscalParametersError) {
+                return buildFiscalParametersFailureResponse(error, {
+                    typeContribuable: 'Entreprise',
+                    regime: 'Régime TPS',
+                    chiffreAffaire: input.chiffreAffaire
+                });
+            }
+
+            return TPSErrorHandler.genererErreurValidation(error instanceof Error ? error.message : 'Erreur lors du calcul de la TPS');
+        }
     }
 }
 
-// Export des types et de la classe
 export { TypeEntreprise, type TPSInput, type TPSCalculationOptions };
 export default MoteurTPSimplifie;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { GlobalEstimationInfoData } from '../../../../types/frontend.result.return.type';
-// import {BackendEstimationError, BackendEstimationFailureResponse, BackendEstimationContext } from '../../../../types/frontend.errors.estomation.type';
-
-// // Interface pour les données d'entrée
-// interface TPSInput {
-//     chiffreAffaire: number;
-//     periodeFiscale: string;
-//     typeEntreprise: TypeEntreprise;
-// }
-
-// // Enum pour le type d'entreprise
-// enum TypeEntreprise {
-//     ENTREPRISE_INDIVIDUELLE = 'entreprise_individuelle',
-//     SOCIETE = 'societe'
-// }
-
-// // Type union pour le retour de la fonction
-// export type TPSCalculationResult = GlobalEstimationInfoData | BackendEstimationFailureResponse;
-
-// // Barème CCI Bénin pour TPS (basé sur le CGI 2025)
-// const TPS_CCI_BENIN_RATES = [
-//     { maxRevenue: 5000000, individual: 20000, company: 100000 },
-//     { maxRevenue: 25000000, individual: 50000, company: 200000 },
-//     { maxRevenue: 50000000, individual: 150000, company: 300000 },
-//     { maxRevenue: 400000000, individual: 400000, company: 400000 },
-//     { maxRevenue: 800000000, individual: 600000, company: 600000 },
-//     { maxRevenue: 1000000000, individual: 800000, company: 800000 },
-//     { maxRevenue: 2000000000, individual: 1200000, company: 1200000 },
-//     { maxRevenue: 4000000000, individual: 1600000, company: 1600000 },
-//     { maxRevenue: Infinity, individual: 2000000, company: 2000000 },
-// ];
-
-// class MoteurTPSimplifie {
-//     private static readonly TAUX_TPS = 0.05;
-//     private static readonly MONTANT_MINIMUM = 10_000;
-//     private static readonly REDEVANCE_RTB = 4_000;
-//     private static readonly SEUIL_REGIME_REEL = 50_000_000;
-
-//     public static calculerTPS(input: TPSInput): TPSCalculationResult {
-//         const { chiffreAffaire, periodeFiscale, typeEntreprise } = input;
-        
-//         // Extraire l'année de la période fiscale
-//         const annee = this.extraireAnnee(periodeFiscale);
-        
-//         // Vérifier si l'année est 2026 ou ultérieure
-//         if (annee >= 2026) {
-//             return this.genererReponseErreurAnnee(chiffreAffaire, annee);
-//         }
-
-//         // Vérifier si le chiffre d'affaires dépasse le seuil pour le régime réel
-//         if (chiffreAffaire > this.SEUIL_REGIME_REEL) {
-//             return this.genererReponseErreurRegimeReel(chiffreAffaire);
-//         }
-
-//         // Calcul de la TPS
-//         const tpsCalculee = chiffreAffaire * this.TAUX_TPS;
-//         const tpsBase = Math.max(tpsCalculee, this.MONTANT_MINIMUM);
-
-//         // Calcul de la contribution CCI selon le barème et le type d'entreprise
-//         const contributionCCI = this.calculerContributionCCI(chiffreAffaire, typeEntreprise);
-
-//         const tpsTotale = tpsBase + this.REDEVANCE_RTB + contributionCCI;
-
-//         return {
-//             totalEstimation: tpsTotale,
-//             totalEstimationCurrency: 'FCFA',
-//             contribuableRegime: 'Régime TPS',
-
-//             VariableEnter: [
-//                 {
-//                     label: "Chiffre d'affaires annuel",
-//                     description: "Montant total des ventes ou revenus encaissés durant l'année fiscale.",
-//                     value: chiffreAffaire,
-//                     currency: 'FCFA',
-//                 }
-//                 // ,
-//                 // {
-//                 //     label: "Type d'entreprise",
-//                 //     description: "Statut juridique de l'entreprise (individuelle ou société).",
-//                 //     value: typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'Entreprise Individuelle' : 'Société',
-//                 //     currency: '',
-//                 // }
-//             ],
-
-//             impotDetailCalcule: [
-//                 {
-//                     impotTitle: 'TPS (Taxe Professionnelle Synthétique)',
-//                     impotDescription: "Calculée à 5% du chiffre d'affaires annuel avec un minimum de 10 000 FCFA.",
-//                     impotValue: tpsBase,
-//                     impotValueCurrency: 'FCFA',
-//                     impotTaux: '5%',
-//                     importCalculeDescription: `TPS = max(5% du chiffre d'affaires, 10 000 FCFA) → ${tpsBase.toLocaleString('fr-FR')} FCFA`
-//                 },
-//                 {
-//                     impotTitle: 'Redevance SRTB',
-//                     impotDescription: 'Montant fixe de 4 000 FCFA ajouté à la TPS pour la radiodiffusion et télévision nationale.',
-//                     impotValue: this.REDEVANCE_RTB,
-//                     impotTaux: '4 000 FCFA',
-//                     impotValueCurrency: 'FCFA',
-//                     importCalculeDescription: 'Conformément à la loi, une redevance audiovisuelle de 4 000 FCFA est ajoutée.'
-//                 },
-//                 {
-//                     impotTitle: 'Contribution CCI Bénin',
-//                     impotDescription: `Contribution à la Chambre de Commerce et d'Industrie du Bénin selon le barème en vigueur (${this.getDescriptionBaremeCCI(chiffreAffaire, typeEntreprise)}).`,
-//                     impotValue: contributionCCI,
-//                     impotTaux: `${contributionCCI} FCFA : barème CCI`,
-//                     impotValueCurrency: 'FCFA',
-//                     importCalculeDescription: `Montant calculé selon le barème CCI pour ${typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'entreprise individuelle' : 'société'} avec CA de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA.`
-//                 }
-//             ],
-
-//             obligationEcheance: [
-//                 {
-//                     impotTitle: 'TPS - Solde à payer',
-//                     echeancePaiement: {
-//                         echeancePeriodeLimite: '30 avril N+1',
-//                         echeanceDescription: "Solde à verser au plus tard le 30 avril de l'année suivante."
-//                     },
-//                     obligationDescription: 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
-//                 },
-//                 {
-//                     impotTitle: 'TPS - Acomptes provisionnels',
-//                     echeancePaiement: [
-//                         {
-//                             echeancePeriodeLimite: '10 février',
-//                             echeanceDescription: "Premier acompte égal à 50% de la TPS de l'année précédente."
-//                         },
-//                         {
-//                             echeancePeriodeLimite: '10 juin',
-//                             echeanceDescription: "Deuxième acompte égal à 50% de la TPS de l'année précédente."
-//                         }
-//                     ],
-//                     obligationDescription: "Applicable sauf pour la première année d'activité."
-//                 }
-//             ],
-
-//             infosSupplementaires: [
-//                 {
-//                     infosTitle: 'Acomptes et Solde',
-//                     infosDescription: [
-//                         "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
-//                         "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
-//                     ]
-//                 },
-//                 {
-//                     infosTitle: 'Contribution CCI Bénin',
-//                     infosDescription: [
-//                         `La contribution CCI varie selon le chiffre d'affaires et le type d'entreprise.`,
-//                         `Pour votre situation (${typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'entreprise individuelle' : 'société'}, CA: ${chiffreAffaire.toLocaleString('fr-FR')} FCFA), la contribution est de ${contributionCCI.toLocaleString('fr-FR')} FCFA.`
-//                     ]
-//                 },
-//                 {
-//                     infosTitle: 'Amendes possibles',
-//                     infosDescription: [
-//                         'Tout paiement ≥ 100 000 FCFA doit être effectué par voie bancaire. Sinon, amende de 5%.',
-//                         'Amende pour non-présentation de comptabilité : 1 000 000 FCFA par exercice.'
-//                     ]
-//                 }
-//             ],
-
-//             impotConfig: {
-//                 impotTitle: 'Taxe Professionnelle Synthétique',
-//                 label: 'TPS',
-//                 description: `La TPS est égale à 5% du chiffre d'affaires annuel avec un minimum forfaitaire de 10 000 FCFA.
-//                         Une redevance audiovisuelle de 4 000 FCFA est ajoutée à la TPS.
-//                         Une contribution variable à la Chambre de Commerce et d'Industrie du Bénin (CCI Bénin) est également ajoutée selon le barème en vigueur.
-//                         En cas de chiffre d'affaires > 50 millions FCFA, le contribuable passe au régime réel.`,
-//                 competentCenter: "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
-//             }
-//         };
-//     }
-
-//     private static calculerContributionCCI(chiffreAffaire: number, typeEntreprise: TypeEntreprise): number {
-//         const cciRate = TPS_CCI_BENIN_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
-        
-//         if (!cciRate) {
-//             // Fallback au dernier échelon
-//             return typeEntreprise === TypeEntreprise.SOCIETE ? 2000000 : 2000000;
-//         }
-
-//         return typeEntreprise === TypeEntreprise.SOCIETE 
-//             ? cciRate.company 
-//             : cciRate.individual;
-//     }
-
-//     private static getDescriptionBaremeCCI(chiffreAffaire: number, typeEntreprise: TypeEntreprise): string {
-//         const cciRate = TPS_CCI_BENIN_RATES.find(rate => chiffreAffaire <= rate.maxRevenue);
-        
-//         if (!cciRate) {
-//             return "Échelon maximum du barème";
-//         }
-
-//         // Trouver l'échelon précédent pour définir la tranche
-//         const index = TPS_CCI_BENIN_RATES.indexOf(cciRate);
-//         const minRevenue = index > 0 ? TPS_CCI_BENIN_RATES[index - 1].maxRevenue + 1 : 0;
-        
-//         const maxRevenue = cciRate.maxRevenue === Infinity ? "et plus" : cciRate.maxRevenue.toLocaleString('fr-FR');
-//         const minRevenueStr = minRevenue === 0 ? "0" : (minRevenue - 1).toLocaleString('fr-FR');
-        
-//         return `Tranche ${minRevenueStr} - ${maxRevenue} FCFA`;
-//     }
-
-//     private static extraireAnnee(periodeFiscale: string): number {
-//         // Essayer d'extraire l'année de différents formats possibles
-//         const anneeMatch = periodeFiscale.match(/(\d{4})/);
-//         if (anneeMatch) {
-//             return parseInt(anneeMatch[1], 10);
-//         }
-        
-//         // Si aucune année n'est trouvée, retourner l'année courante par défaut
-//         return new Date().getFullYear();
-//     }
-
-//     private static genererReponseErreurAnnee(chiffreAffaire: number, annee: number): BackendEstimationFailureResponse {
-//         return {
-//             success: false,
-//             errors: [
-//                 {
-//                     code: 'CONSTANTES_NON_DISPONIBLES',
-//                     message: `Les constantes de calcul de la TPS pour l'année ${annee} ne sont pas encore disponibles.`,
-//                     details: `Le calcul de la Taxe Professionnelle Synthétique pour l'année ${annee} ne peut pas être effectué car les taux, montants minimums et contributions officiels n'ont pas encore été publiés par l'administration fiscale béninoise.`,
-//                     severity: 'info'
-//                 }
-//             ],
-//             context: {
-//                 typeContribuable: 'Entreprise',
-//                 regime: chiffreAffaire > this.SEUIL_REGIME_REEL ? 'Régime Réel' : 'Régime TPS',
-//                 chiffreAffaire: chiffreAffaire,
-//                 missingData: ['taux_tps', 'montant_minimum', 'redevance_rtb', 'contribution_cci']
-//             },
-//             timestamp: new Date().toISOString(),
-//             requestId: `tps_calc_${Date.now()}`
-//         };
-//     }
-
-//     private static genererReponseErreurRegimeReel(chiffreAffaire: number): BackendEstimationFailureResponse {
-//         return {
-//             success: false,
-//             errors: [
-//                 {
-//                     code: 'CHIFFRE_AFFAIRES_DEPASSE_SEUIL_TPS',
-//                     message: `Chiffre d'affaires supérieur au seuil du régime TPS (${this.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA).`,
-//                     details: `Avec un chiffre d'affaires de ${chiffreAffaire.toLocaleString('fr-FR')} FCFA, vous dépassez le seuil de ${this.SEUIL_REGIME_REEL.toLocaleString('fr-FR')} FCFA et devez obligatoirement être soumis au régime réel. Veuillez effectuer votre simulation en tant qu'Entreprise Individuelle ou Société selon votre statut juridique pour obtenir le calcul approprié de vos impôts.`,
-//                     severity: 'warning'
-//                 }
-//             ],
-//             context: {
-//                 typeContribuable: 'Entreprise',
-//                 regime: 'Régime Réel',
-//                 chiffreAffaire: chiffreAffaire,
-//                 missingData: ['regime_reel_parameters']
-//             },
-//             timestamp: new Date().toISOString(),
-//             requestId: `tps_seuil_depasse_${Date.now()}`
-//         };
-//     }
-// }
-
-// // Export des types et de la classe
-// export { TypeEntreprise, type TPSInput };
-// export default MoteurTPSimplifie;

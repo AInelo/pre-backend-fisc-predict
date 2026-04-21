@@ -1,6 +1,8 @@
 import { ProfilingData, ApplicableTax } from '../../types/profilage.result.return.type'
 import { ListTypesContribuableEntreprise, ListTypesRegime } from '../../types/general.entreprise.type';
 import { BackendEstimationFailureResponse, BackendEstimationError, BackendEstimationContext } from '../../types/frontend.errors.estomation.type';
+import { fiscalParameterResolver } from '@/services/fiscal-parameters/FiscalParameterResolver';
+import { FiscalParametersError } from '@/services/fiscal-parameters/errors';
 
 
 interface donneesProfilageRecu {
@@ -165,21 +167,22 @@ class MoteurProfillage {
         ]]
     ]);
 
-    public static getProfil(donneesProfilageRecu: donneesProfilageRecu): ProfilingData | BackendEstimationFailureResponse {
+    public static async getProfil(donneesProfilageRecu: donneesProfilageRecu): Promise<ProfilingData | BackendEstimationFailureResponse> {
         try {
             // Validation de la période fiscale
             const annee = this.extraireAnnee(donneesProfilageRecu.periodeFiscale);
-
-            // Vérifier si l'année est 2026 ou ultérieure
-            if (annee >= 2026) {
-                return this.genererReponseErreur(donneesProfilageRecu, annee);
-            }
 
             // Détermination du régime fiscal basé sur le chiffre d'affaires
             const regime = this.determinerRegime(
                 donneesProfilageRecu.chiffreAffaire,
                 donneesProfilageRecu.typeContribuableEntreprise
             );
+
+            await fiscalParameterResolver.resolveRequiredParams({
+                codeImpot: regime === 'TPS' ? 'TPS' : 'IS',
+                typeContribuable: 'ENTREPRISE',
+                periodeFiscale: donneesProfilageRecu.periodeFiscale
+            });
 
             // Construction du profil fiscal
             const profile = {
@@ -198,6 +201,9 @@ class MoteurProfillage {
                 taxes
             };
         } catch (error) {
+            if (error instanceof FiscalParametersError) {
+                return this.genererReponseErreur(donneesProfilageRecu, this.extraireAnnee(donneesProfilageRecu.periodeFiscale));
+            }
             return this.genererReponseErreurValidation(error instanceof Error ? error.message : 'Erreur lors de la génération du profil fiscal');
         }
     }

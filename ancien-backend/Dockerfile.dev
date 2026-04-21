@@ -1,0 +1,19 @@
+# Dockerfile.dev
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copie uniquement les fichiers de dépendances d'abord
+COPY package*.json ./
+
+# Installation des dépendances
+RUN npm install
+
+# Copie du code source
+COPY . .
+
+# Expose le port utilisé par l'app
+EXPOSE 5001
+
+# Commande de dev : ici on suppose que tu as un script "dev" genre ts-node-dev ou nodemon
+CMD ["npm", "run", "dev"]

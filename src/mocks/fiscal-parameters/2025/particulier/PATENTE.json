@@ -1,0 +1,55 @@
+{
+  "code_impot": "PATENTE",
+  "type_contribuable": "PARTICULIER",
+  "annee": 2025,
+  "actif": true,
+  "parametres": {
+    "fixed_rate_zone1": 70000,
+    "fixed_rate_zone2": 60000,
+    "add_per_billion_ca": 10000,
+    "proportional_rates": {
+      "cotonou": 17,
+      "porto-novo": 17,
+      "ouidah": 18,
+      "abomey": 14,
+      "parakou": 25,
+      "alibori": 15,
+      "borgou": 15,
+      "atacora": 15,
+      "donga": 15,
+      "mono": 12,
+      "couffo": 12,
+      "atlantique": 13.5,
+      "collines": 13.5,
+      "oueme": 13.5,
+      "plateau": 13.5,
+      "zou": 13.5,
+      "other-zone1": 13.5,
+      "other-zone2": 13.5,
+      "littoral": 13.5
+    },
+    "first_zone_locations": [
+      "cotonou", "porto-novo", "ouidah", "abomey", "other-zone1",
+      "atlantique", "collines", "couffo", "littoral", "mono",
+      "oueme", "plateau", "zou"
+    ],
+    "import_export_fixed_rates": [
+      { "maxAmount": 80000000, "amount": 150000 },
+      { "maxAmount": 200000000, "amount": 337500 },
+      { "maxAmount": 500000000, "amount": 525000 },
+      { "maxAmount": 1000000000, "amount": 675000 },
+      { "maxAmount": 2000000000, "amount": 900000 },
+      { "maxAmount": 10000000000, "amount": 1125000 },
+      { "maxAmount": null, "amount": 1125000 }
+    ],
+    "title": "Patente",
+    "label": "Patente",
+    "description": "Impôt local annuel calculé pour chaque établissement.",
+    "competent_center": "Centre des Impôts du ressort territorial de l'établissement."
+  },
+  "meta": {
+    "label": "PATENTE - Particulier",
+    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

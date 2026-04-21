@@ -8,6 +8,7 @@ import irfRoutes from './routes/impots/general/reel/IRF.general.route';
 import entrepriseGeneralEstimationRoutes from './routes/impots/general/entreprise.general.estimation.route';
 import profillageRoutes from './routes/common/profillage.route';
 import estimationSummaryRoutes from './routes/common/summurize.route';
+import { seedFiscalParameters } from './config/seeding.config';
 
 const app = express();
 
@@ -38,11 +39,19 @@ app.use('/api/general/', entrepriseGeneralEstimationRoutes);
 app.use('/api/', profillageRoutes);
 app.use('/api/', estimationSummaryRoutes);
 
-const PORT = 5001;
+const PORT = Number(process.env.PORT) || 5400;
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Serveur démarré sur http://0.0.0.0:${PORT}`);
-  console.log(`📊 Nouvelles routes disponibles:`);
-  console.log(`  - POST http://0.0.0.0:${PORT}/api/estimation/summarize`);
-  console.log(`  - POST http://0.0.0.0:${PORT}/api/estimation/stats`);
-});
+async function bootstrap(): Promise<void> {
+  try {
+    await seedFiscalParameters();
+  } catch (error) {
+    console.warn('Seeding fiscal ignoré:', error instanceof Error ? error.message : error);
+  }
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Serveur démarré sur http://0.0.0.0:${PORT}`);
+    console.log(`Routes estimation disponibles sur /api`);
+  });
+}
+
+void bootstrap();

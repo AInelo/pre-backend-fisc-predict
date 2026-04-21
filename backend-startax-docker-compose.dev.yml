@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   startax-api:
     build:
@@ -9,8 +7,9 @@ services:
     container_name: startax-backend-container
     restart: always
     ports:
-      - "5001:5001"
+      - "5400:5400"
     environment:
+      - PORT=5400
       - MONGO_URL=mongodb://startax-mongo-container:27017/startax_db
     volumes:
       - .:/app
@@ -28,7 +27,7 @@ services:
     volumes:
       - ./mongo-data:/data/db
     ports:
-      - "27018:27017"  # Port externe 27018 pour éviter les conflits
+      - "5401:27017"
     networks:
       - startax-network
 
