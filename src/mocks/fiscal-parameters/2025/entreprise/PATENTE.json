@@ -42,6 +42,7 @@
       { "maxAmount": 10000000000, "amount": 1125000 },
       { "maxAmount": null, "amount": 1125000 }
     ],
+    "import_export_over_max_increment_per_billion": 10000,
     "title": "Patente Multi-Établissements",
     "label": "Patente",
     "description": "Impôt local annuel calculé pour chaque établissement.",

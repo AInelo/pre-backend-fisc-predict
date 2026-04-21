@@ -1,6 +1,5 @@
 import { DatabaseManager } from '@/config/databases/DatabaseManager';
 import {
-  FiscalParametersByTaxModel,
   FiscalParametersModel,
   FiscalParametersQueryModel,
 } from '@/models/fiscal-parameters';

@@ -296,4 +296,4 @@ export class EntrepriseGeneralEstimation {
     }
 }
 
-export const calculerEstimationGlobaleEntreprise = EntrepriseGeneralEstimation.calculerEstimationGlobale;
+export const calculerEstimationGlobaleEntreprise = EntrepriseGeneralEstimation.calculerEstimationGlobale.bind(EntrepriseGeneralEstimation);

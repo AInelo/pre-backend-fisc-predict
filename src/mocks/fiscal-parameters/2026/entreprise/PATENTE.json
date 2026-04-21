@@ -1,7 +1,7 @@
 {
   "code_impot": "PATENTE",
-  "type_contribuable": "PARTICULIER",
-  "annee": 2025,
+  "type_contribuable": "ENTREPRISE",
+  "annee": 2026,
   "actif": true,
   "parametres": {
     "fixed_rate_zone1": 70000,
@@ -43,14 +43,14 @@
       { "maxAmount": null, "amount": 1125000 }
     ],
     "import_export_over_max_increment_per_billion": 10000,
-    "title": "Patente",
+    "title": "Patente Multi-Établissements",
     "label": "Patente",
     "description": "Impôt local annuel calculé pour chaque établissement.",
-    "competent_center": "Centre des Impôts du ressort territorial de l'établissement."
+    "competent_center": "Centre des Impôts des Petites Entreprises (CIPE) du ressort territorial de chaque établissement."
   },
   "meta": {
-    "label": "PATENTE - Particulier",
-    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "label": "PATENTE - Entreprise",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
     "updatedBy": "system-seed"
   }
 }

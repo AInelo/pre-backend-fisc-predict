@@ -106,6 +106,8 @@ export interface PatenteFiscalParams {
   proportional_rates: Record<string, number>;
   first_zone_locations: string[];
   import_export_fixed_rates: Array<{ maxAmount: number | null; amount: number }>;
+  /** Supplément par milliard entier au-delà du dernier seuil d'import/export (>10Mds) */
+  import_export_over_max_increment_per_billion: number;
   title: string;
   label: string;
   description: string;

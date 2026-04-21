@@ -1,0 +1,80 @@
+{
+  "code_impot": "TVM",
+  "type_contribuable": "ENTREPRISE",
+  "annee": 2026,
+  "actif": true,
+  "parametres": {
+    "tarifs": {
+      "tricycle": 15000,
+      "company": [
+        {
+          "maxPower": 7,
+          "amount": 150000
+        },
+        {
+          "maxPower": null,
+          "amount": 200000
+        }
+      ],
+      "private": [
+        {
+          "maxPower": 7,
+          "amount": 20000
+        },
+        {
+          "maxPower": 10,
+          "amount": 30000
+        },
+        {
+          "maxPower": 15,
+          "amount": 40000
+        },
+        {
+          "maxPower": null,
+          "amount": 60000
+        }
+      ],
+      "public_persons": [
+        {
+          "maxCapacity": 9,
+          "amount": 38000
+        },
+        {
+          "maxCapacity": 20,
+          "amount": 59800
+        },
+        {
+          "maxCapacity": null,
+          "amount": 86800
+        }
+      ],
+      "public_goods": [
+        {
+          "maxCapacity": 2.5,
+          "amount": 49500
+        },
+        {
+          "maxCapacity": 5,
+          "amount": 68200
+        },
+        {
+          "maxCapacity": 10,
+          "amount": 102300
+        },
+        {
+          "maxCapacity": null,
+          "amount": 136400
+        }
+      ]
+    },
+    "title": "Taxe sur les Véhicules à Moteur (TVM)",
+    "label": "TVM",
+    "description": "Taxe locale annuelle calculée sur chaque véhicule à moteur possédé.",
+    "competent_center": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+  },
+  "meta": {
+    "label": "TVM - Entreprise",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "code_impot": "TFU",
   "type_contribuable": "PARTICULIER",
-  "annee": 2025,
+  "annee": 2026,
   "actif": true,
   "parametres": {
     "montant_piscine": 30000,
@@ -24956,7 +24956,7 @@
   },
   "meta": {
     "label": "TFU - Particulier",
-    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
     "updatedBy": "system-seed"
   }
 }

@@ -3,17 +3,14 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copie uniquement les fichiers de dépendances d'abord
+# Dépendances (couche cachée séparément)
 COPY package*.json ./
-
-# Installation des dépendances
 RUN npm install
 
-# Copie du code source
-COPY . .
+# Config TypeScript + sources (inclut src/mocks/**/*.json)
+COPY tsconfig.json ./
+COPY src/ ./src/
 
-# Expose le port utilisé par l'app
 EXPOSE 5400
 
-# Commande de dev : ici on suppose que tu as un script "dev" genre ts-node-dev ou nodemon
 CMD ["npm", "run", "dev"]

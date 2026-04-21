@@ -1,7 +1,7 @@
 {
   "code_impot": "PATENTE",
   "type_contribuable": "PARTICULIER",
-  "annee": 2025,
+  "annee": 2026,
   "actif": true,
   "parametres": {
     "fixed_rate_zone1": 70000,
@@ -50,7 +50,7 @@
   },
   "meta": {
     "label": "PATENTE - Particulier",
-    "updatedAt": "2025-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
     "updatedBy": "system-seed"
   }
 }

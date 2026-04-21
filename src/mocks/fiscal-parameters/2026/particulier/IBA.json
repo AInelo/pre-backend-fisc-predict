@@ -1,0 +1,42 @@
+{
+  "code_impot": "IBA",
+  "type_contribuable": "PARTICULIER",
+  "annee": 2026,
+  "actif": true,
+  "parametres": {
+    "taux_general": 0.30,
+    "minimum_general_pourcent": 0.015,
+    "minimum_absolu_general": 500000,
+    "redevance_srtb": 4000,
+    "facteur_reduction_artisanale": 0.5,
+    "regles_secteur": {
+      "enseignement-prive": { "taux": 0.25, "min": 500000 },
+      "industrie": { "taux": 0.25, "min": 500000 },
+      "batiment-travaux-publics": { "taux": 0.30, "minPourcent": 0.03 },
+      "immobilier": { "taux": 0.30, "minPourcent": 0.10 },
+      "stations-services": { "tauxParLitre": 0.60, "min": 250000 },
+      "artisanat": { "taux": 0.30, "reductionArtisanale": 0.5 },
+      "agriculture": { "taux": 0.30, "min": 500000 },
+      "peche": { "taux": 0.30, "min": 500000 },
+      "elevage": { "taux": 0.30, "min": 500000 },
+      "chercheur-variete-vegetale": { "taux": 0.30, "min": 500000 },
+      "profession-liberale": { "taux": 0.30, "min": 500000 },
+      "charges-offices": { "taux": 0.30, "min": 500000 },
+      "propriete-intellectuelle": { "taux": 0.30, "min": 500000 },
+      "location-etablissement-commercial": { "taux": 0.30, "min": 500000 },
+      "intermediaire-immobilier": { "taux": 0.30, "min": 500000 },
+      "achat-revente-immobilier": { "taux": 0.30, "min": 500000 },
+      "lotissement-terrain": { "taux": 0.30, "min": 500000 },
+      "autre": { "taux": 0.30, "min": 500000 }
+    },
+    "title": "Impôt sur le Bénéfice d'Affaire (IBA)",
+    "label": "IBA",
+    "description": "Impôt direct calculé sur le bénéfice imposable des entrepreneurs individuels.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
+  },
+  "meta": {
+    "label": "IBA - Particulier",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

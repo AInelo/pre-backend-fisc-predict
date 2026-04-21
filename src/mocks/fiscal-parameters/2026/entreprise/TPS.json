@@ -1,0 +1,36 @@
+{
+  "code_impot": "TPS",
+  "type_contribuable": "ENTREPRISE",
+  "annee": 2026,
+  "actif": true,
+  "parametres": {
+    "taux_tps": 0.05,
+    "montant_minimum": 10000,
+    "redevance_rtb": 4000,
+    "seuil_regime_reel": 50000000,
+    "cci_rates": [
+      { "maxRevenue": 5000000, "amount": 20000 },
+      { "maxRevenue": 10000000, "amount": 30000 },
+      { "maxRevenue": 25000000, "amount": 50000 },
+      { "maxRevenue": 50000000, "amount": 150000 },
+      { "maxRevenue": 100000000, "amount": 250000 },
+      { "maxRevenue": 300000000, "amount": 300000 },
+      { "maxRevenue": 500000000, "amount": 400000 },
+      { "maxRevenue": 700000000, "amount": 500000 },
+      { "maxRevenue": 800000000, "amount": 600000 },
+      { "maxRevenue": 1000000000, "amount": 800000 },
+      { "maxRevenue": 2000000000, "amount": 1200000 },
+      { "maxRevenue": 4000000000, "amount": 1600000 },
+      { "maxRevenue": null, "amount": 2000000 }
+    ],
+    "title": "Taxe Professionnelle Synthétique",
+    "label": "TPS",
+    "description": "TPS annuelle calculée sur le chiffre d'affaires avec redevance et contribution CCI.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
+  },
+  "meta": {
+    "label": "TPS - Entreprise",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}

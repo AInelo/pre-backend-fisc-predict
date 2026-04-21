@@ -1,0 +1,18 @@
+{
+  "code_impot": "AIB",
+  "type_contribuable": "PARTICULIER",
+  "annee": 2026,
+  "actif": true,
+  "parametres": {
+    "redevance_srtb": 4000,
+    "title": "Accompte sur l'Impôt sur les Bénéfices",
+    "label": "AIB",
+    "description": "Acompte mensuel sur l'impôt sur les bénéfices.",
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
+  },
+  "meta": {
+    "label": "AIB - Particulier",
+    "updatedAt": "2026-01-01T00:00:00.000Z",
+    "updatedBy": "system-seed"
+  }
+}
