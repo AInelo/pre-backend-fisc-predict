@@ -1,0 +1,694 @@
+{
+  "success": true,
+  "message": "Estimation globale calculée avec succès",
+  "data": {
+    "success": true,
+    "totalEstimation": 45492770,
+    "totalEstimationCurrency": "FCFA",
+    "contribuableRegime": "Entreprise - Régime Général",
+    "VariableEnter": {
+      "AIB": [
+        {
+          "label": "AIB Collecté",
+          "description": "Montant total d'AIB collecté",
+          "value": 100000,
+          "currency": "FCFA"
+        },
+        {
+          "label": "AIB Accordé",
+          "description": "Montant total d'AIB accordé",
+          "value": 20000,
+          "currency": "FCFA"
+        }
+      ],
+      "PATENTE": [
+        {
+          "label": "Chiffre d'affaires global",
+          "description": "Revenus totaux de tous les établissements",
+          "value": 152000000,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Nombre d'établissements",
+          "description": "Nombre total d'établissements déclarés",
+          "value": 1,
+          "currency": ""
+        }
+      ],
+      "IS": [
+        {
+          "label": "Chiffre d'affaires",
+          "description": "Revenus totaux de l'entreprise",
+          "value": 152000000,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Charges déductibles",
+          "description": "Charges et dépenses déductibles du bénéfice imposable",
+          "value": 2441141,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Bénéfice imposable",
+          "description": "Différence entre revenus et charges",
+          "value": 149558859,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Volume de carburant annuel",
+          "description": "Nombre de litres vendus dans l'année",
+          "value": 2250,
+          "currency": "litres"
+        }
+      ],
+      "TVM": [
+        {
+          "label": "Nombre de véhicules",
+          "description": "Nombre total de véhicules imposables à la TVM",
+          "value": 1,
+          "currency": ""
+        }
+      ],
+      "TFU": [
+        {
+          "label": "Nombre de propriétés",
+          "description": "Nombre total de propriétés imposables à la TFU",
+          "value": 1,
+          "currency": ""
+        },
+        {
+          "label": "Valeur locative totale",
+          "description": "Somme des valeurs locatives de toutes les propriétés",
+          "value": 22022,
+          "currency": "FCFA"
+        }
+      ]
+    },
+    "impotDetailCalcule": {
+      "AIB": [
+        {
+          "impotTitle": "AIB Net (Accompte sur l'Impôt sur les Bénéfices)",
+          "impotDescription": "Calculé comme la différence entre l'AIB collecté et l'AIB accordé",
+          "impotValue": 80000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "Débit",
+          "importCalculeDescription": "AIB Net = 100 000 FCFA - 20 000 FCFA = 80 000 FCFA"
+        }
+      ],
+      "PATENTE": [
+        {
+          "impotTitle": "EEGETGE - Total",
+          "impotDescription": "Patente pour porto-novo",
+          "impotValue": 200000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "17%",
+          "importCalculeDescription": "Part fixe 150 000 FCFA + part proportionnelle 50 000 FCFA"
+        }
+      ],
+      "IS": [
+        {
+          "impotTitle": "Impôt sur les Sociétés (IS)",
+          "impotDescription": "Calculé selon le taux de 30.0% applicable au secteur gas-station",
+          "impotValue": 44869008,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "30.0%",
+          "importCalculeDescription": "IS = 149 558 859 FCFA x 30.0% = 44 867 658 FCFA + Taxe station 1 350 FCFA"
+        },
+        {
+          "impotTitle": "Taxe station-service",
+          "impotDescription": "Taxe calculée sur la base du comptage des litres vendus",
+          "impotValue": 1350,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "0.6 FCFA par litre",
+          "importCalculeDescription": "Taxe station = 2250 litres x 0.6 FCFA = 1 350 FCFA"
+        },
+        {
+          "impotTitle": "Redevance SRTB",
+          "impotDescription": "Redevance audiovisuelle obligatoire.",
+          "impotValue": 4000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "Forfait",
+          "importCalculeDescription": "Redevance SRTB = 4 000 FCFA"
+        },
+        {
+          "impotTitle": "Contribution CCI Bénin",
+          "impotDescription": "Contribution CCI selon barème (Tranche 100 000 001 - 300 000 000 FCFA)",
+          "impotValue": 300000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "300 000 FCFA",
+          "importCalculeDescription": "Contribution CCI = 300 000 FCFA"
+        }
+      ],
+      "TVM": [
+        {
+          "impotTitle": "TVM (Taxe sur les Véhicules à Moteur)",
+          "impotDescription": "Calculée pour 1 véhicule(s) selon les tarifs en vigueur",
+          "impotValue": 38000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "Tarifs variables selon le type et les caractéristiques",
+          "importCalculeDescription": "TVM totale = 38 000 FCFA pour 1 véhicule(s)"
+        },
+        {
+          "impotTitle": "Véhicule 1 - public-persons",
+          "impotDescription": "Montant appliqué selon le paramétrage fiscal",
+          "impotValue": 38000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "Tarif paramétré",
+          "importCalculeDescription": "public-persons : 38 000 FCFA"
+        }
+      ],
+      "TFU": [
+        {
+          "impotTitle": "TFU - porto-novo",
+          "impotDescription": "Propriété bâtie",
+          "impotValue": 1762,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "8.00%",
+          "importCalculeDescription": "TFU = 22 022 FCFA x 8.00% = 1 762 FCFA"
+        }
+      ]
+    },
+    "obligationEcheance": {
+      "AIB": [
+        {
+          "impotTitle": "AIB - Déclaration mensuelle",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 du mois suivant",
+            "echeanceDescription": "Déclaration et paiement de l'AIB mensuel."
+          },
+          "obligationDescription": "L'AIB doit être déclaré et payé avant le 10 du mois suivant la période d'activité."
+        }
+      ],
+      "PATENTE": [
+        {
+          "impotTitle": "Patente - Paiement annuel",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Paiement de la patente annuelle pour tous les établissements."
+          },
+          "obligationDescription": "La patente doit être payée au plus tard le 30 avril de chaque année pour tous les établissements."
+        }
+      ],
+      "IS": [
+        {
+          "impotTitle": "IS - Premier acompte",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 mars",
+            "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+          },
+          "obligationDescription": "Premier acompte à verser au plus tard le 10 mars."
+        },
+        {
+          "impotTitle": "IS - Deuxième acompte",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 juin",
+            "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+          },
+          "obligationDescription": "Deuxième acompte à verser au plus tard le 10 juin."
+        },
+        {
+          "impotTitle": "IS - Troisième acompte",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 septembre",
+            "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+          },
+          "obligationDescription": "Troisième acompte à verser au plus tard le 10 septembre."
+        },
+        {
+          "impotTitle": "IS - Quatrième acompte",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 décembre",
+            "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+          },
+          "obligationDescription": "Quatrième acompte à verser au plus tard le 10 décembre."
+        },
+        {
+          "impotTitle": "IS - Solde et déclaration annuelle",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Solde de l'IS et déclaration annuelle avec bilan OHADA."
+          },
+          "obligationDescription": "Le solde de l'IS doit être versé et la déclaration annuelle déposée avant le 30 avril."
+        }
+      ],
+      "TVM": [
+        {
+          "impotTitle": "TVM - Paiement annuel",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Paiement de la TVM annuelle."
+          },
+          "obligationDescription": "La TVM doit être payée au plus tard le 30 avril de chaque année."
+        }
+      ],
+      "TFU": [
+        {
+          "impotTitle": "TFU - Solde",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Solde de 50% du montant total de la taxe due."
+          },
+          "obligationDescription": "Le solde de 50% doit être versé au plus tard le 30 avril."
+        }
+      ]
+    },
+    "infosSupplementaires": {
+      "AIB": [
+        {
+          "infosTitle": "Principe de l'AIB",
+          "infosDescription": [
+            "L'AIB est un acompte sur l'impôt sur les bénéfices (IBA/IS) à payer mensuellement.",
+            "L'AIB accordé représente ce qui a été retenu à la source ou payé d'avance."
+          ]
+        }
+      ],
+      "PATENTE": [
+        {
+          "infosTitle": "Calcul multi-établissements",
+          "infosDescription": [
+            "Nombre d'établissements : 1",
+            "Les zones et taux proportionnels sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+          ]
+        }
+      ],
+      "IS": [
+        {
+          "infosTitle": "Taux d'imposition par secteur",
+          "infosDescription": [
+            "education : 25.0%",
+            "industry : 25.0%",
+            "real-estate : 30.0%",
+            "construction : 30.0%",
+            "gas-station : 30.0%",
+            "general : 30.0%"
+          ]
+        },
+        {
+          "infosTitle": "Impôt minimum",
+          "infosDescription": [
+            "L'impôt minimum est calculé sur le chiffre d'affaires selon le secteur d'activité.",
+            "Il s'applique si l'impôt calculé sur le bénéfice est inférieur à ce minimum.",
+            "L'impôt minimum absolu est de 250 000 FCFA pour toutes les entreprises."
+          ]
+        }
+      ],
+      "TVM": [
+        {
+          "infosTitle": "Tarifs par type de véhicule",
+          "infosDescription": [
+            "Les montants sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+          ]
+        }
+      ],
+      "TFU": [
+        {
+          "infosTitle": "Obligations spécifiques entreprises",
+          "infosDescription": [
+            "Les taux appliqués sont lus par ville depuis le paramétrage fiscal annuel en base MongoDB."
+          ]
+        }
+      ]
+    },
+    "impotConfig": {
+      "AIB": {
+        "impotTitle": "Accompte sur l'Impôt sur les Bénéfices",
+        "label": "AIB",
+        "description": "Acompte mensuel sur l'impôt sur les bénéfices.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+      },
+      "PATENTE": {
+        "impotTitle": "Patente Multi-Établissements",
+        "label": "Patente",
+        "description": "Impôt local annuel calculé pour chaque établissement.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) du ressort territorial de chaque établissement."
+      },
+      "IS": {
+        "impotTitle": "Impôt sur les Sociétés (IS)",
+        "label": "IS",
+        "description": "Impôt direct calculé sur le bénéfice imposable des entreprises.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+      },
+      "TVM": {
+        "impotTitle": "Taxe sur les Véhicules à Moteur (TVM)",
+        "label": "TVM",
+        "description": "Taxe locale annuelle calculée sur chaque véhicule à moteur possédé.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+      },
+      "TFU": {
+        "impotTitle": "Taxe Foncière Urbaine - Entreprises",
+        "label": "TFU Entreprise",
+        "description": "TFU calculée selon la valeur locative et le taux communal.",
+        "competentCenter": "Centre des Impôts territorialement compétent selon l'adresse de la propriété principale."
+      }
+    },
+    "estimationsParImpot": {
+      "AIB": {
+        "totalEstimation": 80000,
+        "totalEstimationCurrency": "FCFA",
+        "contribuableRegime": "Régime AIB",
+        "VariableEnter": [
+          {
+            "label": "AIB Collecté",
+            "description": "Montant total d'AIB collecté",
+            "value": 100000,
+            "currency": "FCFA"
+          },
+          {
+            "label": "AIB Accordé",
+            "description": "Montant total d'AIB accordé",
+            "value": 20000,
+            "currency": "FCFA"
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "AIB Net (Accompte sur l'Impôt sur les Bénéfices)",
+            "impotDescription": "Calculé comme la différence entre l'AIB collecté et l'AIB accordé",
+            "impotValue": 80000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "Débit",
+            "importCalculeDescription": "AIB Net = 100 000 FCFA - 20 000 FCFA = 80 000 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "AIB - Déclaration mensuelle",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 du mois suivant",
+              "echeanceDescription": "Déclaration et paiement de l'AIB mensuel."
+            },
+            "obligationDescription": "L'AIB doit être déclaré et payé avant le 10 du mois suivant la période d'activité."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Principe de l'AIB",
+            "infosDescription": [
+              "L'AIB est un acompte sur l'impôt sur les bénéfices (IBA/IS) à payer mensuellement.",
+              "L'AIB accordé représente ce qui a été retenu à la source ou payé d'avance."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Accompte sur l'Impôt sur les Bénéfices",
+          "label": "AIB",
+          "description": "Acompte mensuel sur l'impôt sur les bénéfices.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+        }
+      },
+      "PATENTE": {
+        "totalEstimation": 200000,
+        "totalEstimationCurrency": "FCFA",
+        "VariableEnter": [
+          {
+            "label": "Chiffre d'affaires global",
+            "description": "Revenus totaux de tous les établissements",
+            "value": 152000000,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Nombre d'établissements",
+            "description": "Nombre total d'établissements déclarés",
+            "value": 1,
+            "currency": ""
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "EEGETGE - Total",
+            "impotDescription": "Patente pour porto-novo",
+            "impotValue": 200000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "17%",
+            "importCalculeDescription": "Part fixe 150 000 FCFA + part proportionnelle 50 000 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "Patente - Paiement annuel",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Paiement de la patente annuelle pour tous les établissements."
+            },
+            "obligationDescription": "La patente doit être payée au plus tard le 30 avril de chaque année pour tous les établissements."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Calcul multi-établissements",
+            "infosDescription": [
+              "Nombre d'établissements : 1",
+              "Les zones et taux proportionnels sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Patente Multi-Établissements",
+          "label": "Patente",
+          "description": "Impôt local annuel calculé pour chaque établissement.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) du ressort territorial de chaque établissement."
+        }
+      },
+      "IS": {
+        "totalEstimation": 45173008,
+        "totalEstimationCurrency": "FCFA",
+        "contribuableRegime": "Régime IS",
+        "VariableEnter": [
+          {
+            "label": "Chiffre d'affaires",
+            "description": "Revenus totaux de l'entreprise",
+            "value": 152000000,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Charges déductibles",
+            "description": "Charges et dépenses déductibles du bénéfice imposable",
+            "value": 2441141,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Bénéfice imposable",
+            "description": "Différence entre revenus et charges",
+            "value": 149558859,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Volume de carburant annuel",
+            "description": "Nombre de litres vendus dans l'année",
+            "value": 2250,
+            "currency": "litres"
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "Impôt sur les Sociétés (IS)",
+            "impotDescription": "Calculé selon le taux de 30.0% applicable au secteur gas-station",
+            "impotValue": 44869008,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "30.0%",
+            "importCalculeDescription": "IS = 149 558 859 FCFA x 30.0% = 44 867 658 FCFA + Taxe station 1 350 FCFA"
+          },
+          {
+            "impotTitle": "Taxe station-service",
+            "impotDescription": "Taxe calculée sur la base du comptage des litres vendus",
+            "impotValue": 1350,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "0.6 FCFA par litre",
+            "importCalculeDescription": "Taxe station = 2250 litres x 0.6 FCFA = 1 350 FCFA"
+          },
+          {
+            "impotTitle": "Redevance SRTB",
+            "impotDescription": "Redevance audiovisuelle obligatoire.",
+            "impotValue": 4000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "Forfait",
+            "importCalculeDescription": "Redevance SRTB = 4 000 FCFA"
+          },
+          {
+            "impotTitle": "Contribution CCI Bénin",
+            "impotDescription": "Contribution CCI selon barème (Tranche 100 000 001 - 300 000 000 FCFA)",
+            "impotValue": 300000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "300 000 FCFA",
+            "importCalculeDescription": "Contribution CCI = 300 000 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "IS - Premier acompte",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 mars",
+              "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+            },
+            "obligationDescription": "Premier acompte à verser au plus tard le 10 mars."
+          },
+          {
+            "impotTitle": "IS - Deuxième acompte",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 juin",
+              "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+            },
+            "obligationDescription": "Deuxième acompte à verser au plus tard le 10 juin."
+          },
+          {
+            "impotTitle": "IS - Troisième acompte",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 septembre",
+              "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+            },
+            "obligationDescription": "Troisième acompte à verser au plus tard le 10 septembre."
+          },
+          {
+            "impotTitle": "IS - Quatrième acompte",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 décembre",
+              "echeanceDescription": "25% du montant de l'IS de l'année précédente."
+            },
+            "obligationDescription": "Quatrième acompte à verser au plus tard le 10 décembre."
+          },
+          {
+            "impotTitle": "IS - Solde et déclaration annuelle",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Solde de l'IS et déclaration annuelle avec bilan OHADA."
+            },
+            "obligationDescription": "Le solde de l'IS doit être versé et la déclaration annuelle déposée avant le 30 avril."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Taux d'imposition par secteur",
+            "infosDescription": [
+              "education : 25.0%",
+              "industry : 25.0%",
+              "real-estate : 30.0%",
+              "construction : 30.0%",
+              "gas-station : 30.0%",
+              "general : 30.0%"
+            ]
+          },
+          {
+            "infosTitle": "Impôt minimum",
+            "infosDescription": [
+              "L'impôt minimum est calculé sur le chiffre d'affaires selon le secteur d'activité.",
+              "Il s'applique si l'impôt calculé sur le bénéfice est inférieur à ce minimum.",
+              "L'impôt minimum absolu est de 250 000 FCFA pour toutes les entreprises."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Impôt sur les Sociétés (IS)",
+          "label": "IS",
+          "description": "Impôt direct calculé sur le bénéfice imposable des entreprises.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+        }
+      },
+      "TVM": {
+        "totalEstimation": 38000,
+        "totalEstimationCurrency": "FCFA",
+        "VariableEnter": [
+          {
+            "label": "Nombre de véhicules",
+            "description": "Nombre total de véhicules imposables à la TVM",
+            "value": 1,
+            "currency": ""
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "TVM (Taxe sur les Véhicules à Moteur)",
+            "impotDescription": "Calculée pour 1 véhicule(s) selon les tarifs en vigueur",
+            "impotValue": 38000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "Tarifs variables selon le type et les caractéristiques",
+            "importCalculeDescription": "TVM totale = 38 000 FCFA pour 1 véhicule(s)"
+          },
+          {
+            "impotTitle": "Véhicule 1 - public-persons",
+            "impotDescription": "Montant appliqué selon le paramétrage fiscal",
+            "impotValue": 38000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "Tarif paramétré",
+            "importCalculeDescription": "public-persons : 38 000 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "TVM - Paiement annuel",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Paiement de la TVM annuelle."
+            },
+            "obligationDescription": "La TVM doit être payée au plus tard le 30 avril de chaque année."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Tarifs par type de véhicule",
+            "infosDescription": [
+              "Les montants sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Taxe sur les Véhicules à Moteur (TVM)",
+          "label": "TVM",
+          "description": "Taxe locale annuelle calculée sur chaque véhicule à moteur possédé.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+        }
+      },
+      "TFU": {
+        "totalEstimation": 1762,
+        "totalEstimationCurrency": "FCFA",
+        "VariableEnter": [
+          {
+            "label": "Nombre de propriétés",
+            "description": "Nombre total de propriétés imposables à la TFU",
+            "value": 1,
+            "currency": ""
+          },
+          {
+            "label": "Valeur locative totale",
+            "description": "Somme des valeurs locatives de toutes les propriétés",
+            "value": 22022,
+            "currency": "FCFA"
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "TFU - porto-novo",
+            "impotDescription": "Propriété bâtie",
+            "impotValue": 1762,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "8.00%",
+            "importCalculeDescription": "TFU = 22 022 FCFA x 8.00% = 1 762 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "TFU - Solde",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Solde de 50% du montant total de la taxe due."
+            },
+            "obligationDescription": "Le solde de 50% doit être versé au plus tard le 30 avril."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Obligations spécifiques entreprises",
+            "infosDescription": [
+              "Les taux appliqués sont lus par ville depuis le paramétrage fiscal annuel en base MongoDB."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Taxe Foncière Urbaine - Entreprises",
+          "label": "TFU Entreprise",
+          "description": "TFU calculée selon la valeur locative et le taux communal.",
+          "competentCenter": "Centre des Impôts territorialement compétent selon l'adresse de la propriété principale."
+        }
+      }
+    }
+  }
+}

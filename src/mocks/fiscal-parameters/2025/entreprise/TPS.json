@@ -26,7 +26,37 @@
     "title": "Taxe Professionnelle Synthétique",
     "label": "TPS",
     "description": "TPS annuelle calculée sur le chiffre d'affaires avec redevance et contribution CCI.",
-    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable."
+    "competent_center": "Centre des Impôts territorialement compétent selon l'adresse du contribuable.",
+    "echeances": {
+      "solde": "30 avril N+1",
+      "acompte_1": "10 février",
+      "acompte_2": "10 juin"
+    },
+    "textes": {
+      "solde_title": "TPS - Solde à payer",
+      "solde_echeance_description": "Solde à verser au plus tard le 30 avril de l'année suivante.",
+      "solde_description_premiere_annee": "En première année d'activité, aucun acompte n'est dû. Le solde correspond à la TPS totale.",
+      "solde_description_standard": "Le solde de la TPS est calculé après déduction des acomptes éventuels.",
+      "acomptes_title": "TPS - Acomptes provisionnels",
+      "acompte_1_description": "Premier acompte égal à 50% de la TPS de l'année précédente.",
+      "acompte_2_description": "Deuxième acompte égal à 50% de la TPS de l'année précédente.",
+      "acomptes_description": "Applicable sauf pour la première année d'activité.",
+      "info_acomptes_title": "Acomptes et Solde",
+      "info_acomptes_premiere_annee": [
+        "Première année d'activité : dispense d'acomptes provisionnels.",
+        "Le solde total de la TPS sera à payer le 30 avril de l'année suivante."
+      ],
+      "info_acomptes_standard": [
+        "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
+        "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
+      ],
+      "variable_ca_label": "Chiffre d'affaires annuel",
+      "variable_ca_description": "Montant total des ventes ou revenus encaissés durant l'année fiscale.",
+      "variable_type_label": "Type d'entreprise",
+      "variable_type_description": "Statut juridique de l'entreprise (individuelle ou société).",
+      "variable_type_individuelle": "Entreprise Individuelle",
+      "variable_type_societe": "Société"
+    }
   },
   "meta": {
     "label": "TPS - Entreprise",

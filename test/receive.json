@@ -1,0 +1,344 @@
+{
+  "success": true,
+  "message": "Estimation globale calculée avec succès",
+  "data": {
+    "success": true,
+    "totalEstimation": 45881314,
+    "totalEstimationCurrency": "FCFA",
+    "contribuableRegime": "Entreprise - Régime Général",
+    "VariableEnter": {
+      "AIB": [
+        {
+          "label": "AIB Collecté",
+          "description": "Montant total d'AIB collecté",
+          "value": 120020,
+          "currency": "FCFA"
+        },
+        {
+          "label": "AIB Accordé",
+          "description": "Montant total d'AIB accordé",
+          "value": 12100,
+          "currency": "FCFA"
+        }
+      ],
+      "PATENTE": [
+        {
+          "label": "Chiffre d'affaires global",
+          "description": "Revenus totaux de tous les établissements",
+          "value": 152000000,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Nombre d'établissements",
+          "description": "Nombre total d'établissements déclarés",
+          "value": 1,
+          "currency": ""
+        }
+      ],
+      "IBA": [
+        {
+          "label": "Chiffre d'affaires",
+          "description": "Revenus totaux de l'activité",
+          "value": 152000000,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Charges déductibles",
+          "description": "Charges et dépenses déductibles",
+          "value": 102020,
+          "currency": "FCFA"
+        },
+        {
+          "label": "Bénéfice imposable",
+          "description": "Différence entre revenus et charges",
+          "value": 151897980,
+          "currency": "FCFA"
+        }
+      ]
+    },
+    "impotDetailCalcule": {
+      "AIB": [
+        {
+          "impotTitle": "AIB Net (Accompte sur l'Impôt sur les Bénéfices)",
+          "impotDescription": "Calculé comme la différence entre l'AIB collecté et l'AIB accordé",
+          "impotValue": 107920,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "Débit",
+          "importCalculeDescription": "AIB Net = 120 020 FCFA - 12 100 FCFA = 107 920 FCFA"
+        }
+      ],
+      "PATENTE": [
+        {
+          "impotTitle": "gjgjgj - Total",
+          "impotDescription": "Patente pour porto-novo",
+          "impotValue": 200000,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "17%",
+          "importCalculeDescription": "Part fixe 150 000 FCFA + part proportionnelle 50 000 FCFA"
+        }
+      ],
+      "IBA": [
+        {
+          "impotTitle": "Impôt sur le Bénéfice d'Affaire (IBA) - Base",
+          "impotDescription": "Calculé selon le taux de 30.0% applicable au secteur batiment-travaux-publics",
+          "impotValue": 45569394,
+          "impotValueCurrency": "FCFA",
+          "impotTaux": "30.0%",
+          "importCalculeDescription": "IBA base = MAX(impôt nominal 45 569 394 FCFA, minimum sectoriel 4 560 000 FCFA, minimum absolu 500 000 FCFA)"
+        }
+      ]
+    },
+    "obligationEcheance": {
+      "AIB": [
+        {
+          "impotTitle": "AIB - Déclaration mensuelle",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "10 du mois suivant",
+            "echeanceDescription": "Déclaration et paiement de l'AIB mensuel."
+          },
+          "obligationDescription": "L'AIB doit être déclaré et payé avant le 10 du mois suivant la période d'activité."
+        }
+      ],
+      "PATENTE": [
+        {
+          "impotTitle": "Patente - Paiement annuel",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Paiement de la patente annuelle pour tous les établissements."
+          },
+          "obligationDescription": "La patente doit être payée au plus tard le 30 avril de chaque année pour tous les établissements."
+        }
+      ],
+      "IBA": [
+        {
+          "impotTitle": "IBA - Solde et déclaration annuelle",
+          "echeancePaiement": {
+            "echeancePeriodeLimite": "30 avril",
+            "echeanceDescription": "Solde de l'IBA et déclaration annuelle avec bilan OHADA."
+          },
+          "obligationDescription": "Le solde de l'IBA doit être versé et la déclaration annuelle déposée avant le 30 avril."
+        }
+      ]
+    },
+    "infosSupplementaires": {
+      "AIB": [
+        {
+          "infosTitle": "Principe de l'AIB",
+          "infosDescription": [
+            "L'AIB est un acompte sur l'impôt sur les bénéfices (IBA/IS) à payer mensuellement.",
+            "L'AIB accordé représente ce qui a été retenu à la source ou payé d'avance."
+          ]
+        }
+      ],
+      "PATENTE": [
+        {
+          "infosTitle": "Calcul multi-établissements",
+          "infosDescription": [
+            "Nombre d'établissements : 1",
+            "Les zones et taux proportionnels sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+          ]
+        }
+      ],
+      "IBA": [
+        {
+          "infosTitle": "Paramètres appliqués",
+          "infosDescription": [
+            "Taux principal: 30.0%",
+            "Minimum sectoriel: 4 560 000 FCFA",
+            "Minimum absolu: 500 000 FCFA"
+          ]
+        }
+      ]
+    },
+    "impotConfig": {
+      "AIB": {
+        "impotTitle": "Accompte sur l'Impôt sur les Bénéfices",
+        "label": "AIB",
+        "description": "Acompte mensuel sur l'impôt sur les bénéfices.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+      },
+      "PATENTE": {
+        "impotTitle": "Patente Multi-Établissements",
+        "label": "Patente",
+        "description": "Impôt local annuel calculé pour chaque établissement.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) du ressort territorial de chaque établissement."
+      },
+      "IBA": {
+        "impotTitle": "Impôt sur le Bénéfice d'Affaire (IBA)",
+        "label": "IBA",
+        "description": "Impôt direct calculé sur le bénéfice imposable des entrepreneurs individuels.",
+        "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+      }
+    },
+    "estimationsParImpot": {
+      "AIB": {
+        "totalEstimation": 107920,
+        "totalEstimationCurrency": "FCFA",
+        "contribuableRegime": "Régime AIB",
+        "VariableEnter": [
+          {
+            "label": "AIB Collecté",
+            "description": "Montant total d'AIB collecté",
+            "value": 120020,
+            "currency": "FCFA"
+          },
+          {
+            "label": "AIB Accordé",
+            "description": "Montant total d'AIB accordé",
+            "value": 12100,
+            "currency": "FCFA"
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "AIB Net (Accompte sur l'Impôt sur les Bénéfices)",
+            "impotDescription": "Calculé comme la différence entre l'AIB collecté et l'AIB accordé",
+            "impotValue": 107920,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "Débit",
+            "importCalculeDescription": "AIB Net = 120 020 FCFA - 12 100 FCFA = 107 920 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "AIB - Déclaration mensuelle",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "10 du mois suivant",
+              "echeanceDescription": "Déclaration et paiement de l'AIB mensuel."
+            },
+            "obligationDescription": "L'AIB doit être déclaré et payé avant le 10 du mois suivant la période d'activité."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Principe de l'AIB",
+            "infosDescription": [
+              "L'AIB est un acompte sur l'impôt sur les bénéfices (IBA/IS) à payer mensuellement.",
+              "L'AIB accordé représente ce qui a été retenu à la source ou payé d'avance."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Accompte sur l'Impôt sur les Bénéfices",
+          "label": "AIB",
+          "description": "Acompte mensuel sur l'impôt sur les bénéfices.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+        }
+      },
+      "PATENTE": {
+        "totalEstimation": 200000,
+        "totalEstimationCurrency": "FCFA",
+        "VariableEnter": [
+          {
+            "label": "Chiffre d'affaires global",
+            "description": "Revenus totaux de tous les établissements",
+            "value": 152000000,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Nombre d'établissements",
+            "description": "Nombre total d'établissements déclarés",
+            "value": 1,
+            "currency": ""
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "gjgjgj - Total",
+            "impotDescription": "Patente pour porto-novo",
+            "impotValue": 200000,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "17%",
+            "importCalculeDescription": "Part fixe 150 000 FCFA + part proportionnelle 50 000 FCFA"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "Patente - Paiement annuel",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Paiement de la patente annuelle pour tous les établissements."
+            },
+            "obligationDescription": "La patente doit être payée au plus tard le 30 avril de chaque année pour tous les établissements."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Calcul multi-établissements",
+            "infosDescription": [
+              "Nombre d'établissements : 1",
+              "Les zones et taux proportionnels sont lus depuis le paramétrage fiscal annuel en base MongoDB."
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Patente Multi-Établissements",
+          "label": "Patente",
+          "description": "Impôt local annuel calculé pour chaque établissement.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) du ressort territorial de chaque établissement."
+        }
+      },
+      "IBA": {
+        "totalEstimation": 45573394,
+        "totalEstimationCurrency": "FCFA",
+        "contribuableRegime": "Régime IBA",
+        "VariableEnter": [
+          {
+            "label": "Chiffre d'affaires",
+            "description": "Revenus totaux de l'activité",
+            "value": 152000000,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Charges déductibles",
+            "description": "Charges et dépenses déductibles",
+            "value": 102020,
+            "currency": "FCFA"
+          },
+          {
+            "label": "Bénéfice imposable",
+            "description": "Différence entre revenus et charges",
+            "value": 151897980,
+            "currency": "FCFA"
+          }
+        ],
+        "impotDetailCalcule": [
+          {
+            "impotTitle": "Impôt sur le Bénéfice d'Affaire (IBA) - Base",
+            "impotDescription": "Calculé selon le taux de 30.0% applicable au secteur batiment-travaux-publics",
+            "impotValue": 45569394,
+            "impotValueCurrency": "FCFA",
+            "impotTaux": "30.0%",
+            "importCalculeDescription": "IBA base = MAX(impôt nominal 45 569 394 FCFA, minimum sectoriel 4 560 000 FCFA, minimum absolu 500 000 FCFA)"
+          }
+        ],
+        "obligationEcheance": [
+          {
+            "impotTitle": "IBA - Solde et déclaration annuelle",
+            "echeancePaiement": {
+              "echeancePeriodeLimite": "30 avril",
+              "echeanceDescription": "Solde de l'IBA et déclaration annuelle avec bilan OHADA."
+            },
+            "obligationDescription": "Le solde de l'IBA doit être versé et la déclaration annuelle déposée avant le 30 avril."
+          }
+        ],
+        "infosSupplementaires": [
+          {
+            "infosTitle": "Paramètres appliqués",
+            "infosDescription": [
+              "Taux principal: 30.0%",
+              "Minimum sectoriel: 4 560 000 FCFA",
+              "Minimum absolu: 500 000 FCFA"
+            ]
+          }
+        ],
+        "impotConfig": {
+          "impotTitle": "Impôt sur le Bénéfice d'Affaire (IBA)",
+          "label": "IBA",
+          "description": "Impôt direct calculé sur le bénéfice imposable des entrepreneurs individuels.",
+          "competentCenter": "Centre des Impôts des Petites Entreprises (CIPE) de votre ressort territorial."
+        }
+      }
+    }
+  }
+}

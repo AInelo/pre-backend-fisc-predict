@@ -16,6 +16,32 @@ export interface CciRateBracket {
   amount: number;
 }
 
+export interface TpsEcheances {
+  solde: string;
+  acompte_1: string;
+  acompte_2: string;
+}
+
+export interface TpsTextes {
+  solde_title: string;
+  solde_echeance_description: string;
+  solde_description_premiere_annee: string;
+  solde_description_standard: string;
+  acomptes_title: string;
+  acompte_1_description: string;
+  acompte_2_description: string;
+  acomptes_description: string;
+  info_acomptes_title: string;
+  info_acomptes_premiere_annee: string[];
+  info_acomptes_standard: string[];
+  variable_ca_label: string;
+  variable_ca_description: string;
+  variable_type_label: string;
+  variable_type_description: string;
+  variable_type_individuelle: string;
+  variable_type_societe: string;
+}
+
 export interface TpsFiscalParams {
   taux_tps: number;
   montant_minimum: number;
@@ -26,6 +52,8 @@ export interface TpsFiscalParams {
   label: string;
   description: string;
   competent_center: string;
+  echeances: TpsEcheances;
+  textes: TpsTextes;
 }
 
 export interface IsFiscalParams {

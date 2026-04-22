@@ -1,0 +1,59 @@
+📤 [EntrepriseApi] Request Body (JSON stringifié): {
+  "chiffreAffaire": 152000000,
+  "periodeFiscale": "2025",
+  "dataImpot": {
+    "AIB": {
+      "aibCollected": 120020,
+      "aibGranted": 12100,
+      "periodeFiscale": "2025"
+    },
+    "PATENTE": {
+      "etablissementsCount": 1,
+      "isImporter": true,
+      "importExportAmount": 102022,
+      "etablissements": [
+        {
+          "nom": "gjgjgj",
+          "adresse": "ymumm",
+          "location": "porto-novo",
+          "rentalValue": 100000
+        }
+      ],
+      "periodeFiscale": "2025",
+      "chiffreAffaire": 152000000
+    },
+    "IBA": {
+      "charges": 102020,
+      "secteur": "batiment-travaux-publics",
+      "nbrLitreAnnee": 0,
+      "conditionsReduction": "normale",
+      "periodeFiscale": "2025",
+      "chiffreAffaire": 152000000
+    },
+    "TVM": {
+      "hasVehicles": "true",
+      "nombreVehicules": 1,
+      "vehicles": [
+        {
+          "vehicleType": "company",
+          "power": 2,
+          "capacity": 4
+        }
+      ],
+      "periodeFiscale": "2025"
+    },
+    "TFU": {
+      "possessionProprietes": "true",
+      "NbrProprietes": 1,
+      "proprietes": [
+        {
+          "ville": "ouidah",
+          "valeurLocative": 12002,
+          "proprieteBatie": true,
+          "tauxTfu": 10
+        }
+      ],
+      "periodeFiscale": "2025"
+    }
+  }
+}

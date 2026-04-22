@@ -13,8 +13,8 @@ import {
 type FiscalParametersStoredDocument<TParams> = FiscalParametersModel<TParams> & { _id?: unknown };
 
 export class FiscalParametersRepository {
-  private readonly databaseManager = DatabaseManager.getInstance();
-  private readonly collectionName =
+    private readonly databaseManager = DatabaseManager.getInstance();
+    private readonly collectionName =
     process.env.MONGO_FISCAL_PARAMETERS_COLLECTION || 'parametres_fiscaux';
 
   public async getRequiredParams<TCode extends FiscalTaxCode>(
@@ -74,6 +74,38 @@ export class FiscalParametersRepository {
     }
 
     return document.parametres;
+  }
+
+
+
+
+  
+
+  public async getAllByAnneeAndType(
+    annee: number,
+    typeContribuable: FiscalContributorType
+  ): Promise<Array<FiscalParametersModel<Record<string, unknown>>>> {
+    await this.databaseManager.initAll();
+    const collection = this.databaseManager
+      .getMongo()
+      .getCollection<FiscalParametersStoredDocument<Record<string, unknown>>>(this.collectionName);
+
+    const documents = await collection
+      .find({ annee, type_contribuable: typeContribuable, actif: true })
+      .sort({ code_impot: 1 })
+      .toArray();
+
+    return documents.map(({ _id, ...doc }) => doc as FiscalParametersModel<Record<string, unknown>>);
+  }
+
+  public async getAnneesDisponibles(): Promise<number[]> {
+    await this.databaseManager.initAll();
+    const collection = this.databaseManager
+      .getMongo()
+      .getCollection<FiscalParametersStoredDocument<Record<string, unknown>>>(this.collectionName);
+
+    const annees = await collection.distinct('annee', { actif: true });
+    return (annees as number[]).sort((a, b) => a - b);
   }
 
   public async upsertMany(

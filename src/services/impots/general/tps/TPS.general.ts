@@ -106,17 +106,20 @@ class TPSResponseBuilder {
     }
 
     private buildVariablesEnter() {
+        const t = this.params.textes;
         return [
             {
-                label: "Chiffre d'affaires annuel",
-                description: "Montant total des ventes ou revenus encaissés durant l'année fiscale.",
+                label: t.variable_ca_label,
+                description: t.variable_ca_description,
                 value: this.input.chiffreAffaire,
                 currency: 'FCFA',
             },
             {
-                label: "Type d'entreprise",
-                description: "Statut juridique de l'entreprise (individuelle ou société).",
-                value: this.input.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE ? 'Entreprise Individuelle' : 'Société',
+                label: t.variable_type_label,
+                description: t.variable_type_description,
+                value: this.input.typeEntreprise === TypeEntreprise.ENTREPRISE_INDIVIDUELLE
+                    ? t.variable_type_individuelle
+                    : t.variable_type_societe,
                 currency: '',
             }
         ];
@@ -160,33 +163,36 @@ class TPSResponseBuilder {
     }
 
     private buildObligationEcheance(): ObligationEcheance[] {
+        const t = this.params.textes;
+        const e = this.params.echeances;
+
         const obligations: ObligationEcheance[] = [
             {
-                impotTitle: 'TPS - Solde à payer',
+                impotTitle: t.solde_title,
                 echeancePaiement: {
-                    echeancePeriodeLimite: '30 avril N+1',
-                    echeanceDescription: "Solde à verser au plus tard le 30 avril de l'année suivante."
+                    echeancePeriodeLimite: e.solde,
+                    echeanceDescription: t.solde_echeance_description
                 },
                 obligationDescription: this.estPremiereAnnee
-                    ? 'En première année d\'activité, aucun acompte n\'est dû. Le solde correspond à la TPS totale.'
-                    : 'Le solde de la TPS est calculé après déduction des acomptes éventuels.'
+                    ? t.solde_description_premiere_annee
+                    : t.solde_description_standard
             }
         ];
 
         if (!this.estPremiereAnnee) {
             obligations.push({
-                impotTitle: 'TPS - Acomptes provisionnels',
+                impotTitle: t.acomptes_title,
                 echeancePaiement: [
                     {
-                        echeancePeriodeLimite: '10 février',
-                        echeanceDescription: "Premier acompte égal à 50% de la TPS de l'année précédente."
+                        echeancePeriodeLimite: e.acompte_1,
+                        echeanceDescription: t.acompte_1_description
                     },
                     {
-                        echeancePeriodeLimite: '10 juin',
-                        echeanceDescription: "Deuxième acompte égal à 50% de la TPS de l'année précédente."
+                        echeancePeriodeLimite: e.acompte_2,
+                        echeanceDescription: t.acompte_2_description
                     }
                 ],
-                obligationDescription: "Applicable sauf pour la première année d'activité."
+                obligationDescription: t.acomptes_description
             });
         }
 
@@ -194,18 +200,13 @@ class TPSResponseBuilder {
     }
 
     private buildInfosSupplementaires() {
+        const t = this.params.textes;
         return [
             {
-                infosTitle: 'Acomptes et Solde',
+                infosTitle: t.info_acomptes_title,
                 infosDescription: this.estPremiereAnnee
-                    ? [
-                        "Première année d'activité : dispense d'acomptes provisionnels.",
-                        "Le solde total de la TPS sera à payer le 30 avril de l'année suivante."
-                    ]
-                    : [
-                        "Deux acomptes provisionnels égaux à 50% de la TPS de l'année précédente sont exigés.",
-                        "Le solde à payer est : TPS année en cours – (acompte 1 + acompte 2)."
-                    ]
+                    ? t.info_acomptes_premiere_annee
+                    : t.info_acomptes_standard
             },
             {
                 infosTitle: 'Contribution CCI Bénin',

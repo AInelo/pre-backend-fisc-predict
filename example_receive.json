@@ -1,0 +1,123 @@
+{
+  "chiffreAffaire": 75000000,
+  "periodeFiscale": "2025",
+  "dataImpot": {
+
+    "TPS": {
+      "chiffreAffaire": 75000000,
+      "periodeFiscale": "2025"
+    },
+
+    "TVA": {
+      "chiffreAffaire": 75000000,
+      "periodeFiscale": "2025"
+    },
+
+    "AIB": {
+      "aibCollected": 1500000,
+      "aibGranted": 750000,
+      "periodeFiscale": "2025"
+    },
+
+    "IBA": {
+      "chiffreAffaire": 75000000,
+      "charges": 12000000,
+      "secteur": "stations-services",
+      "nbrLitreAnnee": 850000,
+      "conditionsReduction": "artisanale",
+      "periodeFiscale": "2025"
+    },
+
+    "PATENTE": {
+      "chiffreAffaire": 75000000,
+      "etablissementsCount": 2,
+      "etablissements": [
+        {
+          "nom": "Siège social",
+          "adresse": "123 Avenue Clozel, Cotonou",
+          "location": "cotonou",
+          "rentalValue": 3600000
+        },
+        {
+          "nom": "Agence Nord",
+          "adresse": "45 Rue du Commerce, Parakou",
+          "location": "parakou",
+          "rentalValue": 1800000
+        }
+      ],
+      "isImporter": true,
+      "importExportAmount": 22000000,
+      "periodeFiscale": "2025"
+    },
+
+    "IS": {
+      "chiffreAffaire": 75000000,
+      "charges": 18000000,
+      "secteur": "gas-station",
+      "dureeCreation": 7,
+      "pourcentageActionsNonCotees": 35,
+      "estExoneree": false,
+      "nbrLitreParAn": 850000,
+      "periodeFiscale": "2025"
+    },
+
+    "TFU": {
+      "possessionProprietes": true,
+      "NbrProprietes": 2,
+      "proprietes": [
+        {
+          "ville": "cotonou",
+          "valeurLocative": 4800000,
+          "proprieteBatie": true,
+          "tauxTfu": 4
+        },
+        {
+          "ville": "porto-novo",
+          "valeurLocative": 2400000,
+          "proprieteBatie": false,
+          "tauxTfu": 2
+        }
+      ],
+      "periodeFiscale": "2025"
+    },
+
+    "IRF": {
+      "revenuLocatif": 9600000,
+      "isAlreadyTaxed": false,
+      "periodeFiscale": "2025"
+    },
+
+    "ITS": {
+      "salaireAnnuel": 36000000,
+      "periodeFiscale": "2025"
+    },
+
+    "TVM": {
+      "hasVehicles": true,
+      "nombreVehicules": 2,
+      "vehicles": [
+        {
+          "vehicleType": "company",
+          "power": 120,
+          "capacity": 5
+        },
+        {
+          "vehicleType": "public-goods",
+          "power": 180,
+          "capacity": 3
+        }
+      ],
+      "periodeFiscale": "2025"
+    },
+
+    "VPS": {
+      "masseSalariale": 36000000,
+      "nombreEmployes": 24,
+      "periodeFiscale": "2025"
+    },
+
+    "IRCM": {
+      "periodeFiscale": "2025"
+    }
+  }
+}

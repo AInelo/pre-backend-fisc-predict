@@ -94,11 +94,13 @@ export class EntrepriseGeneralEstimation {
 
     private static estImpotConditionnelApplicable(impotCode: string, dataImpot: any): boolean {
         if (impotCode === 'TVM') {
-            return dataImpot?.hasVehicles === true && Array.isArray(dataImpot.vehicles) && dataImpot.vehicles.length > 0;
+            const hasVehicles = dataImpot?.hasVehicles === true || dataImpot?.hasVehicles === 'true';
+            return hasVehicles && Array.isArray(dataImpot.vehicles) && dataImpot.vehicles.length > 0;
         }
 
         if (impotCode === 'TFU') {
-            return dataImpot?.possessionProprietes === true && Array.isArray(dataImpot.proprietes) && dataImpot.proprietes.length > 0;
+            const possessionProprietes = dataImpot?.possessionProprietes === true || dataImpot?.possessionProprietes === 'true';
+            return possessionProprietes && Array.isArray(dataImpot.proprietes) && dataImpot.proprietes.length > 0;
         }
 
         return true;
