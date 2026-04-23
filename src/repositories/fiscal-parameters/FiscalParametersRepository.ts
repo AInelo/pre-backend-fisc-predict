@@ -81,6 +81,67 @@ export class FiscalParametersRepository {
 
   
 
+  public async createParametres(
+    codeImpot: string,
+    typeContribuable: FiscalContributorType,
+    annee: number,
+    parametres: Record<string, unknown>,
+    label: string
+  ): Promise<'created' | 'conflict'> {
+    await this.databaseManager.initAll();
+    const collection = this.databaseManager
+      .getMongo()
+      .getCollection<FiscalParametersStoredDocument<Record<string, unknown>>>(this.collectionName);
+
+    const existing = await collection.findOne({
+      code_impot: codeImpot as never,
+      type_contribuable: typeContribuable,
+      annee,
+    });
+
+    if (existing) return 'conflict';
+
+    await collection.insertOne({
+      code_impot: codeImpot as never,
+      type_contribuable: typeContribuable,
+      annee,
+      actif: true,
+      parametres,
+      meta: {
+        label,
+        updatedAt: new Date().toISOString(),
+        updatedBy: 'admin',
+      },
+    } as never);
+
+    return 'created';
+  }
+
+  public async updateParametres(
+    codeImpot: string,
+    typeContribuable: FiscalContributorType,
+    annee: number,
+    parametres: Record<string, unknown>
+  ): Promise<boolean> {
+    await this.databaseManager.initAll();
+    const collection = this.databaseManager
+      .getMongo()
+      .getCollection<FiscalParametersStoredDocument<Record<string, unknown>>>(this.collectionName);
+
+    const result = await collection.updateOne(
+      { code_impot: codeImpot as never, type_contribuable: typeContribuable, annee },
+      {
+        $set: {
+          parametres,
+          'meta.updatedAt': new Date().toISOString(),
+          'meta.updatedBy': 'admin',
+        },
+      }
+    );
+
+    return result.matchedCount > 0;
+  }
+
   public async getAllByAnneeAndType(
     annee: number,
     typeContribuable: FiscalContributorType

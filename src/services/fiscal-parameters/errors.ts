@@ -1,5 +1,6 @@
 import { BackendEstimationFailureResponse } from '@/types/frontend.errors.estomation.type';
 import { FiscalParametersQueryModel } from '@/models/fiscal-parameters';
+import { FiscalTaxCode } from '@/types/fiscal-parameters';
 
 export class FiscalParametersError extends Error {
   constructor(
@@ -19,6 +20,30 @@ export class FiscalParametersError extends Error {
   }
 }
 
+const IMPOT_NOMS: Record<FiscalTaxCode, string> = {
+  TPS:     'Taxe Professionnelle Synthétique',
+  ITS:     'Impôt sur les Traitements et Salaires',
+  IRF:     'Impôt sur les Revenus Fonciers',
+  AIB:     "Acompte sur l'Impôt sur les Bénéfices",
+  IBA:     "Impôt sur le Bénéfice d'Affaire",
+  IS:      'Impôt sur les Sociétés',
+  PATENTE: 'Patente',
+  TFU:     'Taxe Foncière Urbaine',
+  TVM:     'Taxe sur les Véhicules à Moteur',
+};
+
+const IMPOT_MISSING_DATA: Record<FiscalTaxCode, string[]> = {
+  TPS:     ['taux_tps', 'montant_minimum', 'redevance_rtb', 'cci_rates'],
+  ITS:     ['bareme_its', 'seuil_exoneration', 'redevance_srtb'],
+  IRF:     ['taux_standard', 'taux_reduit', 'redevance_srtb'],
+  AIB:     ['redevance_srtb'],
+  IBA:     ['taux_general', 'minimum_general_pourcent', 'regles_secteur'],
+  IS:      ['taux_principal_par_secteur', 'taux_minimum_par_secteur', 'cci_rates'],
+  PATENTE: ['fixed_rate_zone1', 'fixed_rate_zone2', 'proportional_rates'],
+  TFU:     ['taux_standard', 'taux_par_ville'],
+  TVM:     ['tarifs'],
+};
+
 export function buildFiscalParametersFailureResponse(
   error: FiscalParametersError,
   context?: {
@@ -27,6 +52,30 @@ export function buildFiscalParametersFailureResponse(
     chiffreAffaire?: number;
   }
 ): BackendEstimationFailureResponse {
+  if (error.code === 'FISCAL_PARAMS_NOT_FOUND' && error.query) {
+    const { codeImpot, annee } = error.query;
+    const nomImpot = IMPOT_NOMS[codeImpot] ?? codeImpot;
+    const missingData = IMPOT_MISSING_DATA[codeImpot] ?? [];
+
+    return {
+      success: false,
+      errors: [
+        {
+          code: 'CONSTANTES_NON_DISPONIBLES',
+          message: `Les constantes de calcul de la ${codeImpot} pour l'année ${annee} ne sont pas encore disponibles.`,
+          details: `Le calcul de la ${nomImpot} pour l'année ${annee} ne peut pas être effectué car les paramètres officiels n'ont pas encore été publiés par l'administration fiscale béninoise.`,
+          severity: 'info',
+        },
+      ],
+      context: {
+        ...context,
+        missingData,
+      },
+      timestamp: new Date().toISOString(),
+      requestId: `${codeImpot.toLowerCase()}_calc_${Date.now()}`,
+    };
+  }
+
   return {
     success: false,
     errors: [
